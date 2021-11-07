@@ -703,7 +703,28 @@ public class p2000 {
         }
     }
 
-    static class s2063{
+    static class s2063 {//Vowels of All Substrings
+        public long countVowels(String word) {
+            long r = 0;
+            for (int i = 0; i < word.length(); i++)
+                if ("aeiou".indexOf(word.charAt(i)) >= 0)
+                    r += (i + 1L) * (word.length() - i);
+            return r;
+        }
+    }
 
+    static class s2064 {//Minimized Maximum of Products Distributed to Any Store
+        public int minimizedMaximum(int n, int[] quantities) {
+            int lo = 1, hi = 100_000;
+            while (lo < hi) {
+                int perStore = (lo + hi) / 2, sum = 0;
+                for (int i = 0; i < quantities.length && sum <= n; i++)
+                    sum += Math.ceil(1.0 * quantities[i] / perStore);
+                if (sum > n)
+                    lo = perStore + 1;
+                else hi = perStore;
+            }
+            return hi;
+        }
     }
 }
