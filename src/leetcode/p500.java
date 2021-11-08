@@ -81,6 +81,16 @@ public class p500 {
         }
     }
 
+    static class s561 {//Array Partition I
+        public int arrayPairSum(int[] a) {
+            Arrays.sort(a);
+            int sum = 0;
+            for (int i = 0; i < a.length; i += 2)
+                sum += a[i];
+            return sum;
+        }
+    }
+
     static class s565 {//Array Nesting
         public int arrayNesting(int[] a) {
             int r = 0;
@@ -93,6 +103,22 @@ public class p500 {
                     r = Math.max(r, len);
                 }
             return r;
+        }
+    }
+
+    static class s572 {//Subtree of Another Tree
+        public boolean isSubtree(TreeNode root, TreeNode sub) {
+            if (root == null)
+                return false;
+            return sub(root, sub) || isSubtree(root.left, sub) || isSubtree(root.right, sub);
+        }
+
+        boolean sub(TreeNode root, TreeNode sub) {
+            if (root == null && sub == null)
+                return true;
+            if (root == null || sub == null)
+                return false;
+            return root.val == sub.val && sub(root.left, sub.left) && sub(root.right, sub.right);
         }
     }
 
