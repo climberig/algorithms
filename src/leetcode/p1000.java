@@ -1,9 +1,27 @@
 package leetcode;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class p1000 {
+    static class s1002 {//Find Common Characters
+        public List<String> commonChars(String[] words) {
+            int[] common = new int[26];
+            Arrays.fill(common, Integer.MAX_VALUE);
+            for (String w : words) {
+                int[] counts = new int[26];
+                w.chars().forEach(c -> counts[c - 'a']++);
+                for (int i = 0; i < common.length; i++)
+                    common[i] = Math.min(common[i], counts[i]);
+            }
+            List<String> r = new ArrayList<>();
+            for (char c = 'a'; c <= 'z'; c++)
+                while (common[c - 'a']-- > 0)
+                    r.add(Character.toString(c));
+            return r;
+        }
+    }
     static class s1015 {//Smallest Integer Divisible by K
         public int smallestRepunitDivByK(int k) {
             if (!Set.of(1, 3, 7, 9).contains(k % 10))

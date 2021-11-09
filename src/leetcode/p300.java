@@ -1,9 +1,10 @@
 package leetcode;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-@SuppressWarnings("ALL") public class p300 {
+public class p300 {
     static class s303 {//Range Sum Query - Immutable
         class NumArray {
             final int[] cs;
@@ -100,12 +101,14 @@ import java.util.stream.*;
                 hasNext();
             }
 
-            @Override public Integer next() {
+            @Override
+            public Integer next() {
                 hasNext();
                 return s.peek().next().getInteger();
             }
 
-            @Override public boolean hasNext() {
+            @Override
+            public boolean hasNext() {
                 while (!s.empty())
                     if (s.peek().hasNext()) {
                         NestedInteger ni = s.peek().next();
@@ -214,6 +217,19 @@ import java.util.stream.*;
                 r.add(n);
             });
             return r.stream().mapToInt(i -> i).toArray();
+        }
+    }
+
+    static class s350 {//Intersection of Two Arrays II
+        public int[] intersect(int[] a1, int[] a2) {
+            int[] c1 = new int[1_001], c2 = new int[1_001];
+            Arrays.stream(a1).forEach(n -> c1[n]++);
+            Arrays.stream(a2).forEach(n -> c2[n]++);
+            int[] r = new int[IntStream.range(0, c1.length).map(i -> Math.min(c1[i], c2[i])).sum()];
+            for (int n = 0, i = 0; n < c1.length; n++)
+                for (int j = 0; j < Math.min(c1[n], c2[n]); j++)
+                    r[i++] = n;
+            return r;
         }
     }
 
