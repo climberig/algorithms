@@ -131,6 +131,12 @@ public class p400 {
         }
     }
 
+    static class s461 {//Hamming Distance
+        public int hammingDistance(int x, int y) {
+            return Integer.bitCount(x ^ y);
+        }
+    }
+
     static class s463 {//Island Perimeter
         public int islandPerimeter(int[][] g) {
             int r = 0;
