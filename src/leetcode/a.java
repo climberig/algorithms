@@ -15,4 +15,3 @@ public class a {
         return root.val == sub.val && sub(root.left, sub.left) && sub(root.right, sub.right);
     }
 }
-
