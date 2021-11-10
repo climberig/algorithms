@@ -80,6 +80,15 @@ public class p300 {
         int find(int i, int[] uf) {return i == uf[i] ? i : (uf[i] = find(uf[i], uf));}
     }
 
+    static class s338 {//Counting Bits
+        public int[] countBits(int n) {
+            int[] r = new int[n + 1];
+            for (int i = 1; i < r.length; i++)
+                r[i] = r[i / 2] + i % 2;
+            return r;
+        }
+    }
+
     static class s339 {//Nested List Weight Sum
         public int depthSum(List<NestedInteger> nestedList) {
             int r = 0, level = 1;
