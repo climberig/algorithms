@@ -107,6 +107,13 @@ public class p400 {
         }
     }
 
+    static class s434 {//Number of Segments in a String
+        public int countSegments(String s) {
+            s = s.trim();
+            return s.isEmpty() ? 0 : s.split("\\s+").length;
+        }
+    }
+
     static class s441 {//Arranging Coins
         public int arrangeCoins(int n) {
             int r = 0;
