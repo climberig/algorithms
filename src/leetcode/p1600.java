@@ -3,20 +3,20 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p1600 {
-    static class s1644 {//Lowest Common Ancestor of a Binary Tree II
+public class p1600{
+    static class s1644{//Lowest Common Ancestor of a Binary Tree II
         int count = 0;
 
-        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q){
             TreeNode lca = lca(root, p, q);
             return count == 2 ? lca : null;
         }
 
-        TreeNode lca(TreeNode root, TreeNode p, TreeNode q) {
-            if (root == null)
+        TreeNode lca(TreeNode root, TreeNode p, TreeNode q){
+            if(root == null)
                 return null;
             TreeNode L = lca(root.left, p, q), R = lca(root.right, p, q);
-            if (root == p || root == q) {
+            if(root == p || root == q){
                 count++;
                 return root;
             }
@@ -24,31 +24,31 @@ public class p1600 {
         }
     }
 
-    static class s1654 {//Minimum Jumps to Reach Home
-        public int minimumJumps(int[] forbidden, int a, int b, int x) {
+    static class s1654{//Minimum Jumps to Reach Home
+        public int minimumJumps(int[] forbidden, int a, int b, int x){
             Set<Integer> seen = Arrays.stream(forbidden).boxed().collect(Collectors.toSet()), notAllowed = new HashSet<>(seen);
             Queue<int[]> q = new LinkedList<>();
-            for (seen.add(0), q.add(new int[]{0, 1, 0}); !q.isEmpty(); ) {
+            for(seen.add(0), q.add(new int[]{0, 1, 0}); !q.isEmpty(); ){
                 int[] p = q.poll();
-                if (p[0] == x)
+                if(p[0] == x)
                     return p[2];
-                if (seen.add(p[0] + a) && p[0] <= 2000 + b)
+                if(seen.add(p[0] + a) && p[0] <= 2000 + b)
                     q.add(new int[]{p[0] + a, 1, p[2] + 1});
-                if (p[1] == 1 && p[0] - b > 0 && !notAllowed.contains(p[0] - b))
+                if(p[1] == 1 && p[0] - b > 0 && !notAllowed.contains(p[0] - b))
                     q.add(new int[]{p[0] - b, -1, p[2] + 1});
             }
             return -1;
         }
     }
 
-    static class s1664 {//Ways to Make a Fair Array
-        public int waysToMakeFair(int[] a) {
+    static class s1664{//Ways to Make a Fair Array
+        public int waysToMakeFair(int[] a){
             int r = 0, L[] = new int[2], R[] = new int[2];
-            for (int i = 0; i < a.length; i++)
+            for(int i = 0; i < a.length; i++)
                 R[i % 2] += a[i];
-            for (int i = 0; i < a.length; i++) {
+            for(int i = 0; i < a.length; i++){
                 R[i % 2] -= a[i];
-                if (L[0] + R[1] == L[1] + R[0])
+                if(L[0] + R[1] == L[1] + R[0])
                     r++;
                 L[i % 2] += a[i];
             }
@@ -56,127 +56,127 @@ public class p1600 {
         }
     }
 
-    static class s1666 {//Change the Root of a Binary Tree
+    static class s1666{//Change the Root of a Binary Tree
         Node originRoot;
 
-        public Node flipBinaryTree(Node root, Node leaf) {
+        public Node flipBinaryTree(Node root, Node leaf){
             originRoot = root;
             return flip(leaf, null);
         }
 
-        Node flip(Node node, Node newParent) {
+        Node flip(Node node, Node newParent){
             Node oldParent = node.parent;
             node.parent = newParent;
-            if (node.left == newParent)
+            if(node.left == newParent)
                 node.left = null;
-            if (node.right == newParent)
+            if(node.right == newParent)
                 node.right = null;
-            if (node == originRoot)
+            if(node == originRoot)
                 return node;
-            if (node.left != null)
+            if(node.left != null)
                 node.right = node.left;
             node.left = flip(oldParent, node);
             return node;
         }
 
-        class Node {
+        class Node{
             int val;
             Node left, right, parent;
         }
     }
 
-    static class s1670 {//Design Front Middle Back Queue
-        class FrontMiddleBackQueue {
+    static class s1670{//Design Front Middle Back Queue
+        class FrontMiddleBackQueue{
             LinkedList<Integer> front = new LinkedList<>(), back = new LinkedList<>();
 
-            public void pushFront(int val) {
+            public void pushFront(int val){
                 ifFrontBigger();
                 front.addFirst(val);
             }
 
-            public void pushMiddle(int val) {
+            public void pushMiddle(int val){
                 ifFrontBigger();
                 front.addLast(val);
             }
 
-            public void pushBack(int val) {
+            public void pushBack(int val){
                 back.addLast(val);
                 ifBackBigger();
             }
 
-            public int popFront() {
-                if (front.isEmpty())
+            public int popFront(){
+                if(front.isEmpty())
                     return -1;
                 int val = front.removeFirst();
                 ifBackBigger();
                 return val;
             }
 
-            public int popMiddle() {
-                if (front.isEmpty())
+            public int popMiddle(){
+                if(front.isEmpty())
                     return -1;
                 int val = front.removeLast();
                 ifBackBigger();
                 return val;
             }
 
-            public int popBack() {
-                if (front.isEmpty())
+            public int popBack(){
+                if(front.isEmpty())
                     return -1;
                 ifFrontBigger();
                 return back.removeLast();
             }
 
-            void ifBackBigger() {
-                if (back.size() > front.size())
+            void ifBackBigger(){
+                if(back.size() > front.size())
                     front.addLast(back.pollFirst());
             }
 
-            void ifFrontBigger() {
-                if (front.size() > back.size())
+            void ifFrontBigger(){
+                if(front.size() > back.size())
                     back.addFirst(front.removeLast());
             }
         }
     }
 
-    static class s1673 {//Find the Most Competitive Subsequence
-        public int[] mostCompetitive(int[] a, int k) {
+    static class s1673{//Find the Most Competitive Subsequence
+        public int[] mostCompetitive(int[] a, int k){
             Stack<Integer> s = new Stack<>();
-            for (int i = 0; i < a.length; i++) {
-                while (!s.isEmpty() && a[i] < s.peek() && a.length - i + s.size() > k)
+            for(int i = 0; i < a.length; i++){
+                while(!s.isEmpty() && a[i] < s.peek() && a.length - i + s.size() > k)
                     s.pop();
-                if (s.size() < k)
+                if(s.size() < k)
                     s.push(a[i]);
             }
             return s.stream().mapToInt(i -> i).toArray();
         }
     }
 
-    static class s1679 {//Max Number of K-Sum Pairs
-        public int maxOperations(int[] a, int k) {
+    static class s1679{//Max Number of K-Sum Pairs
+        public int maxOperations(int[] a, int k){
             int r = 0;
             Arrays.sort(a);
-            for (int i = 0, j = a.length - 1; i < j; )
-                if (a[i] + a[j] == k) {
+            for(int i = 0, j = a.length - 1; i < j; )
+                if(a[i] + a[j] == k){
                     i++;
                     j--;
                     r++;
-                } else if (a[i] + a[j] < k)
+                }else if(a[i] + a[j] < k)
                     i++;
                 else j--;
             return r;
         }
     }
 
-    static class s1690 {//Stone Game VII
-        public int stoneGameVII(int[] stones) {
+    static class s1690{//Stone Game VII
+        public int stoneGameVII(int[] stones){
             return dfs(Arrays.stream(stones).sum(), 0, stones.length - 1, stones, new Integer[stones.length][stones.length]);
         }
 
-        int dfs(int sum, int i, int j, int[] a, Integer[][] dp) {
-            if (i == j)
+        int dfs(int sum, int i, int j, int[] a, Integer[][] dp){
+            if(i == j)
                 return 0;
-            if (dp[i][j] != null)
+            if(dp[i][j] != null)
                 return dp[i][j];
             return dp[i][j] = Math.max(sum - a[i] - dfs(sum - a[i], i + 1, j, a, dp), sum - a[j] - dfs(sum - a[j], i, j - 1, a, dp));
         }
