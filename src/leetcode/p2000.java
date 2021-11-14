@@ -743,4 +743,25 @@ public class p2000{
             return IntStream.range(0, tickets.length).map(i -> Math.min(tickets[i], i <= k ? tickets[k] : tickets[k] - 1)).sum();
         }
     }
+
+    static class s2074{//Reverse Nodes in Even Length Groups
+        public ListNode reverseEvenLengthGroups(ListNode head){
+            ListNode curr = head;
+            for(int groupSize = 2, size = 0; curr != null && curr.next != null; groupSize += 1, size = 0){
+                Stack<ListNode> s = new Stack<>();
+                for(ListNode node = curr.next; size < groupSize && node != null; size++, node = node.next)
+                    s.push(node);
+                if(size % 2 == 0){
+                    ListNode next = s.peek().next;
+                    while(!s.isEmpty()){
+                        curr.next = s.pop();
+                        curr = curr.next;
+                    }
+                    curr.next = next;
+                }else for(size = 0; size < groupSize && curr != null; size++)
+                    curr = curr.next;
+            }
+            return head;
+        }
+    }
 }
