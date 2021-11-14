@@ -1,7 +1,8 @@
 package leetcode;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class p2000{
     static class s2001{//Number of Pairs of Interchangeable Rectangles
@@ -725,6 +726,21 @@ public class p2000{
                 else hi = perStore;
             }
             return hi;
+        }
+    }
+
+    static class s2068{//Check Whether Two Strings are Almost Equivalent
+        public boolean checkAlmostEquivalent(String w1, String w2){
+            int[] counts = new int[26];
+            w1.chars().forEach(c -> counts[c - 'a']++);
+            w2.chars().forEach(c -> counts[c - 'a']--);
+            return Arrays.stream(counts).allMatch(c -> Math.abs(c) <= 3);
+        }
+    }
+
+    static class s2073{//Time Needed to Buy Tickets
+        public int timeRequiredToBuy(int[] tickets, int k){
+            return IntStream.range(0, tickets.length).map(i -> Math.min(tickets[i], i <= k ? tickets[k] : tickets[k] - 1)).sum();
         }
     }
 }
