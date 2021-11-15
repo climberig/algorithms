@@ -764,4 +764,14 @@ public class p2000{
             return head;
         }
     }
+
+    static class s2075{//Decode the Slanted Ciphertext
+        public String decodeCiphertext(String encoded, int rows){
+            StringBuilder r = new StringBuilder();
+            for(int col = 0, cols = encoded.length() / rows; col < cols; col++)
+                for(int i = col; i < encoded.length(); i += cols + 1)
+                    r.append(encoded.charAt(i));
+            return r.toString().stripTrailing();
+        }
+    }
 }
