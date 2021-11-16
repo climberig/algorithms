@@ -1,11 +1,14 @@
 package leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
 public class a{
-    public String decodeCiphertext(String encodedText, int rows){
-        StringBuilder r = new StringBuilder();
-        for(int col = 0, cols = encodedText.length() / rows; col < cols; col++)
-            for(int i = col; i < encodedText.length(); i += cols + 1)
-                r.append(encodedText.charAt(i));
-        return r.toString().stripTrailing();
+    public int[] twoSum(int[] a, int t){
+        Map<Integer, Integer> m = new HashMap<>();
+        for(int i = 0; i < a.length; i++)
+            if(m.containsKey(t - a[i]))
+                return new int[]{m.get(t - a[i]), i};
+            else m.put(a[i], i);
+        return null;
     }
 }

@@ -738,6 +738,15 @@ public class p2000{
         }
     }
 
+    static class s2070{//Most Beautiful Item for Each Query
+        public int[] maximumBeauty(int[][] items, int[] queries){
+            TreeMap<Integer, Integer> m = new TreeMap<>();
+            m.put(0, 0);
+            Arrays.stream(items).sorted(Comparator.comparingInt(i -> i[0])).forEach(i -> m.put(i[0], Math.max(m.lastEntry().getValue(), i[1])));
+            return Arrays.stream(queries).map(q -> m.floorEntry(q).getValue()).toArray();
+        }
+    }
+
     static class s2073{//Time Needed to Buy Tickets
         public int timeRequiredToBuy(int[] tickets, int k){
             return IntStream.range(0, tickets.length).map(i -> Math.min(tickets[i], i <= k ? tickets[k] : tickets[k] - 1)).sum();
