@@ -1,14 +1,14 @@
 package leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
 public class a{
-    public int[] twoSum(int[] a, int t){
-        Map<Integer, Integer> m = new HashMap<>();
-        for(int i = 0; i < a.length; i++)
-            if(m.containsKey(t - a[i]))
-                return new int[]{m.get(t - a[i]), i};
-            else m.put(a[i], i);
-        return null;
+    public String tree2str(TreeNode node){
+        if(node == null)
+            return "";
+        String left = tree2str(node.left), right = tree2str(node.right), r = node.val + "";
+        if(node.right != null)
+            r += "(" + left + ")(" + right + ")";
+        else if(node.left != null)
+            r += "(" + left + ")";
+        return r;
     }
 }

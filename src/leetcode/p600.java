@@ -1,7 +1,9 @@
 package leetcode;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.IntStream;
 
 public class p600{
     static class s604{//Design Compressed String Iterator
@@ -24,6 +26,19 @@ public class p600{
             }
 
             public boolean hasNext(){return n > 0 || i < a.length;}
+        }
+    }
+
+    static class s606{//Construct String from Binary Tree
+        public String tree2str(TreeNode node){
+            if(node == null)
+                return "";
+            String left = tree2str(node.left), right = tree2str(node.right), r = node.val + "";
+            if(node.right != null)
+                r += "(" + left + ")(" + right + ")";
+            else if(node.left != null)
+                r += "(" + left + ")";
+            return r;
         }
     }
 
