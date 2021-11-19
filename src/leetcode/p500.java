@@ -124,6 +124,17 @@ public class p500{
         }
     }
 
+    static class s594{//Longest Harmonious Subsequence
+        public int findLHS(int[] a){
+            Map<Integer, Integer> m = new HashMap<>();
+            Arrays.stream(a).forEach(n -> m.put(n, m.getOrDefault(n, 0) + 1));
+            int r = 0;
+            for(Integer n : m.keySet())
+                r = Math.max(r, m.get(n) + m.getOrDefault(n + 1, -m.get(n)));
+            return r;
+        }
+    }
+
     static class s598{//Range Addition II
         public int maxCount(int m, int n, int[][] ops){
             for(int[] op : ops){

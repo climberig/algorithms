@@ -24,6 +24,18 @@ public class p400{
         }
     }
 
+    static class s405{//Convert a Number to Hexadecimal
+        public String toHex(int n){
+            if(n == 0)
+                return "0";
+            String s = "0123456789abcdef";
+            StringBuilder r = new StringBuilder();
+            for(; n != 0; n >>>= 4)
+                r.insert(0, s.charAt(n & 15));
+            return r.toString();
+        }
+    }
+
     static class s408{//Valid Word Abbreviation, tricky test case "a", "01" should return false
         public boolean validWordAbbreviation(String word, String abbr){
             int i = 0, j = 0;

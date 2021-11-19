@@ -1,14 +1,15 @@
 package leetcode;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 public class a{
-    public String tree2str(TreeNode node){
-        if(node == null)
-            return "";
-        String left = tree2str(node.left), right = tree2str(node.right), r = node.val + "";
-        if(node.right != null)
-            r += "(" + left + ")(" + right + ")";
-        else if(node.left != null)
-            r += "(" + left + ")";
+    public int findLHS(int[] a){
+        Map<Integer, Integer> m = new HashMap<>();
+        Arrays.stream(a).forEach(n -> m.put(n, m.getOrDefault(n, 0) + 1));
+        int r = 0;
+        for(Integer n : m.keySet())
+            r = Math.max(r, m.get(n) + m.getOrDefault(n + 1, -m.get(n)));
         return r;
     }
 }
