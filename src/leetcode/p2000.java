@@ -792,4 +792,16 @@ public class p2000{
             return 0;
         }
     }
+
+    static class s2079{//Watering Plants
+        public int wateringPlants(int[] plants, int capacity){
+            int steps = 0, can = capacity;
+            for(int i = 0; i < plants.length; can -= plants[i++])
+                if(can < plants[i]){
+                    steps += i + i;
+                    can = capacity;
+                }
+            return steps + plants.length;
+        }
+    }
 }
