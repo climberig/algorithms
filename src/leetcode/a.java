@@ -1,10 +1,8 @@
 package leetcode;
 
+import java.util.stream.IntStream;
 public class a{
-    public int findPoisonedDuration(int[] timeSeries, int duration){
-        int r = duration;
-        for(int i = 0; i < timeSeries.length - 1; i++)
-            r += Math.min(timeSeries[i + 1] - timeSeries[i], duration);
-        return r;
+    public int maxDistance(int[] cs){
+        return IntStream.range(0, cs.length).filter(i -> cs[i] != cs[cs.length - 1] || cs[cs.length - 1 - i] != cs[0]).map(i -> cs.length - 1 - i).findFirst().orElse(0);
     }
 }

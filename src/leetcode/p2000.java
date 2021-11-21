@@ -783,4 +783,13 @@ public class p2000{
             return r.toString().stripTrailing();
         }
     }
+
+    static class s2078{//Two Furthest Houses With Different Colors
+        public int maxDistance(int[] colors){
+            for(int i = 0, n = colors.length - 1; i <= n; i++)
+                if(colors[i] != colors[n] || colors[n - i] != colors[0])
+                    return n - i;
+            return 0;
+        }
+    }
 }
