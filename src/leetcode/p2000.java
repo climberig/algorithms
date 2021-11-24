@@ -435,6 +435,23 @@ public class p2000{
         }
     }
 
+    static class s2046{//Sort Linked List Already Sorted Using Absolute Values
+        public ListNode sortLinkedList(ListNode head){
+            ListNode node = head.next, newHead = head, prev = head;
+            while(node != null)
+                if(node.val < 0){
+                    ListNode next = node.next;
+                    prev.next = next;
+                    newHead = new ListNode(node.val, newHead);
+                    node = next;
+                }else{
+                    prev = node;
+                    node = node.next;
+                }
+            return newHead;
+        }
+    }
+
     static class s2047{//Number of Valid Words in a Sentence
         public int countValidWords(String s){
             String words[] = s.trim().split("\\s+"), pMarks = ".,!";
