@@ -800,7 +800,6 @@ public class p2000{
             }
             return r;
         }
-
     }
 
     static class s2078{//Two Furthest Houses With Different Colors
