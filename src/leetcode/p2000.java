@@ -784,6 +784,25 @@ public class p2000{
         }
     }
 
+    static class s2077{//Paths in Maze That Lead to Same Room
+        public int numberOfPaths(int n, int[][] corridors){
+            List<Set<Integer>> g = IntStream.range(0, n + 1).mapToObj(i -> new HashSet<Integer>()).collect(Collectors.toList());
+            for(int[] c : corridors)
+                if(c[0] < c[1])
+                    g.get(c[0]).add(c[1]);
+                else g.get(c[1]).add(c[0]);
+            int r = 0;
+            for(int[] e : corridors){
+                Set<Integer> s1 = g.get(e[0]), s2 = g.get(e[1]);
+                for(Integer u : s1)
+                    if(s2.contains(u))
+                        r++;
+            }
+            return r;
+        }
+
+    }
+
     static class s2078{//Two Furthest Houses With Different Colors
         public int maxDistance(int[] colors){
             for(int i = 0, n = colors.length - 1; i <= n; i++)

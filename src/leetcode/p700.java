@@ -1,7 +1,7 @@
 package leetcode;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.IntStream;
 
 public class p700{
     static class s704{//Binary Search
@@ -19,23 +19,23 @@ public class p700{
         }
     }
 
-    static class s723{//Candy Crush TODO: submit next time!
+    static class s723{//Candy Crush
         public int[][] candyCrush(int[][] b){
             Set<Integer> s = new HashSet<>();
             for(int i = 0; i < b.length; i++)
                 for(int j = 0; j < b[0].length; j++){
                     if(b[i][j] > 0 && j - 2 >= 0 && b[i][j - 1] == b[i][j] && b[i][j - 2] == b[i][j])
-                        s.add(51 * i + j);
+                        s.addAll(Arrays.asList(51 * i + j, 51 * i + j - 1, 51 * i + j - 2));
                     if(b[i][j] > 0 && i - 2 >= 0 && b[i - 1][j] == b[i][j] && b[i - 2][j] == b[i][j])
-                        s.add(51 * i + j);
+                        s.addAll(Arrays.asList(51 * i + j, 51 * (i - 1) + j, 51 * (i - 2) + j));
                 }
             s.forEach(p -> b[p / 51][p % 51] = 0);
             for(int c = 0; c < b[0].length; c++){
                 int bot = b.length - 1;
                 for(int j = b.length - 1; j >= 0; j--)
                     if(b[j][c] > 0)
-                        b[bot++][c] = b[j][c];
-                for(; bot >= 0; b[bot++][c] = 0) ;
+                        b[bot--][c] = b[j][c];
+                for(; bot >= 0; b[bot--][c] = 0) ;
             }
             return s.isEmpty() ? b : candyCrush(b);
         }
