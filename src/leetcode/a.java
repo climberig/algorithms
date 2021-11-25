@@ -1,24 +1,19 @@
 package leetcode;
 
-import java.util.LinkedList;
+import java.util.Arrays;
 public class a{
-    public static void main(String[] args){
-        ListNode node = new ListNode(0, new ListNode(5, new ListNode(-5)));
-        ListNode x = new a().sortLinkedList(node);
-        System.out.println(x);
-    }
-    public ListNode sortLinkedList(ListNode head){
-        ListNode node = head.next, newHead = head, prev = head;
-        while(node != null)
-            if(node.val < 0){
-                ListNode next = node.next;
-                prev.next = next;
-                newHead = new ListNode(node.val, newHead);
-                node = next;
-            }else{
-                prev = node;
-                node = node.next;
-            }
-        return newHead;
+    public int numberOfCleanRooms(int[][] room){
+        int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}, seen = new int[room.length][room[0].length];
+        for(int r = 0, c = 0, dirIdx = 0; (1 << dirIdx & seen[r][c]) == 0; ){
+            seen[r][c] |= 1 << dirIdx;
+            if(room[r][c] == 0)
+                room[r][c] = -1;
+            int nr = r + dirs[dirIdx][0], nc = c + dirs[dirIdx][1];
+            if(0 <= nr && nr < room.length && 0 <= nc && nc < room[0].length && room[nr][nc] != 1){
+                r = nr;
+                c = nc;
+            }else dirIdx = (dirIdx + 1) % dirs.length;
+        }
+        return -Arrays.stream(room).mapToInt(row -> Arrays.stream(row).filter(n -> n < 0).sum()).sum();
     }
 }

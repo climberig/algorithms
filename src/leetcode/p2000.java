@@ -707,6 +707,33 @@ public class p2000{
         }
     }
 
+    static class s2061{//Number of Spaces Cleaning Robot Cleaned
+        /**
+         * A room is represented by a 0-indexed 2D binary matrix room where a 0 represents
+         * an empty space and a 1 represents a space with an object. The top left corner of
+         * the room will be empty in all test cases. A cleaning robot starts in the top left
+         * corner of the room and is facing right. The robot will continue heading straight
+         * until it reaches the edge of the room, or it hits an object, after which it will
+         * turn 90 degrees clockwise and repeat this process. The starting space and all spaces
+         * that the robot visits are cleaned by it. Return the number of clean spaces in the room
+         * if the robot runs indefinitely.
+         */
+        public int numberOfCleanRooms(int[][] room){
+            int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}, seen = new int[room.length][room[0].length];
+            for(int r = 0, c = 0, dirIdx = 0; (1 << dirIdx & seen[r][c]) == 0; ){
+                seen[r][c] |= 1 << dirIdx;
+                if(room[r][c] == 0)
+                    room[r][c] = -1;
+                int nr = r + dirs[dirIdx][0], nc = c + dirs[dirIdx][1];
+                if(0 <= nr && nr < room.length && 0 <= nc && nc < room[0].length && room[nr][nc] != 1){
+                    r = nr;
+                    c = nc;
+                }else dirIdx = (dirIdx + 1) % dirs.length;
+            }
+            return -Arrays.stream(room).mapToInt(row -> Arrays.stream(row).filter(n -> n < 0).sum()).sum();
+        }
+    }
+
     static class s2062{
         public int countVowelSubstrings(String word){//Count Vowel Substrings of a String
             Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u'), curr = new HashSet<>();
@@ -837,6 +864,21 @@ public class p2000{
                     can = capacity;
                 }
             return steps + plants.length;
+        }
+    }
+
+    static class s5951{//Substrings That Begin and End With the Same Letter
+        /**
+         * You are given a 0-indexed string s consisting of only lowercase
+         * English letters. Return the number of substrings in s that begin
+         * and end with the same character. A substring is a contiguous non-empty
+         * sequence of characters within a string.
+         */
+        public long numberOfSubstrings(String s){
+            long r = 0;
+            for(int i = 0, counts[] = new int[26]; i < s.length(); i++)
+                r += ++counts[s.charAt(i) - 'a'];
+            return r;
         }
     }
 }
