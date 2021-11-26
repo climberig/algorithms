@@ -1,19 +1,25 @@
 package leetcode;
 
-import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
 public class a{
-    public int numberOfCleanRooms(int[][] room){
-        int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}, seen = new int[room.length][room[0].length];
-        for(int r = 0, c = 0, dirIdx = 0; (1 << dirIdx & seen[r][c]) == 0; ){
-            seen[r][c] |= 1 << dirIdx;
-            if(room[r][c] == 0)
-                room[r][c] = -1;
-            int nr = r + dirs[dirIdx][0], nc = c + dirs[dirIdx][1];
-            if(0 <= nr && nr < room.length && 0 <= nc && nc < room[0].length && room[nr][nc] != 1){
-                r = nr;
-                c = nc;
-            }else dirIdx = (dirIdx + 1) % dirs.length;
+    static class s2021{//Brightest Position on Street
+        public int brightestPosition(int[][] lights){
+            Map<Integer, Integer> m = new TreeMap<>();
+            for(int[] l : lights){
+                int left = l[0] - l[1], right = l[0] + l[1];
+                m.put(left, m.getOrDefault(left, 0) + 1);
+                m.put(right + 1, m.getOrDefault(right + 1, 0) - 1);
+            }
+            int maxLight = Integer.MIN_VALUE, sum = 0, minPosition = 0;
+            for(Integer p : m.keySet()){
+                sum += m.get(p);
+                if(sum > maxLight){
+                    maxLight = sum;
+                    minPosition = p;
+                }
+            }
+            return minPosition;
         }
-        return -Arrays.stream(room).mapToInt(row -> Arrays.stream(row).filter(n -> n < 0).sum()).sum();
     }
 }
