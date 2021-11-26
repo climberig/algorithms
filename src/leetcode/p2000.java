@@ -199,6 +199,14 @@ public class p2000{
     }
 
     static class s2021{//Brightest Position on Street
+        /**
+         * A perfectly straight street is represented by a number line. The street has street lamp(s)
+         * on it and is represented by a 2D integer array lights. Each lights[i] = [positioni, rangei]
+         * indicates that there is a street lamp at position positioni that lights up the area from
+         * [positioni - rangei, positioni + rangei] (inclusive). The brightness of a position p is defined
+         * as the number of street lamp that light up the position p. Given lights, return the brightest
+         * position on the street. If there are multiple brightest positions, return the smallest one.
+         */
         public int brightestPosition(int[][] lights){
             Map<Integer, Integer> m = new TreeMap<>();
             for(int[] l : lights){
@@ -887,7 +895,7 @@ public class p2000{
         }
     }
 
-    static class s5951{//Substrings That Begin and End With the Same Letter
+    static class s2083{//Substrings That Begin and End With the Same Letter
         /**
          * You are given a 0-indexed string s consisting of only lowercase
          * English letters. Return the number of substrings in s that begin
