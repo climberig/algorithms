@@ -938,4 +938,16 @@ public class p2000{
             return (i > 0 && a[i - 1] == c ? 1 : 0) + (i < a.length - 1 && a[i + 1] == c ? 1 : 0);
         }
     }
+
+    static class s2087{//Minimum Cost Homecoming of a Robot in a Grid
+        public int minCost(int[] start, int[] home, int[] rowCosts, int[] colCosts){
+            int cost = 0;
+            for(int r = start[0] + 1; r <= home[0]; cost += rowCosts[r++]) ;
+            for(int c = start[1] + 1; c <= home[1]; cost += colCosts[c++]) ;
+            for(int r = start[0] - 1; r >= home[0]; cost += rowCosts[r--]) ;
+            for(int c = start[1] - 1; c >= home[1]; cost += colCosts[c--]) ;
+            return cost;
+        }
+    }
+
 }
