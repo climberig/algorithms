@@ -19,7 +19,7 @@ public class InsertSolution{
         List<String> oldLines = Files.readAllLines(Path.of(WORKING_DIR, updateFile)), newLines = new ArrayList<>();
         boolean inserted = false;
         for(String line : oldLines){
-            if(!inserted && line.startsWith(SOLUTION_PREFIX) && problemNo(line) >= problemNo){
+            if(!inserted && (problemNo(line) >= problemNo || line.startsWith("}"))){
                 if(problemNo(line) == problemNo){
                     log.warning(String.format("solution s%s already exists in %s", problemNo, updateFile));
                     return;
@@ -47,6 +47,8 @@ public class InsertSolution{
     }
 
     static int problemNo(String s){
+        if(!s.startsWith(SOLUTION_PREFIX))
+            return 0;
         int n = 0;
         for(int i = SOLUTION_PREFIX.length(); s.charAt(i) != '{'; i++)
             n = 10 * n + s.charAt(i) - '0';

@@ -1,28 +1,23 @@
 package leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
 public class a{
-    public static void main(String[] args){
-        System.out.println(new a().subarraysWithMoreZerosThanOnes(new int[]{0, 1, 1, 0, 1}));
-    }
-    public int subarraysWithMoreZerosThanOnes(int[] a){
-        Map<Integer, Integer> m = new HashMap<>();
-        m.put(0, 1);
-        int r = 0, cnt = 0, sum = 0;
-        for(int n : a){
-            if(n == 1){
-                // any subarray that has prefix sum equals (sum - 1) will become new valid subarray
-                cnt += m.getOrDefault(sum, 0);
-                sum++;
-            }else{
-                sum--;
-                // any subarray that has prefix sum equals sum will become invalid
-                cnt -= m.getOrDefault(sum, 0);
-            }
-            r = (r + cnt) % 1_000_000_007;
-            m.put(sum, m.getOrDefault(sum, 0) + 1);
+    static class s2086{//Minimum Number of Buckets Required to Collect Rainwater from Houses
+        public int minimumBuckets(String street){
+            int r = 0;
+            char[] a = street.toCharArray();
+            for(int i = 0; i < a.length; i++)
+                if(a[i] == '.' && countCharAround(a, i, 'H') == 2){
+                    r++;
+                    a[i - 1] = a[i + 1] = 'h';
+                }else if(a[i] == 'H' && countCharAround(a, i, '.') == 0)
+                    return -1;
+            for(char c : a)
+                r += c == 'H' ? 1 : 0;
+            return r;
         }
-        return r;
+
+        int countCharAround(char[] a, int i, char c){
+            return (i > 0 && a[i - 1] == c ? 1 : 0) + (i < a.length - 1 && a[i + 1] == c ? 1 : 0);
+        }
     }
 }
