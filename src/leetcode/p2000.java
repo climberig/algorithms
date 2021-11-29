@@ -947,4 +947,37 @@ public class p2000{
             return cost;
         }
     }
+
+    static class s2090{//K Radius Subarray Averages
+        public int[] getAverages(int[] a, int k){
+            int[] r = new int[a.length];
+            Arrays.fill(r, -1);
+            long sum = 0;
+            for(int i = 0; i < 2 * k && i < a.length; i++)
+                sum += a[i];
+            for(int j = k; j < a.length - k; j++){
+                sum += a[j + k];
+                r[j] = (int) (sum / (2.0 * k + 1));
+                sum -= a[j - k];
+            }
+            return r;
+        }
+    }
+
+    static class s2091{//Removing Minimum and Maximum From Array
+        public int minimumDeletions(int[] a){
+            int minIdx = 0, maxIdx = 0;
+            for(int i = 1; i < a.length; i++){
+                if(a[minIdx] > a[i])
+                    minIdx = i;
+                if(a[maxIdx] < a[i])
+                    maxIdx = i;
+            }
+            int left = Math.min(minIdx, maxIdx), right = Math.max(minIdx, maxIdx);
+            int cutBoth = left + 1 + a.length - right;
+            int cutLeft = 1 + right;
+            int cutRight = a.length - left;
+            return Math.min(cutBoth, Math.min(cutLeft, cutRight));
+        }
+    }
 }
