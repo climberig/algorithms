@@ -601,6 +601,36 @@ public class p2000{
         }
     }
 
+    static class s2052{//Minimum Cost to Separate Sentence Into Rows
+        /**
+         * You are given a string sentence containing words separated by spaces, and an integer k. Your task is to
+         * separate sentence into rows where the number of characters in each row is at most k. You may assume that
+         * sentence does not begin or end with a space, and the words in sentence are separated by a single space.
+         * You can split sentence into rows by inserting line breaks between words in sentence. A word cannot be
+         * split between two rows. Each word must be used exactly once, and the word order cannot be rearranged.
+         * Adjacent words in a row should be separated by a single space, and rows should not begin or end with spaces.
+         * The cost of a row with length n is (k - n)2, and the total cost is the sum of the costs for all rows except
+         * the last one. For example if sentence = "i love leetcode" and k = 12: Separating sentence into "i", "love",
+         * and "leetcode" has a cost of (12 - 1)2 + (12 - 4)2 = 185. Separating sentence into "i love", and "leetcode"
+         * has a cost of (12 - 6)2 = 36. Separating sentence into "i", and "love leetcode" is not possible because the
+         * length of "love leetcode" is greater than k. Return the minimum possible total cost of separating sentence into rows.
+         */
+        Map<String, Integer> dp = new HashMap<>();
+
+        public int minimumCost(String s, int k){
+            if(s.length() <= k)
+                return 0;
+            if(dp.containsKey(s))
+                return dp.get(s);
+            int cost = Integer.MAX_VALUE;
+            for(int i = 0; i < s.length() && i <= k; i++)
+                if(s.charAt(i) == ' ')
+                    cost = Math.min(cost, (k - i) * (k - i) + minimumCost(s.substring(i + 1), k));
+            dp.put(s, cost);
+            return cost;
+        }
+    }
+
     static class s2053{//Kth Distinct String in an Array
         public String kthDistinct(String[] a, int k){
             Map<String, Integer> m = new HashMap<>();
