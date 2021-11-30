@@ -38,6 +38,20 @@ public class p1000{
         }
     }
 
+    static class s1022{//Sum of Root To Leaf Binary Numbers
+        public int sumRootToLeaf(TreeNode root){
+            return sum(root, 0);
+        }
+
+        int sum(TreeNode node, int sum){
+            if(node == null)
+                return 0;
+            if(node.left == null && node.right == null)
+                return 2 * sum + node.val;
+            return sum(node.left, 2 * sum + node.val) + sum(node.right, 2 * sum + node.val);
+        }
+    }
+
     static class s1031{//Maximum Sum of Two Non-Overlapping Subarrays
         public int maxSumTwoNoOverlap(int[] a, int L, int R){
             int[] cs = new int[a.length + 1];
