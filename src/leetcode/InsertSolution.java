@@ -33,6 +33,14 @@ public class InsertSolution{
         }
         log.info("Updating the file...");
         Files.write(Path.of(WORKING_DIR, updateFile), newLines);
+        log.info("Clearing a.java");
+        Files.writeString(Path.of(WORKING_DIR, "a.java"), """
+                package leetcode;
+                                
+                public class a{
+                                
+                }
+                """);
     }
 
     static List<String> solutionFromA() throws IOException{
