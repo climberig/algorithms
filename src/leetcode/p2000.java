@@ -1003,4 +1003,32 @@ public class p2000{
             return Math.min(cutBoth, Math.min(cutLeft, cutRight));
         }
     }
+
+    static class s2092{//Find All People With Secret
+        public List<Integer> findAllPeople(int n, int[][] meetings, int first){
+            int[] ds = new int[n];
+            Arrays.fill(ds, -1);
+            ds[first] = 0;
+            Arrays.sort(meetings, Comparator.comparingInt(m -> m[2]));
+            for(int i = 0, j = 0; i < meetings.length; i++){
+                if(meetings[i][2] != meetings[j][2]){
+                    for(int k = j; k < i; k++){
+                        if(find(meetings[k][0], ds) != 0)
+                            ds[meetings[k][0]] = -1;
+                        if(find(meetings[k][1], ds) != 0)
+                            ds[meetings[k][1]] = -1;
+                    }
+                    j = i;
+                }
+                int p1 = find(meetings[i][0], ds), p2 = find(meetings[i][1], ds);
+                if(p1 != p2)
+                    ds[Math.max(p1, p2)] = Math.min(p1, p2);
+            }
+            return IntStream.range(0, n).filter(i -> find(i, ds) == 0).boxed().collect(Collectors.toList());
+        }
+
+        int find(int i, int[] ds){
+            return ds[i] < 0 ? i : (ds[i] = find(ds[i], ds));
+        }
+    }
 }
