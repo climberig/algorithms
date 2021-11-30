@@ -279,6 +279,28 @@ public class p300{
         }
     }
 
+    static class s370{//Range Addition
+        /**
+         * You are given an integer length and an array updates where updates[i] = [startIdxi, endIdxi, inci].
+         * You have an array arr of length len with all zeros, and you have some operation to apply on arr.
+         * In the ith operation, you should increment all the elements arr[startIdxi], arr[startIdxi + 1], ..., arr[endIdxi] by inci.
+         * Return arr after applying all the updates.
+         */
+        public int[] getModifiedArray(int len, int[][] updates){
+            int r[] = new int[len], sum = 0;
+            for(int[] u : updates){
+                r[u[0]] += u[2];
+                if(u[1] + 1 < len)
+                    r[u[1] + 1] -= u[2];
+            }
+            for(int i = 0; i < len; i++){
+                sum += r[i];
+                r[i] = sum;
+            }
+            return r;
+        }
+    }
+
     static class s379{//Design Phone Directory
         class PhoneDirectory{
             final Set<Integer> s = new HashSet<>();
