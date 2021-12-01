@@ -144,6 +144,37 @@ public class p2000{
         }
     }
 
+    static class s2015{//Average Height of Buildings in Each Segment
+        public int[][] averageHeightOfBuildings(int[][] buildings){
+            Map<Integer, Integer> height = new TreeMap<>(), count = new TreeMap<>();
+            for(int[] b : buildings){
+                height.put(b[0], height.getOrDefault(b[0], 0) + b[2]);
+                height.put(b[1], height.getOrDefault(b[1], 0) - b[2]);
+                count.put(b[0], count.getOrDefault(b[0], 0) + 1);
+                count.put(b[1], count.getOrDefault(b[1], 0) - 1);
+            }
+            LinkedList<int[]> r = new LinkedList<>();
+            r.add(new int[]{-1, -1, 0});
+            int sumH = 0, sumC = 0;
+            for(Integer b : height.keySet()){
+                sumH += height.get(b);
+                sumC += count.get(b);
+                if(sumC - count.get(b) != 0)
+                    r.peekLast()[1] = b;
+                if(sumC > 0){
+                    int avr = sumH / sumC;
+                    if((r.peekLast()[2] != avr && avr > 0) || sumC - count.get(b) == 0)
+                        r.add(new int[]{b, b, avr});
+                }
+            }
+            int a[][] = new int[r.size() - 1][3], i = 0;
+            r.removeFirst();
+            for(int[] v : r)
+                a[i++] = v;
+            return a;
+        }
+    }
+
     static class s2016{//Maximum Difference Between Increasing Elements
         public int maximumDifference(int[] a){
             int r = -1, i = 0;
