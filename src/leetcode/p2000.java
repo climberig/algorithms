@@ -389,6 +389,25 @@ public class p2000{
         }
     }
 
+    static class s2036{//Maximum Alternating Subarray Sum
+        /**
+         * A subarray of a 0-indexed integer array is a contiguous non-empty sequence of elements
+         * within an array. The alternating subarray sum of a subarray that ranges from index i to
+         * j (inclusive, 0 <= i <= j < nums.length) is nums[i] - nums[i+1] + nums[i+2] - ... +/- nums[j].
+         * Given a 0-indexed integer array nums, return the maximum alternating subarray sum of any subarray of nums
+         */
+        public long maximumAlternatingSubarraySum(int[] a){
+            long r = Integer.MIN_VALUE, lastMinus = Integer.MIN_VALUE, lastPlus = Integer.MIN_VALUE;
+            for(int n : a){
+                long plus = Math.max(n, lastMinus + n);
+                lastMinus = lastPlus - n;
+                lastPlus = plus;
+                r = Math.max(r, Math.max(lastMinus, lastPlus));
+            }
+            return r;
+        }
+    }
+
     static class s2037{//Minimum Number of Moves to Seat Everyone
         public int minMovesToSeat(int[] seats, int[] students){
             Arrays.sort(seats);
