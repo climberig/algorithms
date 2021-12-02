@@ -406,6 +406,31 @@ public class p200{
         }
     }
 
+    static class s288{//Unique Word Abbreviation
+        class ValidWordAbbr{
+            final Map<String, Set<String>> m = new HashMap<>();
+
+            public ValidWordAbbr(String[] dictionary){
+                for(String w : dictionary){
+                    String abbr = abbr(w);
+                    m.putIfAbsent(abbr, new HashSet<>());
+                    m.get(abbr).add(w);
+                }
+            }
+
+            public boolean isUnique(String word){
+                String abbr = abbr(word);
+                return m.get(abbr) == null || (m.get(abbr).contains(word) && m.get(abbr).size() == 1);
+            }
+
+            String abbr(String w){
+                if(w.length() <= 2)
+                    return w;
+                return w.charAt(0) + String.valueOf(w.length() - 2) + w.charAt(w.length() - 1);
+            }
+        }
+    }
+
     static class s289{
         public void gameOfLife(int[][] b){
             for(int i = 0; i < b.length; i++)
