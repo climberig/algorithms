@@ -4,6 +4,22 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p1900{
+    static class s1902{//Depth of BST Given Insertion Order
+        public int maxDepthBST(int[] order){
+            TreeMap<Integer, Integer> m = new TreeMap<>();
+            m.put(order[0], 1);
+            int r = 1;
+            for(int i = 1; i < order.length; i++){
+                Map.Entry<Integer, Integer> left = m.floorEntry(order[i]), right = m.ceilingEntry(order[i]);
+                int leftDepth = left != null ? left.getValue() : 0, rightDepth = right != null ? right.getValue() : 0;
+                int depth = Math.max(leftDepth, rightDepth) + 1;
+                r = Math.max(r, depth);
+                m.put(order[i], depth);
+            }
+            return r;
+        }
+    }
+
     static class s1908{//Game of Nim
         public boolean nimGame(int[] piles){
             return Arrays.stream(piles).reduce((a, b) -> a ^ b).getAsInt() != 0;
