@@ -1111,4 +1111,35 @@ public class p2000{
             return ds[i] < 0 ? i : (ds[i] = find(ds[i], ds));
         }
     }
+
+    static class s2093{//Minimum Cost to Reach City With Discounts
+        public int minimumCost(int n, int[][] highways, int discounts){
+            List<List<int[]>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<int[]>()).collect(Collectors.toList());
+            for(int[] x : highways){
+                int a = x[0], b = x[1], c = x[2];
+                g.get(a).add(new int[]{b, c});
+                g.get(b).add(new int[]{a, c});
+            }
+            PriorityQueue<int[]> q = new PriorityQueue<>(Comparator.comparingInt(o -> o[0]));
+            int[][] dp = new int[n][discounts + 1];
+            IntStream.range(0, n).forEach(i -> Arrays.fill(dp[i], Integer.MAX_VALUE));
+            for(q.offer(new int[]{0, 0, 0}), dp[0][0] = 0; !q.isEmpty(); ){
+                int e[] = q.poll(), cost = e[0], city = e[1], discount = e[2];
+                if(city == n - 1)
+                    return cost;
+                for(int[] x : g.get(city)){
+                    int next = x[0], weight = x[1];
+                    if(cost + weight < dp[next][discount]){
+                        q.offer(new int[]{cost + weight, next, discount});
+                        dp[next][discount] = cost + weight;
+                    }
+                    if(discount < discounts && cost + weight / 2 < dp[next][discount + 1]){
+                        q.offer(new int[]{cost + weight / 2, next, discount + 1});
+                        dp[next][discount + 1] = cost + weight / 2;
+                    }
+                }
+            }
+            return -1;
+        }
+    }
 }
