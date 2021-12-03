@@ -168,6 +168,22 @@ public class p1600{
         }
     }
 
+    static class s1682{// Longest Palindromic Subsequence II
+        public int longestPalindromeSubseq(String s){
+            return longest(s.toCharArray(), 0, s.length() - 1, 0, new Integer[s.length()][s.length()][27]);
+        }
+
+        int longest(char[] a, int lo, int hi, int last, Integer[][][] dp){
+            if(lo + 1 > hi)
+                return 0;
+            if(dp[lo][hi][last] != null)
+                return dp[lo][hi][last];
+            if(a[lo] == a[hi] && a[lo] - 'a' + 1 != last)
+                return dp[lo][hi][last] = 2 + longest(a, lo + 1, hi - 1, a[lo] - 'a' + 1, dp);
+            return dp[lo][hi][last] = Math.max(longest(a, lo + 1, hi, last, dp), longest(a, lo, hi - 1, last, dp));
+        }
+    }
+
     static class s1690{//Stone Game VII
         public int stoneGameVII(int[] stones){
             return dfs(Arrays.stream(stones).sum(), 0, stones.length - 1, stones, new Integer[stones.length][stones.length]);
