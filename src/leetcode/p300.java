@@ -271,6 +271,19 @@ public class p300{
         }
     }
 
+    static class s359{//Logger Rate Limiter
+        class Logger{
+            Map<String, Integer> m = new HashMap<>();
+
+            public boolean shouldPrintMessage(int timestamp, String message){
+                boolean shouldPrint = timestamp >= m.getOrDefault(message, 0);
+                if(shouldPrint)
+                    m.put(message, timestamp + 10);
+                return shouldPrint;
+            }
+        }
+    }
+
     static class s367{//Valid Perfect Square
         public boolean isPerfectSquare(int n){
             for(int i = 1; n > 0; i += 2)
