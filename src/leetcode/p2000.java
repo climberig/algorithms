@@ -1142,4 +1142,20 @@ public class p2000{
             return -1;
         }
     }
+
+    static class s2094{//Finding 3-Digit Even Numbers
+        public int[] findEvenNumbers(int[] digits){
+            int count[] = new int[10];
+            Arrays.stream(digits).forEach(d -> count[d]++);
+            List<Integer> r = new ArrayList<>();
+            for(int n = 100; n < 1_000; n += 2){
+                int currCount[] = new int[10];
+                for(int m = n; m > 0; m /= 10)
+                    currCount[m % 10]++;
+                if(IntStream.range(0, 10).allMatch(d -> currCount[d] <= count[d]))
+                    r.add(n);
+            }
+            return r.stream().mapToInt(i -> i).toArray();
+        }
+    }
 }

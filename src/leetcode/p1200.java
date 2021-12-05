@@ -65,6 +65,30 @@ public class p1200{
         }
     }
 
+    static class s1254{//Number of Closed Islands
+        public int closedIsland(int[][] g){
+            for(int c = 0; c < g[0].length; c++){
+                sink(0, c, g);
+                sink(g.length - 1, c, g);
+            }
+            for(int r = 0; r < g.length; r++){
+                sink(r, 0, g);
+                sink(r, g[0].length - 1, g);
+            }
+            int r = 0;
+            for(int i = 0; i < g.length; i++)
+                for(int j = 0; j < g[0].length; j++)
+                    r += sink(i, j, g) > 0 ? 1 : 0;
+            return r;
+        }
+
+        int sink(int r, int c, int[][] g){
+            if(0 <= r && r < g.length && 0 <= c && c < g[0].length && g[r][c] == 0)
+                return (g[r][c] = 1) + sink(r + 1, c, g) + sink(r - 1, c, g) + sink(r, c + 1, g) + sink(r, c - 1, g);
+            return 0;
+        }
+    }
+
     static class s1273{//Delete Tree Nodes
         public int deleteTreeNodes(int size, int[] parents, int[] vals){
             List<List<Integer>> g = new ArrayList<>(size);
@@ -133,6 +157,12 @@ public class p1200{
                     a[r][c] += min;
                 }
             return Arrays.stream(a[0]).min().getAsInt();
+        }
+    }
+
+    static class s1295{//Find Numbers with Even Number of Digits
+        public int findNumbers(int[] a){
+            return (int) Arrays.stream(a).filter(n -> (int) Math.log10(n) % 2 == 1).count();
         }
     }
 }
