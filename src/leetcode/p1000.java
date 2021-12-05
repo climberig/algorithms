@@ -183,6 +183,43 @@ public class p1000{
         }
     }
 
+    static class s1065{//Index Pairs of a String
+        /**
+         * Given a string text and an array of strings words, return an array of all index pairs [i, j]
+         * so that the substring text[i...j] is in words. Return the pairs [i, j] in sorted order
+         * (i.e., sort them by their first coordinate, and in case of ties sort them by their second coordinate).
+         */
+        public int[][] indexPairs(String text, String[] words){
+            Node trie = new Node();
+            for(String w : words){
+                Node node = trie;
+                for(char c : w.toCharArray()){
+                    if(node.nodes[c - 'a'] == null)
+                        node.nodes[c - 'a'] = new Node();
+                    node = node.nodes[c - 'a'];
+                }
+                node.isWord = true;
+            }
+            List<int[]> r = new ArrayList<>();
+            char[] s = text.toCharArray();
+            for(int i = 0; i < text.length(); i++){
+                Node node = trie;
+                for(int j = i; j < s.length && node != null; j++){
+                    node = node.nodes[s[j] - 'a'];
+                    if(node != null && node.isWord)
+                        r.add(new int[]{i, j});
+                }
+            }
+            return r.toArray(new int[0][]);
+
+        }
+
+        class Node{
+            Node[] nodes = new Node[26];
+            boolean isWord;
+        }
+    }
+
     static class s1086{//High Five
         public int[][] highFive(int[][] items){
             TreeMap<Integer, PriorityQueue<Integer>> m = new TreeMap<>();
