@@ -1158,4 +1158,18 @@ public class p2000{
             return r.stream().mapToInt(i -> i).toArray();
         }
     }
+    static class s2095{//Delete the Middle Node of a Linked List
+        public ListNode deleteMiddle(ListNode head){
+            if(head.next == null)
+                return null;
+            ListNode slow = head, fast = head.next;
+            while(fast.next != null && fast.next.next != null){
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            slow.next = slow.next.next;
+            return head;
+        }
+    }
+
 }
