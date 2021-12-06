@@ -1172,4 +1172,24 @@ public class p2000{
         }
     }
 
+    static class s2096{//Step-By-Step Directions From a Binary Tree Node to Another
+        public String getDirections(TreeNode root, int start, int target){
+            StringBuilder s = new StringBuilder(), t = new StringBuilder();
+            find(start, s, root);
+            find(target, t, root);
+            int i = 0, maxI = Math.min(s.length(), t.length());
+            for(; i < maxI && s.charAt(i) == t.charAt(i); i++) ;
+            return "U".repeat(s.length() - i) + t.substring(i);
+        }
+
+        boolean find(int val, StringBuilder s, TreeNode node){
+            if(node.val == val)
+                return true;
+            if(node.left != null && find(val, s, node.left))
+                s.insert(0, 'L');
+            else if(node.right != null && find(val, s, node.right))
+                s.insert(0, 'R');
+            return s.length() > 0;
+        }
+    }
 }
