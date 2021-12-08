@@ -4,6 +4,21 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p1100{
+    static class s1119{//Remove Vowels from a String
+        public String removeVowels(String s){
+            Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u');
+            StringBuilder r = new StringBuilder();
+            for(char c : s.toCharArray())
+                if(!vowels.contains(c))
+                    r.append(c);
+            return r.toString();
+        }
+
+        public String removeVowels1(String s){
+            return s.replaceAll("[aeiou]", "");
+        }
+    }
+
     static class s1129{//Shortest Path with Alternating Colors
         public int[] shortestAlternatingPaths(int n, int[][] redEdges, int[][] blueEdges){
             int r[] = new int[n];

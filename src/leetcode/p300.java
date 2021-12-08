@@ -284,6 +284,38 @@ public class p300{
         }
     }
 
+    static class s361{//Bomb Enemy
+        /**
+         * Given an m x n matrix grid where each cell is either a wall 'W', an enemy 'E' or empty '0',
+         * return the maximum enemies you can kill using one bomb. You can only place the bomb in an
+         * empty cell. The bomb kills all the enemies in the same row and column from the planted point
+         * until it hits the wall since it is too strong to be destroyed.
+         */
+        public int maxKilledEnemies(char[][] g){
+            int n = g.length, m = g[0].length, rows[][] = new int[n][m], cols[][] = new int[n][m];
+            for(int r = 0; r < n; r++)
+                for(int c = 1, e1 = 0, e2 = 0; c < m; c++){
+                    e1 = g[r][c - 1] == 'W' ? 0 : e1 + (g[r][c - 1] == 'E' ? 1 : 0);
+                    e2 = g[r][m - c] == 'W' ? 0 : e2 + (g[r][m - c] == 'E' ? 1 : 0);
+                    rows[r][c] += e1;
+                    rows[r][m - c - 1] += e2;
+                }
+            for(int c = 0; c < m; c++)
+                for(int r = 1, e1 = 0, e2 = 0; r < n; r++){
+                    e1 = g[r - 1][c] == 'W' ? 0 : e1 + (g[r - 1][c] == 'E' ? 1 : 0);
+                    e2 = g[n - r][c] == 'W' ? 0 : e2 + (g[n - r][c] == 'E' ? 1 : 0);
+                    cols[r][c] += e1;
+                    cols[n - r - 1][c] += e2;
+                }
+            int r = 0;
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j < m; j++)
+                    if(g[i][j] == '0')
+                        r = Math.max(rows[i][j] + cols[i][j], r);
+            return r;
+        }
+    }
+
     static class s367{//Valid Perfect Square
         public boolean isPerfectSquare(int n){
             for(int i = 1; n > 0; i += 2)

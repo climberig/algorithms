@@ -67,6 +67,14 @@ public class p1900{
         }
     }
 
+    static class s1941{//Check if All Characters Have Equal Number of Occurrences
+        public boolean areOccurrencesEqual(String s){
+            int[] fr = new int[26];
+            s.chars().forEach(c -> fr[c - 'a']++);
+            return Arrays.stream(fr).filter(f -> f > 0).allMatch(f -> f == Arrays.stream(fr).max().getAsInt());
+        }
+    }
+
     static class s1954{//Minimum Garden Perimeter to Collect Enough Apples
         public long minimumPerimeter(long neededApples){
             int side = 0, lo = 0, hi = 0;
