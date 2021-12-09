@@ -490,4 +490,25 @@ public class p200{
             return r;
         }
     }
+
+    static class s298{//Binary Tree Longest Consecutive Sequence
+        /**
+         * Given the root of a binary tree, return the length of the longest consecutive sequence path.
+         * The path refers to any sequence of nodes from some starting node to any node in the tree along
+         * the parent-child connections. The longest consecutive path needs to be from parent to child (cannot be the reverse).
+         */
+        int r = 1;
+        public int longestConsecutive(TreeNode root){
+            dfs(1, root);
+            return r;
+        }
+
+        void dfs(int len, TreeNode node){
+            r = Math.max(len, r);
+            if(node.left != null)
+                dfs(node.val + 1 == node.left.val ? len + 1 : 1, node.left);
+            if(node.right != null)
+                dfs(node.val + 1 == node.right.val ? len + 1 : 1, node.right);
+        }
+    }
 }
