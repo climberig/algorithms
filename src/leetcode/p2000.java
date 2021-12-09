@@ -1192,4 +1192,29 @@ public class p2000{
             return s.length() > 0;
         }
     }
+
+    static class s2098{//Subsequence of Size K With the Largest Even Sum
+        public long largestEvenSum(int[] a, int k){
+            Arrays.sort(a);
+            long sum = 0, r = -1;
+            int smallestEven = Integer.MAX_VALUE, smallestOdd = Integer.MAX_VALUE;
+            int largestEven = -1, largestOdd = -1;
+            for(int i = a.length - 1; i >= 0; i--)
+                if(i >= a.length - k){
+                    sum += a[i];
+                    if(a[i] % 2 == 0)
+                        smallestEven = Math.min(smallestEven, a[i]);
+                    else smallestOdd = Math.min(smallestOdd, a[i]);
+                }else if(a[i] % 2 == 0)
+                    largestEven = Math.max(largestEven, a[i]);
+                else largestOdd = Math.max(largestOdd, a[i]);
+            if(sum % 2 == 0)
+                return sum;
+            if(0 <= largestOdd && smallestEven < Integer.MAX_VALUE)
+                r = Math.max(r, sum - smallestEven + largestOdd);
+            if(0 <= largestEven && smallestOdd < Integer.MAX_VALUE)
+                r = Math.max(r, sum - smallestOdd + largestEven);
+            return r;
+        }
+    }
 }
