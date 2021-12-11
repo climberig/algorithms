@@ -219,6 +219,24 @@ public class p200{
         }
     }
 
+    static class s250{//Count Univalue Subtrees (A uni-value subtree means all nodes of the subtree have the same value)
+        int r = 0;
+
+        public int countUnivalSubtrees(TreeNode root){
+            all(root, 0);
+            return r;
+        }
+
+        boolean all(TreeNode node, int val){
+            if(node == null)
+                return true;
+            if(!all(node.left, node.val) | !all(node.right, node.val))
+                return false;
+            r++;
+            return node.val == val;
+        }
+    }
+
     static class s251{//Flatten 2D Vector
         class Vector2D{
             int r = 0, c = -1, v[][];
