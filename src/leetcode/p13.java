@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p1300{
+public class p13{
     static class s1320{//Minimum Distance to Type a Word Using Two Fingers
         public int minimumDistance(String word){
             return dfs(word.toCharArray(), 0, -1, -1, new Integer[word.length()][27][27]);

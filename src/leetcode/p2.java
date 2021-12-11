@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p200{
+public class p2{
     static class s208{//Implement Trie (Prefix Tree)
         class Trie{
             Trie[] nodes = new Trie[26];

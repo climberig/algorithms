@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class p1000{
+public class p10{
     static class s1002{//Find Common Characters
         public List<String> commonChars(String[] words){
             int[] common = new int[26];

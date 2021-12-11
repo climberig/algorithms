@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class p900{
+public class p9{
     static class s925{
         public boolean isLongPressedName(String name, String typed){
             int i = 0, j = 0;

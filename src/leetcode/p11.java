@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p1100{
+public class p11{
     static class s1119{//Remove Vowels from a String
         public String removeVowels(String s){
             Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u');

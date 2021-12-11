@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class p2000{
+public class p20{
     static class s2001{//Number of Pairs of Interchangeable Rectangles
         public long interchangeableRectangles(int[][] rectangles){
             Map<String, Integer> m = new HashMap<>();

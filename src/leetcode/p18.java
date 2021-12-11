@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p1800{
+public class p18{
     static class s1810{
         public int findShortestPath(GridMaster master){
             int N = 100, g[][] = new int[2 * N + 1][2 * N + 1], moves[][] = new int[][]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}, target[] = new int[]{-N, -N};

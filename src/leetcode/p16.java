@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p1600{
+public class p16{
     static class s1644{//Lowest Common Ancestor of a Binary Tree II
         int count = 0;
 

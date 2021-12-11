@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p1200{
+public class p12{
     static class s1202{//Smallest String With Swaps
         public String smallestStringWithSwaps(String s, List<List<Integer>> pairs){
             List<List<Integer>> g = IntStream.range(0, s.length()).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());

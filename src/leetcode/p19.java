@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p1900{
+public class p19{
     static class s1902{//Depth of BST Given Insertion Order
         public int maxDepthBST(int[] order){
             TreeMap<Integer, Integer> m = new TreeMap<>();

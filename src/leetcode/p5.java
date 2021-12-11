@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class p500{
+public class p5{
     static class s500{//Keyboard Row
         public String[] findWords(String[] words){
             List<String> r = new ArrayList<>(), rows = Arrays.asList("qwertyuiop", "asdfghjkl", "zxcvbnm");

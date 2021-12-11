@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p1500{
+public class p15{
     static class s1503{//Last Moment Before All Ants Fall Out of a Plank
         public int getLastMoment(int n, int[] left, int[] right){
             int r = 0;

@@ -2,7 +2,7 @@ package leetcode;
 
 import java.util.*;
 
-public class p400{
+public class p4{
     static class s401{//Binary Watch
         public List<String> readBinaryWatch(int turnedOn){
             List<String> r = new ArrayList<>();

@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class p700{
+public class p7{
     static class s704{//Binary Search
         public int search(int[] a, int target){
             int lo = 0, hi = a.length - 1;

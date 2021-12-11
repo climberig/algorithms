@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.IntStream;
 
-public class p600{
+public class p6{
     static class s604{//Design Compressed String Iterator
         class StringIterator{
             char a[], c;

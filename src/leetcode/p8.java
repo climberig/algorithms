@@ -1,6 +1,6 @@
 package leetcode;
 
-public class p800{
+public class p8{
     static class s821{//Shortest Distance to a Character
         public int[] shortestToChar(String s, char c){
             int[] r = new int[s.length()];

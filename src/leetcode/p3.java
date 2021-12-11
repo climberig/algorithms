@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class p300{
+public class p3{
     static class s303{//Range Sum Query - Immutable
         class NumArray{
             final int[] cs;

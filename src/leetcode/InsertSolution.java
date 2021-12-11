@@ -14,7 +14,7 @@ public class InsertSolution{
         log.info("Reading a.java");
         List<String> insertLines = solutionFromA();
         int problemNo = problemNo(insertLines.get(0));
-        String updateFile = "p" + (problemNo / 100 * 100) + ".java";
+        String updateFile = "p" + (problemNo / 100) + ".java";
         log.info(String.format("Inserting problem %s into %s", problemNo, updateFile));
         List<String> oldLines = Files.readAllLines(Path.of(WORKING_DIR, updateFile)), newLines = new ArrayList<>();
         boolean inserted = false;

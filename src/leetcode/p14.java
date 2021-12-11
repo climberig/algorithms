@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.*;
 
-public class p1400{
+public class p14{
     static class s1400{//Construct K Palindrome Strings
         public boolean canConstruct(String s, int k){
             int odd = 0, count[] = new int[26];
