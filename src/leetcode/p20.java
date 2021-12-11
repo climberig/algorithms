@@ -1220,13 +1220,13 @@ public class p20{
 
     static class s2099{//Find Subsequence of Length K With the Largest Sum
         public int[] maxSubsequence(int[] a, int k){
-            PriorityQueue<int[]> q = new PriorityQueue<>(Comparator.comparingInt(n -> n[0]));
-            for(int i = 0; i < a.length; i++){
-                q.offer(new int[]{a[i], i});
+            PriorityQueue<Integer> q = new PriorityQueue<>(Comparator.comparingInt(i -> a[i]));
+            for(int i = 0; i < a.length; ++i){
+                q.offer(i);
                 if(q.size() > k)
-                    q.remove();
+                    q.poll();
             }
-            return q.stream().sorted(Comparator.comparingInt(n -> n[1])).mapToInt(n -> n[0]).toArray();
+            return q.stream().sorted().mapToInt(i -> a[i]).toArray();
         }
     }
 }

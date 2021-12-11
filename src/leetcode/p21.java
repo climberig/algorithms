@@ -2,6 +2,7 @@ package leetcode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 public class p21{
     static class s2100{//Find Good Days to Rob the Bank
         public List<Integer> goodDaysToRobBank(int[] sec, int time){
