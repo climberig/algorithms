@@ -57,4 +57,17 @@ public class p21{
             return (int) Arrays.stream(rods).filter(s -> s.length() == 3).count();
         }
     }
+
+    static class s2104{//Sum of Subarray Ranges
+        public long subArrayRanges(int[] a){
+            long r = 0;
+            for(int i = 0; i < a.length; i++)
+                for(int j = i, min = a[j], max = a[j]; j < a.length; j++){
+                    max = Math.max(a[j], max);
+                    min = Math.min(a[j], min);
+                    r += max - min;
+                }
+            return r;
+        }
+    }
 }
