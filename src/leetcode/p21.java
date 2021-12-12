@@ -44,4 +44,17 @@ public class p21{
             return x * x + y * y <= (long) bombs[i][2] * bombs[i][2];
         }
     }
+
+    static class s2103{//Rings and Rods
+        public int countPoints(String rings){
+            String[] rods = new String[10];
+            Arrays.fill(rods, "");
+            for(int i = 0; i < rings.length(); i += 2){
+                int rod = rings.charAt(i + 1) - '0';
+                if(rods[rod].indexOf(rings.charAt(i)) == -1)
+                    rods[rod] += rings.charAt(i);
+            }
+            return (int) Arrays.stream(rods).filter(s -> s.length() == 3).count();
+        }
+    }
 }
