@@ -80,6 +80,22 @@ public class p3{
         int find(int i, int[] uf){return i == uf[i] ? i : (uf[i] = find(uf[i], uf));}
     }
 
+    static class s332{//Reconstruct Itinerary
+        public List<String> findItinerary(List<List<String>> tickets){
+            Map<String, PriorityQueue<String>> g = new HashMap<>();
+            tickets.forEach(t -> g.computeIfAbsent(t.get(0), k -> new PriorityQueue<>()).add(t.get(1)));
+            LinkedList<String> r = new LinkedList<>();
+            visit("JFK", g, r);
+            return r;
+        }
+
+        void visit(String airport, Map<String, PriorityQueue<String>> g, LinkedList<String> route){
+            while(g.containsKey(airport) && !g.get(airport).isEmpty())
+                visit(g.get(airport).poll(), g, route);
+            route.addFirst(airport);
+        }
+    }
+
     static class s338{//Counting Bits
         public int[] countBits(int n){
             int[] r = new int[n + 1];
