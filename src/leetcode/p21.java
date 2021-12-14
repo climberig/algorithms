@@ -70,4 +70,23 @@ public class p21{
             return r;
         }
     }
+
+    static class s2105{//Watering Plants II
+        public int minimumRefill(int[] plants, int capA, int capB){
+            int r = 0;
+            for(int i = 0, j = plants.length - 1, canA = capA, canB = capB; i <= j; canA -= plants[i++], canB -= plants[j--]){
+                if(i == j)
+                    return Math.max(canA, canB) >= plants[i] ? r : r + 1;
+                if(canA < plants[i]){
+                    canA = capA;
+                    r++;
+                }
+                if(canB < plants[j]){
+                    canB = capB;
+                    r++;
+                }
+            }
+            return r;
+        }
+    }
 }

@@ -324,6 +324,29 @@ public class p3{
         }
     }
 
+    static class s369{//Plus One Linked List
+        /**
+         * Given a non-negative integer represented as a linked list of digits, plus one to the integer.
+         * The digits are stored such that the most significant digit is at the head of the list.
+         */
+        public ListNode plusOne(ListNode head){
+            ListNode lastNon9 = null, nine = head;
+            for(ListNode node = head; node != null; node = node.next)
+                if(node.val < 9)
+                    lastNon9 = node;
+            if(lastNon9 == null){
+                head = new ListNode(1);
+                head.next = nine;
+            }else{
+                lastNon9.val++;
+                nine = lastNon9.next;
+            }
+            for(; nine != null; nine = nine.next)
+                nine.val = 0;
+            return head;
+        }
+    }
+
     static class s370{//Range Addition
         /**
          * You are given an integer length and an array updates where updates[i] = [startIdxi, endIdxi, inci].

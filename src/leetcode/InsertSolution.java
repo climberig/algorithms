@@ -25,10 +25,13 @@ public class InsertSolution{
                     return;
                 }
                 log.info("Inserting before " + line);
-                newLines.addAll(insertLines);
-                if(line.startsWith("}"))
-                    newLines.add(0, "");
-                else newLines.add("");
+                if(line.startsWith("}")){
+                    newLines.add("");
+                    newLines.addAll(insertLines);
+                }else{
+                    newLines.addAll(insertLines);
+                    newLines.add("");
+                }
                 inserted = true;
             }
             newLines.add(line);
