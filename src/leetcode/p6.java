@@ -53,6 +53,22 @@ public class p6{
         }
     }
 
+    static class s616{//Add Bold Tag in String
+        public String addBoldTag(String s, String[] words){
+            boolean[] b = new boolean[s.length() + 1];
+            for(String w : words)
+                for(int i = s.indexOf(w); i != -1; i = s.indexOf(w, i + 1))
+                    Arrays.fill(b, i, i + w.length(), true);
+            StringBuilder r = new StringBuilder(b[0] ? "<b>" : "");
+            for(int i = 0; i < b.length - 1; i++){
+                r.append(s.charAt(i));
+                r.append(b[i] && !b[i + 1] ? "</b>" : "");
+                r.append(!b[i] && b[i + 1] ? "<b>" : "");
+            }
+            return r.toString();
+        }
+    }
+
     static class s617{//Merge Two Binary Trees
         public TreeNode mergeTrees(TreeNode r1, TreeNode r2){
             if(r1 != null && r2 != null)
