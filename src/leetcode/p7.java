@@ -121,6 +121,23 @@ public class p7{
             int walls;
         }
     }
+
+    static class s758{//Bold Words in String
+        public String boldWords(String[] words, String s){
+            boolean[] bold = new boolean[s.length() + 1];
+            for(String w : words)
+                for(int i = s.indexOf(w); i != -1; i = s.indexOf(w, i + 1))
+                    Arrays.fill(bold, i, i + w.length(), true);
+            StringBuilder r = new StringBuilder(bold[0] ? "<b>" : "");
+            for(int i = 0; i < bold.length - 1; i++){
+                r.append(s.charAt(i));
+                r.append(bold[i] && !bold[i + 1] ? "</b>" : "");
+                r.append(!bold[i] && bold[i + 1] ? "<b>" : "");
+            }
+            return r.toString();
+        }
+    }
+
     static class s760{//Find Anagram Mapping
         /**
          * You are given two integer arrays nums1 and nums2 where nums2 is an anagram of nums1.
