@@ -88,6 +88,39 @@ public class p19{
         }
     }
 
+    static class s1976{//Number of Ways to Arrive at Destination
+        public int countPaths(int n, int[][] roads){
+            List<List<int[]>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<int[]>()).collect(Collectors.toList());
+            for(int[] e : roads){
+                g.get(e[0]).add(new int[]{e[1], e[2]});
+                g.get(e[1]).add(new int[]{e[0], e[2]});
+            }
+            return dijkstra(g, n);
+        }
+
+        int dijkstra(List<List<int[]>> g, int n){
+            int[] dp = new int[n], ways = new int[n];
+            Arrays.fill(dp, Integer.MAX_VALUE);
+            ways[0] = 1;
+            dp[0] = 0;
+            PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+            for(q.offer(new int[]{0, 0}); !q.isEmpty(); ){
+                int from[] = q.poll(), d = from[0], u = from[1];
+                if(d <= dp[u])
+                    for(int[] to : g.get(u)){
+                        int v = to[0], time = to[1];
+                        if(dp[v] > d + time){
+                            dp[v] = d + time;
+                            ways[v] = ways[u];
+                            q.add(new int[]{dp[v], v});
+                        }else if(dp[v] == d + time)
+                            ways[v] = (ways[v] + ways[u]) % 1_000_000_007;
+                    }
+            }
+            return ways[n - 1];
+        }
+    }
+
     static class s1981{//Minimize the Difference Between Target and Chosen Elements
         public int minimizeTheDifference(int[][] mat, int target){
             return minDiff(mat, 0, target, 0, new Integer[mat.length][5_000]);
