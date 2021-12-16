@@ -15,6 +15,17 @@ public class p15{
         }
     }
 
+    static class s1513{//Number of Substrings With Only 1s
+        public int numSub(String s){
+            int r = 0;
+            for(int i = 0, count = 0; i < s.length(); i++){
+                count = s.charAt(i) == '1' ? count + 1 : 0;
+                r = (r + count) % 1_000_000_007;
+            }
+            return r;
+        }
+    }
+
     static class s1516{//Move Sub-Tree of N-Ary Tree
         public Node moveSubTree(Node root, Node p, Node q){
             if(q.children.contains(p))
