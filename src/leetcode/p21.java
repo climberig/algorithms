@@ -1,7 +1,5 @@
 package leetcode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -87,6 +85,24 @@ public class p21{
                 }
             }
             return r;
+        }
+    }
+
+    static class s2107{//Number of Unique Flavors After Sharing K Candies
+        public int shareCandies(int[] candies, int k){
+            int r = 0;
+            Map<Integer, Integer> flavors = new HashMap<>();
+            Arrays.stream(candies).forEach(c -> flavors.put(c, flavors.getOrDefault(c, 0) + 1));
+            for(int i = 0; i < candies.length; i++){
+                if(i >= k){
+                    r = Math.max(r, flavors.size());
+                    flavors.put(candies[i - k], flavors.getOrDefault(candies[i - k], 0) + 1);
+                }
+                flavors.put(candies[i], flavors.get(candies[i]) - 1);
+                if(flavors.get(candies[i]) == 0)
+                    flavors.remove(candies[i]);
+            }
+            return Math.max(r, flavors.size());
         }
     }
 }
