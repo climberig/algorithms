@@ -1,6 +1,25 @@
 package leetcode;
 
 public class p8{
+    static class s800{//Similar RGB Color
+        public String similarRGB(String color){
+            String hex = "0123456789abcdef", minS = "";
+            StringBuilder r = new StringBuilder("#");
+            for(int i = 1; i < color.length(); i += 2){
+                int min = Integer.MAX_VALUE, n = Integer.parseInt(color.substring(i, i + 2), 16);
+                for(char c : hex.toCharArray()){
+                    int val = Integer.parseInt("" + c + c, 16);
+                    if(Math.abs(val - n) < min){
+                        min = Math.abs(val - n);
+                        minS = "" + c + c;
+                    }
+                }
+                r.append(minS);
+            }
+            return r.toString();
+        }
+    }
+
     static class s821{//Shortest Distance to a Character
         public int[] shortestToChar(String s, char c){
             int[] r = new int[s.length()];
