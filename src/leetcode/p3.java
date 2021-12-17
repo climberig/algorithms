@@ -332,6 +332,24 @@ public class p3{
         }
     }
 
+    static class s366{//Find Leaves of Binary Tree
+        public List<List<Integer>> findLeaves(TreeNode root){
+            List<List<Integer>> r = new ArrayList<>();
+            height(root, r);
+            return r;
+        }
+
+        int height(TreeNode node, List<List<Integer>> r){
+            if(node == null)
+                return -1;
+            int h = Math.max(height(node.left, r), height(node.right, r)) + 1;
+            if(r.size() <= h)
+                r.add(new ArrayList<>());
+            r.get(h).add(node.val);
+            return h;
+        }
+    }
+
     static class s367{//Valid Perfect Square
         public boolean isPerfectSquare(int n){
             for(int i = 1; n > 0; i += 2)
@@ -382,6 +400,26 @@ public class p3{
                 r[i] = sum;
             }
             return r;
+        }
+    }
+
+    static class s374{//Guess Number Higher or Lower
+        public class Solution extends GuessGame{
+            public int guessNumber(int n){
+                for(int lo = 1, hi = n; lo <= n; ){
+                    int mid = hi - (hi - lo) / 2, r = guess(mid);
+                    if(r == 0)
+                        return mid;
+                    else if(r < 0)
+                        hi = mid - 1;
+                    else lo = mid + 1;
+                }
+                return 0;
+            }
+        }
+
+        class GuessGame{
+            int guess(int n){return 0;}//n is your guess, return -1 if pick < n, 1 if pick > n and 0 if pick=n
         }
     }
 
