@@ -286,6 +286,24 @@ public class p2{
         }
     }
 
+    static class s256{//Paint House
+        /**
+         * There is a row of n houses, where each house can be painted one of three colors: red, blue, or green.
+         * The cost of painting each house with a certain color is different. You have to paint all the houses
+         * such that no two adjacent houses have the same color.
+         */
+        public int minCost(int[][] costs){
+            int red = 0, blue = 0, green = 0;
+            for(int[] cost : costs){
+                int r = red, b = blue, g = green;
+                red = Math.min(g, b) + cost[0];
+                blue = Math.min(r, g) + cost[1];
+                green = Math.min(b, r) + cost[2];
+            }
+            return Math.min(Math.min(red, blue), green);
+        }
+    }
+
     static class s258{//Add Digits
         public int addDigits(int n){
             if(n == 0)

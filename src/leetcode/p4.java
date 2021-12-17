@@ -1,6 +1,7 @@
 package leetcode;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class p4{
     static class s401{//Binary Watch
@@ -147,6 +148,21 @@ public class p4{
                     count = 1;
                 }else count++;
             return j;
+        }
+    }
+
+    static class s451{//Sort Characters By Frequency
+        public String frequencySort(String s){
+            int[] counts = new int[256];
+            s.chars().forEach(c -> counts[c]++);
+            PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> counts[b] - counts[a]);
+            IntStream.range(0, counts.length).filter(i -> counts[i] > 0).forEach(q::offer);
+            StringBuilder r = new StringBuilder();
+            while(!q.isEmpty()){
+                int c = q.poll();
+                r.append(String.valueOf((char) c).repeat(counts[c]));
+            }
+            return r.toString();
         }
     }
 
