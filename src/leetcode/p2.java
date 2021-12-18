@@ -547,4 +547,16 @@ public class p2{
                 dfs(node.val + 1 == node.right.val ? len + 1 : 1, node.right);
         }
     }
+
+    static class s299{//Bulls and Cows
+        public String getHint(String secret, String guess){
+            int c1[] = new int[10], c2[] = new int[10], a = 0;
+            for(int i = 0; i < secret.length(); i++)
+                if(secret.charAt(i) != guess.charAt(i)){
+                    c1[secret.charAt(i) - '0']++;
+                    c2[guess.charAt(i) - '0']++;
+                }else a++;
+            return a + "A" + IntStream.range(0, c1.length).map(i -> Math.min(c1[i], c2[i])).sum() + "B";
+        }
+    }
 }

@@ -188,4 +188,41 @@ public class p17{
             return max - min;
         }
     }
+
+    static class s1786{//Number of Restricted Paths From First to Last Node
+        public int countRestrictedPaths(int n, int[][] edges){
+            int[] d = new int[n + 1];
+            Arrays.fill(d, Integer.MAX_VALUE);
+            List<List<int[]>> g = IntStream.range(0, n + 1).mapToObj(i -> new ArrayList<int[]>()).collect(Collectors.toList());
+            for(int[] e : edges){
+                g.get(e[0]).add(new int[]{e[1], e[2]});
+                g.get(e[1]).add(new int[]{e[0], e[2]});
+            }
+            PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+            d[n] = 0;
+            for(q.offer(new int[]{n, 0}); !q.isEmpty(); ){
+                int from[] = q.poll(), u = from[0], d1 = from[1];
+                for(int[] to : g.get(u)){
+                    int v = to[0], d2 = to[1];
+                    if(d2 + d1 < d[v]){
+                        d[v] = d2 + d1;
+                        q.offer(new int[]{v, d[v]});
+                    }
+                }
+            }
+            return dfs(1, n, g, d, new Integer[n + 1]);
+        }
+
+        int dfs(int u, int n, List<List<int[]>> g, int[] d, Integer[] dp){
+            if(dp[u] != null)
+                return dp[u];
+            if(u == n)
+                return 1;
+            int r = 0;
+            for(int[] to : g.get(u))
+                if(d[u] > d[to[0]])
+                    r = (r + dfs(to[0], n, g, d, dp)) % 1_000_000_007;
+            return dp[u] = r;
+        }
+    }
 }
