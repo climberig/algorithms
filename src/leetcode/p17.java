@@ -1,7 +1,8 @@
 package leetcode;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class p17{
     static class s1722{//Minimize Hamming Distance After Swap Operations
@@ -88,6 +89,28 @@ public class p17{
                 else hi = size;
             }
             return lo;
+        }
+    }
+
+    static class s1764{//Form Array by Concatenating Subarrays of Another Array
+        public boolean canChoose(int[][] groups, int[] a){
+            return can(0, groups, a, 0);
+        }
+
+        boolean can(int gIdx, int[][] groups, int[] a, int aIdx){
+            if(gIdx == groups.length)
+                return true;
+            for(int i = aIdx; i <= a.length - groups[gIdx].length; i++)
+                if(same(a, i, groups[gIdx]) && can(gIdx + 1, groups, a, i + groups[gIdx].length))
+                    return true;
+            return false;
+        }
+
+        boolean same(int[] a, int start, int[] g){
+            for(int i = start, j = 0; j < g.length; i++, j++)
+                if(a[i] != g[j])
+                    return false;
+            return true;
         }
     }
 
@@ -191,37 +214,32 @@ public class p17{
 
     static class s1786{//Number of Restricted Paths From First to Last Node
         public int countRestrictedPaths(int n, int[][] edges){
-            int[] d = new int[n + 1];
-            Arrays.fill(d, Integer.MAX_VALUE);
+            int[] dist = new int[n + 1];
+            Arrays.fill(dist, Integer.MAX_VALUE);
             List<List<int[]>> g = IntStream.range(0, n + 1).mapToObj(i -> new ArrayList<int[]>()).collect(Collectors.toList());
             for(int[] e : edges){
                 g.get(e[0]).add(new int[]{e[1], e[2]});
                 g.get(e[1]).add(new int[]{e[0], e[2]});
             }
-            PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[1] - b[1]);
-            d[n] = 0;
-            for(q.offer(new int[]{n, 0}); !q.isEmpty(); ){
-                int from[] = q.poll(), u = from[0], d1 = from[1];
-                for(int[] to : g.get(u)){
-                    int v = to[0], d2 = to[1];
-                    if(d2 + d1 < d[v]){
-                        d[v] = d2 + d1;
-                        q.offer(new int[]{v, d[v]});
-                    }
-                }
+            PriorityQueue<int[]> q = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+            for(dist[n] = 0, q.add(new int[]{n, 0}); !q.isEmpty(); ){
+                int p[] = q.poll(), u = p[0], d = p[1];
+                for(int[] to : g.get(u))
+                    if(d + to[1] < dist[to[0]])
+                        q.add(new int[]{to[0], dist[to[0]] = d + to[1]});
             }
-            return dfs(1, n, g, d, new Integer[n + 1]);
+            return dfs(1, n, dist, g, new Integer[n + 1]);
         }
 
-        int dfs(int u, int n, List<List<int[]>> g, int[] d, Integer[] dp){
-            if(dp[u] != null)
-                return dp[u];
+        int dfs(int u, int n, int[] d, List<List<int[]>> g, Integer[] dp){
             if(u == n)
                 return 1;
+            if(dp[u] != null)
+                return dp[u];
             int r = 0;
-            for(int[] to : g.get(u))
-                if(d[u] > d[to[0]])
-                    r = (r + dfs(to[0], n, g, d, dp)) % 1_000_000_007;
+            for(int[] v : g.get(u))
+                if(d[v[0]] < d[u])
+                    r = (r + dfs(v[0], n, d, g, dp)) % 1_000_000_007;
             return dp[u] = r;
         }
     }
