@@ -48,6 +48,14 @@ public class p14{
         }
     }
 
+    static class s1426{//Counting Elements
+        public int countElements(int[] a){
+            int f[] = new int[1_001];
+            Arrays.stream(a).forEach(n -> f[n]++);
+            return IntStream.range(1, f.length).filter(i -> f[i] > 0).map(i -> f[i - 1]).sum();
+        }
+    }
+
     static class s1462{//Course Schedule IV
         public List<Boolean> checkIfPrerequisite(int n, int[][] prerequisites, int[][] queries){
             List<List<Integer>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
