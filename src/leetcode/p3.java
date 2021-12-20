@@ -5,6 +5,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p3{
+    static class s300{//Longest Increasing Subsequence
+        public int lengthOfLIS(int[] a){
+            List<Integer> piles = new ArrayList<>(a.length);
+            for(int n : a){
+                int p = Collections.binarySearch(piles, n);
+                if(p < 0)
+                    p = ~p;
+                if(p == piles.size())
+                    piles.add(n);
+                else piles.set(p, n);
+            }
+            return piles.size();
+        }
+    }
+
     static class s303{//Range Sum Query - Immutable
         class NumArray{
             final int[] cs;

@@ -105,4 +105,40 @@ public class p21{
             return Math.max(r, flavors.size());
         }
     }
+
+    static class s2108{//Find First Palindromic String in the Array
+        public String firstPalindrome(String[] words){
+            return Arrays.stream(words).filter(w -> isPali(w.toCharArray())).findFirst().orElse("");
+        }
+
+        boolean isPali(char[] a){
+            for(int i = 0, j = a.length - 1; i < j; i++, j--)
+                if(a[i] != a[j])
+                    return false;
+            return true;
+        }
+    }
+
+    static class s2109{//Adding Spaces to a String
+        public String addSpaces(String s, int[] spaces){
+            StringBuilder r = new StringBuilder();
+            for(int i = 0, j = 0; i < s.length(); r.append(s.charAt(i++)))
+                if(j < spaces.length && i == spaces[j]){
+                    r.append(" ");
+                    j++;
+                }
+            return r.toString();
+        }
+    }
+
+    static class s2110{//Number of Smooth Descent Periods of a Stock
+        public long getDescentPeriods(int[] prices){
+            long r = 1, periodLen = 1;
+            for(int i = 1; i < prices.length; i++){
+                periodLen = prices[i - 1] - 1 == prices[i] ? periodLen + 1 : 1;
+                r += periodLen;
+            }
+            return r;
+        }
+    }
 }
