@@ -38,6 +38,15 @@ public class p10{
         }
     }
 
+    static class s1016{//Binary String With Substrings Representing 1 To N
+        public boolean queryString(String s, int n){
+            for(int i = n; i > n / 2; i--)
+                if(!s.contains(Integer.toBinaryString(i)))
+                    return false;
+            return true;
+        }
+    }
+
     static class s1022{//Sum of Root To Leaf Binary Numbers
         public int sumRootToLeaf(TreeNode root){
             return sum(root, 0);

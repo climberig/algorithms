@@ -185,6 +185,22 @@ public class p15{
         }
     }
 
+    static class s1545{//Find Kth Bit in Nth Binary String
+        public char findKthBit(int n, int k){
+            String s = "0";
+            while(k > s.length())
+                s = s + "1" + invertReverse(s);
+            return s.charAt(k - 1);
+        }
+
+        String invertReverse(String s){
+            StringBuilder r = new StringBuilder(s.length());
+            for(int i = s.length() - 1; i >= 0; i--)
+                r.append(s.charAt(i) == '0' ? '1' : '0');
+            return r.toString();
+        }
+    }
+
     static class s1557{//Minimum Number of Vertices to Reach All Nodes
         public List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges){
             boolean[] seen = new boolean[n];
