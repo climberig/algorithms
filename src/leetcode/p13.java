@@ -4,6 +4,20 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p13{
+    static class s1312{//Minimum Insertion Steps to Make a String Palindrome
+        public int minInsertions(String s){
+            return s.length() - lcs(s, new StringBuilder(s).reverse().toString());
+        }
+
+        int lcs(String s1, String s2){
+            int n = s1.length(), dp[][] = new int[n + 1][n + 1];
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j < n; j++)
+                    dp[i + 1][j + 1] = s1.charAt(i) == s2.charAt(j) ? dp[i][j] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+            return dp[n][n];
+        }
+    }
+
     static class s1320{//Minimum Distance to Type a Word Using Two Fingers
         public int minimumDistance(String word){
             return dfs(word.toCharArray(), 0, -1, -1, new Integer[word.length()][27][27]);

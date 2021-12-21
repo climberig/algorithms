@@ -111,6 +111,24 @@ public class p12{
         }
     }
 
+    static class s1274{//Number of Ships in a Rectangle
+        public int countShips(Sea sea, int[] R, int[] L){
+            if(!sea.hasShips(R, L))
+                return 0;
+            if(R[0] == L[0] && R[1] == L[1])
+                return 1;
+            int x = (R[0] + L[0]) / 2, y = (R[1] + L[1]) / 2;
+            return countShips(sea, new int[]{x, y}, L) +
+                    countShips(sea, R, new int[]{x + 1, y + 1}) +
+                    countShips(sea, new int[]{x, R[1]}, new int[]{L[0], y + 1}) +
+                    countShips(sea, new int[]{R[0], y}, new int[]{x + 1, L[1]});
+        }
+
+        interface Sea{
+            boolean hasShips(int[] topRight, int[] bottomLeft);
+        }
+    }
+
     static class s1284{//Minimum Number of Flips to Convert Binary Matrix to Zero Matrix
         public int minFlips(int[][] m){
             Set<String> seen = new HashSet<>();
