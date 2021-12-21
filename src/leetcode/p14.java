@@ -102,4 +102,28 @@ public class p14{
             return codes.size() == 1 << k;
         }
     }
+
+    static class s1482{//Minimum Number of Days to Make m Bouquets
+        public int minDays(int[] bloomDays, int m, int k){
+            int lo = 1, hi = 1_000_000_000, r = 0;
+            while(lo <= hi){
+                int mid = (lo + hi) / 2, n = nOfBouquets(mid, bloomDays, k);
+                if(n >= m){
+                    r = mid;
+                    hi = mid - 1;
+                }else lo = mid + 1;
+            }
+            return r > 0 ? r : -1;
+        }
+
+        int nOfBouquets(int maxDay, int[] bloomDays, int k){
+            int adjacent = 0, bouquets = 0;
+            for(int day : bloomDays)
+                if(day > maxDay){
+                    bouquets += adjacent / k;
+                    adjacent = 0;
+                }else adjacent++;
+            return bouquets + adjacent / k;
+        }
+    }
 }
