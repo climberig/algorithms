@@ -201,6 +201,30 @@ public class p15{
         }
     }
 
+    static class s1552{//Magnetic Force Between Two Balls
+        public int maxDistance(int[] position, int m){
+            Arrays.sort(position);
+            int r = 1, lo = 1, hi = 1_000_000_000;
+            while(lo <= hi){
+                int force = (lo + hi) / 2;
+                if(valid(force, position, m)){
+                    r = force;
+                    lo = force + 1;
+                }else hi = force - 1;
+            }
+            return r;
+        }
+
+        boolean valid(int force, int[] position, int m){
+            for(int i = 0, lastIdx = 0; i < position.length && m > 1; i++)
+                if(position[i] - position[lastIdx] >= force){
+                    lastIdx = i;
+                    m--;
+                }
+            return m == 1;
+        }
+    }
+
     static class s1557{//Minimum Number of Vertices to Reach All Nodes
         public List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges){
             boolean[] seen = new boolean[n];
