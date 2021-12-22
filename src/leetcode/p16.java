@@ -24,6 +24,18 @@ public class p16{
         }
     }
 
+    static class s1653{//Minimum Deletions to Make String Balanced
+        public int minimumDeletions(String s){
+            int[] dp = new int[s.length() + 1];//min chars to remove to make s[0:i] valid
+            for(int i = 0, bCount = 0; i < s.length(); i++)
+                if(s.charAt(i) == 'b'){
+                    dp[i + 1] = dp[i];
+                    bCount++;
+                }else dp[i + 1] = Math.min(dp[i] + 1, bCount);
+            return dp[s.length()];
+        }
+    }
+
     static class s1654{//Minimum Jumps to Reach Home
         public int minimumJumps(int[] forbidden, int a, int b, int x){
             Set<Integer> seen = Arrays.stream(forbidden).boxed().collect(Collectors.toSet()), notAllowed = new HashSet<>(seen);
