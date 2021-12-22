@@ -192,6 +192,27 @@ public class p10{
         }
     }
 
+    static class s1058{//Minimize Rounding Error to Meet Target
+        public String minimizeError(String[] prices, int target){
+            double r = 0;
+            PriorityQueue<double[]> q = new PriorityQueue<>(Comparator.comparingDouble(a -> a[1]));
+            for(String price : prices){
+                double f = Double.parseDouble(price), floor = Math.floor(f), ceil = Math.ceil(f);
+                if(floor != ceil)
+                    q.offer(new double[]{f, ceil - f});
+                r += f - floor;
+                target -= floor;
+            }
+            if(target < 0 || target > q.size())
+                return "-1";
+            while(target-- > 0){
+                double p[] = q.poll(), f = p[0], d = p[1];
+                r = r - (f - Math.floor(f)) + d;
+            }
+            return String.format("%.3f", r);
+        }
+    }
+
     static class s1065{//Index Pairs of a String
         /**
          * Given a string text and an array of strings words, return an array of all index pairs [i, j]

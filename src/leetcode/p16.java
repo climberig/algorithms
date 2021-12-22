@@ -180,6 +180,17 @@ public class p16{
         }
     }
 
+    static class s1680{//Concatenation of Consecutive Binary Numbers
+        public int concatenatedBinary(int n){
+            long r = 0;
+            for(int i = 1; i <= n; i++){
+                String b = Integer.toBinaryString(i);
+                r = ((r << b.length()) + i) % 1_000_000_007;
+            }
+            return (int) r;
+        }
+    }
+
     static class s1682{// Longest Palindromic Subsequence II
         public int longestPalindromeSubseq(String s){
             return longest(s.toCharArray(), 0, s.length() - 1, 0, new Integer[s.length()][s.length()][27]);

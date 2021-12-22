@@ -38,6 +38,19 @@ public class p13{
         }
     }
 
+    static class s1328{//Break a Palindrome
+        public String breakPalindrome(String pali){
+            char[] a = pali.toCharArray();
+            for(int i = 0; i < a.length / 2; i++)
+                if(a[i] != 'a'){
+                    a[i] = 'a';
+                    return String.valueOf(a);
+                }
+            a[a.length - 1] = 'b'; //if all 'a'
+            return a.length < 2 ? "" : String.valueOf(a);
+        }
+    }
+
     static class s1339{//Maximum Product of Splitted Binary Tree
         long r = 0;
         public int maxProduct(TreeNode root){
