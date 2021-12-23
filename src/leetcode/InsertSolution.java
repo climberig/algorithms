@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 public class InsertSolution{
-    static String WORKING_DIR = "/home/igor/projects/algos/src/leetcode";
+    static String WORKING_DIR = "/home/igor/projects/algorithms/src/leetcode";
     static String SOLUTION_PREFIX = "    static class s";
     static Logger log = Logger.getLogger("InsertSolution");
 

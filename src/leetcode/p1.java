@@ -234,6 +234,18 @@ public class p1{
         }
     }
 
+    static class s169{//Majority Element
+        public int majorityElement(int[] a){
+            int majority = a[0], count = 0;
+            for(int n : a)
+                if(count == 0){
+                    majority = n;
+                    count = 1;
+                }else count = majority == n ? count + 1 : count - 1;
+            return majority;
+        }
+    }
+
     static class s170{//Two Sum III - Data structure design
         class TwoSum{
             final List<Integer> list = new ArrayList<>();
