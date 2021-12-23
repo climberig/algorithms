@@ -141,4 +141,17 @@ public class p21{
             return r;
         }
     }
+
+    static class s2113{//Elements in Array After Removing and Replacing Elements
+        public int[] elementInNums(int[] a, int[][] queries){
+            int r[] = new int[queries.length], i = 0;
+            for(int[] q : queries){
+                int t = q[0] % (a.length * 2), j = q[1];
+                int from = t <= a.length ? t : 0;
+                int to = t > a.length ? t - a.length : a.length - 1;
+                r[i++] = from + j <= to ? a[from + j] : -1;
+            }
+            return r;
+        }
+    }
 }
