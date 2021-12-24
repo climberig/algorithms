@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class p6{
@@ -82,6 +80,27 @@ public class p6{
             Arrays.sort(a);
             int last = a.length - 1;
             return Math.max(a[last] * a[last - 1] * a[last - 2], a[last] * a[0] * a[1]);
+        }
+    }
+
+    static class s637{//Average of Levels in Binary Tree
+        public List<Double> averageOfLevels(TreeNode root){
+            Queue<TreeNode> q = new LinkedList<>();
+            List<Double> r = new ArrayList<>();
+            for(q.add(root); !q.isEmpty(); ){
+                int size = q.size();
+                double sum = 0;
+                for(int i = 0; i < size; i++){
+                    TreeNode node = q.poll();
+                    sum += node.val;
+                    if(node.left != null)
+                        q.offer(node.left);
+                    if(node.right != null)
+                        q.offer(node.right);
+                }
+                r.add(sum / size);
+            }
+            return r;
         }
     }
 
