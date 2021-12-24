@@ -47,6 +47,23 @@ public class p12{
         }
     }
 
+    static class s1230{//Toss Strange Coins
+        public double probabilityOfHeads(double[] prob, int target){
+            return heads(0, target, new Double[prob.length + 1][target + 1], prob);
+        }
+
+        double heads(int i, int target, Double[][] dp, double[] p){
+            if(i == p.length)
+                return target == 0 ? 1 : 0;
+            if(dp[i][target] != null)
+                return dp[i][target];
+            double r = heads(i + 1, target, dp, p) * (1 - p[i]);
+            if(target > 0)
+                r += heads(i + 1, target - 1, dp, p) * p[i];
+            return dp[i][target] = r;
+        }
+    }
+
     static class s1248{//Count Number of Nice Subarrays
         public int numberOfSubarrays(int[] a, int k){
             int r = 0;
@@ -178,9 +195,44 @@ public class p12{
         }
     }
 
+    static class s1292{//Maximum Side Length of a Square with Sum Less than or Equal to Threshold
+        public int maxSideLength(int[][] m, int threshold){
+            int[][] dp = new int[m.length + 1][m[0].length + 1];
+            for(int i = 0; i < m.length; i++)
+                for(int j = 0; j < m[0].length; j++)
+                    dp[i + 1][j + 1] = m[i][j] + dp[i + 1][j] + dp[i][j + 1] - dp[i][j];
+            for(int side = Math.min(m.length, m[0].length); side > 0; side--)
+                for(int i = 0; i <= m.length - side; i++)
+                    for(int j = 0; j <= m[0].length - side; j++)
+                        if(dp[i + side][j + side] - dp[i][j + side] - dp[i + side][j] + dp[i][j] <= threshold)
+                            return side;
+            return 0;
+        }
+    }
+
     static class s1295{//Find Numbers with Even Number of Digits
         public int findNumbers(int[] a){
             return (int) Arrays.stream(a).filter(n -> (int) Math.log10(n) % 2 == 1).count();
+        }
+    }
+
+    static class s1297{//Maximum Number of Occurrences of a Substring
+        public int maxFreq(String s, int maxLetters, int minSize, int maxSize){
+            Map<String, Integer> m = new HashMap<>();
+            int count[] = new int[26], r = 0;
+            for(int i = 0; i < s.length(); i++){
+                count[s.charAt(i) - 'a']++;
+                if(i >= minSize - 1){
+                    int uniq = (int) Arrays.stream(count).filter(f -> f > 0).count();
+                    if(uniq <= maxLetters){
+                        String sub = s.substring(i - minSize + 1, i + 1);
+                        m.put(sub, m.getOrDefault(sub, 0) + 1);
+                        r = Math.max(r, m.get(sub));
+                    }
+                    count[s.charAt(i - minSize + 1) - 'a']--;
+                }
+            }
+            return r;
         }
     }
 }
