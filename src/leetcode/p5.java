@@ -39,6 +39,32 @@ public class p5{
         }
     }
 
+    static class s521{//Longest Uncommon Subsequence I
+        public int findLUSlength(String a, String b){
+            return a.equals(b) ? -1 : Math.max(a.length(), b.length());
+        }
+    }
+
+    static class s522{//Longest Uncommon Subsequence II
+        public int findLUSlength(String[] strs){
+            int r = -1;
+            for(int i = 0; i < strs.length; i++){
+                final int k = i;
+                if(IntStream.range(0, strs.length).filter(j -> k != j).noneMatch(j -> subsequence(strs[k], strs[j])))
+                    r = Math.max(r, strs[i].length());
+            }
+            return r;
+        }
+
+        boolean subsequence(String s1, String s2){
+            int i = 0;
+            for(int j = 0; j < s2.length() && i < s1.length(); j++)
+                if(s1.charAt(i) == s2.charAt(j))
+                    i++;
+            return i == s1.length();
+        }
+    }
+
     static class s530{//Minimum Absolute Difference in BST
         Integer min = Integer.MAX_VALUE, prev = null;
 
