@@ -154,4 +154,24 @@ public class p21{
             return r;
         }
     }
+
+    static class s2120{//Execution of All Suffix Instructions Staying in a Grid
+        public int[] executeInstructions(int n, int[] startPos, String s){
+            int[] r = new int[s.length()];
+            for(int i = 0; i < s.length(); i++)
+                r[i] = count(i, n, startPos[0], startPos[1], s);
+            return r;
+        }
+        int count(int si, int n, int x, int y, String s){
+            if(si == s.length())
+                return 0;
+            switch(s.charAt(si)){
+                case 'U' -> x -= 1;
+                case 'D' -> x += 1;
+                case 'R' -> y += 1;
+                case 'L' -> y -= 1;
+            }
+            return 0 <= x && x < n && 0 <= y && y < n ? 1 + count(si + 1, n, x, y, s) : 0;
+        }
+    }
 }
