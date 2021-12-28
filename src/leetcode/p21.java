@@ -174,4 +174,53 @@ public class p21{
             return 0 <= x && x < n && 0 <= y && y < n ? 1 + count(si + 1, n, x, y, s) : 0;
         }
     }
+
+    static class s2121{//Intervals Between Identical Elements
+        public long[] getDistances(int[] a){
+            long[] r = new long[a.length];
+            sum(a, 0, 1, r);
+            sum(a, a.length - 1, -1, r);
+            return r;
+        }
+
+        void sum(int[] a, int start, int increment, long[] r){
+            long[] count = new long[100_001], sum = new long[100_001];
+            for(int i = start, j = 0; 0 <= i && i < r.length; i += increment, j++){
+                r[i] += count[a[i]] * j - sum[a[i]];
+                count[a[i]]++;
+                sum[a[i]] += j;
+            }
+        }
+    }
+
+    static class s2122{//Recover the Original Array
+        public int[] recoverArray(int[] a){
+            Arrays.sort(a);
+            for(int i = 1; i < a.length; i++){
+                int k = a[i] - a[0];
+                if(k > 0 && k % 2 == 0){
+                    Map<Integer, Integer> freq = new HashMap<>();
+                    Arrays.stream(a).forEach(n -> freq.put(n, freq.getOrDefault(n, 0) + 1));
+                    int[] r = new int[a.length / 2];
+                    if(dfs(a, k, r, freq))
+                        return r;
+                }
+            }
+            return null;
+        }
+
+        boolean dfs(int[] a, int k, int[] r, Map<Integer, Integer> freq){
+            int i = 0;
+            for(int n : a){
+                if(freq.get(n) > 0){
+                    if(freq.getOrDefault(n + k, 0) <= 0)
+                        return false;
+                    freq.put(n, freq.get(n) - 1);
+                    freq.put(n + k, freq.get(n + k) - 1);
+                    r[i++] = n + k / 2;
+                }
+            }
+            return true;
+        }
+    }
 }
