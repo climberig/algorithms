@@ -128,6 +128,23 @@ public class p10{
         }
     }
 
+    static class s1039{//Minimum Score Triangulation of Polygon
+        public int minScoreTriangulation(int[] a){
+            return score(a, 0, a.length - 1, new Integer[a.length][a.length]);
+        }
+
+        int score(int[] a, int i, int j, Integer[][] dp){
+            if((j - i + 1) < 3)
+                return 0;
+            if(dp[i][j] != null)
+                return dp[i][j];
+            int min = Integer.MAX_VALUE;
+            for(int k = i + 1; k < j; k++)
+                min = Math.min(min, score(a, i, k, dp) + a[i] * a[k] * a[j] + score(a, k, j, dp));
+            return dp[i][j] = min;
+        }
+    }
+
     static class s1042{//Flower Planting With No Adjacent
         public int[] gardenNoAdj(int n, int[][] paths){
             List<List<Integer>> g = new ArrayList<>(n);
