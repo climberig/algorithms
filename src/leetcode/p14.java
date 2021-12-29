@@ -140,4 +140,21 @@ public class p14{
             return bouquets + adjacent / k;
         }
     }
+
+    static class s1497{//Check If Array Pairs Are Divisible by k
+        public boolean canArrange(int[] a, int k){
+            int[] counts = new int[k];
+            for(int n : a){
+                n %= k;
+                n += n < 0 ? k : 0;
+                counts[n]++;
+            }
+            if(counts[0] % 2 != 0)
+                return false;
+            for(int i = 1; i <= k / 2; i++)
+                if(counts[i] != counts[k - i])
+                    return false;
+            return true;
+        }
+    }
 }
