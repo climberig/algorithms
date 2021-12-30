@@ -136,4 +136,26 @@ public class p18{
             char t = a[i]; a[i] = a[j]; a[j] = t;
         }
     }
+
+    static class s1878{//Get Biggest Three Rhombus Sums in a Grid
+        public int[] getBiggestThree(int[][] g){
+            Set<Integer> sums = new HashSet<>();
+            for(int i = 0; i < g.length; i++)
+                for(int j = 0; j < g[0].length; j++)
+                    for(int side = 0; side <= Math.min(g.length / 2, g[0].length / 2); side++){
+                        int sum = 0;
+                        if(side == 0)
+                            sum = g[i][j];
+                        else if(0 <= j - side && j + side < g[0].length && i + side + side < g.length){
+                            int r, c;
+                            for(r = i + 1, c = j + 1; c - j <= side; sum += g[r++][c++]) ;
+                            for(c = c - 2; c >= j; sum += g[r++][c--]) ;
+                            for(r = r - 2; j - c <= side; sum += g[r--][c--]) ;
+                            for(c = c + 2; c <= j; sum += g[r--][c++]) ;
+                        }
+                        sums.add(sum);
+                    }
+            return sums.stream().sorted(Comparator.reverseOrder()).limit(3).mapToInt(s -> s).toArray();
+        }
+    }
 }
