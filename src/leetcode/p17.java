@@ -65,6 +65,20 @@ public class p17{
         }
     }
 
+    static class s1744{//Can You Eat Your Favorite Candy on Your Favorite Day?
+        public boolean[] canEat(int[] counts, int[][] queries){
+            long[] cs = new long[counts.length + 1];
+            boolean[] r = new boolean[queries.length];
+            for(int i = 0; i < counts.length; i++)
+                cs[i + 1] = cs[i] + counts[i];
+            for(int i = 0; i < r.length; i++){
+                int type = queries[i][0], day = queries[i][1], dailyCap = queries[i][2];
+                r[i] = cs[type] / dailyCap <= day && day <= cs[type + 1] - 1;
+            }
+            return r;
+        }
+    }
+
     static class s1749{//Maximum Absolute Sum of Any Subarray
         public int maxAbsoluteSum(int[] a){
             int r = 0, maxSum = 0, minSum = 0;
