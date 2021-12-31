@@ -51,6 +51,27 @@ public class p13{
         }
     }
 
+    static class s1334{//Find the City With the Smallest Number of Neighbors at a Threshold Distance
+        public int findTheCity(int n, int[][] edges, int distanceThreshold){
+            int d[][] = new int[n][n], r = 0;
+            Arrays.stream(d).forEach(row -> Arrays.fill(row, 10_001));
+            Arrays.stream(edges).forEach(e -> d[e[0]][e[1]] = d[e[1]][e[0]] = e[2]);
+            IntStream.range(0, n).forEach(i -> d[i][i] = 0);
+            for(int k = 0; k < n; ++k)
+                for(int i = 0; i < n; ++i)
+                    for(int j = 0; j < n; ++j)
+                        d[i][j] = Math.min(d[i][j], d[i][k] + d[k][j]);
+            for(int i = 0, smallest = n; i < n; i++){
+                final int u = i, count = (int) IntStream.range(0, n).filter(j -> d[u][j] <= distanceThreshold).count();
+                if(count <= smallest){
+                    r = i;
+                    smallest = count;
+                }
+            }
+            return r;
+        }
+    }
+
     static class s1339{//Maximum Product of Splitted Binary Tree
         long r = 0;
         public int maxProduct(TreeNode root){

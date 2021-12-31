@@ -41,6 +41,15 @@ public class p11{
         }
     }
 
+    static class s1134{//Armstrong Number
+        public boolean isArmstrong(int n){
+            int pow = (int) Math.log10(n) + 1, r = 0;
+            for(int m = n; m > 0; m /= 10)
+                r += Math.pow(m % 10, pow);
+            return r == n;
+        }
+    }
+
     static class s1143{//Longest Common Subsequence
         public int longestCommonSubsequence(String text1, String text2){
             int[][] dp = new int[text1.length() + 1][text2.length() + 1];

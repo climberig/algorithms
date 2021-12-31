@@ -52,6 +52,21 @@ public class p9{
         }
     }
 
+    static class s937{//Reorder Data in Log Files
+        public String[] reorderLogFiles(String[] logs){
+            return Arrays.stream(logs).sorted((s1, s2) -> {
+                String[] p1 = s1.split(" ", 2), p2 = s2.split(" ", 2);
+                boolean digit1 = Character.isDigit(p1[1].charAt(0)), digit2 = Character.isDigit(p2[1].charAt(0));
+                if(!digit1 && !digit2){
+                    int cmp = p1[1].compareTo(p2[1]);
+                    return cmp != 0 ? cmp : p1[0].compareTo(p2[0]);
+                }else if(digit1 && digit2)
+                    return 0;
+                else return digit1 ? 1 : -1;
+            }).toArray(String[]::new);
+        }
+    }
+
     static class s947{//Most Stones Removed with Same Row or Column
         public int removeStones(int[][] stones){
             int[] uf = IntStream.range(0, stones.length).toArray();
