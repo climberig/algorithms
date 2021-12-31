@@ -4,6 +4,10 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p11{
+    static class s1108{//Defanging an IP Address
+        public String defangIPaddr(String address){return address.replace(".", "[.]");}
+    }
+
     static class s1119{//Remove Vowels from a String
         public String removeVowels(String s){
             Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u');

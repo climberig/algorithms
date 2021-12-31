@@ -285,4 +285,39 @@ public class p15{
             return r;
         }
     }
+
+    static class s1577{//Number of Ways Where Square of Number Is Equal to Product of Two Numbers
+        public int numTriplets(int[] a1, int[] a2){
+            return count(a1, a2) + count(a2, a1);
+        }
+
+        int count(int[] a1, int[] a2){
+            Map<Long, Integer> squares = new HashMap<>();
+            for(int n : a2){
+                long s = (long) n * n;
+                squares.put(s, squares.getOrDefault(s, 0) + 1);
+            }
+            int r = 0;
+            for(int i = 0; i < a1.length; i++)
+                for(int j = i + 1; j < a1.length; j++)
+                    r += squares.getOrDefault((long) a1[i] * a1[j], 0);
+            return r;
+        }
+    }
+
+    static class s1589{//Maximum Sum Obtained of Any Permutation
+        public int maxSumRangeQuery(int[] a, int[][] requests){
+            int[] count = new int[a.length];
+            for(var r : requests){
+                count[r[0]]++;
+                if(r[1] + 1 < a.length)
+                    count[r[1] + 1]--;
+            }
+            for(int i = 1; i < count.length; ++i)
+                count[i] += count[i - 1];
+            Arrays.sort(a);
+            Arrays.sort(count);
+            return (int) (IntStream.range(0, a.length).mapToLong(i -> (long) a[i] * count[i]).sum() % 1_000_000_007);
+        }
+    }
 }
