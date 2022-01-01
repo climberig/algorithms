@@ -45,6 +45,17 @@ public class p11{
         }
     }
 
+    static class s1133{//Largest Unique Number
+        public int largestUniqueNumber(int[] a){
+            int[] counts = new int[1_001];
+            Arrays.stream(a).forEach(n -> counts[n]++);
+            for(int n = counts.length - 1; n >= 0; n--)
+                if(counts[n] == 1)
+                    return n;
+            return -1;
+        }
+    }
+
     static class s1134{//Armstrong Number
         public boolean isArmstrong(int n){
             int pow = (int) Math.log10(n) + 1, r = 0;

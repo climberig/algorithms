@@ -80,6 +80,24 @@ public class p5{
         }
     }
 
+    static class s531{//Lonely Pixel I
+        public int findLonelyPixel(char[][] picture){
+            int[] rows = new int[picture.length], cols = new int[picture[0].length];
+            for(int i = 0; i < picture.length; i++)
+                for(int j = 0; j < picture[0].length; j++)
+                    if(picture[i][j] == 'B'){
+                        rows[i]++;
+                        cols[j]++;
+                    }
+            int r = 0;
+            for(int i = 0; i < picture.length; i++)
+                for(int j = 0; j < picture[0].length; j++)
+                    if(picture[i][j] == 'B' && rows[i] == 1 && cols[j] == 1)
+                        r++;
+            return r;
+        }
+    }
+
     static class s541{//Reverse String II
         public String reverseStr(String s, int k){
             char[] a = s.toCharArray();
