@@ -283,4 +283,19 @@ public class p10{
             return r;
         }
     }
+
+    static class s1099{//Two Sum Less Than K
+        public int twoSumLessThanK(int[] a, int k){
+            Arrays.sort(a);
+            int r = -1;
+            for(int i = 0, j = a.length - 1; i < j; ){
+                int sum = a[i] + a[j];
+                if(sum < k){
+                    r = Math.max(sum, r);
+                    i++;
+                }else j--;
+            }
+            return r;
+        }
+    }
 }

@@ -67,6 +67,18 @@ public class p9{
         }
     }
 
+    static class s938{//Range Sum of BST
+        public int rangeSumBST(TreeNode root, int low, int high){
+            if(root == null)
+                return 0;
+            if(low <= root.val && root.val <= high)
+                return root.val + rangeSumBST(root.left, low, root.val) + rangeSumBST(root.right, root.val, high);
+            else if(root.val < low)
+                return rangeSumBST(root.right, low, high);
+            else return rangeSumBST(root.left, low, high);
+        }
+    }
+
     static class s947{//Most Stones Removed with Same Row or Column
         public int removeStones(int[][] stones){
             int[] uf = IntStream.range(0, stones.length).toArray();
