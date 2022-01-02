@@ -5,6 +5,22 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p17{
+    static class s1712{//Ways to Split Array Into Three Subarrays
+        public int waysToSplit(int[] a){
+            int n = a.length, r = 0;
+            for(int i = 1; i < n; ++i)
+                a[i] += a[i - 1];
+            for(int i = 0, j = 0, k = 0; i < n - 2; i++){
+                while(j <= i || (j < n - 1 && a[j] < a[i] * 2))
+                    j++;
+                while(k < j || (k < n - 1 && a[k] - a[i] <= a[n - 1] - a[k]))
+                    k++;
+                r = (r + k - j) % 1_000_000_007;
+            }
+            return r;
+        }
+    }
+
     static class s1722{//Minimize Hamming Distance After Swap Operations
         public int minimumHammingDistance(int[] src, int[] tgt, int[][] swaps){
             List<List<Integer>> g = IntStream.range(0, src.length).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());

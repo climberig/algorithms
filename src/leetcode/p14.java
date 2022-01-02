@@ -157,4 +157,19 @@ public class p14{
             return true;
         }
     }
+
+    static class s1498{//Number of Subsequences That Satisfy the Given Sum Condition
+        public int numSubseq(int[] a, int target){
+            Arrays.sort(a);
+            int r = 0, n = a.length, lo = 0, hi = n - 1, mod = 1_000_000_007, pow[] = new int[n];
+            pow[0] = 1;
+            for(int i = 1; i < n; ++i)
+                pow[i] = pow[i - 1] * 2 % mod;
+            while(lo <= hi)
+                if(a[lo] + a[hi] > target)
+                    hi--;
+                else r = (r + pow[hi - lo++]) % mod;
+            return r;
+        }
+    }
 }
