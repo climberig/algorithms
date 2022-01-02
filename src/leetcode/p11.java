@@ -137,6 +137,19 @@ public class p11{
         }
     }
 
+    static class s1165{//Single-Row Keyboard
+        public int calculateTime(String keyboard, String word){
+            int layout[] = new int[26], r = 0;
+            for(int i = 0; i < keyboard.length(); i++)
+                layout[keyboard.charAt(i) - 'a'] = i;
+            for(int i = 0, j = 0; i < word.length(); i++){
+                r += Math.abs(layout[word.charAt(i) - 'a'] - j);
+                j = layout[word.charAt(i) - 'a'];
+            }
+            return r;
+        }
+    }
+
     static class s1177{//Can Make Palindrome from Substring
         public List<Boolean> canMakePaliQueries(String s, int[][] queries){
             int[] f = new int[s.length() + 1];

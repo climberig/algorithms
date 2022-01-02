@@ -137,6 +137,26 @@ public class p9{
         }
     }
 
+    static class s953{//Verifying an Alien Dictionary
+        public boolean isAlienSorted(String[] words, String order){
+            int[] m = new int[26];
+            for(int i = 0; i < order.length(); i++)
+                m[order.charAt(i) - 'a'] = i;
+            for(int i = 1; i < words.length; i++)
+                if(bigger(words[i - 1], words[i], m))
+                    return false;
+            return true;
+        }
+
+        boolean bigger(String w1, String w2, int[] order){
+            int i = 0, j = 0;
+            for(; i < w1.length() && j < w2.length(); i++, j++)
+                if(w1.charAt(i) != w2.charAt(i))
+                    return order[w1.charAt(i) - 'a'] > order[w2.charAt(i) - 'a'];
+            return w1.length() > w2.length();
+        }
+    }
+
     static class s954{//Array of Doubled Pairs
         public boolean canReorderDoubled(int[] a){
             Map<Integer, Integer> m = new TreeMap<>();

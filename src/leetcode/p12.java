@@ -106,6 +106,20 @@ public class p12{
         }
     }
 
+    static class s1271{//Hexspeak
+        public String toHexspeak(String s){
+            char[] hex = Long.toHexString(Long.parseLong(s)).toCharArray();
+            for(int i = 0; i < hex.length; i++)
+                if(hex[i] == '0')
+                    hex[i] = 'O';
+                else if(hex[i] == '1')
+                    hex[i] = 'I';
+                else if(Character.isDigit(hex[i]))
+                    return "ERROR";
+            return new String(hex).toUpperCase();
+        }
+    }
+
     static class s1273{//Delete Tree Nodes
         public int deleteTreeNodes(int size, int[] parents, int[] vals){
             List<List<Integer>> g = new ArrayList<>(size);
