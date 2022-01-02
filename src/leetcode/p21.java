@@ -223,4 +223,41 @@ public class p21{
             return true;
         }
     }
+
+    static class s2124{//Check if All A's Appears Before All B's
+        public boolean checkString(String s){
+            int i = 0, j = s.length() - 1;
+            for(; i < s.length() && s.charAt(i) != 'b'; i++) ;
+            for(; j >= 0 && s.charAt(j) != 'a'; j--) ;
+            return i - 1 == j;
+        }
+    }
+
+    static class s2125{//Number of Laser Beams in a Bank
+        public int numberOfBeams(String[] bank){
+            int r = 0, prev = 0;
+            for(String b : bank){
+                int ones = 0;
+                for(char c : b.toCharArray())
+                    ones += c == '1' ? 1 : 0;
+                if(ones > 0){
+                    r += prev * ones;
+                    prev = ones;
+                }
+            }
+            return r;
+        }
+    }
+
+    static class s2126{//Destroying Asteroids
+        public boolean asteroidsDestroyed(int mass, int[] asteroids){
+            Arrays.sort(asteroids);
+            long m = mass;
+            for(int asteroid : asteroids)
+                if(m < asteroid)
+                    return false;
+                else m += asteroid;
+            return true;
+        }
+    }
 }
