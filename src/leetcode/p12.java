@@ -64,6 +64,20 @@ public class p12{
         }
     }
 
+    static class s1235{//Maximum Profit in Job Scheduling
+        public int jobScheduling(int[] startTime, int[] endTime, int[] profit){
+            int[][] jobs = new int[startTime.length][3];
+            for(int i = 0; i < startTime.length; i++)
+                jobs[i] = new int[]{startTime[i], endTime[i], profit[i]};
+            Arrays.sort(jobs, Comparator.comparingInt(j -> j[1]));
+            TreeMap<Integer, Integer> dp = new TreeMap<>();
+            dp.put(0, 0);
+            for(int[] j : jobs)
+                dp.put(j[1], Math.max(j[2] + dp.lowerEntry(j[0] + 1).getValue(), dp.lowerEntry(j[1] + 1).getValue()));
+            return dp.lastEntry().getValue();
+        }
+    }
+
     static class s1248{//Count Number of Nice Subarrays
         public int numberOfSubarrays(int[] a, int k){
             int r = 0;
