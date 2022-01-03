@@ -65,6 +65,27 @@ public class p11{
         }
     }
 
+    static class s1140{//Stone Game II
+        public int stoneGameII(int[] piles){
+            int[] cs = Arrays.copyOf(piles, piles.length);
+            for(int i = cs.length - 2; i >= 0; i--)
+                cs[i] += cs[i + 1];
+            return dfs(cs, 1, 0, new int[piles.length][piles.length]);
+        }
+        int dfs(int[] cs, int m, int idx, int[][] dp){
+            if(idx + 2 * m >= cs.length)
+                return cs[idx];
+            if(dp[idx][m] > 0)
+                return dp[idx][m];
+            int r = 0, take;
+            for(int i = 1; i <= 2 * m; i++){
+                take = cs[idx] - cs[idx + i];
+                r = Math.max(r, take + cs[idx + i] - dfs(cs, Math.max(i, m), idx + i, dp));
+            }
+            return dp[idx][m] = r;
+        }
+    }
+
     static class s1143{//Longest Common Subsequence
         public int longestCommonSubsequence(String text1, String text2){
             int[][] dp = new int[text1.length() + 1][text2.length() + 1];
