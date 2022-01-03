@@ -32,6 +32,19 @@ public class p14{
         }
     }
 
+    static class s1411{//Number of Ways to Paint N × 3 Grid
+        public int numOfWays(int n){
+            long a121 = 6, a123 = 6, b121, b123, mod = 1_000_000_007;
+            for(int i = 1; i < n; ++i){
+                b121 = a121 * 3 + a123 * 2;
+                b123 = a121 * 2 + a123 * 2;
+                a121 = b121 % mod;
+                a123 = b123 % mod;
+            }
+            return (int) ((a121 + a123) % mod);
+        }
+    }
+
     static class s1415{//The k-th Lexicographical String of All Happy Strings of Length n
         public String getHappyString(int n, int k){
             Queue<String> q = new LinkedList<>();

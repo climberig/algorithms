@@ -54,6 +54,21 @@ public class p17{
         }
     }
 
+    static class s1727{//Largest Submatrix With Rearrangements
+        public int largestSubmatrix(int[][] m){
+            for(int c = 0; c < m[0].length; c++)
+                for(int r = 1; r < m.length; r++)
+                    m[r][c] += m[r][c] == 0 ? 0 : m[r - 1][c];
+            int r = 0;
+            for(int[] row : m){
+                Arrays.sort(row);
+                for(int j = 1; j <= m[0].length; j++)
+                    r = Math.max(r, j * row[m[0].length - j]);
+            }
+            return r;
+        }
+    }
+
     static class s1734{//Decode XORed Permutation
         public int[] decode(int[] encoded){
             int allXor = 0, xor = 0, r[] = new int[encoded.length + 1];
