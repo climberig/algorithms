@@ -201,6 +201,21 @@ public class p15{
         }
     }
 
+    static class s1546{//Maximum Number of Non-Overlapping Subarrays With Sum Equals Target
+        public int maxNonOverlapping(int[] a, int target){
+            Map<Integer, Integer> dp = new HashMap<>();
+            dp.put(0, 0);
+            int sum = 0, r = 0;
+            for(int n : a){
+                sum += n;
+                if(dp.containsKey(sum - target))
+                    r = Math.max(r, 1 + dp.get(sum - target));
+                dp.put(sum, r);
+            }
+            return r;
+        }
+    }
+
     static class s1552{//Magnetic Force Between Two Balls
         public int maxDistance(int[] position, int m){
             Arrays.sort(position);

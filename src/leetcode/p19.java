@@ -53,6 +53,19 @@ public class p19{
         }
     }
 
+    static class s1922{//Count Good Numbers
+        public int countGoodNumbers(long n){
+            return (int) ((pow(5, (n + 1) / 2) * pow(4, n / 2)) % 1_000_000_007);
+        }
+
+        long pow(int n, long p){
+            if(p == 0)
+                return 1;
+            long r = pow(n, p / 2);
+            return r * r * (p % 2 == 1 ? n : 1) % 1_000_000_007;
+        }
+    }
+
     static class s1933{//Check if String Is Decomposable Into Value-Equal Substrings
         public boolean isDecomposable(String s){
             int twoCount = 0;

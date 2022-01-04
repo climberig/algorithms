@@ -288,4 +288,17 @@ public class p17{
             return dp[u] = r;
         }
     }
+
+    static class s1798{//Maximum Number of Consecutive Values You Can Make
+        public int getMaximumConsecutive(int[] coins){
+            Arrays.sort(coins);
+            int r = 1;
+            for(int coin : coins){
+                if(coin > r)
+                    break;
+                r += coin;
+            }
+            return r;
+        }
+    }
 }
