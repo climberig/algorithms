@@ -1,7 +1,8 @@
 package leetcode;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class p0{
     static class s1{//Two Sum
@@ -76,7 +77,7 @@ public class p0{
         public int maxSubArray(int[] a){
             int r = a[0], sum = a[0];
             for(int i = 1; i < a.length; i++){
-                sum = Math.max(0, sum + a[i]);
+                sum = Math.max(a[i], sum + a[i]);
                 r = Math.max(r, sum);
             }
             return r;

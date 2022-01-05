@@ -179,4 +179,31 @@ public class p11{
             return Arrays.stream(queries).map(q -> Integer.bitCount(f[q[1] + 1] ^ f[q[0]]) / 2 <= q[2]).collect(Collectors.toList());
         }
     }
+
+    static class s1191{//K-Concatenation Maximum Sum
+        public int kConcatenationMaxSum(int[] a, int k){
+            long r = 0, sum = Arrays.stream(a).mapToLong(i -> i).sum(), right = max(a.length - 1, -1, a), left = max(0, 1, a);
+            if(sum > 0)
+                r = Math.max(sum * k, r);
+            if(k > 2)
+                r = Math.max(r, right + (k - 2) * sum + left);
+            sum = 0;
+            for(int n : a){
+                sum = Math.max(n, sum + n);
+                r = Math.max(r, sum);
+            }
+            if(k == 1)
+                return (int) (r % 1_000_000_007);
+            return (int) (Math.max(r, left + right) % 1_000_000_007);
+        }
+
+        long max(int start, int d, int[] a){
+            long r = 0, sum = 0;
+            for(int i = start; 0 <= i && i < a.length; i += d){
+                sum += a[i];
+                r = Math.max(r, sum);
+            }
+            return r;
+        }
+    }
 }
