@@ -4,6 +4,26 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p18{
+    static class s1802{//Maximum Value at a Given Index in a Bounded Array
+        public int maxValue(int n, int index, int maxSum){
+            int lo = 1, hi = maxSum, r = 1;
+            while(lo <= hi){
+                int v = (lo + hi) / 2;
+                long sum = sum(v - 1, index) + sum(v - 1, n - index - 1) + v;
+                if(sum <= maxSum){
+                    r = v;
+                    lo = v + 1;
+                }else hi = v - 1;
+            }
+            return r;
+        }
+
+        long sum(int v, int n){
+            int m = v - n, v1 = Math.max(m + 1, 1), onesLen = m < 0 ? -m : 0;
+            return 1L * onesLen + (1L * v1 + v) * Math.min(n, v) / 2;
+        }
+    }
+
     static class s1810{
         public int findShortestPath(GridMaster master){
             int N = 100, g[][] = new int[2 * N + 1][2 * N + 1], moves[][] = new int[][]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}, target[] = new int[]{-N, -N};

@@ -1,6 +1,7 @@
 package leetcode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p9{
@@ -217,6 +218,31 @@ public class p9{
                     if((i & j) == 0)
                         r += m[j];
             return r;
+        }
+    }
+
+    static class s987{//Vertical Order Traversal of a Binary Tree
+        public List<List<Integer>> verticalTraversal(TreeNode root){
+            Map<Integer, Map<Integer, List<Integer>>> m = new TreeMap<>();
+            traverse(0, 0, root, m);
+            List<List<Integer>> r = new ArrayList<>();
+            for(Integer col : m.keySet()){
+                List<Integer> list = new ArrayList<>();
+                for(Integer row : m.get(col).keySet())
+                    list.addAll(m.get(col).get(row).stream().sorted().collect(Collectors.toList()));
+                r.add(list);
+            }
+            return r;
+        }
+
+        void traverse(int col, int row, TreeNode node, Map<Integer, Map<Integer, List<Integer>>> m){
+            if(node != null){
+                m.putIfAbsent(col, new TreeMap<>());
+                m.get(col).putIfAbsent(row, new ArrayList<>());
+                m.get(col).get(row).add(node.val);
+                traverse(col - 1, row, node.left, m);
+                traverse(col + 1, row + 1, node.right, m);
+            }
         }
     }
 
