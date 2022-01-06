@@ -260,4 +260,11 @@ public class p21{
             return true;
         }
     }
+
+    static class s2128{//Remove All Ones With Row and Column Flips
+        public boolean removeOnes(int[][] g){
+            int[] flipped = Arrays.stream(g[0]).map(n -> 1 - n).toArray();
+            return IntStream.range(1, g.length).allMatch(r -> Arrays.equals(g[r], g[0]) || Arrays.equals(g[r], flipped));
+        }
+    }
 }

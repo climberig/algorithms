@@ -335,4 +335,19 @@ public class p15{
             return (int) (IntStream.range(0, a.length).mapToLong(i -> (long) a[i] * count[i]).sum() % 1_000_000_007);
         }
     }
+
+    static class s1590{//Make Sum Divisible by P
+        public int minSubarray(int[] a, int p){
+            int r = a.length, need = (int) (Arrays.stream(a).mapToLong(n -> n).sum() % p);
+            Map<Integer, Integer> last = new HashMap<>();
+            last.put(0, -1);
+            for(int i = 0, sum = 0; i < a.length; ++i){
+                sum = (sum + a[i]) % p;
+                last.put(sum, i);
+                int want = (sum - need + p) % p;
+                r = Math.min(r, i - last.getOrDefault(want, -a.length));
+            }
+            return r < a.length ? r : -1;
+        }
+    }
 }
