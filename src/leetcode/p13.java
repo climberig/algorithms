@@ -72,6 +72,32 @@ public class p13{
         }
     }
 
+    static class s1335{//Minimum Difficulty of a Job Schedule
+        public int minDifficulty(int[] jobDifficulty, int d){
+            if(jobDifficulty.length < d)
+                return -1;
+            return min(0, jobDifficulty, d, new Integer[jobDifficulty.length][d + 1]);
+        }
+        int min(int start, int[] jobDifficulty, int d, Integer[][] dp){
+            if(jobDifficulty.length == d)
+                return Arrays.stream(jobDifficulty).sum();
+            if(d == 1){
+                int max = jobDifficulty[start];
+                for(int i = start + 1; i < jobDifficulty.length; i++)
+                    max = Math.max(max, jobDifficulty[i]);
+                return max;
+            }
+            if(dp[start][d] != null)
+                return dp[start][d];
+            int r = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+            for(int i = start; i < jobDifficulty.length && jobDifficulty.length - i >= d; i++){
+                max = Math.max(max, jobDifficulty[i]);
+                r = Math.min(r, max + min(i + 1, jobDifficulty, d - 1, dp));
+            }
+            return dp[start][d] = r;
+        }
+    }
+
     static class s1339{//Maximum Product of Splitted Binary Tree
         long r = 0;
         public int maxProduct(TreeNode root){
