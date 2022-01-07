@@ -69,6 +69,32 @@ public class p17{
         }
     }
 
+    static class s1730{//Shortest Path to Get Food
+        public int getFood(char[][] g){
+            Queue<int[]> q = new LinkedList<>();
+            for(int i = 0; i < g.length; i++)
+                for(int j = 0; j < g[0].length; j++)
+                    if(g[i][j] == '*'){
+                        q.add(new int[]{i, j});
+                        break;
+                    }
+            for(int dist = 1, dirs[] = {-1, 0, 1, 0, -1}; !q.isEmpty(); dist++)
+                for(int size = q.size(); size > 0; size--){
+                    int p[] = q.poll(), x = p[0], y = p[1];
+                    for(int d = 1; d < dirs.length; d++){
+                        int nx = x + dirs[d - 1], ny = y + dirs[d];
+                        if(0 <= nx && nx < g.length && 0 <= ny && ny < g[0].length && g[nx][ny] != 'X'){
+                            if(g[nx][ny] == '#')
+                                return dist;
+                            g[nx][ny] = 'X';
+                            q.offer(new int[]{nx, ny});
+                        }
+                    }
+                }
+            return -1;
+        }
+    }
+
     static class s1734{//Decode XORed Permutation
         public int[] decode(int[] encoded){
             int allXor = 0, xor = 0, r[] = new int[encoded.length + 1];

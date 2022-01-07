@@ -238,6 +238,33 @@ public class p12{
         }
     }
 
+    static class s1293{//Shortest Path in a Grid with Obstacles Elimination
+        public int shortestPath(int[][] g, int k){
+            int[][] minObstacles = new int[g.length][g[0].length];
+            IntStream.range(0, g.length).forEach(i -> Arrays.fill(minObstacles[i], Integer.MAX_VALUE));
+            Queue<int[]> q = new LinkedList<>();
+            q.add(new int[]{0, 0, 0});
+            minObstacles[0][0] = 0;
+            for(int dist = 0, dirs[] = {-1, 0, 1, 0, -1}; !q.isEmpty(); dist++)
+                for(int size = q.size(); size > 0; size--){
+                    int p[] = q.poll(), x = p[0], y = p[1];
+                    if(x == g.length - 1 && y == g[0].length - 1)
+                        return dist;
+                    for(int d = 1; d < dirs.length; d++){
+                        int nx = x + dirs[d - 1], ny = y + dirs[d];
+                        if(0 <= nx && nx < g.length && 0 <= ny && ny < g[0].length){
+                            int obstacles = g[nx][ny] + p[2];
+                            if(obstacles <= k && obstacles < minObstacles[nx][ny]){
+                                minObstacles[nx][ny] = obstacles;
+                                q.offer(new int[]{nx, ny, obstacles});
+                            }
+                        }
+                    }
+                }
+            return -1;
+        }
+    }
+
     static class s1295{//Find Numbers with Even Number of Digits
         public int findNumbers(int[] a){
             return (int) Arrays.stream(a).filter(n -> (int) Math.log10(n) % 2 == 1).count();
