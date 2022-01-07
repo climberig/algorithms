@@ -5,6 +5,20 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p9{
+    static class s917{//Reverse Only Letters
+        public String reverseOnlyLetters(String s){
+            char[] a = s.toCharArray();
+            for(int lo = 0, hi = a.length - 1; lo < hi; ){
+                for(; lo < hi && !Character.isLetter(a[lo]); lo++) ;
+                for(; lo < hi && !Character.isLetter(a[hi]); hi--) ;
+                char t = a[lo];
+                a[lo++] = a[hi];
+                a[hi--] = t;
+            }
+            return new String(a);
+        }
+    }
+
     static class s925{
         public boolean isLongPressedName(String name, String typed){
             int i = 0, j = 0;
