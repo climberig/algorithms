@@ -111,6 +111,28 @@ public class p5{
         }
     }
 
+    static class s542{//01 Matrix
+        public int[][] updateMatrix(int[][] m){
+            Queue<int[]> q = new LinkedList<>();
+            for(int i = 0; i < m.length; i++)
+                for(int j = 0; j < m[0].length; j++)
+                    if(m[i][j] == 0)
+                        q.offer(new int[]{i, j});
+                    else m[i][j] = -1;
+            for(int[] dirs = {-1, 0, 1, 0, -1}; !q.isEmpty(); ){
+                int p[] = q.poll(), x = p[0], y = p[1];
+                for(int d = 1; d < dirs.length; d++){
+                    int nx = x + dirs[d - 1], ny = y + dirs[d];
+                    if(0 <= nx && nx < m.length && 0 <= ny && ny < m[0].length && m[nx][ny] == -1){
+                        m[nx][ny] = 1 + m[x][y];
+                        q.offer(new int[]{nx, ny});
+                    }
+                }
+            }
+            return m;
+        }
+    }
+
     static class s543{//Diameter of Binary Tree
         int r = 0;
         public int diameterOfBinaryTree(TreeNode root){
