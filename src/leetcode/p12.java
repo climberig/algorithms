@@ -47,6 +47,21 @@ public class p12{
         }
     }
 
+    static class s1220{//Count Vowels Permutation
+        public int countVowelPermutation(int n){
+            int[][] m = {{1}, {0, 2}, {0, 1, 3, 4}, {2, 4}, {0}};
+            long[] ends = {1, 1, 1, 1, 1};
+            while(--n > 0){
+                long[] next = new long[ends.length];
+                for(int i = 0; i < ends.length; i++)
+                    for(int j : m[i])
+                        next[j] = (ends[i] + next[j]) % 1_000_000_007;
+                ends = next;
+            }
+            return (int) (Arrays.stream(ends).sum() % 1_000_000_007);
+        }
+    }
+
     static class s1230{//Toss Strange Coins
         public double probabilityOfHeads(double[] prob, int target){
             return heads(0, target, new Double[prob.length + 1][target + 1], prob);

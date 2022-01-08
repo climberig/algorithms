@@ -216,6 +216,26 @@ public class p15{
         }
     }
 
+    static class s1547{//Minimum Cost to Cut a Stick
+        public int minCost(int n, int[] cuts){
+            int[] c = new int[cuts.length + 2];
+            System.arraycopy(Arrays.stream(cuts).sorted().toArray(), 0, c, 1, cuts.length);
+            c[c.length - 1] = n;
+            return minCost(0, c.length - 1, c, new Integer[c.length][c.length]);
+        }
+
+        int minCost(int lo, int hi, int[] cuts, Integer[][] dp){
+            if(lo + 1 >= hi)
+                return 0;
+            if(dp[lo][hi] != null)
+                return dp[lo][hi];
+            int r = Integer.MAX_VALUE;
+            for(int i = lo + 1; i < hi; i++)
+                r = Math.min(r, minCost(lo, i, cuts, dp) + minCost(i, hi, cuts, dp));
+            return dp[lo][hi] = cuts[hi] - cuts[lo] + r;
+        }
+    }
+
     static class s1552{//Magnetic Force Between Two Balls
         public int maxDistance(int[] position, int m){
             Arrays.sort(position);
