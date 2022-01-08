@@ -267,4 +267,42 @@ public class p21{
             return IntStream.range(1, g.length).allMatch(r -> Arrays.equals(g[r], g[0]) || Arrays.equals(g[r], flipped));
         }
     }
+
+    static class s2129{//Capitalize the Title
+        public String capitalizeTitle(String title){
+            return Arrays.stream(title.split(" "))
+                    .map(w -> w.length() <= 2 ? w.toLowerCase() : Character.toUpperCase(w.charAt(0)) + w.toLowerCase().substring(1))
+                    .collect(Collectors.joining(" "));
+        }
+    }
+
+    static class s2130{//Maximum Twin Sum of a Linked List
+        public int pairSum(ListNode head){
+            List<Integer> vals = new ArrayList<>();
+            for(; head != null; head = head.next)
+                vals.add(head.val);
+            int sum = 0;
+            for(int lo = 0, hi = vals.size() - 1; lo < hi; lo++, hi--)
+                sum = Math.max(vals.get(lo) + vals.get(hi), sum);
+            return sum;
+        }
+    }
+
+    static class s2131{//Longest Palindrome by Concatenating Two Letter Words
+        public int longestPalindrome(String[] words){
+            Map<String, Integer> m = new HashMap<>();
+            int r = 0, doubleLetter = 0;
+            for(String w : words)
+                m.put(w, m.getOrDefault(w, 0) + 1);
+            for(char a = 'a'; a <= 'z'; a++){
+                int aaCount = m.getOrDefault("" + a + a, 0);
+                if(doubleLetter == 0 && aaCount % 2 == 1)
+                    doubleLetter = 2;
+                r += (aaCount / 2) * 2 * 2;
+                for(char b = (char) (a + 1); b <= 'z'; b++)
+                    r += Math.min(m.getOrDefault("" + a + b, 0), m.getOrDefault("" + b + a, 0)) * 4;
+            }
+            return r + doubleLetter;
+        }
+    }
 }
