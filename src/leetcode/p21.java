@@ -321,6 +321,22 @@ public class p21{
         }
     }
 
+    static class s2134{//Minimum Swaps to Group All 1's Together II
+        public int minSwaps(int[] a){
+            int len = Arrays.stream(a).sum(), ones = 0, r = Integer.MAX_VALUE;
+            for(int i = 0; i < len - 1; i++)
+                ones += a[i];
+            if(ones == 0)
+                return 0;
+            for(int lo = 0, hi = len - 1; lo < a.length; lo++, hi = (hi + 1) % a.length){
+                ones += a[hi];
+                r = Math.min(len - ones, r);
+                ones -= a[lo];
+            }
+            return r;
+        }
+    }
+
     static class s2135{//Count Words Obtained After Adding a Letter
         public int wordCount(String[] startWords, String[] targetWords){
             Set<String> s = Arrays.stream(startWords).map(this::sorted).collect(Collectors.toSet());
@@ -340,6 +356,22 @@ public class p21{
             char[] a = w.toCharArray();
             Arrays.sort(a);
             return new String(a);
+        }
+    }
+
+    static class s2136{//Earliest Possible Day of Full Bloom
+        public int earliestFullBloom(int[] plantTime, int[] growTime){
+            int[][] pg = new int[plantTime.length][2];
+            for(int i = 0; i < plantTime.length; i++)
+                pg[i] = new int[]{plantTime[i], growTime[i]};
+            Arrays.sort(pg, (a, b) -> b[1] - a[1]);
+            int r = 0, time = 0;
+            for(int[] a : pg){
+                int plant = a[0], grow = a[1];
+                time += plant;
+                r = Math.max(r, time + grow);
+            }
+            return r;
         }
     }
 }
