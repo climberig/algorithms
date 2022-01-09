@@ -305,4 +305,41 @@ public class p21{
             return r + doubleLetter;
         }
     }
+
+    static class s2133{//Check if Every Row and Column Contains All Numbers
+        public boolean checkValid(int[][] m){
+            for(int i = 0; i < m.length; i++){
+                int x1 = 0, x2 = 0;
+                for(int j = 0; j < m.length; j++){
+                    x1 ^= (j + 1) ^ m[i][j];
+                    x2 ^= (j + 1) ^ m[j][i];
+                }
+                if(x1 + x2 != 0)
+                    return false;
+            }
+            return true;
+        }
+    }
+
+    static class s2135{//Count Words Obtained After Adding a Letter
+        public int wordCount(String[] startWords, String[] targetWords){
+            Set<String> s = Arrays.stream(startWords).map(this::sorted).collect(Collectors.toSet());
+            int r = 0;
+            for(String w : targetWords){
+                String sorted = sorted(w);
+                for(int i = 0; i < w.length(); i++)
+                    if(s.contains(sorted.substring(0, i) + sorted.substring(i + 1))){
+                        r++;
+                        break;
+                    }
+            }
+            return r;
+        }
+
+        String sorted(String w){
+            char[] a = w.toCharArray();
+            Arrays.sort(a);
+            return new String(a);
+        }
+    }
 }
