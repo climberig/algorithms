@@ -370,4 +370,26 @@ public class p15{
             return r < a.length ? r : -1;
         }
     }
+
+    static class s1594{//Maximum Non Negative Product in a Matrix
+        public int maxProductPath(int[][] g){
+            int n = g.length, m = g[0].length;
+            long[][] max = new long[n][m], min = new long[n][m];
+            max[0][0] = min[0][0] = g[0][0];
+            for(int r = 1; r < n; r++)
+                min[r][0] = max[r][0] = min[r - 1][0] * g[r][0];
+            for(int c = 1; c < m; c++)
+                min[0][c] = max[0][c] = min[0][c - 1] * g[0][c];
+            for(int i = 1; i < n; i++)
+                for(int j = 1; j < m; j++){
+                    long v1 = Math.min(g[i][j] * min[i - 1][j], g[i][j] * min[i][j - 1]);
+                    long v2 = Math.max(g[i][j] * min[i - 1][j], g[i][j] * min[i][j - 1]);
+                    long v3 = Math.max(g[i][j] * max[i - 1][j], g[i][j] * max[i][j - 1]);
+                    long v4 = Math.min(g[i][j] * max[i - 1][j], g[i][j] * max[i][j - 1]);
+                    min[i][j] = Math.min(v1, Math.min(v2, Math.min(v3, v4)));
+                    max[i][j] = Math.max(v1, Math.max(v2, Math.max(v3, v4)));
+                }
+            return max[n - 1][m - 1] >= 0 ? (int) (max[n - 1][m - 1] % 1_000_000_007) : -1;
+        }
+    }
 }
