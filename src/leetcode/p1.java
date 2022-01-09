@@ -1,9 +1,7 @@
 package leetcode;
-
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
 
-@SuppressWarnings("ALL")
 public class p1{
     static class s108{//Convert Sorted Array to Binary Search Tree
         public TreeNode sortedArrayToBST(int[] a){

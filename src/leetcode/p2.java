@@ -1,7 +1,7 @@
 package leetcode;
-
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class p2{
     static class s208{//Implement Trie (Prefix Tree)
