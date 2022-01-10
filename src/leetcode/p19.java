@@ -121,6 +121,20 @@ public class p19{
         }
     }
 
+    static class s1969{//Minimum Non-Zero Product of the Array Elements
+        public int minNonZeroProduct(int p){
+            long last = (1L << p) - 1, mod = 1_000_000_007;
+            return (int) (last % mod * pow(last - 1, last / 2, mod) % mod);
+        }
+
+        long pow(long n, long p, long mod){
+            if(p == 0)
+                return 1;
+            long r = pow(n, p / 2, mod);
+            return ((r * r) % mod) * ((p % 2 == 1 ? n : 1) % mod) % mod;
+        }
+    }
+
     static class s1976{//Number of Ways to Arrive at Destination
         public int countPaths(int n, int[][] roads){
             List<List<int[]>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<int[]>()).collect(Collectors.toList());
