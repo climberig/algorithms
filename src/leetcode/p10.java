@@ -266,6 +266,19 @@ public class p10{
         }
     }
 
+    static class s1072{//Flip Columns For Maximum Number of Equal Rows
+        public int maxEqualRowsAfterFlips(int[][] m){
+            Map<String, Integer> counts = new HashMap<>();
+            for(int[] row : m){
+                String s1 = Arrays.stream(row).mapToObj(n -> String.valueOf(1 - n)).collect(Collectors.joining(""));
+                String s2 = Arrays.stream(row).mapToObj(String::valueOf).collect(Collectors.joining(""));
+                counts.put(s1, counts.getOrDefault(s1, 0) + 1);
+                counts.put(s2, counts.getOrDefault(s2, 0) + 1);
+            }
+            return counts.values().stream().mapToInt(n -> n).max().getAsInt();
+        }
+    }
+
     static class s1086{//High Five
         public int[][] highFive(int[][] items){
             TreeMap<Integer, PriorityQueue<Integer>> m = new TreeMap<>();
