@@ -20,6 +20,28 @@ public class p17{
         }
     }
 
+    static class s1717{//Maximum Score From Removing Substrings
+        public int maximumGain(String s, int x, int y){
+            StringBuilder b = new StringBuilder(s);
+            if(x > y)
+                return rm(b, 'a', 'b', x) + rm(b, 'b', 'a', y);
+            return rm(b, 'b', 'a', y) + rm(b, 'a', 'b', x);
+        }
+
+        int rm(StringBuilder s, char a, char b, int score){
+            int i = 0, r = 0;
+            for(int j = 0; j < s.length(); j++){
+                s.setCharAt(i++, s.charAt(j));
+                if(i > 1 && s.charAt(i - 2) == a && s.charAt(i - 1) == b){
+                    i -= 2;
+                    r += score;
+                }
+            }
+            s.setLength(i);
+            return r;
+        }
+    }
+
     static class s1722{//Minimize Hamming Distance After Swap Operations
         public int minimumHammingDistance(int[] src, int[] tgt, int[][] swaps){
             List<List<Integer>> g = IntStream.range(0, src.length).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
