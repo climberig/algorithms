@@ -88,6 +88,28 @@ public class p21{
         }
     }
 
+    static class s2106{//Maximum Fruits Harvested After at Most K Steps
+        public int maxTotalFruits(int[][] fruits, int start, int k){
+            int[] cs = new int[2 * 100_000 + 2];
+            for(int i = 1, j = 0; i < cs.length; i++)
+                if(j < fruits.length && fruits[j][0] == i - 1)
+                    cs[i] = cs[i - 1] + fruits[j++][1];
+                else cs[i] = cs[i - 1];
+            int r = 0;
+            for(int i = start + 1; i > 0 && (start + 1 - i) * 2 <= k; i--){
+                int j = Math.max(0, k - 2 * (start + 1 - i));
+                int p = Math.min(start + j + 1, cs.length - 1);
+                r = Math.max(r, cs[p] - cs[i - 1]);
+            }
+            for(int i = start + 1; i < cs.length && (i - (start + 1)) * 2 <= k; i++){
+                int j = Math.max(0, k - 2 * (i - (start + 1)));
+                int p = Math.max(start + 1 - j, 1);
+                r = Math.max(r, cs[i] - cs[p - 1]);
+            }
+            return r;
+        }
+    }
+
     static class s2107{//Number of Unique Flavors After Sharing K Candies
         public int shareCandies(int[] candies, int k){
             int r = 0;
