@@ -169,6 +169,18 @@ public class p17{
         }
     }
 
+    static class s1750{//Minimum Length of String After Deleting Similar Ends
+        public int minimumLength(String s){
+            int i = 0, j = s.length() - 1;
+            while(i < j && s.charAt(i) == s.charAt(j)){
+                char c = s.charAt(i);
+                for(; i <= j && s.charAt(i) == c; i++) ;
+                for(; i <= j && s.charAt(j) == c; j--) ;
+            }
+            return j - i + 1;
+        }
+    }
+
     static class s1760{//Minimum Limit of Balls in a Bag
         public int minimumSize(int[] bags, int k){
             int lo = 1, hi = 1_000_000_000;
