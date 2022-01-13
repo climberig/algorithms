@@ -889,6 +889,52 @@ public class p20{
         }
     }
 
+    static class s2069{//Walking Robot Simulation II
+        class Robot{
+            String[] dirs;
+            boolean hasMoved = false;
+            int point[][], roundTrip, i = 0, x = 0, y = 0, mult[][] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+
+            public Robot(int width, int height){
+                dirs = new String[]{"East", "North", "West", "South"};
+                point = new int[][]{{width - 1, 0}, {width - 1, height - 1}, {0, height - 1}, {0, 0}};
+                roundTrip = 2 * (width - 1) + 2 * (height - 1);
+            }
+
+            public void step(int n){
+                n = n % roundTrip;
+                if(!hasMoved){
+                    hasMoved = true;
+                    if(n == 0){
+                        i = 3;
+                        return;
+                    }
+                }
+                while(true){
+                    int dist = Math.abs(x - point[i][0]) + Math.abs(y - point[i][1]);
+                    if(n <= dist){
+                        x = x + mult[i][0] * n;
+                        y = y + mult[i][1] * n;
+                        break;
+                    }else{
+                        x = point[i][0];
+                        y = point[i][1];
+                        n -= dist;
+                        i = (i + 1) % 4;
+                    }
+                }
+            }
+
+            public int[] getPos(){
+                return new int[]{x, y};
+            }
+
+            public String getDir(){
+                return dirs[i];
+            }
+        }
+    }
+
     static class s2070{//Most Beautiful Item for Each Query
         public int[] maximumBeauty(int[][] items, int[] queries){
             TreeMap<Integer, Integer> m = new TreeMap<>();

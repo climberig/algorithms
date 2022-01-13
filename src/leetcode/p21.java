@@ -398,15 +398,23 @@ public class p21{
     }
 
     static class s2137{//Pour Water Between Buckets to Make Water Levels Equal
+        /**
+         * You have n buckets each containing some gallons of water in it, represented by a 0-indexed integer array buckets,
+         * where the ith bucket contains buckets[i] gallons of water. You are also given an integer loss. You want to make
+         * the amount of water in each bucket equal. You can pour any amount of water from one bucket to another bucket
+         * (not necessarily an integer). However, every time you pour k gallons of water, you spill loss percent of k.
+         * Return the maximum amount of water in each bucket after making the amount of water equal. Answers within 10-5 of
+         * the actual answer will be accepted.
+         */
         public double equalizeWater(int[] buckets, int loss){
-            double lo = 0, hi = 100_000, r = 0;
+            double lo = 0, hi = 100_000, r = 0, retainPercent = (100.0 - loss) / 100;
             while(hi - lo > 0.00001){
-                double mid = (lo + hi) / 2.0, less = 0, more = 0;
+                double mid = (lo + hi) / 2.0, need = 0, have = 0;
                 for(int b : buckets)
                     if(b >= mid)
-                        more += b - mid;
-                    else less += mid - b;
-                if(less <= more * (100 - loss) / 100){
+                        have += b - mid;
+                    else need += mid - b;
+                if(need <= have * retainPercent){
                     r = mid;
                     lo = mid;
                 }else hi = mid;
