@@ -396,4 +396,22 @@ public class p21{
             return r;
         }
     }
+
+    static class s2137{//Pour Water Between Buckets to Make Water Levels Equal
+        public double equalizeWater(int[] buckets, int loss){
+            double lo = 0, hi = 100_000, r = 0;
+            while(lo <= hi){
+                double mid = (lo + hi) / 2.0, less = 0, more = 0;
+                for(int b : buckets)
+                    if(b >= mid)
+                        more += b - mid;
+                    else less += mid - b;
+                if(less <= more * (100 - loss) / 100){
+                    r = mid;
+                    lo = mid + 0.000001;
+                }else hi = mid - 0.000001;
+            }
+            return r;
+        }
+    }
 }

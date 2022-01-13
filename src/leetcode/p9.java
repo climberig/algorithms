@@ -93,6 +93,15 @@ public class p9{
         }
     }
 
+    static class s940{//Distinct Subsequences II
+        public int distinctSubseqII(String s){
+            long ends[] = new long[26], m = 1_000_000_007;
+            for(char c : s.toCharArray())
+                ends[c - 'a'] = (Arrays.stream(ends).sum() + 1) % m;
+            return (int) (Arrays.stream(ends).sum() % m);
+        }
+    }
+
     static class s947{//Most Stones Removed with Same Row or Column
         public int removeStones(int[][] stones){
             int[] uf = IntStream.range(0, stones.length).toArray();
