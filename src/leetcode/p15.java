@@ -391,4 +391,23 @@ public class p15{
             return max[n - 1][m - 1] >= 0 ? (int) (max[n - 1][m - 1] % 1_000_000_007) : -1;
         }
     }
+
+    static class s1599{//Maximum Profit of Operating a Centennial Wheel
+        public int minOperationsMaxProfit(int[] customers, int ticketPrice, int cost){
+            int profit = 0, maxProfit = 0, i = 0, rotation = 0, maxRotation = 0, waiting = 0;
+            while(i < customers.length || waiting > 0){
+                if(i < customers.length)
+                    waiting += customers[i++];
+                int board = Math.min(4, waiting);
+                waiting -= board;
+                profit += ticketPrice * board - cost;
+                rotation++;
+                if(profit > maxProfit){
+                    maxProfit = profit;
+                    maxRotation = rotation;
+                }
+            }
+            return maxProfit > 0 ? maxRotation : -1;
+        }
+    }
 }

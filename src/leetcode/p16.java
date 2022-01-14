@@ -3,6 +3,24 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p16{
+    static class s1626{//Best Team With No Conflicts
+        public int bestTeamScore(int[] scores, int[] ages){
+            int[][] players = new int[ages.length][2];
+            for(int i = 0; i < ages.length; i++)
+                players[i] = new int[]{ages[i], scores[i]};
+            Arrays.sort(players, (a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]);
+            int dp[] = new int[ages.length], r = players[0][1];
+            for(int i = 0; i < ages.length; i++){
+                dp[i] = players[i][1];
+                for(int j = 0; j < i; j++)
+                    if(players[j][1] <= players[i][1])
+                        dp[i] = Math.max(dp[i], players[i][1] + dp[j]);
+                r = Math.max(dp[i], r);
+            }
+            return r;
+        }
+    }
+
     static class s1644{//Lowest Common Ancestor of a Binary Tree II
         int count = 0;
 
