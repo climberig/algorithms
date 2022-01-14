@@ -3,6 +3,25 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p16{
+    static class s1621{//Number of Sets of K Non-Overlapping Line Segments
+        public int numberOfSets(int n, int k){
+            return count(0, k, 1, new Integer[n + 1][k + 1][2], n);
+        }
+        int count(int i, int k, int isStart, Integer[][][] dp, int n){
+            if(dp[i][k][isStart] != null)
+                return dp[i][k][isStart];
+            if(k == 0)
+                return 1;
+            if(i == n)
+                return 0;
+            int r = count(i + 1, k, isStart, dp, n);
+            if(isStart == 1)
+                r += count(i + 1, k, 0, dp, n);
+            else r += count(i, k - 1, 1, dp, n);
+            return dp[i][k][isStart] = r % 1_000_000_007;
+        }
+    }
+
     static class s1626{//Best Team With No Conflicts
         public int bestTeamScore(int[] scores, int[] ages){
             int[][] players = new int[ages.length][2];
@@ -221,6 +240,22 @@ public class p16{
             if(a[lo] == a[hi] && a[lo] - 'a' + 1 != last)
                 return dp[lo][hi][last] = 2 + longest(a, lo + 1, hi - 1, a[lo] - 'a' + 1, dp);
             return dp[lo][hi][last] = Math.max(longest(a, lo + 1, hi, last, dp), longest(a, lo, hi - 1, last, dp));
+        }
+    }
+
+    static class s1686{//Stone Game VI
+        public int stoneGameVI(int[] aliceValues, int[] bobValues){
+            int[][] vals = new int[aliceValues.length][2];
+            for(int i = 0; i < vals.length; i++)
+                vals[i] = new int[]{aliceValues[i], bobValues[i]};
+            Arrays.sort(vals, (a, b) -> b[0] + b[1] - a[0] - a[1]);
+            int diff = 0;
+            for(int i = 0; i < vals.length; ){
+                diff += vals[i++][0];
+                if(i < vals.length)
+                    diff -= vals[i++][1];
+            }
+            return (int) Math.signum(diff);
         }
     }
 
