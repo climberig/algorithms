@@ -422,4 +422,29 @@ public class p21{
             return r;
         }
     }
+
+    static class s2138{//Divide a String Into Groups of Size k
+        public String[] divideString(String s, int k, char fill){
+            String[] r = new String[s.length() / k + (s.length() % k > 0 ? 1 : 0)];
+            for(int i = 0, j = 0; i < s.length(); i += k, j++){
+                String group = s.substring(i, Math.min(i + k, s.length()));
+                while(group.length() < k)
+                    group += fill;
+                r[j] = group;
+            }
+            return r;
+        }
+    }
+
+    static class s2139{//Minimum Moves to Reach Target Score
+        public int minMoves(int target, int doubles){
+            int r = 0;
+            for(; target > 1 && doubles > 0; r++)
+                if(target % 2 == 0){
+                    target /= 2;
+                    doubles--;
+                }else target--;
+            return r + target - 1;
+        }
+    }
 }

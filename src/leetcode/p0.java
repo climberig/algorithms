@@ -82,5 +82,23 @@ public class p0{
             return r;
         }
     }
+
+    static class s69{//Sqrt(x)
+        public int mySqrt(int x){
+            if(x <= 1)
+                return x;
+            long lo = 1, hi = x / 2, r = 0;
+            while(lo <= hi){
+                long mid = (lo + hi) / 2;
+                if(mid * mid == x)
+                    return (int) mid;
+                if(mid * mid < x){
+                    r = mid;
+                    lo = mid + 1;
+                }else hi = mid - 1;
+            }
+            return (int) r;
+        }
+    }
 }
 
