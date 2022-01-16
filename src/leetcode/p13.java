@@ -3,6 +3,38 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p13{
+    static class s1301{//Number of Paths with Max Score
+        public int[] pathsWithMaxScore(List<String> b){
+            int n = b.size(), m = b.get(0).length();
+            int[][] dp = new int[n][m], counts = new int[n][m], dirs = {{-1, -1}, {-1, 0}, {0, -1}};
+            counts[0][0] = 1;
+            for(int j = 1; j < m && b.get(0).charAt(j) != 'X'; j++){
+                dp[0][j] = dp[0][j - 1] + b.get(0).charAt(j) - '0';
+                counts[0][j] = 1;
+            }
+            for(int i = 1; i < n && b.get(i).charAt(0) != 'X'; i++){
+                dp[i][0] = dp[i - 1][0] + b.get(i).charAt(0) - '0';
+                counts[i][0] = 1;
+            }
+            for(int i = 1; i < n; i++)
+                for(int j = 1; j < m; j++)
+                    if(b.get(i).charAt(j) != 'X'){
+                        int score = b.get(i).charAt(j) == 'S' ? 0 : b.get(i).charAt(j) - '0';
+                        for(int[] d : dirs){
+                            int x = i + d[0], y = j + d[1];
+                            if(counts[x][y] > 0){
+                                if(dp[x][y] + score > dp[i][j]){
+                                    dp[i][j] = dp[x][y] + score;
+                                    counts[i][j] = counts[x][y];
+                                }else if(dp[x][y] + score == dp[i][j])
+                                    counts[i][j] = (counts[i][j] + counts[x][y]) % 1_000_000_007;
+                            }
+                        }
+                    }
+            return new int[]{dp[n - 1][m - 1], counts[n - 1][m - 1]};
+        }
+    }
+
     static class s1312{//Minimum Insertion Steps to Make a String Palindrome
         public int minInsertions(String s){
             return s.length() - lcs(s, new StringBuilder(s).reverse().toString());

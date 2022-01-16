@@ -447,4 +447,15 @@ public class p21{
             return r + target - 1;
         }
     }
+
+    static class s2140{//Solving Questions With Brainpower
+        public long mostPoints(int[][] questions){
+            long[] dp = new long[questions.length + 1];
+            for(int i = questions.length - 1; i >= 0; i--){
+                int j = Math.min(i + questions[i][1] + 1, dp.length - 1);
+                dp[i] = Math.max(dp[i + 1], questions[i][0] + dp[j]);
+            }
+            return dp[0];
+        }
+    }
 }
