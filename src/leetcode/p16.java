@@ -104,6 +104,19 @@ public class p16{
         }
     }
 
+    static class s1665{//Minimum Initial Energy to Finish Tasks
+        public int minimumEffort(int[][] tasks){
+            Arrays.sort(tasks, (a, b) -> Integer.compare(b[1] - b[0], a[1] - a[0]));
+            int r = 0, left = 0;
+            for(int[] task : tasks){
+                int need = Math.max(0, task[1] - left);
+                r += need;
+                left = Math.max(task[1], left) - task[0];
+            }
+            return r;
+        }
+    }
+
     static class s1666{//Change the Root of a Binary Tree
         Node originRoot;
 
