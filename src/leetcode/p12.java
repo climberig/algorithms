@@ -110,6 +110,17 @@ public class p12{
         }
     }
 
+    static class s1250{//Check If It Is a Good Array
+        public boolean isGoodArray(int[] a){
+            int d = a[0];
+            for(int i = 0; i < a.length && d != 1; i++)
+                d = gcd(a[i], d);
+            return d == 1;
+        }
+
+        int gcd(int a, int b){return b == 0 ? a : gcd(b, a % b);}
+    }
+
     static class s1254{//Number of Closed Islands
         public int closedIsland(int[][] g){
             for(int c = 0; c < g[0].length; c++){
@@ -185,6 +196,35 @@ public class p12{
 
         interface Sea{
             boolean hasShips(int[] topRight, int[] bottomLeft);
+        }
+    }
+
+    static class s1278{//Palindrome Partitioning III
+        public int palindromePartition(String s, int k){
+            return min(s.toCharArray(), 0, k, new Integer[s.length()][k + 1]);
+        }
+
+        int min(char[] a, int start, int k, Integer[][] dp){
+            if(k == 1)
+                return changes(start, a.length - 1, a);
+            if(a.length - start == k)
+                return 0;
+            if(dp[start][k] != null)
+                return dp[start][k];
+            int r = Integer.MAX_VALUE;
+            for(int i = start; i + k <= a.length; i++){
+                int changes = changes(start, i, a) + min(a, i + 1, k - 1, dp);
+                r = Math.min(r, changes);
+            }
+            return dp[start][k] = r;
+        }
+
+        int changes(int lo, int hi, char[] a){
+            int r = 0;
+            for(; lo < hi; lo++, hi--)
+                if(a[lo] != a[hi])
+                    r++;
+            return r;
         }
     }
 

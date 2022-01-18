@@ -168,6 +168,14 @@ public class p13{
         }
     }
 
+    static class s1359{//Count All Valid Pickup and Delivery Options
+        public int countOrders(int n){
+            if(n == 1)
+                return 1;
+            return (int) (((long) n * (2 * n - 1) * countOrders(n - 1)) % 1_000_000_007);
+        }
+    }
+
     static class s1375{//Bulb Switcher III
         public int numTimesAllBlue(int[] a){
             int right = 0, r = 0;
