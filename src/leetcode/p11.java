@@ -134,6 +134,26 @@ public class p11{
         }
     }
 
+    static class s1147{//Longest Chunked Palindrome Decomposition
+        public int longestDecomposition(String text){
+            return longest(text.toCharArray(), 0, text.length() - 1);
+        }
+
+        int longest(char[] a, int left, int right){
+            for(int i = 0; left + i < right - i; i++)
+                if(match(a, left, right, i))
+                    return 2 + longest(a, left + i + 1, right - i - 1);
+            return left > right ? 0 : 1;
+        }
+
+        boolean match(char[] a, int left, int right, int i){
+            for(int lo = left, hi = right - i; hi <= right; lo++, hi++)
+                if(a[lo] != a[hi])
+                    return false;
+            return true;
+        }
+    }
+
     static class s1151{//Minimum Swaps to Group All 1's Together
         public int minSwaps(int[] a){
             int width = Arrays.stream(a).sum(), ones = Arrays.stream(a, 0, width).sum(), maxOnes = ones;
