@@ -4,6 +4,23 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p17{
+    static class s1702{//Maximum Binary String After Change
+        public String maximumBinaryString(String binary){
+            char[] a = binary.toCharArray();
+            int i = -1, zeroes = 0;
+            for(int j = a.length - 1; j >= 0; j--)
+                if(a[j] == '0'){
+                    zeroes++;
+                    i = j;
+                }
+            if(i < 0)
+                return binary;
+            Arrays.fill(a, '1');
+            a[i + zeroes - 1] = '0';
+            return new String(a);
+        }
+    }
+
     static class s1712{//Ways to Split Array Into Three Subarrays
         public int waysToSplit(int[] a){
             int n = a.length, r = 0;
