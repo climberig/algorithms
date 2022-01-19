@@ -1,0 +1,4 @@
+pN.java contains solutions for problems from [N*100, N*100 + 99] (max of 100 solutions per each p*.java)
+For example, p2 contains solutions for problems [200, 299].
+Solutions are implemented in a.java. InsertSolution.java can be run to insert a solution from a.java
+into the right p*.java. Solutions are inserted in numerical order.
