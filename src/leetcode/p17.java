@@ -59,6 +59,35 @@ public class p17{
         }
     }
 
+    static class s1718{//Construct the Lexicographically Largest Valid Sequence
+        public int[] constructDistancedSequence(int n){
+            int[] r = new int[2 * n - 1];
+            construct(0, r, new boolean[n + 1], n);
+            return r;
+        }
+
+        boolean construct(int i, int[] a, boolean[] seen, int n){
+            if(i == a.length)
+                return true;
+            if(a[i] != 0)
+                return construct(i + 1, a, seen, n);
+            for(int k = n; k > 0; k--)
+                if(!seen[k] && (k == 1 || i + k < a.length && a[i + k] == 0)){
+                    a[i] = k;
+                    if(k != 1)
+                        a[i + k] = k;
+                    seen[k] = true;
+                    if(construct(i + 1, a, seen, n))
+                        return true;
+                    a[i] = 0;
+                    if(k != 1)
+                        a[i + k] = 0;
+                    seen[k] = false;
+                }
+            return false;
+        }
+    }
+
     static class s1722{//Minimize Hamming Distance After Swap Operations
         public int minimumHammingDistance(int[] src, int[] tgt, int[][] swaps){
             List<List<Integer>> g = IntStream.range(0, src.length).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
