@@ -227,6 +227,24 @@ public class p17{
         }
     }
 
+    static class s1756{//Design Most Recently Used Queue
+        class MRUQueue{
+            int[] q;
+
+            public MRUQueue(int n){
+                q = IntStream.range(1, n + 1).toArray();
+            }
+
+            public int fetch(int k){
+                int val = q[k - 1];
+                for(int i = k; i < q.length; i++)
+                    q[i - 1] = q[i];
+                q[q.length - 1] = val;
+                return val;
+            }
+        }
+    }
+
     static class s1760{//Minimum Limit of Balls in a Bag
         public int minimumSize(int[] bags, int k){
             int lo = 1, hi = 1_000_000_000;
