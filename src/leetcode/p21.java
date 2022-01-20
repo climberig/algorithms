@@ -458,4 +458,19 @@ public class p21{
             return dp[0];
         }
     }
+
+    static class s2141{//Maximum Running Time of N Computers
+        public long maxRunTime(int n, int[] batteries){
+            long lo = 0, hi = Arrays.stream(batteries).mapToLong(i -> i).sum() / n;
+            while(lo < hi){
+                long mid = (lo + hi + 1) / 2, minutes = 0;
+                for(int b : batteries)
+                    minutes += Math.min(mid, b);
+                if(minutes >= n * mid)
+                    lo = mid;
+                else hi = mid - 1;
+            }
+            return lo;
+        }
+    }
 }
