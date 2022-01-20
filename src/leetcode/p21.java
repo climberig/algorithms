@@ -473,4 +473,24 @@ public class p21{
             return lo;
         }
     }
+
+    static class s2143{//Choose Numbers From Two Arrays in Range
+        public int countSubranges(int[] a1, int[] a2){
+            Integer[][] dp = new Integer[a1.length][10_001];
+            long r = 0;
+            for(int i = 0; i < a1.length; i++)
+                r = (r + count(i + 1, a1[i], a1, a2, dp) + count(i + 1, -a2[i], a1, a2, dp)) % 1_000_000_007;
+            return (int) r;
+        }
+        int count(int i, int sum, int[] a1, int[] a2, Integer[][] dp){
+            if(i == a1.length)
+                return sum == 0 ? 1 : 0;
+            int key = sum + 5_000;
+            if(key < 0 || key > 10_000)
+                return 0;
+            if(dp[i][key] != null)
+                return dp[i][key];
+            return dp[i][key] = ((sum == 0 ? 1 : 0) + count(i + 1, sum + a1[i], a1, a2, dp) + count(i + 1, sum - a2[i], a1, a2, dp)) % 1_000_000_007;
+        }
+    }
 }
