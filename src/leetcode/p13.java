@@ -147,6 +147,18 @@ public class p13{
         long sum(TreeNode node){return node != null ? (long) node.val + sum(node.left) + sum(node.right) : 0;}
     }
 
+    static class s1346{//Check If N and Its Double Exist
+        public boolean checkIfExist(int[] a){
+            Set<Integer> s = new HashSet<>();
+            for(int n : a){
+                if(n % 2 == 0 && s.contains(n / 2) || s.contains(2 * n))
+                    return true;
+                s.add(n);
+            }
+            return false;
+        }
+    }
+
     static class s1348{//Tweet Counts Per Frequency
         class TweetCounts{
             final Map<String, TreeMap<Integer, Integer>> m = new HashMap<>();
