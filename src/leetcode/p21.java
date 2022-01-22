@@ -493,4 +493,17 @@ public class p21{
             return dp[i][key] = ((sum == 0 ? 1 : 0) + count(i + 1, sum + a1[i], a1, a2, dp) + count(i + 1, sum - a2[i], a1, a2, dp)) % 1_000_000_007;
         }
     }
+
+    static class s2144{//Minimum Cost of Buying Candies With Discount
+        public int minimumCost(int[] cost){
+            Arrays.sort(cost);
+            int r = 0;
+            for(int i = cost.length - 1; i >= 0; i -= 3){
+                r += cost[i];
+                if(i - 1 >= 0)
+                    r += cost[i - 1];
+            }
+            return r;
+        }
+    }
 }
