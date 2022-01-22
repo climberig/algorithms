@@ -506,4 +506,50 @@ public class p21{
             return r;
         }
     }
+
+    static class s2145{//Count the Hidden Sequences
+        public int numberOfArrays(int[] differences, int lower, int upper){
+            long min = 0, max = 0, val = 0;
+            for(int diff : differences){
+                val = val + diff;
+                min = Math.min(min, val);
+                max = Math.max(max, val);
+            }
+            max -= min - lower;
+            return (int) Math.max(0, upper - max + 1);
+        }
+    }
+
+    static class s2146{//K Highest Ranked Items Within a Price Range
+        public List<List<Integer>> highestRankedKItems(int[][] g, int[] pricing, int[] start, int k){
+            List<List<Integer>> r = new ArrayList<>(k);
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] != b[1] ? a[1] - b[1] : a[2] - b[2]);//price, row, column
+            Queue<int[]> q = new LinkedList<>();
+            int[] dirs = {-1, 0, 1, 0, -1};
+            if(pricing[0] <= g[start[0]][start[1]] && g[start[0]][start[1]] <= pricing[1]){
+                r.add(Arrays.asList(start[0], start[1]));
+                g[start[0]][start[1]] = 0;
+                k--;
+            }
+            for(q.add(start); !q.isEmpty() && k > 0; ){
+                for(int size = q.size(); size > 0; size--){
+                    int p[] = q.poll(), x = p[0], y = p[1];
+                    for(int d = 1; d < dirs.length; d++){
+                        int nx = x + dirs[d - 1], ny = y + dirs[d];
+                        if(0 <= nx && nx < g.length && 0 <= ny && ny < g[0].length && g[nx][ny] > 0){
+                            if(pricing[0] <= g[nx][ny] && g[nx][ny] <= pricing[1])
+                                pq.offer(new int[]{g[nx][ny], nx, ny});
+                            q.offer(new int[]{nx, ny});
+                            g[nx][ny] = 0;
+                        }
+                    }
+                }
+                for(; k > 0 && !pq.isEmpty(); k--){
+                    int[] p = pq.poll();
+                    r.add(Arrays.asList(p[1], p[2]));
+                }
+            }
+            return r;
+        }
+    }
 }
