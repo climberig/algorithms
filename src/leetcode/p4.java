@@ -165,6 +165,13 @@ public class p4{
         }
     }
 
+    static class s459{//Repeated Substring Pattern
+        public boolean repeatedSubstringPattern(String s){
+            String ss = s + s;
+            return ss.substring(1, ss.length() - 1).contains(s);
+        }
+    }
+
     static class s461{//Hamming Distance
         public int hammingDistance(int x, int y){
             return Integer.bitCount(x ^ y);
