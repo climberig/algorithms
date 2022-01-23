@@ -522,34 +522,40 @@ public class p21{
 
     static class s2146{//K Highest Ranked Items Within a Price Range
         public List<List<Integer>> highestRankedKItems(int[][] g, int[] pricing, int[] start, int k){
+            int low = pricing[0], high = pricing[1], dirs[] = {-1, 0, 1, 0, -1};
+            PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] != b[1] ? a[1] - b[1] : a[2] != b[2] ? a[2] - b[2] : a[3] - b[3]);//distance, price, row, col
             List<List<Integer>> r = new ArrayList<>(k);
-            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] != b[1] ? a[1] - b[1] : a[2] - b[2]);//price, row, column
-            Queue<int[]> q = new LinkedList<>();
-            int[] dirs = {-1, 0, 1, 0, -1};
-            if(pricing[0] <= g[start[0]][start[1]] && g[start[0]][start[1]] <= pricing[1]){
-                r.add(Arrays.asList(start[0], start[1]));
-                g[start[0]][start[1]] = 0;
-                k--;
-            }
-            for(q.add(start); !q.isEmpty() && k > 0; ){
-                for(int size = q.size(); size > 0; size--){
-                    int p[] = q.poll(), x = p[0], y = p[1];
-                    for(int d = 1; d < dirs.length; d++){
-                        int nx = x + dirs[d - 1], ny = y + dirs[d];
-                        if(0 <= nx && nx < g.length && 0 <= ny && ny < g[0].length && g[nx][ny] > 0){
-                            if(pricing[0] <= g[nx][ny] && g[nx][ny] <= pricing[1])
-                                pq.offer(new int[]{g[nx][ny], nx, ny});
-                            q.offer(new int[]{nx, ny});
-                            g[nx][ny] = 0;
-                        }
+            for(q.add(new int[]{0, g[start[0]][start[1]], start[0], start[1]}), g[start[0]][start[1]] = 0; !q.isEmpty() && r.size() < k; ){
+                int p[] = q.poll(), dist = p[0], price = p[1], x = p[2], y = p[3];
+                if(low <= price && price <= high)
+                    r.add(Arrays.asList(x, y));
+                for(int d = 1; d < dirs.length; d++){
+                    int nx = x + dirs[d - 1], ny = y + dirs[d];
+                    if(0 <= nx && nx < g.length && 0 <= ny && ny < g[0].length && g[nx][ny] > 0){
+                        q.offer(new int[]{dist + 1, g[nx][ny], nx, ny});
+                        g[nx][ny] = 0;
                     }
-                }
-                for(; k > 0 && !pq.isEmpty(); k--){
-                    int[] p = pq.poll();
-                    r.add(Arrays.asList(p[1], p[2]));
                 }
             }
             return r;
+        }
+    }
+
+    static class s2147{//Number of Ways to Divide a Long Corridor
+        public int numberOfWays(String corridor){
+            long r = 1, mod = 1_000_000_007;
+            for(int i = 0; i < corridor.length(); ){
+                int seats = 0, j = i;
+                for(; j < corridor.length() && seats < 2; j++)
+                    if(corridor.charAt(j) == 'S')
+                        seats++;
+                for(i = j; i < corridor.length() && corridor.charAt(i) != 'S'; i++) ;
+                if(seats < 2)
+                    return 0;
+                if(i < corridor.length())
+                    r = r * (i - j + 1) % mod;
+            }
+            return (int) r;
         }
     }
 }
