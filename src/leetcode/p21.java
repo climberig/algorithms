@@ -558,4 +558,38 @@ public class p21{
             return (int) r;
         }
     }
+
+    static class s2148{//Count Elements With Strictly Smaller and Greater Elements
+        public int countElements(int[] a){
+            int min = Arrays.stream(a).min().getAsInt(), max = Arrays.stream(a).max().getAsInt();
+            return (int) Arrays.stream(a).filter(n -> min < n && n < max).count();
+        }
+    }
+
+    static class s2149{//Rearrange Array Elements by Sign
+        public int[] rearrangeArray(int[] a){
+            int r[] = new int[a.length], i = 0, j = 1;
+            for(int n : a)
+                if(n > 0){
+                    r[i] = n;
+                    i += 2;
+                }else{
+                    r[j] = n;
+                    j += 2;
+                }
+            return r;
+        }
+    }
+
+    static class s2150{//Find All Lonely Numbers in the Array
+        public List<Integer> findLonely(int[] a){
+            Map<Integer, Integer> m = new HashMap<>();
+            Arrays.stream(a).forEach(n -> m.put(n, m.getOrDefault(n, 0) + 1));
+            List<Integer> r = new ArrayList<>();
+            for(int n : a)
+                if(m.get(n) + m.getOrDefault(n - 1, 0) + m.getOrDefault(n + 1, 0) == 1)
+                    r.add(n);
+            return r;
+        }
+    }
 }
