@@ -147,6 +147,25 @@ public class p13{
         long sum(TreeNode node){return node != null ? (long) node.val + sum(node.left) + sum(node.right) : 0;}
     }
 
+    static class s1340{//Jump Game V
+        public int maxJumps(int[] a, int d){
+            int r = 1, dp[] = new int[a.length];
+            for(int i = 0; i < a.length; i++)
+                r = Math.max(r, jump(i, a, d, dp));
+            return r;
+        }
+        int jump(int idx, int[] a, int d, int[] dp){
+            if(dp[idx] > 0)
+                return dp[idx];
+            int r = 1;
+            for(int i = idx + 1; i <= Math.min(idx + d, a.length - 1) && a[idx] > a[i]; i++)
+                r = Math.max(r, 1 + jump(i, a, d, dp));
+            for(int i = idx - 1; i >= Math.max(0, idx - d) && a[idx] > a[i]; i--)
+                r = Math.max(r, 1 + jump(i, a, d, dp));
+            return dp[idx] = r;
+        }
+    }
+
     static class s1346{//Check If N and Its Double Exist
         public boolean checkIfExist(int[] a){
             Set<Integer> s = new HashSet<>();
