@@ -209,6 +209,19 @@ public class p4{
         }
     }
 
+    static class s484{//Find Permutation
+        public int[] findPermutation(String s){
+            int lastUsed = 0, r[] = new int[s.length() + 1], k = 0;
+            for(int i = 0; i <= s.length(); i++)
+                if(i == s.length() || s.charAt(i) == 'I'){
+                    for(int n = i + 1; n > lastUsed; n--)
+                        r[k++] = n;
+                    lastUsed = i + 1;
+                }
+            return r;
+        }
+    }
+
     static class s485{//Max Consecutive Ones
         public int findMaxConsecutiveOnes(int[] a){
             int r = 0, count = 0;

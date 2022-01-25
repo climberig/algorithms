@@ -103,6 +103,20 @@ public class p6{
         }
     }
 
+    static class s645{//Set Mismatch
+        public int[] findErrorNums(int[] a){
+            int[] r = new int[2];
+            for(int n : a)
+                if(a[Math.abs(n) - 1] < 0)
+                    r[0] = Math.abs(n);
+                else a[Math.abs(n) - 1] *= -1;
+            for(int i = 0; i < a.length; i++)
+                if(a[i] > 0)
+                    r[1] = i + 1;
+            return r;
+        }
+    }
+
     static class s654{//Maximum Binary Tree
         public TreeNode constructMaximumBinaryTree(int[] a){return maxBt(a, 0, a.length - 1);}
 

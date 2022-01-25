@@ -217,4 +217,23 @@ public class p13{
             return r;
         }
     }
+
+    static class s1383{//Maximum Performance of a Team
+        public int maxPerformance(int n, int[] speed, int[] efficiency, int k){
+            int[][] es = new int[n][2];
+            for(int i = 0; i < n; i++)
+                es[i] = new int[]{efficiency[i], speed[i]};
+            Arrays.sort(es, (a, b) -> b[0] - a[0]);
+            PriorityQueue<Integer> q = new PriorityQueue<>(k);
+            long r = 0, speedSum = 0;
+            for(int[] e : es){
+                q.offer(e[1]);
+                speedSum += e[1];
+                if(q.size() > k)
+                    speedSum -= q.poll();
+                r = Math.max(r, speedSum * e[0]);
+            }
+            return (int) (r % 1_000_000_007);
+        }
+    }
 }
