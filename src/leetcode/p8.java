@@ -1,5 +1,8 @@
 package leetcode;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 public class p8{
     static class s800{//Similar RGB Color
         public String similarRGB(String color){
@@ -43,6 +46,32 @@ public class p8{
             for(int i = 0; i < words.length; i++, end += 'a')
                 r[i] = (v.indexOf(words[i].charAt(0)) >= 0 ? words[i] : words[i].substring(1) + words[i].charAt(0)) + "ma" + end;
             return String.join(" ", r);
+        }
+    }
+
+    static class s840{//Magic Squares In Grid
+        public int numMagicSquaresInside(int[][] g){
+            int r = 0;
+            for(int i = 0; i <= g.length - 3; i++)
+                for(int j = 0; j <= g[0].length - 3; j++)
+                    r += magic(i, j, g) ? 1 : 0;
+            return r;
+        }
+
+        boolean magic(int x, int y, int[][] g){
+            Set<Integer> s = new HashSet<>();
+            int rowsSum[] = new int[3], colsSum[] = new int[3], d1 = 0, d2 = 0;
+            for(int r = 0; r < 3; r++){
+                for(int c = 0; c < 3; c++){
+                    if(g[x + r][y + c] < 1 || g[x + r][y + c] > 9 || !s.add(g[x + r][y + c]))
+                        return false;
+                    rowsSum[r] += g[x + r][y + c];
+                    colsSum[c] += g[x + r][y + c];
+                }
+                d1 += g[x + r][y + r];
+                d2 += g[x + r][y + 2 - r];
+            }
+            return s.size() == 9 && Arrays.stream(rowsSum).allMatch(n -> n == 15) && Arrays.stream(colsSum).allMatch(n -> n == 15) && d1 == 15 && d2 == 15;
         }
     }
 
