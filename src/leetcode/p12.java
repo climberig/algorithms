@@ -78,6 +78,25 @@ public class p12{
         }
     }
 
+    static class s1231{//Divide Chocolate
+        public int maximizeSweetness(int[] sweetness, int k){
+            int lo = 0, hi = Arrays.stream(sweetness).sum(), r = 0;
+            while(lo <= hi){
+                int mid = (lo + hi) / 2, m = k + 1, sum = 0;
+                for(int i = 0; i < sweetness.length && m > 0; i++)
+                    if((sum += sweetness[i]) >= mid){
+                        sum = 0;
+                        m--;
+                    }
+                if(m == 0){
+                    r = mid;
+                    lo = mid + 1;
+                }else hi = mid - 1;
+            }
+            return r;
+        }
+    }
+
     static class s1235{//Maximum Profit in Job Scheduling
         public int jobScheduling(int[] startTime, int[] endTime, int[] profit){
             int[][] jobs = new int[startTime.length][3];
