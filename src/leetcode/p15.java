@@ -14,6 +14,31 @@ public class p15{
         }
     }
 
+    static class s1504{//Count Submatrices With All Ones
+        public int numSubmat(int[][] m){
+            int r = 0;
+            for(int i = 0; i < m.length; i++){
+                int[] h = new int[m[0].length];
+                Arrays.fill(h, 1);
+                for(int j = i; j < m.length; j++){
+                    for(int k = 0; k < m[0].length; ++k)
+                        h[k] &= m[j][k];
+                    r += countOneRow(h);
+                }
+            }
+            return r;
+        }
+
+        int countOneRow(int[] a){
+            int r = 0, len = 0;
+            for(int n : a){
+                len = n == 0 ? 0 : len + 1;
+                r += len;
+            }
+            return r;
+        }
+    }
+
     static class s1508{//Range Sum of Sorted Subarray Sums
         public int rangeSum(int[] a, int n, int left, int right){
             int[] cs = new int[n + 1];

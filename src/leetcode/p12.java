@@ -363,4 +363,31 @@ public class p12{
             return r;
         }
     }
+
+    static class s1298{//Maximum Candies You Can Get from Boxes
+        public int maxCandies(int[] status, int[] candies, int[][] keys, int[][] containedBoxes, int[] initialBoxes){
+            Set<Integer> opened = new HashSet<>(), pending = new HashSet<>();
+            Queue<Integer> q = new LinkedList<>();
+            for(int b : initialBoxes)
+                if(status[b] == 1){
+                    opened.add(b);
+                    q.offer(b);
+                }else pending.add(b);
+            int r = 0;
+            while(!q.isEmpty()){
+                Integer currBox = q.poll();
+                r += candies[currBox];
+                for(int key : keys[currBox]){
+                    status[key] = 1;
+                    if(pending.contains(key) && opened.add(key))
+                        q.offer(key);
+                }
+                for(int box : containedBoxes[currBox])
+                    if(status[box] == 1 && opened.add(box))
+                        q.offer(box);
+                    else pending.add(box);
+            }
+            return r;
+        }
+    }
 }
