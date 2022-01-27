@@ -14,6 +14,23 @@ public class p15{
         }
     }
 
+    static class s1508{//Range Sum of Sorted Subarray Sums
+        public int rangeSum(int[] a, int n, int left, int right){
+            int[] cs = new int[n + 1];
+            for(int i = 0; i < n; i++)
+                cs[i + 1] = cs[i] + a[i];
+            List<Integer> sums = new ArrayList<>(n * (n + 1) / 2);
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j <= i; j++)
+                    sums.add(cs[i + 1] - cs[j]);
+            Collections.sort(sums);
+            long r = 0;
+            for(int i = left - 1; i < right; i++)
+                r += sums.get(i);
+            return (int) (r % 1_000_000_007);
+        }
+    }
+
     static class s1513{//Number of Substrings With Only 1s
         public int numSub(String s){
             int r = 0;
