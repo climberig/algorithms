@@ -56,6 +56,17 @@ public class p15{
         }
     }
 
+    static class s1510{//Stone Game IV
+        public boolean winnerSquareGame(int n){
+            boolean[] dp = new boolean[n + 1];
+            for(int i = 1; i <= n; ++i)
+                for(int k = 1; k * k <= i && !dp[i]; ++k)
+                    if(!dp[i - k * k])
+                        dp[i] = true;
+            return dp[n];
+        }
+    }
+
     static class s1513{//Number of Substrings With Only 1s
         public int numSub(String s){
             int r = 0;
@@ -298,6 +309,17 @@ public class p15{
                     m--;
                 }
             return m == 1;
+        }
+    }
+
+    static class s1553{//Minimum Number of Days to Eat N Oranges
+        Map<Integer, Integer> dp = new HashMap<>();
+        public int minDays(int n){
+            if(n <= 1)
+                return n;
+            if(!dp.containsKey(n))
+                dp.put(n, 1 + Math.min(n % 2 + minDays(n / 2), n % 3 + minDays(n / 3)));
+            return dp.get(n);
         }
     }
 
