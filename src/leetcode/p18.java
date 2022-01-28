@@ -156,6 +156,17 @@ public class p18{
         }
     }
 
+    static class s1872{//Stone Game VIII
+        public int stoneGameVIII(int[] stones){
+            for(int i = 1; i < stones.length; i++)
+                stones[i] += stones[i - 1];
+            int r = stones[stones.length - 1];
+            for(int i = stones.length - 2; i >= 1; i--)
+                r = Math.max(r, stones[i] - r);
+            return r;
+        }
+    }
+
     static class s1878{//Get Biggest Three Rhombus Sums in a Grid
         public int[] getBiggestThree(int[][] g){
             Set<Integer> sums = new HashSet<>();
