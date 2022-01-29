@@ -68,6 +68,31 @@ public class p14{
         }
     }
 
+    static class s1432{// Max Difference You Can Get From Changing an Integer
+        public int maxDiff(int num){
+            String s = String.valueOf(num);
+            StringBuilder hi = new StringBuilder(s.length());
+            for(int i = 0; i < s.length(); i++)
+                if(s.charAt(i) != '9'){
+                    hi.append('9');
+                    for(int j = i + 1; j < s.length(); j++)
+                        if(s.charAt(i) == s.charAt(j))
+                            hi.append('9');
+                        else hi.append(s.charAt(j));
+                    break;
+                }else hi.append(s.charAt(i));
+            int i = 0;
+            if(s.charAt(0) != '1')
+                s = s.replace(s.charAt(0), '1');
+            else{
+                for(; i < s.length() && (s.charAt(i) == '1' || s.charAt(i) == '0'); i++) ;
+                if(i < s.length())
+                    s = s.replace(s.charAt(i), '0');
+            }
+            return Integer.parseInt(hi.toString()) - Integer.parseInt(s);
+        }
+    }
+
     static class s1462{//Course Schedule IV
         public List<Boolean> checkIfPrerequisite(int n, int[][] prerequisites, int[][] queries){
             List<List<Integer>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
