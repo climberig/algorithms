@@ -225,4 +225,16 @@ public class p11{
             return r;
         }
     }
+
+    static class s1199{//Minimum Time to Build Blocks
+        public int minBuildTime(int[] blocks, int split){
+            PriorityQueue<Integer> q = new PriorityQueue<>();
+            Arrays.stream(blocks).forEach(q::offer);
+            while(q.size() > 1){
+                int a = q.poll(), b = q.poll();
+                q.offer(split + b);
+            }
+            return q.poll();
+        }
+    }
 }

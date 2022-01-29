@@ -46,6 +46,23 @@ public class p12{
         }
     }
 
+    static class s1216{//Valid Palindrome III
+        public boolean isValidPalindrome(String s, int k){
+            int len = lcs(s, new StringBuilder(s).reverse().toString(), s.length());
+            return s.length() - len <= k;
+        }
+
+        int lcs(String s1, String s2, int n){
+            int[][] dp = new int[n + 1][n + 1];
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j < n; j++)
+                    if(s1.charAt(i) == s2.charAt(j))
+                        dp[i + 1][j + 1] = dp[i][j] + 1;
+                    else dp[i + 1][j + 1] = Math.max(dp[i][j + 1], dp[i + 1][j]);
+            return dp[n][n];
+        }
+    }
+
     static class s1220{//Count Vowels Permutation
         public int countVowelPermutation(int n){
             int[][] m = {{1}, {0, 2}, {0, 1, 3, 4}, {2, 4}, {0}};

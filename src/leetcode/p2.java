@@ -98,6 +98,24 @@ public class p2{
         }
     }
 
+    static class s233{//Number of Digit One
+        public int countDigitOne(int n){
+            int r = 0;
+            for(int left = n, right = 0, m = 1; left > 0; ){
+                int d = left % 10;
+                left = left / 10;
+                r += left * m;
+                if(d == 1)
+                    r += right + 1;
+                else if(d > 1)
+                    r += m;
+                right = d * m + right;
+                m *= 10;
+            }
+            return r;
+        }
+    }
+
     static class s235{//Lowest Common Ancestor of a Binary Search Tree
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q){
             if(root.val < p.val && root.val < q.val)
