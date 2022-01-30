@@ -1,6 +1,7 @@
 package leetcode;
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class p14{
     static class s1400{//Construct K Palindrome Strings
@@ -146,11 +147,25 @@ public class p14{
     }
 
     static class s1477{//Find Two Non-overlapping Sub-arrays Each With Target Sum
-        public boolean hasAllCodes(String s, int k){
-            Set<String> codes = new HashSet<>();
-            for(int i = k; i <= s.length() && codes.size() < 1 << k; i++)
-                codes.add(s.substring(i - k, i));
-            return codes.size() == 1 << k;
+        public int minSumOfLengths(int[] a, int target){
+            Map<Integer, Integer> m1 = new HashMap<>(), m2 = new HashMap<>();
+            m1.put(0, -1);
+            int minLen = Integer.MAX_VALUE, min[] = new int[a.length], r = Integer.MAX_VALUE;
+            for(int i = 0, sum = 0; i < a.length; i++){
+                sum += a[i];
+                if(m1.containsKey(sum - target))
+                    minLen = Math.min(minLen, i - m1.get(sum - target));
+                min[i] = minLen;
+                m1.put(sum, i);
+            }
+            m2.put(0, a.length);
+            for(int i = a.length - 1, sum = 0; i > 0; i--){
+                sum += a[i];
+                if(m2.containsKey(sum - target) && min[i - 1] != Integer.MAX_VALUE)
+                    r = Math.min(r, min[i - 1] + m2.get(sum - target) - i);
+                m2.put(sum, i);
+            }
+            return r == Integer.MAX_VALUE ? -1 : r;
         }
     }
 

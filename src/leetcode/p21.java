@@ -592,4 +592,30 @@ public class p21{
             return r;
         }
     }
+
+    static class s2154{//Keep Multiplying Found Values by Two
+        public int findFinalValue(int[] a, int original){
+            Set<Integer> s = Arrays.stream(a).boxed().collect(Collectors.toSet());
+            for(; s.contains(original); original *= 2) ;
+            return original;
+        }
+    }
+
+    static class s2155{//All Divisions With the Highest Score of a Binary Array
+        public List<Integer> maxScoreIndices(int[] a){
+            List<Integer> r = new ArrayList<>();
+            int score = Arrays.stream(a).sum(), maxScore = score;
+            for(int i = 0; i <= a.length; i++){
+                if(score > maxScore){
+                    maxScore = score;
+                    r.clear();
+                }
+                if(score == maxScore)
+                    r.add(i);
+                if(i < a.length)
+                    score += 1 - 2 * a[i];
+            }
+            return r;
+        }
+    }
 }
