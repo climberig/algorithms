@@ -156,6 +156,23 @@ public class p18{
         }
     }
 
+    static class s1856{//Maximum Subarray Min-Product
+        public int maxSumMinProduct(int[] a){
+            long cs[] = new long[a.length + 1], r = 0;
+            for(int i = 0; i < a.length; i++)
+                cs[i + 1] = cs[i] + a[i];
+            Stack<Integer> s = new Stack<>();
+            for(int i = 0; i <= a.length; i++){
+                while(!s.isEmpty() && (i == a.length || a[s.peek()] > a[i])){
+                    int j = s.pop();
+                    r = Math.max(r, (cs[i] - cs[s.isEmpty() ? 0 : s.peek() + 1]) * a[j]);
+                }
+                s.push(i);
+            }
+            return (int) (r % 1_000_000_007);
+        }
+    }
+
     static class s1872{//Stone Game VIII
         public int stoneGameVIII(int[] stones){
             for(int i = 1; i < stones.length; i++)
