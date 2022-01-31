@@ -618,4 +618,20 @@ public class p21{
             return r;
         }
     }
+
+    static class s2156{//Find Substring With Given Hash Value
+        public String subStrHash(String s, int p, int mod, int k, int hasVal){
+            long poly = 0, pk = 1;
+            int r = 0, n = s.length();
+            for(int i = n - 1; i >= 0; i--){
+                poly = (poly * p + s.charAt(i) - 'a' + 1) % mod;
+                if(i + k >= n)
+                    pk = p * pk % mod;
+                else poly = (poly - (s.charAt(i + k) - 'a' + 1) * pk % mod + mod) % mod;
+                if(poly == hasVal)
+                    r = i;
+            }
+            return s.substring(r, r + k);
+        }
+    }
 }
