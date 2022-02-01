@@ -169,6 +169,37 @@ public class p14{
         }
     }
 
+    static class s1478{//Allocate Mailboxes
+        public int minDistance(int[] houses, int k){
+            Arrays.sort(houses);
+            int r = dfs(houses, 0, k, new Integer[houses.length + 1][k + 1]);
+            return r == Integer.MAX_VALUE ? -1 : r;
+        }
+
+        int dfs(int[] houses, int start, int k, Integer[][] dp){
+            if(k == 0 || start >= houses.length)
+                return Integer.MAX_VALUE;
+            if(k == 1)
+                return distance(houses, start, houses.length - 1);
+            if(dp[start][k] != null)
+                return dp[start][k];
+            int r = Integer.MAX_VALUE;
+            for(int i = start; i <= houses.length - k; i++){
+                int d1 = distance(houses, start, i), r1 = dfs(houses, i + 1, k - 1, dp);
+                if(d1 < Integer.MAX_VALUE && r1 < Integer.MAX_VALUE)
+                    r = Integer.min(r, d1 + r1);
+            }
+            return dp[start][k] = r;
+        }
+
+        int distance(int[] houses, int lo, int hi){
+            int m = houses[lo + (hi - lo) / 2], r = 0;
+            for(int i = lo; i <= hi; i++)
+                r += Math.abs(houses[i] - m);
+            return r;
+        }
+    }
+
     static class s1482{//Minimum Number of Days to Make m Bouquets
         public int minDays(int[] bloomDays, int m, int k){
             int lo = 1, hi = 1_000_000_000, r = 0;

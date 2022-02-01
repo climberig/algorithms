@@ -114,6 +114,22 @@ public class p12{
         }
     }
 
+    static class s1234{//Replace the Substring for Balanced String
+        public int balancedString(String s){
+            int fr[] = new int[128], r = s.length(), k = s.length() / 4;
+            for(int i = 0; i < s.length(); i++)
+                fr[s.charAt(i)]++;
+            for(int i = 0, j = 0; i < s.length(); i++){
+                fr[s.charAt(i)]--;
+                while(j < s.length() && fr['Q'] <= k && fr['W'] <= k && fr['E'] <= k && fr['R'] <= k){
+                    r = Math.min(r, i - j + 1);
+                    fr[s.charAt(j++)]++;
+                }
+            }
+            return r;
+        }
+    }
+
     static class s1235{//Maximum Profit in Job Scheduling
         public int jobScheduling(int[] startTime, int[] endTime, int[] profit){
             int[][] jobs = new int[startTime.length][3];
