@@ -3,6 +3,28 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p16{
+    static class s1620{//Coordinate With Maximum Network Quality
+        public int[] bestCoordinate(int[][] towers, int radius){
+            double bestQ = -1;
+            int[] r = null;
+            for(int x = 0; x <= 50; x++)
+                for(int y = 0; y <= 50; y++){
+                    double q = 0;
+                    for(int[] t : towers){
+                        int x1 = t[0], y1 = t[1], q1 = t[2];
+                        double d = (x - x1) * (x - x1) + (y - y1) * (y - y1);
+                        if(d <= radius * radius)
+                            q += Math.floor(1.0 * q1 / (1 + Math.sqrt(d)));
+                    }
+                    if(q > bestQ){
+                        bestQ = q;
+                        r = new int[]{x, y};
+                    }
+                }
+            return r;
+        }
+    }
+
     static class s1621{//Number of Sets of K Non-Overlapping Line Segments
         public int numberOfSets(int n, int k){
             return count(0, k, 1, new Integer[n + 1][k + 1][2], n);
