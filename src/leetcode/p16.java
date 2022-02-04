@@ -307,4 +307,15 @@ public class p16{
             return dp[i][j] = Math.max(sum - a[i] - dfs(sum - a[i], i + 1, j, a, dp), sum - a[j] - dfs(sum - a[j], i, j - 1, a, dp));
         }
     }
+
+    static class s1692{//Count Ways to Distribute Candies
+        public int waysToDistribute(int n, int k){
+            long[][] dp = new long[k + 1][n + 1];
+            IntStream.range(0, k + 1).forEach(i -> dp[i][i] = 1);
+            for(int i = 1; i <= k; i++)
+                for(int j = i + 1; j <= n; j++)
+                    dp[i][j] = (i * dp[i][j - 1] + dp[i - 1][j - 1]) % 1_000_000_007;
+            return (int) dp[k][n];
+        }
+    }
 }

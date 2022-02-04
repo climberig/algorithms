@@ -944,6 +944,40 @@ public class p20{
         }
     }
 
+    static class s2071{//Maximum Number of Tasks You Can Assign
+        public int maxTaskAssign(int[] tasks, int[] workers, int pills, int strength){
+            Arrays.sort(tasks);
+            Arrays.sort(workers);
+            int lo = 0, hi = Math.min(tasks.length, workers.length), r = 0;
+            while(lo <= hi){
+                int mid = (lo + hi) / 2;
+                if(canAssign(mid, tasks, workers, pills, strength)){
+                    r = mid;
+                    lo = mid + 1;
+                }else hi = mid - 1;
+            }
+            return r;
+        }
+
+        boolean canAssign(int nTasks, int[] tasks, int[] workers, int pills, int strength){
+            Deque<Integer> q = new ArrayDeque<>();
+            for(int i = nTasks - 1, j = workers.length - 1; i >= 0; i--){
+                while(j >= workers.length - nTasks && workers[j] + strength >= tasks[i])
+                    q.offerLast(workers[j--]);
+                if(q.isEmpty())
+                    return false;
+                if(q.peekFirst() >= tasks[i])
+                    q.pollFirst();
+                else{
+                    q.pollLast();
+                    if(--pills < 0)
+                        return false;
+                }
+            }
+            return true;
+        }
+    }
+
     static class s2073{//Time Needed to Buy Tickets
         public int timeRequiredToBuy(int[] tickets, int k){
             return IntStream.range(0, tickets.length).map(i -> Math.min(tickets[i], i <= k ? tickets[k] : tickets[k] - 1)).sum();
