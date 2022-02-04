@@ -634,4 +634,27 @@ public class p21{
             return s.substring(r, r + k);
         }
     }
+
+    static class s2158{//Amount of New Area Painted Each Day
+        public int[] amountPainted(int[][] paint){
+            int end = Arrays.stream(paint).mapToInt(p -> p[1]).max().getAsInt(), r[] = new int[paint.length];
+            List<List<int[]>> line = new ArrayList<>(end + 1);
+            for(int i = 0; i <= end; i++)
+                line.add(new ArrayList<>());
+            for(int i = 0; i < paint.length; i++){
+                line.get(paint[i][0]).add(new int[]{i, 1});
+                line.get(paint[i][1]).add(new int[]{i, -1});
+            }
+            TreeSet<Integer> s = new TreeSet<>();
+            for(List<int[]> point : line){
+                for(int[] layer : point)
+                    if(layer[1] == 1)
+                        s.add(layer[0]);
+                    else s.remove(layer[0]);
+                if(!s.isEmpty())
+                    r[s.first()]++;
+            }
+            return r;
+        }
+    }
 }

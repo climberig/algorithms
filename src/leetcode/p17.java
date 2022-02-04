@@ -412,6 +412,24 @@ public class p17{
         }
     }
 
+    static class s1793{//Maximum Score of a Good Subarray
+        public int maximumScore(int[] a, int k){
+            int r = a[k], min = a[k], lo = k, hi = k;
+            while(lo > 0 || hi < a.length - 1){
+                if(lo == 0)
+                    hi++;
+                else if(hi == a.length - 1)
+                    lo--;
+                else if(a[lo - 1] < a[hi + 1])
+                    hi++;
+                else lo--;
+                min = Math.min(min, Math.min(a[lo], a[hi]));
+                r = Math.max(r, min * (hi - lo + 1));
+            }
+            return r;
+        }
+    }
+
     static class s1798{//Maximum Number of Consecutive Values You Can Make
         public int getMaximumConsecutive(int[] coins){
             Arrays.sort(coins);
