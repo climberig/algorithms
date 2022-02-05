@@ -961,20 +961,17 @@ public class p20{
 
         boolean canAssign(int nTasks, int[] tasks, int[] workers, int pills, int strength){
             Deque<Integer> q = new ArrayDeque<>();
-            for(int i = nTasks - 1, j = workers.length - 1; i >= 0; i--){
+            for(int i = nTasks - 1, j = workers.length - 1; i >= 0 && pills >= 0; i--){
                 while(j >= workers.length - nTasks && workers[j] + strength >= tasks[i])
                     q.offerLast(workers[j--]);
                 if(q.isEmpty())
                     return false;
-                if(q.peekFirst() >= tasks[i])
-                    q.pollFirst();
-                else{
+                if(q.peekFirst() < tasks[i]){
                     q.pollLast();
-                    if(--pills < 0)
-                        return false;
-                }
+                    pills--;
+                }else q.pollFirst();
             }
-            return true;
+            return pills >= 0;
         }
     }
 
