@@ -657,4 +657,52 @@ public class p21{
             return r;
         }
     }
+
+    static class s2160{//Minimum Sum of Four Digit Number After Splitting Digits
+        public int minimumSum(int n){
+            int[] d = new int[4];
+            for(int i = 0; n > 0; n /= 10, i++)
+                d[i] = n % 10;
+            Arrays.sort(d);
+            return 10 * (d[0] + d[2]) + d[1] + d[3];
+        }
+    }
+
+    static class s2161{//Partition Array According to Given Pivot
+        public int[] pivotArray(int[] a, int pivot){
+            int r[] = new int[a.length], lo = 0, hi = a.length - 1;
+            for(int i = 0, j = a.length - 1; i < a.length; i++, j--){
+                if(a[i] < pivot)
+                    r[lo++] = a[i];
+                if(a[j] > pivot)
+                    r[hi--] = a[j];
+            }
+            Arrays.fill(r, lo, hi + 1, pivot);
+            return r;
+        }
+    }
+
+    static class s2163{//Minimum Difference in Sums After Removal of Elements
+        public long minimumDifference(int[] a){
+            long s1 = 0, s2 = 0, dp[] = new long[a.length], r = Long.MAX_VALUE, n = a.length / 3;
+            PriorityQueue<Integer> q1 = new PriorityQueue<>(Comparator.reverseOrder()), q2 = new PriorityQueue<>();
+            for(int i = 0; i < 2 * n; i++){
+                q1.offer(a[i]);
+                s1 += a[i];
+                if(q1.size() > n)
+                    s1 -= q1.poll();
+                if(q1.size() == n)
+                    dp[i] = s1;
+            }
+            for(int i = a.length - 1; i >= n; i--){
+                q2.offer(a[i]);
+                s2 += a[i];
+                if(q2.size() > n)
+                    s2 -= q2.poll();
+                if(q2.size() == n)
+                    r = Math.min(r, dp[i - 1] - s2);
+            }
+            return r;
+        }
+    }
 }
