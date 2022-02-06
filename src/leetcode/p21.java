@@ -729,4 +729,52 @@ public class p21{
             return r;
         }
     }
+
+    static class s2164{//Sort Even and Odd Indices Independently
+        public int[] sortEvenOdd(int[] a){
+            List<PriorityQueue<Integer>> qq = Arrays.asList(new PriorityQueue<>(), new PriorityQueue<>(Comparator.reverseOrder()));
+            int n = a.length, r[] = new int[n];
+            IntStream.range(0, n).forEach(i -> qq.get(i % 2).offer(a[i]));
+            return IntStream.range(0, n).map(i -> qq.get(i % 2).poll()).toArray();
+        }
+    }
+
+    static class s2165{//Smallest Value of the Rearranged Number
+        public long smallestNumber(long n){
+            int[] fr = new int[10];
+            for(long m = Math.abs(n); m != 0; m /= 10)
+                fr[(int) (m % 10)]++;
+            return n >= 0 ? create(0, fr) : -create(fr.length - 1, fr);
+        }
+
+        long create(int i, int[] fr){
+            long r = 0;
+            for(int j = 1; i == 0 && j < fr.length; j++)
+                if(fr[j] > 0){
+                    r = j;
+                    fr[j]--;
+                    break;
+                }
+            for(int inc = i == 0 ? 1 : -1; 0 <= i && i < fr.length; i += inc)
+                while(fr[i]-- > 0)
+                    r = r * 10 + i;
+            return r;
+        }
+
+        public long smallestNumber1(long n){
+            List<Integer> digits = new ArrayList<>();
+            for(long m = Math.abs(n); m > 0; m /= 10)
+                digits.add((int) (m % 10));
+            Collections.sort(digits, n >= 0 ? Comparator.naturalOrder() : Comparator.reverseOrder());
+            for(int i = 0; n > 0 && digits.get(0) == 0 && i < digits.size(); i++)
+                if(digits.get(i) > 0){
+                    digits.set(0, digits.get(i));
+                    digits.set(i, 0);
+                }
+            long r = 0;
+            for(Integer d : digits)
+                r = 10 * r + d;
+            return r * (n >= 0 ? 1 : -1);
+        }
+    }
 }
