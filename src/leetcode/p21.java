@@ -682,6 +682,30 @@ public class p21{
         }
     }
 
+    static class s2162{//Minimum Cost to Set Cooking Time
+        public int minCostSetTime(int startAt, int moveCost, int pushCost, int targetSeconds){
+            int min = 0, sec = targetSeconds, r = Integer.MAX_VALUE;
+            for(; sec >= 0 && min <= 99; min += 1, sec -= 60)
+                if(sec <= 99)
+                    r = Math.min(minCost(min, sec, startAt, moveCost, pushCost), r);
+            return r;
+        }
+
+        int minCost(int min, int sec, int prev, int moveCost, int pushCost){
+            String s = min > 0 && sec < 10 ? min + "0" + sec : String.valueOf(min) + sec;
+            int i = 0, cost = 0;
+            for(; s.charAt(i) == '0'; i++) ;
+            for(; i < s.length(); i++)
+                if(s.charAt(i) - '0' == prev)
+                    cost += pushCost;
+                else{
+                    cost += pushCost + moveCost;
+                    prev = s.charAt(i) - '0';
+                }
+            return cost;
+        }
+    }
+
     static class s2163{//Minimum Difference in Sums After Removal of Elements
         public long minimumDifference(int[] a){
             long s1 = 0, s2 = 0, dp[] = new long[a.length], r = Long.MAX_VALUE, n = a.length / 3;
