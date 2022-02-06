@@ -732,10 +732,9 @@ public class p21{
 
     static class s2164{//Sort Even and Odd Indices Independently
         public int[] sortEvenOdd(int[] a){
-            List<PriorityQueue<Integer>> qq = Arrays.asList(new PriorityQueue<>(), new PriorityQueue<>(Comparator.reverseOrder()));
-            int n = a.length, r[] = new int[n];
-            IntStream.range(0, n).forEach(i -> qq.get(i % 2).offer(a[i]));
-            return IntStream.range(0, n).map(i -> qq.get(i % 2).poll()).toArray();
+            var qq = Arrays.asList(new PriorityQueue<Integer>(), new PriorityQueue<Integer>(Comparator.reverseOrder()));
+            IntStream.range(0, a.length).forEach(i -> qq.get(i % 2).offer(a[i]));
+            return IntStream.range(0, a.length).map(i -> qq.get(i % 2).poll()).toArray();
         }
     }
 
@@ -775,6 +774,43 @@ public class p21{
             for(Integer d : digits)
                 r = 10 * r + d;
             return r * (n >= 0 ? 1 : -1);
+        }
+    }
+
+    static class s2166{//Design Bitset
+        class Bitset{
+            int b[], flipped = 0, count = 0;
+
+            public Bitset(int size){b = new int[size];}
+
+            public void fix(int idx){
+                if(b[idx] == flipped){
+                    b[idx] = 1 - flipped;
+                    count++;
+                }
+            }
+
+            public void unfix(int idx){
+                if(b[idx] == 1 - flipped){
+                    b[idx] = flipped;
+                    count--;
+                }
+            }
+
+            public void flip(){
+                flipped ^= 1;
+                count = b.length - count;
+            }
+
+            public boolean all(){return b.length == count;}
+
+            public boolean one(){return count > 0;}
+
+            public int count(){return count;}
+
+            public String toString(){
+                return Arrays.stream(b).mapToObj(v -> String.valueOf(v ^ flipped)).collect(Collectors.joining());
+            }
         }
     }
 }
