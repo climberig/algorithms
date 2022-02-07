@@ -145,6 +145,26 @@ public class p6{
         }
     }
 
+    static class s661{//Image Smoother
+        public int[][] imageSmoother(int[][] img){
+            int[][] r = new int[img.length][img[0].length];
+            for(int i = 0; i < r.length; i++)
+                for(int j = 0; j < r[0].length; j++){
+                    int n = 0, sum = 0;
+                    for(int x = -1; x <= 1; x++)
+                        for(int y = -1; y <= 1; y++)
+                            if(valid(i + x, j + y, img)){
+                                sum += img[i + x][j + y];
+                                n++;
+                            }
+                    r[i][j] = sum / n;
+                }
+            return r;
+        }
+
+        boolean valid(int x, int y, int[][] m){return 0 <= x && x < m.length && 0 <= y && y < m[0].length;}
+    }
+
     static class s684{//Redundant Connection
         public int[] findRedundantConnection(int[][] edges){
             int[] uf = IntStream.range(0, edges.length + 1).toArray();
