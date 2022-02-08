@@ -4,6 +4,18 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p9{
+    static class s914{//X of a Kind in a Deck of Cards
+        public boolean hasGroupsSizeX(int[] deck){
+            int f[] = new int[10_000], r = 0;
+            Arrays.stream(deck).forEach(n -> f[n]++);
+            for(int d : f)
+                r = gcd(r, d);
+            return r > 1;
+        }
+
+        int gcd(int a, int b){return b == 0 ? a : gcd(b, a % b);}
+    }
+
     static class s917{//Reverse Only Letters
         public String reverseOnlyLetters(String s){
             char[] a = s.toCharArray();
