@@ -39,6 +39,19 @@ public class p7{
             return s.isEmpty() ? b : candyCrush(b);
         }
     }
+    static class s724{//Find Pivot Index
+        public int pivotIndex(int[] a){
+            int right = Arrays.stream(a).sum(), left = 0;
+            for(int i = 0; i < a.length; i++){
+                right -= a[i];
+                if(left == right)
+                    return i;
+                left += a[i];
+            }
+            return -1;
+        }
+    }
+
     static class s734{//Sentence Similarity
         public boolean areSentencesSimilar(String[] s1, String[] s2, List<List<String>> pairs){
             if(s1.length != s2.length)

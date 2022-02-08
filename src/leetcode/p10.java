@@ -21,6 +21,22 @@ public class p10{
             return r;
         }
     }
+    static class s1013{//Partition Array Into Three Parts With Equal Sum
+        public boolean canThreePartsEqualSum(int[] a){
+            int sum = Arrays.stream(a).sum(), count = 0;
+            if(sum % 3 != 0)
+                return false;
+            for(int i = 0, currSum = 0, target = sum / 3; i < a.length; i++){
+                currSum += a[i];
+                if(currSum == target){
+                    currSum = 0;
+                    count++;
+                }
+            }
+            return count >= 3;
+        }
+    }
+
     static class s1015{//Smallest Integer Divisible by K
         public int smallestRepunitDivByK(int k){
             if(!Set.of(1, 3, 7, 9).contains(k % 10))

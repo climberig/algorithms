@@ -210,11 +210,14 @@ public class p19{
 
     static class s1991{//Find the Middle Index in Array
         public int findMiddleIndex(int[] a){
-            int sum = 0;
-            Map<Integer, Integer> m = new HashMap<>();
-            for(int i = 0; i < a.length; sum += a[i++])
-                m.putIfAbsent(2 * sum + a[i], i);
-            return m.getOrDefault(sum, -1);
+            int left = 0, right = Arrays.stream(a).sum();
+            for(int i = 0; i < a.length; i++){
+                right -= a[i];
+                if(left == right)
+                    return i;
+                left += a[i];
+            }
+            return -1;
         }
     }
 
