@@ -226,6 +226,16 @@ public class p11{
         }
     }
 
+    static class s1196{//How Many Apples Can You Put into the Basket
+        public int maxNumberOfApples(int[] weight){
+            Arrays.sort(weight);
+            int i = 0;
+            for(int cap = 5_000; i < weight.length && weight[i] <= cap; i++)
+                cap -= weight[i];
+            return i;
+        }
+    }
+
     static class s1199{//Minimum Time to Build Blocks
         public int minBuildTime(int[] blocks, int split){
             PriorityQueue<Integer> q = new PriorityQueue<>();

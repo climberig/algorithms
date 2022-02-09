@@ -3,6 +3,22 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p12{
+    static class s1200{//Minimum Absolute Difference
+        public List<List<Integer>> minimumAbsDifference(int[] a){
+            Arrays.sort(a);
+            List<List<Integer>> r = new ArrayList<>();
+            for(int i = 1, minDiff = Integer.MAX_VALUE; i < a.length; i++){
+                if(a[i] - a[i - 1] < minDiff){
+                    minDiff = a[i] - a[i - 1];
+                    r.clear();
+                }
+                if(a[i] - a[i - 1] == minDiff)
+                    r.add(Arrays.asList(a[i - 1], a[i]));
+            }
+            return r;
+        }
+    }
+
     static class s1202{//Smallest String With Swaps
         public String smallestStringWithSwaps(String s, List<List<Integer>> pairs){
             List<List<Integer>> g = IntStream.range(0, s.length()).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());

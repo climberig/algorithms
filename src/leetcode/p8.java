@@ -23,6 +23,19 @@ public class p8{
         }
     }
 
+    static class s804{//Unique Morse Code Words
+        public int uniqueMorseRepresentations(String[] words){
+            String[] m = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
+            Set<String> s = new HashSet<>();
+            for(String w : words){
+                StringBuilder r = new StringBuilder();
+                w.chars().forEach(c -> r.append(m[c - 'a']));
+                s.add(r.toString());
+            }
+            return s.size();
+        }
+    }
+
     static class s821{//Shortest Distance to a Character
         public int[] shortestToChar(String s, char c){
             int[] r = new int[s.length()];
