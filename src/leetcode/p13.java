@@ -218,6 +218,23 @@ public class p13{
         }
     }
 
+    static class s1380{//Lucky Numbers in a Matrix
+        public List<Integer> luckyNumbers(int[][] m){
+            int[] rows = IntStream.range(0, m.length).map(i -> Integer.MAX_VALUE).toArray(), cols = new int[m[0].length];
+            for(int i = 0; i < rows.length; i++)
+                for(int j = 0; j < cols.length; j++){
+                    rows[i] = Math.min(rows[i], m[i][j]);
+                    cols[j] = Math.max(cols[j], m[i][j]);
+                }
+            List<Integer> r = new ArrayList<>();
+            for(int i = 0; i < rows.length; i++)
+                for(int j = 0; j < cols.length; j++)
+                    if(rows[i] == cols[j])
+                        r.add(m[i][j]);
+            return r;
+        }
+    }
+
     static class s1383{//Maximum Performance of a Team
         public int maxPerformance(int n, int[] speed, int[] efficiency, int k){
             int[][] es = new int[n][2];

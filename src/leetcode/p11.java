@@ -22,6 +22,21 @@ public class p11{
         }
     }
 
+    static class s1122{//Relative Sort Array
+        public int[] relativeSortArray(int[] a1, int[] a2){
+            int f[] = new int[1_001], i = 0;
+            for(int n : a1)
+                f[n]++;
+            for(int n : a2)
+                while(f[n]-- > 0)
+                    a1[i++] = n;
+            for(int n = 0; n < f.length; n++)
+                while(f[n]-- > 0)
+                    a1[i++] = n;
+            return a1;
+        }
+    }
+
     static class s1129{//Shortest Path with Alternating Colors
         public int[] shortestAlternatingPaths(int n, int[][] redEdges, int[][] blueEdges){
             int r[] = new int[n];
