@@ -109,6 +109,35 @@ public class p4{
         }
     }
 
+    static class s417{//Pacific Atlantic Water Flow
+        public List<List<Integer>> pacificAtlantic(int[][] g){
+            boolean[][] pacific = new boolean[g.length][g[0].length], atlantic = new boolean[g.length][g[0].length];
+            for(int i = 0; i < g.length; i++){
+                dfs(0, i, 0, g, pacific);
+                dfs(0, i, g[0].length - 1, g, atlantic);
+            }
+            for(int i = 0; i < g[0].length; i++){
+                dfs(0, 0, i, g, pacific);
+                dfs(0, g.length - 1, i, g, atlantic);
+            }
+            List<List<Integer>> r = new ArrayList<>();
+            for(int i = 0; i < g.length; i++)
+                for(int j = 0; j < g[0].length; j++)
+                    if(pacific[i][j] && atlantic[i][j])
+                        r.add(Arrays.asList(i, j));
+            return r;
+        }
+
+        int dfs(int prevVal, int r, int c, int[][] g, boolean[][] flow){
+            if(0 <= r && r < g.length && 0 <= c && c < g[0].length && !flow[r][c]){
+                flow[r][c] = prevVal <= g[r][c];
+                if(flow[r][c])
+                    return dfs(g[r][c], r + 1, c, g, flow) + dfs(g[r][c], r - 1, c, g, flow) + dfs(g[r][c], r, c + 1, g, flow) + dfs(g[r][c], r, c - 1, g, flow);
+            }
+            return 0;
+        }
+    }
+
     static class s422{//Valid Word Square
         public boolean validWordSquare(List<String> words){
             for(int i = 0, n = words.size(); i < n; i++)
