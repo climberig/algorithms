@@ -339,6 +339,30 @@ public class p20{
         }
     }
 
+    static class s2029{// Stone Game IX
+        public boolean stoneGameIX(int[] stones){
+            int[] f = new int[3];
+            Arrays.stream(stones).forEach(s -> f[s % 3]++);
+            return get(f.clone(), 1, stones.length) || get(f, 2, stones.length);
+        }
+
+        boolean get(int[] f, int start, int n){
+            if(--f[start] < 0)
+                return false;
+            for(int i = 1, sum = start; i < n; i++)
+                if(f[1] > 0 && (sum + 1) % 3 != 0){
+                    f[1]--;
+                    sum += 1;
+                }else if(f[2] > 0 && (sum + 2) % 3 != 0){
+                    f[2]--;
+                    sum += 2;
+                }else if(f[0] > 0 && sum % 3 != 0)
+                    f[0]--;
+                else return i % 2 == 1;
+            return false;
+        }
+    }
+
     static class s2032{
         public List<Integer> twoOutOfThree(int[] a1, int[] a2, int[] a3){
             int[][] a = {a1, a2, a3}, c = new int[3][101];
