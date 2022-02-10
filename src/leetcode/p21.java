@@ -813,4 +813,23 @@ public class p21{
             }
         }
     }
+
+    static class s2168{
+        /* Given a digit string s, return the number of unique substrings of s where every digit appears the same number of times */
+        public int equalDigitFrequency(String s){
+            Set<Integer> ss = new HashSet<>();
+            for(int i = 0; i < s.length(); i++){
+                int count[] = new int[10], uniq = 0, maxCount = 0, rollingHash = 0;
+                for(int j = i; j < s.length(); j++){
+                    int digit = s.charAt(j) - '0';
+                    rollingHash = (rollingHash * 11 + digit + 1) % 1_000_000_007;
+                    uniq += count[digit]++ == 0 ? 1 : 0;
+                    maxCount = Math.max(count[digit], maxCount);
+                    if(maxCount * uniq == j - i + 1)
+                        ss.add(rollingHash);
+                }
+            }
+            return ss.size();
+        }
+    }
 }
