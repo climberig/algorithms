@@ -831,5 +831,32 @@ public class p21{
             }
             return ss.size();
         }
+
+        public int equalDigitFrequency1(String s){
+            Node trie = new Node();
+            int r = 0;
+            for(int i = 0; i < s.length(); i++){
+                Node node = trie;
+                int count[] = new int[10], uniq = 0, maxCount = 0;
+                for(int j = i; j < s.length(); j++){
+                    int digit = s.charAt(j) - '0';
+                    uniq += count[digit]++ == 0 ? 1 : 0;
+                    maxCount = Math.max(maxCount, count[digit]);
+                    if(node.nodes[digit] == null)
+                        node.nodes[digit] = new Node();
+                    node = node.nodes[digit];
+                    if(uniq * maxCount == j - i + 1 && !node.seen){
+                        r++;
+                        node.seen = true;
+                    }
+                }
+            }
+            return r;
+        }
+
+        class Node{
+            Node[] nodes = new Node[10];
+            boolean seen;
+        }
     }
 }
