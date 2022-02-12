@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.*;
 
 public class p12{
@@ -173,6 +174,32 @@ public class p12{
                         q.offer(subUrl);
             }
             return r.stream().toList();
+        }
+        interface HtmlParser{
+            List<String> getUrls(String url);
+        }
+    }
+
+    static class s1242{//Web Crawler Multithreaded
+        public List<String> crawl(String startUrl, HtmlParser htmlParser){
+            ExecutorService es = Executors.newFixedThreadPool(10, r -> {
+                Thread t = new Thread(r);
+                t.setDaemon(true);
+                return t;
+            });
+            Set<String> seen = new HashSet<>();
+            BlockingDeque<Future<List<String>>> q = new LinkedBlockingDeque<>();
+            int idx = startUrl.indexOf('/', startUrl.indexOf('.'));
+            String host = idx > 0 ? startUrl.substring(0, idx) : startUrl;
+            q.add(es.submit(() -> htmlParser.getUrls(startUrl)));
+            seen.add(startUrl);
+            try{
+                while(!q.isEmpty())
+                    for(String url : q.poll().get())
+                        if(url.startsWith(host) && seen.add(url))
+                            q.add(es.submit(() -> htmlParser.getUrls(url)));
+            }catch(InterruptedException | ExecutionException ignored){}
+            return new ArrayList<>(seen);
         }
         interface HtmlParser{
             List<String> getUrls(String url);
