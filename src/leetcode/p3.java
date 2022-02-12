@@ -94,6 +94,21 @@ public class p3{
         int find(int i, int[] uf){return i == uf[i] ? i : (uf[i] = find(uf[i], uf));}
     }
 
+    static class s325{//Maximum Size Subarray Sum Equals k
+        public int maxSubArrayLen(int[] a, int k){
+            Map<Integer, Integer> m = new HashMap<>();
+            m.put(0, -1);
+            int r = 0, sum = 0;
+            for(int i = 0; i < a.length; i++){
+                sum += a[i];
+                if(m.containsKey(sum - k))
+                    r = Math.max(r, i - m.get(sum - k));
+                m.putIfAbsent(sum, i);
+            }
+            return r;
+        }
+    }
+
     static class s332{//Reconstruct Itinerary
         public List<String> findItinerary(List<List<String>> tickets){
             Map<String, PriorityQueue<String>> g = new HashMap<>();
