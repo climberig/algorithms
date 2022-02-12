@@ -62,6 +62,15 @@ public class p10{
         }
     }
 
+    static class s1017{//Convert to Base -2
+        public String baseNeg2(int n){
+            StringBuilder r = new StringBuilder();
+            for(; n != 0; n = -(n >> 1))
+                r.append(n & 1);
+            return r.length() > 0 ? r.reverse().toString() : "0";
+        }
+    }
+
     static class s1022{//Sum of Root To Leaf Binary Numbers
         public int sumRootToLeaf(TreeNode root){
             return sum(root, 0);
@@ -292,6 +301,21 @@ public class p10{
                 counts.put(s2, counts.getOrDefault(s2, 0) + 1);
             }
             return counts.values().stream().mapToInt(n -> n).max().getAsInt();
+        }
+    }
+
+    static class s1073{//Adding Two Negabinary Numbers
+        public int[] addNegabinary(int[] a1, int[] a2){
+            Stack<Integer> s = new Stack<>();
+            for(int i = a1.length - 1, j = a2.length - 1, carry = 0; i >= 0 || j >= 0 || carry != 0; carry = -(carry >> 1)){
+                if(i >= 0)
+                    carry += a1[i--];
+                if(j >= 0)
+                    carry += a2[j--];
+                s.push(carry & 1);
+            }
+            for(; s.size() > 1 && s.peek() == 0; s.pop()) ;
+            return IntStream.range(0, s.size()).map(i -> s.pop()).toArray();
         }
     }
 
