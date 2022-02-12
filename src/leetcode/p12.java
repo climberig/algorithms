@@ -63,6 +63,23 @@ public class p12{
         }
     }
 
+    static class s1213{//Intersection of Three Sorted Arrays
+        public List<Integer> arraysIntersection(int[] a1, int[] a2, int[] a3){
+            List<Integer> r = new ArrayList<>();
+            for(int i = 0, j = 0, k = 0; i < a1.length && j < a2.length && k < a3.length; )
+                if(a1[i] == a2[j] && a2[j] == a3[k]){
+                    r.add(a1[i++]);
+                    j++;
+                    k++;
+                }else if(a1[i] < a2[j])
+                    i++;
+                else if(a2[j] < a3[k])
+                    j++;
+                else k++;
+            return r;
+        }
+    }
+
     static class s1216{//Valid Palindrome III
         public boolean isValidPalindrome(String s, int k){
             int len = lcs(s, new StringBuilder(s).reverse().toString(), s.length());
