@@ -318,4 +318,20 @@ public class p16{
             return (int) dp[k][n];
         }
     }
+
+    static class s1696{//Jump Game VI
+        public int maxResult(int[] a, int k){
+            Deque<Integer> q = new ArrayDeque<>();
+            q.offer(0);
+            for(int i = 1; i < a.length; i++){
+                a[i] += a[q.peekFirst()];
+                while(!q.isEmpty() && a[q.peekLast()] <= a[i])
+                    q.pollLast();
+                q.offerLast(i);
+                if(i - q.peekFirst() >= k)
+                    q.pollFirst();
+            }
+            return a[a.length - 1];
+        }
+    }
 }

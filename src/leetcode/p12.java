@@ -160,6 +160,25 @@ public class p12{
         }
     }
 
+    static class s1236{//Web Crawler
+        public List<String> crawl(String startUrl, HtmlParser parser){
+            Set<String> r = new HashSet<>();
+            int idx = startUrl.indexOf('/', startUrl.indexOf('.'));
+            String host = idx > 0 ? startUrl.substring(0, idx) : startUrl;
+            Queue<String> q = new LinkedList<>();
+            for(q.add(startUrl), r.add(startUrl); !q.isEmpty(); ){
+                String url = q.poll();
+                for(String subUrl : parser.getUrls(url))
+                    if(subUrl.startsWith(host) && r.add(subUrl))
+                        q.offer(subUrl);
+            }
+            return r.stream().toList();
+        }
+        interface HtmlParser{
+            List<String> getUrls(String url);
+        }
+    }
+
     static class s1248{//Count Number of Nice Subarrays
         public int numberOfSubarrays(int[] a, int k){
             int r = 0;
