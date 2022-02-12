@@ -369,6 +369,22 @@ public class p15{
         }
     }
 
+    static class s1562{//Find Latest Group of Size M
+        public int findLatestStep(int[] a, int m){
+            int r = -1, n = a.length;
+            if(n == m)
+                return n;
+            int[] len = new int[n + 2];
+            for(int i = 0; i < n; ++i){
+                int l1 = len[a[i] - 1], l2 = len[a[i] + 1];
+                len[a[i] - l1] = len[a[i] + l2] = l1 + l2 + 1;
+                if(l1 == m || l2 == m)
+                    r = i;
+            }
+            return r;
+        }
+    }
+
     static class s1570{//Dot Product of Two Sparse Vectors
         class SparseVector{
             final Map<Integer, Integer> m = new HashMap<>();
