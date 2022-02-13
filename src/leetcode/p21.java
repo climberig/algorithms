@@ -859,4 +859,28 @@ public class p21{
             boolean seen;
         }
     }
+
+    static class s2169{//Count Operations to Obtain Zero
+        public int countOperations(int n1, int n2){
+            int r = 0;
+            for(; n1 > 0 && n2 > 0; r++)
+                if(n1 >= n2)
+                    n1 -= n2;
+                else n2 -= n1;
+            return r;
+        }
+    }
+
+    static class s2171{//Removing Minimum Number of Magic Beans
+        public long minimumRemoval(int[] beans){
+            Arrays.sort(beans);
+            long r = Arrays.stream(beans).mapToLong(i -> i).sum(), sum = r, left = 0;
+            for(int i = 0; i < beans.length; i++){
+                r = Math.min(r, sum - (long) (beans.length - i) * beans[i] + left);
+                left += beans[i];
+                sum -= beans[i];
+            }
+            return r;
+        }
+    }
 }
