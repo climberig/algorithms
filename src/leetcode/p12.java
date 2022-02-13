@@ -276,6 +276,21 @@ public class p12{
         }
     }
 
+    static class s1259{//Handshakes That Don't Cross
+        /**
+         * You are given an even number of people numPeople that stand around a circle and each person shakes hands with someone else so that there
+         * are numPeople / 2 handshakes total. Return the number of ways these handshakes could occur such that none of the handshakes cross.
+         */
+        public int numberOfWays(int n){
+            long dp[] = new long[n + 1];
+            dp[0] = 1;
+            for(int i = 2; i <= n; i += 2)
+                for(int j = 2; j <= i; j += 2)
+                    dp[i] = (dp[i] + (dp[j - 2] * dp[i - j])) % 1_000_000_007;
+            return (int) dp[n];
+        }
+    }
+
     static class s1271{//Hexspeak
         public String toHexspeak(String s){
             char[] hex = Long.toHexString(Long.parseLong(s)).toCharArray();
