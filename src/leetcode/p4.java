@@ -194,6 +194,18 @@ public class p4{
         }
     }
 
+    static class s455{//Assign Cookies
+        public int findContentChildren(int[] g, int[] s){
+            Arrays.sort(g);
+            Arrays.sort(s);
+            int i = 0;
+            for(int j = 0; i < g.length && j < s.length; j++)
+                if(s[j] >= g[i])
+                    i++;
+            return i;
+        }
+    }
+
     static class s459{//Repeated Substring Pattern
         public boolean repeatedSubstringPattern(String s){
             String ss = s + s;
