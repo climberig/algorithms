@@ -112,6 +112,12 @@ public class p12{
         }
     }
 
+    static class s1228{//Missing Number In Arithmetic Progression
+        public int missingNumber(int[] a){
+            return (a[0] + a[a.length - 1]) * (a.length + 1) / 2 - Arrays.stream(a).sum();
+        }
+    }
+
     static class s1230{//Toss Strange Coins
         public double probabilityOfHeads(double[] prob, int target){
             return heads(0, target, new Double[prob.length + 1][target + 1], prob);
