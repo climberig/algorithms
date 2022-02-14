@@ -173,6 +173,19 @@ public class p18{
         }
     }
 
+    static class s1866{//Number of Ways to Rearrange Sticks With K Sticks Visible
+        int dp[][] = new int[1_001][1_001];
+        public int rearrangeSticks(int n, int k){
+            if(n == k)
+                return 1;
+            if(k == 0)
+                return 0;
+            if(dp[n][k] == 0)
+                dp[n][k] = (int) (((long) rearrangeSticks(n - 1, k - 1) + (long) rearrangeSticks(n - 1, k) * (n - 1)) % 1_000_000_007);
+            return dp[n][k];
+        }
+    }
+
     static class s1872{//Stone Game VIII
         public int stoneGameVIII(int[] stones){
             for(int i = 1; i < stones.length; i++)
