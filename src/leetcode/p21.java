@@ -871,16 +871,26 @@ public class p21{
         }
     }
 
+    static class s2170{//Minimum Operations to Make the Array Alternating
+        public int minimumOperations(int[] a){
+            int f[][] = new int[100_001][2], r = 0, odd = 0, even = 0;
+            IntStream.range(0, a.length).forEach(i -> f[a[i]][i & 1]++);
+            for(int i = 1; i < f.length; i++){
+                r = Math.max(r, Math.max(f[i][0] + odd, f[i][1] + even));
+                even = Math.max(even, f[i][0]);
+                odd = Math.max(odd, f[i][1]);
+            }
+            return a.length - r;
+        }
+    }
+
     static class s2171{//Removing Minimum Number of Magic Beans
         public long minimumRemoval(int[] beans){
             Arrays.sort(beans);
-            long r = Arrays.stream(beans).mapToLong(i -> i).sum(), sum = r, left = 0;
-            for(int i = 0; i < beans.length; i++){
-                r = Math.min(r, sum - (long) (beans.length - i) * beans[i] + left);
-                left += beans[i];
-                sum -= beans[i];
-            }
-            return r;
+            long max = 0;
+            for(int i = 0, n = beans.length; i < beans.length; i++)
+                max = Math.max(max, (long) beans[i] * (n - i));
+            return Arrays.stream(beans).mapToLong(i -> i).sum() - max;
         }
     }
 }

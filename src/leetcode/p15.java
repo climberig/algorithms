@@ -434,6 +434,27 @@ public class p15{
         }
     }
 
+    static class s1583{//Count Unhappy Friends
+        public int unhappyFriends(int n, int[][] preferences, int[][] pairs){
+            int pairMap[] = new int[n], r = 0;
+            for(int[] pair : pairs){
+                pairMap[pair[0]] = pair[1];
+                pairMap[pair[1]] = pair[0];
+            }
+            List<Map<Integer, Integer>> prefer = IntStream.range(0, n).mapToObj(i -> new HashMap<Integer, Integer>()).collect(Collectors.toList()); // O(1) to fetch the index from the preference array.
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j < n - 1; j++)
+                    prefer.get(i).put(preferences[i][j], j);
+            for(int i = 0; i < n; i++)
+                for(int j : preferences[i])
+                    if(prefer.get(j).get(i) < prefer.get(j).get(pairMap[j]) && prefer.get(i).get(pairMap[i]) > prefer.get(i).get(j)){
+                        r++;
+                        break;
+                    }
+            return r;
+        }
+    }
+
     static class s1589{//Maximum Sum Obtained of Any Permutation
         public int maxSumRangeQuery(int[] a, int[][] requests){
             int[] count = new int[a.length];
