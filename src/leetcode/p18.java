@@ -1,6 +1,6 @@
 package leetcode;
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.IntStream;
 
 public class p18{
     static class s1802{//Maximum Value at a Given Index in a Bounded Array
@@ -174,15 +174,18 @@ public class p18{
     }
 
     static class s1866{//Number of Ways to Rearrange Sticks With K Sticks Visible
-        int dp[][] = new int[1_001][1_001];
         public int rearrangeSticks(int n, int k){
-            if(n == k)
-                return 1;
+            return (int) arrange(n, k, new long[k + 1][n + 1]);
+        }
+
+        long arrange(int n, int k, long[][] dp){
             if(k == 0)
                 return 0;
-            if(dp[n][k] == 0)
-                dp[n][k] = (int) (((long) rearrangeSticks(n - 1, k - 1) + (long) rearrangeSticks(n - 1, k) * (n - 1)) % 1_000_000_007);
-            return dp[n][k];
+            if(k == n)
+                return 1;
+            if(dp[k][n] > 0)
+                return dp[k][n];
+            return dp[k][n] = (arrange(n - 1, k - 1, dp) + (n - 1) * arrange(n - 1, k, dp)) % 1_000_000_007;
         }
     }
 
