@@ -227,6 +227,26 @@ public class p17{
         }
     }
 
+    static class s1751{//Maximum Number of Events That Can Be Attended II
+        public int maxValue(int[][] events, int k){
+            Arrays.sort(events, Comparator.comparingInt(a -> a[0]));
+            return maxVal(0, k, 0, events, new HashMap<>());
+        }
+
+        int maxVal(int i, int k, int endTime, int[][] events, Map<String, Integer> dp){
+            if(k == 0 || i == events.length)
+                return 0;
+            String key = k + "_" + endTime;
+            if(dp.containsKey(key))
+                return dp.get(key);
+            int max = maxVal(i + 1, k, endTime, events, dp);
+            if(endTime < events[i][0])
+                max = Math.max(max, maxVal(i + 1, k - 1, events[i][1], events, dp) + events[i][2]);
+            dp.put(key, max);
+            return max;
+        }
+    }
+
     static class s1756{//Design Most Recently Used Queue
         class MRUQueue{
             int[] q;
