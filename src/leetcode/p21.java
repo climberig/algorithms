@@ -893,4 +893,28 @@ public class p21{
             return Arrays.stream(beans).mapToLong(i -> i).sum() - max;
         }
     }
+
+    static class s2174{//Remove All Ones With Row and Column Flips II
+        public int removeOnes(int[][] g){
+            int min = Integer.MAX_VALUE;
+            for(int i = 0; i < g.length; i++)
+                for(int j = 0; j < g[0].length; j++)
+                    if(g[i][j] == 1){
+                        List<int[]> flip = new ArrayList<>();
+                        for(int r = 0; r < g.length; r++)
+                            if(g[r][j] == 1){
+                                flip.add(new int[]{r, j});
+                                g[r][j] = 0;
+                            }
+                        for(int c = 0; c < g[0].length; c++)
+                            if(g[i][c] == 1){
+                                flip.add(new int[]{i, c});
+                                g[i][c] = 0;
+                            }
+                        min = Math.min(min, 1 + removeOnes(g));
+                        flip.forEach(f -> g[f[0]][f[1]] = 1);//backtrack
+                    }
+            return min < Integer.MAX_VALUE ? min : 0;
+        }
+    }
 }
