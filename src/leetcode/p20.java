@@ -143,6 +143,34 @@ public class p20{
         }
     }
 
+    static class s2014{//Longest Subsequence Repeated k Times
+        public String longestSubsequenceRepeatedK(String s, int k){
+            String r = "";
+            int[] freq = new int[26];
+            s.chars().forEach(c -> freq[c - 'a']++);
+            Queue<String> q = new LinkedList<>();
+            for(q.offer(""); !q.isEmpty(); ){
+                String curr = q.poll();
+                for(int i = 0; i < 26; i++)
+                    if(freq[i] >= k && isSub(s, curr + (char) (i + 'a'), k)){
+                        r = curr + (char) (i + 'a');
+                        q.offer(r);
+                    }
+            }
+            return r;
+        }
+
+        boolean isSub(String s, String sub, int k){
+            for(int i = 0, j = 0; i < s.length() && k > 0; i++)
+                if(s.charAt(i) == sub.charAt(j))
+                    if(++j == sub.length()){
+                        k--;
+                        j = 0;
+                    }
+            return k == 0;
+        }
+    }
+
     static class s2015{//Average Height of Buildings in Each Segment
         public int[][] averageHeightOfBuildings(int[][] buildings){
             Map<Integer, Integer> height = new TreeMap<>(), count = new TreeMap<>();

@@ -1,7 +1,8 @@
 package leetcode;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class p12{
     static class s1200{//Minimum Absolute Difference
@@ -298,54 +299,48 @@ public class p12{
     }
 
     static class s1263{//Minimum Moves to Move a Box to Their Target Location
-        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
         public int minPushBox(char[][] g){
-            int[] player = null, box = null, target = null;
-            int r = 0;
+            int user[] = null, box[] = null, target[] = null, dirs[] = {-1, 0, 1, 0, -1}, r = 0;
             for(int i = 0; i < g.length; i++)
                 for(int j = 0; j < g[0].length; j++)
                     if(g[i][j] == 'S')
-                        player = new int[]{i, j};
+                        user = new int[]{i, j};
                     else if(g[i][j] == 'B')
                         box = new int[]{i, j};
                     else if(g[i][j] == 'T')
                         target = new int[]{i, j};
             Queue<int[]> q = new LinkedList<>();
-            Set<List<Integer>> seen = new HashSet<>();
-            seen.add(new ArrayList<>(Arrays.asList(box[0], box[1], player[0], player[1])));
-            for(q.offer(new int[]{box[0], box[1], player[0], player[1]}); !q.isEmpty(); r++)
+            boolean[][][][] seen = new boolean[g.length][g[0].length][g.length][g[0].length];
+            seen[box[0]][box[1]][user[0]][user[1]] = true;
+            for(q.offer(new int[]{box[0], box[1], user[0], user[1]}); !q.isEmpty(); r++)
                 for(int i = q.size(); i > 0; i--){
-                    int[] e = q.poll();
-                    box = new int[]{e[0], e[1]};
-                    player = new int[]{e[2], e[3]};
-                    if(Arrays.equals(box, target))
+                    int[] e = q.poll(), b = new int[]{e[0], e[1]}, u = new int[]{e[2], e[3]};
+                    if(Arrays.equals(b, target))
                         return r;
-                    for(int[] dir : dirs){
-                        int x = box[0] + dir[0], y = box[1] + dir[1];
-                        if(0 <= x && x < g.length && 0 <= y && y < g[0].length && g[x][y] != '#' &&
-                                !seen.contains(new ArrayList<>(Arrays.asList(x, y, box[0], box[1]))) &&
-                                canReach(g, player, box, new int[]{box[0] - dir[0], box[1] - dir[1]})){
-                            seen.add(new ArrayList<>(Arrays.asList(x, y, box[0], box[1])));
-                            q.offer(new int[]{x, y, box[0], box[1]});
+                    for(int d = 1; d < dirs.length; d++){
+                        int x = b[0] + dirs[d - 1], y = b[1] + dirs[d];
+                        if(0 <= x && x < g.length && 0 <= y && y < g[0].length && g[x][y] != '#' && !seen[x][y][b[0]][b[1]] &&
+                                canReach(g, u, b, new int[]{b[0] - dirs[d - 1], b[1] - dirs[d]}, dirs)){
+                            seen[x][y][b[0]][b[1]] = true;
+                            q.offer(new int[]{x, y, b[0], b[1]});
                         }
                     }
                 }
             return -1;
         }
 
-        boolean canReach(char[][] g, int[] player, int[] box, int[] target){
+        boolean canReach(char[][] g, int[] user, int[] box, int[] target, int[] dirs){
             Queue<int[]> q = new ArrayDeque<>();
-            Set<List<Integer>> seen = new HashSet<>();
-            for(q.offer(player); !q.isEmpty(); ){
+            boolean[][] seen = new boolean[g.length][g[0].length];
+            for(q.offer(user), seen[user[0]][user[1]] = true; !q.isEmpty(); ){
                 int[] p = q.poll();
                 if(Arrays.equals(p, target))
                     return true;
-                for(int[] dir : dirs){
-                    int x = p[0] + dir[0], y = p[1] + dir[1];
-                    if(x >= 0 && y >= 0 && x < g.length && y < g[0].length && g[x][y] != '#' &&
-                            !Arrays.equals(new int[]{x, y}, box) && !seen.contains(new ArrayList<>(Arrays.asList(x, y)))){
-                        seen.add(new ArrayList<>(Arrays.asList(x, y)));
+                for(int d = 1; d < dirs.length; d++){
+                    int x = p[0] + dirs[d - 1], y = p[1] + dirs[d];
+                    if(0 <= x && x < g.length && 0 <= y && y < g[0].length && g[x][y] != '#' &&
+                            !Arrays.equals(new int[]{x, y}, box) && !seen[x][y]){
+                        seen[x][y] = true;
                         q.offer(new int[]{x, y});
                     }
                 }
