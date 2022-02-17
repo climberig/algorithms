@@ -215,6 +215,23 @@ public class p5{
                 for(Integer child : g.get(pid))
                     dfs(child, g, r);
         }
+
+        public List<Integer> killProcess1(List<Integer> pid, List<Integer> ppid, int kill){
+            Map<Integer, List<Integer>> g = new HashMap<>();
+            for(int i = 0; i < pid.size(); i++){
+                g.putIfAbsent(ppid.get(i), new ArrayList<>());
+                g.get(ppid.get(i)).add(pid.get(i));
+            }
+            Queue<Integer> q = new LinkedList<>();
+            List<Integer> r = new ArrayList<>();
+            for(q.add(kill); !q.isEmpty(); ){
+                Integer u = q.poll();
+                r.add(u);
+                if(g.containsKey(u))
+                    g.get(u).forEach(q::offer);
+            }
+            return r;
+        }
     }
 
     static class s594{//Longest Harmonious Subsequence

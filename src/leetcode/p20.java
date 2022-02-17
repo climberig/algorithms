@@ -100,6 +100,25 @@ public class p20{
         }
     }
 
+    static class s2009{//Minimum Number of Operations to Make Array Continuous
+        public int minOperations(int[] a){
+            Arrays.sort(a);
+            int r = a.length;
+            Set<Integer> s = new HashSet<>();
+            for(int i = 0, j = 0, right = a.length; j < a.length; i++){
+                int last = a[i] + a.length - 1;
+                while(j < a.length && a[j] <= last){
+                    s.add(a[j++]);
+                    right--;
+                }
+                int spots = a.length - s.size();
+                r = Math.min(r, Math.max(i + right, spots));
+                s.remove(a[i]);
+            }
+            return r;
+        }
+    }
+
     static class s2011{//Final Value of Variable After Performing Operations
         public int finalValueAfterOperations(String[] ops){
             return Arrays.stream(ops).mapToInt(op -> op.contains("+") ? 1 : -1).sum();
