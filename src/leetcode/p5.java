@@ -189,6 +189,34 @@ public class p5{
         }
     }
 
+    static class s582{//Kill Process
+        /**
+         * You have n processes forming a rooted tree structure. You are given two integer arrays pid and ppid, where pid[i] is
+         * the ID of the ith process and ppid[i] is the ID of the ith process's parent process. Each process has only one parent
+         * process but may have multiple children processes. Only one process has ppid[i] = 0, which means this process has no
+         * parent process (the root of the tree). When a process is killed, all of its children processes will also be killed.
+         * Given an integer kill representing the ID of a process you want to kill, return a list of the IDs of the processes
+         * that will be killed. You may return the answer in any order.
+         */
+        public List<Integer> killProcess(List<Integer> pid, List<Integer> ppid, int kill){
+            Map<Integer, List<Integer>> g = new HashMap<>();
+            for(int i = 0; i < pid.size(); i++){
+                g.putIfAbsent(ppid.get(i), new ArrayList<>());
+                g.get(ppid.get(i)).add(pid.get(i));
+            }
+            List<Integer> r = new ArrayList<>();
+            dfs(kill, g, r);
+            return r;
+        }
+
+        void dfs(int pid, Map<Integer, List<Integer>> g, List<Integer> r){
+            r.add(pid);
+            if(g.containsKey(pid))
+                for(Integer child : g.get(pid))
+                    dfs(child, g, r);
+        }
+    }
+
     static class s594{//Longest Harmonious Subsequence
         public int findLHS(int[] a){
             Map<Integer, Integer> m = new HashMap<>();
