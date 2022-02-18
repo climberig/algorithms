@@ -62,6 +62,10 @@ public class p14{
     }
 
     static class s1426{//Counting Elements
+        /**
+         * Given an integer array arr, count how many elements x there are, such that x + 1 is also in arr. If there are duplicates in arr,
+         * count them separately.
+         */
         public int countElements(int[] a){
             int f[] = new int[1_001];
             Arrays.stream(a).forEach(n -> f[n]++);
