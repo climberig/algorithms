@@ -205,6 +205,27 @@ public class p11{
         }
     }
 
+    static class s1166{//Design File System
+        class FileSystem{
+            Map<String, Integer> m = new HashMap<>();
+
+            public FileSystem(){m.put("", 0);}
+
+            public boolean createPath(String path, int value){
+                if(m.containsKey(path))
+                    return false;
+                String parent = path.substring(0, path.lastIndexOf("/"));
+                if(m.containsKey(parent)){
+                    m.put(path, value);
+                    return true;
+                }
+                return false;
+            }
+
+            public int get(String path){return m.getOrDefault(path, -1);}
+        }
+    }
+
     static class s1177{//Can Make Palindrome from Substring
         public List<Boolean> canMakePaliQueries(String s, int[][] queries){
             int[] f = new int[s.length() + 1];
