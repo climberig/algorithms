@@ -936,4 +936,19 @@ public class p21{
             return new long[]{n / 3 - 1, n / 3, n / 3 + 1};
         }
     }
+
+    static class s2178{//Maximum Split of Positive Even Integers
+        public List<Long> maximumEvenSplit(long sum){
+            List<Long> r = new ArrayList<>();
+            if(sum % 2 == 0){
+                for(long i = 2; sum > 2 * i; i += 2){
+                    r.add(i);
+                    sum -= i;
+                }
+                if(sum > 0)
+                    r.add(sum);
+            }
+            return r;
+        }
+    }
 }
