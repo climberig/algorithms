@@ -917,4 +917,23 @@ public class p21{
             return min < Integer.MAX_VALUE ? min : 0;
         }
     }
+
+    static class s2176{//Count Equal and Divisible Pairs in an Array
+        public int countPairs(int[] a, int k){
+            int r = 0;
+            for(int i = 0; i < a.length; i++)
+                for(int j = i + 1; j < a.length; j++)
+                    if(a[i] == a[j] && i * j % k == 0)
+                        r++;
+            return r;
+        }
+    }
+
+    static class s2177{//Find Three Consecutive Integers That Sum to a Given Number
+        public long[] sumOfThree(long n){
+            if(n % 3 != 0)
+                return new long[0];
+            return new long[]{n / 3 - 1, n / 3, n / 3 + 1};
+        }
+    }
 }
