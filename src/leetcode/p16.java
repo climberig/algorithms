@@ -3,6 +3,28 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p16{
+    static class s1604{//Alert Using Same Key-Card Three or More Times in a One Hour Period
+        public List<String> alertNames(String[] keyName, String[] keyTime){
+            Map<String, List<Integer>> m = new TreeMap<>();
+            for(int i = 0; i < keyName.length; i++){
+                m.putIfAbsent(keyName[i], new ArrayList<>());
+                String[] p = keyTime[i].split(":");
+                m.get(keyName[i]).add(Integer.parseInt(p[0]) * 60 + Integer.parseInt(p[1]));
+            }
+            List<String> r = new ArrayList<>();
+            for(String name : m.keySet()){
+                List<Integer> times = m.get(name);
+                Collections.sort(times);
+                for(int i = 2; i < times.size(); i++)
+                    if(times.get(i - 2) >= times.get(i) - 60){
+                        r.add(name);
+                        break;
+                    }
+            }
+            return r;
+        }
+    }
+
     static class s1620{//Coordinate With Maximum Network Quality
         public int[] bestCoordinate(int[][] towers, int radius){
             double bestQ = -1;
