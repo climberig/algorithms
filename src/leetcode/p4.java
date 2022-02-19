@@ -194,6 +194,13 @@ public class p4{
         }
     }
 
+    static class s453{//Minimum Moves to Equal Array Elements
+        public int minMoves(int[] a){
+            int min = Arrays.stream(a).min().getAsInt();
+            return Arrays.stream(a).map(n -> n - min).sum();
+        }
+    }
+
     static class s455{//Assign Cookies
         public int findContentChildren(int[] g, int[] s){
             Arrays.sort(g);
