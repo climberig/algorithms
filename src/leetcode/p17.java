@@ -280,6 +280,18 @@ public class p17{
         }
     }
 
+    static class s1762{//Buildings With an Ocean View
+        public int[] findBuildings(int[] heights){
+            LinkedList<Integer> r = new LinkedList<>();
+            for(int i = heights.length - 1, max = 0; i >= 0; i--)
+                if(heights[i] > max){
+                    r.addFirst(i);
+                    max = heights[i];
+                }
+            return r.stream().mapToInt(n -> n).toArray();
+        }
+    }
+
     static class s1764{//Form Array by Concatenating Subarrays of Another Array
         public boolean canChoose(int[][] groups, int[] a){
             return can(0, groups, a, 0);
