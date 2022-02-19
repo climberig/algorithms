@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p18{
@@ -102,6 +103,12 @@ public class p18{
                     max = Math.max(max, diff - Math.abs(sorted[idx - 1] - a2[i]));
             }
             return (int) ((sumDiff - max) % 1_000_000_007);
+        }
+    }
+
+    static class s1832{//Check if the Sentence Is Pangram
+        public boolean checkIfPangram(String s){
+            return s.chars().boxed().collect(Collectors.toSet()).size() == 26;
         }
     }
 
