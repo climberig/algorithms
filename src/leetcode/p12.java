@@ -467,6 +467,15 @@ public class p12{
         String str(int[][] m){return Arrays.stream(m).map(Arrays::toString).collect(Collectors.joining(""));}
     }
 
+    static class s1287{//Element Appearing More Than 25% In Sorted Array
+        public int findSpecialInteger(int[] a){
+            for(int i = 0, t = a.length / 4; i < a.length; i++)
+                if(a[i] == a[i + t])
+                    return a[i];
+            return -1;
+        }
+    }
+
     static class s1289{//Minimum Falling Path Sum II
         public int minFallingPathSum(int[][] a){
             for(int r = a.length - 2; r >= 0; r--)
