@@ -976,4 +976,45 @@ public class p21{
             return dummy.next;
         }
     }
+
+    static class s2182{//Construct String With Repeat Limit
+        public String repeatLimitedString(String s, int repeatLimit){
+            int[] f = new int[26];
+            s.chars().forEach(c -> f[c - 'a']++);
+            PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+            IntStream.range(0, f.length).filter(i -> f[i] > 0).forEach(i -> q.offer(new int[]{i, f[i]}));
+            StringBuilder r = new StringBuilder();
+            while(!q.isEmpty()){
+                int[] a = q.poll();
+                r.append(String.valueOf((char) (a[0] + 'a')).repeat(Math.min(repeatLimit, a[1])));
+                if(!q.isEmpty() && a[1] > repeatLimit){
+                    a[1] -= repeatLimit;
+                    int[] b = q.poll();
+                    r.append((char) (b[0] + 'a'));
+                    if(a[1] > 0)
+                        q.offer(a);
+                    if(--b[1] > 0)
+                        q.offer(b);
+                }
+            }
+            return r.toString();
+        }
+    }
+
+    static class s2183{//Count Array Pairs Divisible by K
+        public long countPairs(int[] a, int k){
+            Map<Integer, Integer> gcd = new HashMap<>();
+            long r = 0;
+            for(int n : a){
+                int d1 = gcd(n, k);
+                for(Integer d2 : gcd.keySet())
+                    if((long) d1 * d2 % k == 0)
+                        r += gcd.get(d2);
+                gcd.put(d1, gcd.getOrDefault(d1, 0) + 1);
+            }
+            return r;
+        }
+
+        int gcd(int a, int b){return b == 0 ? a : gcd(b, a % b);}
+    }
 }
