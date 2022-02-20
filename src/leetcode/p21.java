@@ -951,4 +951,29 @@ public class p21{
             return r;
         }
     }
+
+    static class s2180{//Count Integers With Even Digit Sum
+        public int countEven(int n){
+            int r = 0;
+            for(int sum = 0; n > 0; n--, sum = 0){
+                for(int m = n; m > 0; m /= 10)
+                    sum += m % 10;
+                r += sum % 2 == 0 ? 1 : 0;
+            }
+            return r;
+        }
+    }
+
+    static class s2181{//Merge Nodes in Between Zeros
+        public ListNode mergeNodes(ListNode head){
+            ListNode dummy = new ListNode(), sumNode = dummy, node = head.next;
+            for(int sum = 0; node != null; node = node.next)
+                if(node.val == 0){
+                    sumNode.next = new ListNode(sum);
+                    sumNode = sumNode.next;
+                    sum = 0;
+                }else sum += node.val;
+            return dummy.next;
+        }
+    }
 }
