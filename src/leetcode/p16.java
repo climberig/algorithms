@@ -3,6 +3,28 @@ import java.util.*;
 import java.util.stream.*;
 
 public class p16{
+    static class s1601{//Maximum Number of Achievable Transfer Requests
+        int r = 0;
+        public int maximumRequests(int n, int[][] requests){
+            bt(requests, 0, new int[n], 0);
+            return r;
+        }
+
+        void bt(int[][] requests, int idx, int[] count, int n){
+            if(idx == requests.length){
+                if(Arrays.stream(count).allMatch(c -> c == 0))
+                    r = Math.max(r, n);
+            }else{
+                count[requests[idx][0]]++;
+                count[requests[idx][1]]--;
+                bt(requests, idx + 1, count, n + 1);
+                count[requests[idx][0]]--;
+                count[requests[idx][1]]++;
+                bt(requests, idx + 1, count, n);
+            }
+        }
+    }
+
     static class s1604{//Alert Using Same Key-Card Three or More Times in a One Hour Period
         public List<String> alertNames(String[] keyName, String[] keyTime){
             Map<String, List<Integer>> m = new TreeMap<>();
