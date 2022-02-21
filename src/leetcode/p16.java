@@ -330,6 +330,22 @@ public class p16{
         }
     }
 
+    static class s1691{//Maximum Height by Stacking Cuboids
+        public int maxHeight(int[][] a){
+            Arrays.stream(a).forEach(Arrays::sort);
+            Arrays.sort(a, (x, y) -> x[0] != y[0] ? y[0] - x[0] : x[1] != y[1] ? y[1] - x[1] : y[2] - x[2]);
+            int r = 0, dp[] = new int[a.length];
+            for(int i = 0; i < a.length; i++){
+                dp[i] = a[i][2];
+                for(int j = 0; j < i; j++)
+                    if(a[j][0] >= a[i][0] && a[j][1] >= a[i][1] && a[j][2] >= a[i][2])
+                        dp[i] = Math.max(dp[i], dp[j] + a[i][2]);
+                r = Math.max(r, dp[i]);
+            }
+            return r;
+        }
+    }
+
     static class s1692{//Count Ways to Distribute Candies
         public int waysToDistribute(int n, int k){
             long[][] dp = new long[k + 1][n + 1];
