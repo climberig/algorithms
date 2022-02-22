@@ -73,6 +73,16 @@ public class p14{
         }
     }
 
+    static class s1427{//Perform String Shifts
+        public String stringShift(String s, int[][] shifts){
+            int shift = 0;
+            for(int[] sh : shifts)
+                shift += sh[0] == 0 ? sh[1] : -sh[1];
+            shift = (s.length() + shift % s.length()) % s.length();
+            return s.substring(shift) + s.substring(0, shift);
+        }
+    }
+
     static class s1432{// Max Difference You Can Get From Changing an Integer
         public int maxDiff(int num){
             String s = String.valueOf(num);
