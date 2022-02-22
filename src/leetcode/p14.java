@@ -150,6 +150,27 @@ public class p14{
         }
     }
 
+    static class s1469{//Find All The Lonely Nodes
+        /**
+         * In a binary tree, a lonely node is a node that is the only child of its parent node.
+         * The root of the tree is not lonely because it does not have a parent node.
+         */
+        public List<Integer> getLonelyNodes(TreeNode root){
+            List<Integer> r = new ArrayList<>();
+            dfs(root, false, r);
+            return r;
+        }
+
+        void dfs(TreeNode node, boolean lonely, List<Integer> r){
+            if(node != null){
+                if(lonely)
+                    r.add(node.val);
+                dfs(node.left, node.right == null, r);
+                dfs(node.right, node.left == null, r);
+            }
+        }
+    }
+
     static class s1477{//Find Two Non-overlapping Sub-arrays Each With Target Sum
         public int minSumOfLengths(int[] a, int target){
             Map<Integer, Integer> m1 = new HashMap<>(), m2 = new HashMap<>();
