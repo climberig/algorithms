@@ -1017,4 +1017,34 @@ public class p21{
 
         int gcd(int a, int b){return b == 0 ? a : gcd(b, a % b);}
     }
+
+    static class s2184{//Number of Ways to Build Sturdy Brick Wall
+        public int buildWall(int height, int width, int[] bricks){
+            List<Integer> currRows = new ArrayList<>();
+            buildRow(0, width, bricks, 0, currRows, 0);
+            Map<Integer, Long> m = new HashMap<>();
+            m.put(0, 1L);
+            for(int h = 0; h < height; h++){
+                Map<Integer, Long> next = new HashMap<>();
+                for(Integer currRow : currRows){
+                    for(Integer prevRow : m.keySet())
+                        if((currRow & prevRow) == 0)
+                            next.put(currRow, (next.getOrDefault(currRow, 0L) + m.get(prevRow)) % 1_000_000_007);
+                }
+                m = next;
+            }
+            int r = 0;
+            for(Long val : m.values())
+                r = (int) ((r + val) % 1_000_000_007);
+            return r;
+        }
+
+        void buildRow(int currWidth, int width, int[] bricks, int prevRow, List<Integer> currRows, int currRow){
+            for(int brick : bricks)
+                if(currWidth + brick == width)
+                    currRows.add(currRow);
+                else if(currWidth + brick < width && (prevRow & (1 << (currWidth + brick))) == 0)
+                    buildRow(currWidth + brick, width, bricks, prevRow, currRows, currRow | (1 << (currWidth + brick)));
+        }
+    }
 }
