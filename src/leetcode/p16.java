@@ -106,6 +106,18 @@ public class p16{
         }
     }
 
+    static class s1629{//Slowest Key
+        public char slowestKey(int[] time, String keys){
+            int slowest = time[0], idx = 0;
+            for(int i = 1; i < keys.length(); i++)
+                if(time[i] - time[i - 1] > slowest || (time[i] - time[i - 1] == slowest && keys.charAt(i) > keys.charAt(idx))){
+                    slowest = time[i] - time[i - 1];
+                    idx = i;
+                }
+            return keys.charAt(idx);
+        }
+    }
+
     static class s1644{//Lowest Common Ancestor of a Binary Tree II
         int count = 0;
 
