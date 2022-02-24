@@ -1020,31 +1020,37 @@ public class p21{
 
     static class s2184{//Number of Ways to Build Sturdy Brick Wall
         public int buildWall(int height, int width, int[] bricks){
-            List<Integer> currRows = new ArrayList<>();
-            buildRow(0, width, bricks, 0, currRows, 0);
-            Map<Integer, Long> m = new HashMap<>();
-            m.put(0, 1L);
-            for(int h = 0; h < height; h++){
-                Map<Integer, Long> next = new HashMap<>();
-                for(Integer currRow : currRows){
-                    for(Integer prevRow : m.keySet())
-                        if((currRow & prevRow) == 0)
-                            next.put(currRow, (next.getOrDefault(currRow, 0L) + m.get(prevRow)) % 1_000_000_007);
-                }
-                m = next;
+            List<Integer> validRows = new ArrayList<>();
+            buildRows(0, width, bricks, 0, validRows);
+            Map<Integer, Long> dp = new HashMap<>();
+            Map<Integer, List<Integer>> transitions = new HashMap<>();
+            for(Integer row : validRows){
+                transitions.put(row, new ArrayList<>());
+                dp.put(row, 1L);
             }
-            int r = 0;
-            for(Long val : m.values())
-                r = (int) ((r + val) % 1_000_000_007);
-            return r;
+            for(Integer from : validRows)
+                for(Integer to : validRows)
+                    if((from & to) == 0)
+                        transitions.get(from).add(to);
+            while(--height > 0){
+                Map<Integer, Long> nextDp = new HashMap<>();
+                for(Integer next : validRows){
+                    long count = 0;
+                    for(Integer prev : transitions.get(next))
+                        count = (count + dp.get(prev)) % 1_000_000_007;
+                    nextDp.put(next, count);
+                }
+                dp = nextDp;
+            }
+            return (int) (dp.values().stream().mapToLong(n -> n).sum() % 1_000_000_007);
         }
 
-        void buildRow(int currWidth, int width, int[] bricks, int prevRow, List<Integer> currRows, int currRow){
+        void buildRows(int currWidth, int width, int[] bricks, int rowMask, List<Integer> r){
             for(int brick : bricks)
                 if(currWidth + brick == width)
-                    currRows.add(currRow);
-                else if(currWidth + brick < width && (prevRow & (1 << (currWidth + brick))) == 0)
-                    buildRow(currWidth + brick, width, bricks, prevRow, currRows, currRow | (1 << (currWidth + brick)));
+                    r.add(rowMask);
+                else if(currWidth + brick < width)
+                    buildRows(currWidth + brick, width, bricks, rowMask | (1 << (currWidth + brick)), r);
         }
     }
 }
