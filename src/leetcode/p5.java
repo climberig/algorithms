@@ -25,6 +25,18 @@ public class p5{
         }
     }
 
+    static class s509{//Fibonacci Number
+        public int fib(int n){
+            int a = 0, b = 1;
+            while(n-- > 0){
+                int c = a + b;
+                a = b;
+                b = c;
+            }
+            return a;
+        }
+    }
+
     static class s520{//Detect Capital
         public boolean detectCapitalUse(String word){
             int capitalCount = 0;
