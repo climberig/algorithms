@@ -206,6 +206,16 @@ public class p10{
         }
     }
 
+    static class s1051{//Height Checker
+        public int heightChecker(int[] heights){
+            int origin[] = heights.clone(), r = 0;
+            Arrays.sort(heights);
+            for(int i = 0; i < heights.length; i++)
+                r += heights[i] != origin[i] ? 1 : 0;
+            return r;
+        }
+    }
+
     static class s1053{//Previous Permutation With One Swap
         public int[] prevPermOpt1(int[] a){
             int i = a.length - 2, j;
