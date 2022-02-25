@@ -397,6 +397,22 @@ public class p2{
         }
     }
 
+    static class s274{//H-Index
+        public int hIndex(int[] citations){
+            int n = citations.length, buckets[] = new int[n + 1];
+            for(int c : citations)
+                if(c >= n)
+                    buckets[n]++;
+                else buckets[c]++;
+            for(int i = n, count = 0; i >= 0; i--){
+                count += buckets[i];
+                if(count >= i)
+                    return i;
+            }
+            return 0;
+        }
+    }
+
     static class s278{//First Bad Version
         public int firstBadVersion(int n){
             int lo = 1, hi = n;
