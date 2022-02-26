@@ -18,6 +18,15 @@ public class p7{
         }
     }
 
+    static class s717{//1-bit and 2-bit Characters
+        public boolean isOneBitCharacter(int[] bits){
+            int n = bits.length, i = 0;
+            while(i < n - 1)
+                i += bits[i] == 0 ? 1 : 2;
+            return i == n - 1;
+        }
+    }
+
     static class s723{//Candy Crush
         public int[][] candyCrush(int[][] b){
             Set<Integer> s = new HashSet<>();
