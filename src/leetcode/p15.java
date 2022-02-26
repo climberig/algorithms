@@ -434,6 +434,23 @@ public class p15{
         }
     }
 
+    static class s1582{//Special Positions in a Binary Matrix
+        public int numSpecial(int[][] m){
+            int r = 0, rows[] = new int[m.length], cols[] = new int[m[0].length];
+            for(int i = 0; i < m.length; i++)
+                for(int j = 0; j < m[0].length; j++)
+                    if(m[i][j] == 1){
+                        rows[i]++;
+                        cols[j]++;
+                    }
+            for(int i = 0; i < m.length; i++)
+                for(int j = 0; j < m[0].length; j++)
+                    if(m[i][j] * rows[i] * cols[j] == 1)
+                        r++;
+            return r;
+        }
+    }
+
     static class s1583{//Count Unhappy Friends
         public int unhappyFriends(int n, int[][] preferences, int[][] pairs){
             int pairMap[] = new int[n], r = 0;

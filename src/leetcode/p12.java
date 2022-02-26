@@ -230,6 +230,21 @@ public class p12{
         }
     }
 
+    static class s1243{//Array Transformation
+        public List<Integer> transformArray(int[] a){
+            while(true){
+                int[] b = a.clone();
+                for(int i = 1; i < a.length - 1; i++)
+                    if(b[i - 1] < b[i] && b[i] > b[i + 1])
+                        a[i]--;
+                    else if(b[i - 1] > b[i] && b[i] < b[i + 1])
+                        a[i]++;
+                if(Arrays.equals(a, b))
+                    return Arrays.stream(a).boxed().collect(Collectors.toList());
+            }
+        }
+    }
+
     static class s1248{//Count Number of Nice Subarrays
         public int numberOfSubarrays(int[] a, int k){
             int r = 0;
