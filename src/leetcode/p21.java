@@ -1053,4 +1053,19 @@ public class p21{
                     buildRows(currWidth + brick, width, bricks, rowMask | (1 << (currWidth + brick)), r);
         }
     }
+
+    static class s2185{//Counting Words With a Given Prefix
+        public int prefixCount(String[] words, String pref){
+            return (int) Arrays.stream(words).filter(w -> w.startsWith(pref)).count();
+        }
+    }
+
+    static class s2186{//Minimum Number of Steps to Make Two Strings Anagram II
+        public int minSteps(String s, String t){
+            int[] counts = new int[26];
+            s.chars().forEach(c -> counts[c - 'a']++);
+            t.chars().forEach(c -> counts[c - 'a']--);
+            return Arrays.stream(counts).map(Math::abs).sum();
+        }
+    }
 }
