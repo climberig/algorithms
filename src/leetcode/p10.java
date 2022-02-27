@@ -189,6 +189,17 @@ public class p10{
         }
     }
 
+    static class s1047{//Remove All Adjacent Duplicates In String
+        public String removeDuplicates(String str){
+            Stack<Character> s = new Stack<>();
+            for(char c : str.toCharArray())
+                if(!s.isEmpty() && s.peek() == c)
+                    s.pop();
+                else s.push(c);
+            return s.stream().map(Objects::toString).collect(Collectors.joining());
+        }
+    }
+
     static class s1049{//Last Stone Weight II
         public int lastStoneWeightII(int[] stones){
             boolean[] dp = new boolean[1501];
