@@ -289,4 +289,17 @@ public class p4{
             return r;
         }
     }
+
+    static class s496{//Next Greater Element I
+        public int[] nextGreaterElement(int[] a1, int[] a2){
+            Map<Integer, Integer> m = new HashMap<>();
+            Stack<Integer> s = new Stack<>();
+            for(int n : a2){
+                while(!s.isEmpty() && s.peek() < n)
+                    m.put(s.pop(), n);
+                s.push(n);
+            }
+            return Arrays.stream(a1).map(n -> m.getOrDefault(n, -1)).toArray();
+        }
+    }
 }
