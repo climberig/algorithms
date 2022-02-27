@@ -1068,4 +1068,20 @@ public class p21{
             return Arrays.stream(counts).map(Math::abs).sum();
         }
     }
+
+    static class s2187{//Minimum Time to Complete Trips
+        public long minimumTime(int[] time, int totalTrips){
+            long lo = 1, hi = Long.MAX_VALUE, r = Long.MAX_VALUE;
+            while(lo <= hi){
+                long mid = hi - (hi - lo) / 2, total = totalTrips;
+                for(int i = 0; i < time.length && total > 0; i++)
+                    total -= mid / time[i];
+                if(total <= 0){
+                    r = mid;
+                    hi = mid - 1;
+                }else lo = mid + 1;
+            }
+            return r;
+        }
+    }
 }
