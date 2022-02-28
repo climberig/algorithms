@@ -182,6 +182,33 @@ public class p6{
         }
     }
 
+    static class s693{//Binary Number with Alternating Bits
+        public boolean hasAlternatingBits(int n){
+            int diff = 0;
+            for(int prev = -1; n > 0; n /= 2){
+                int curr = n & 1;
+                if(curr == prev)
+                    return false;
+                diff += curr == 1 ? 1 : -1;
+                prev = curr;
+            }
+            return Math.abs(diff) <= 1;
+        }
+
+        boolean hasAlternatingBits2(int n){
+        /*
+        n =         1 0 1 0 1 0 1 0
+        n >> 1      0 1 0 1 0 1 0 1
+        n ^ n>>1    1 1 1 1 1 1 1 1
+        n           1 1 1 1 1 1 1 1
+        n + 1     1 0 0 0 0 0 0 0 0
+        n & (n+1)   0 0 0 0 0 0 0 0
+        */
+            n = n ^ (n >> 1);
+            return (n & n + 1) == 0;
+        }
+    }
+
     static class s694{//Number of Distinct Islands
         public int numDistinctIslands(int[][] g){
             Set<String> s = new HashSet<>();
