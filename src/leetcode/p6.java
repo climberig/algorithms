@@ -249,4 +249,21 @@ public class p6{
             return r;
         }
     }
+
+    static class s697{//Degree of an Array
+        public int findShortestSubArray(int[] a){
+            int maxFreq = 0, freq[] = new int[50_000], first[] = new int[50_000], r = Integer.MAX_VALUE;
+            for(int i = 0; i < a.length; i++){
+                if(first[a[i]] == 0)
+                    first[a[i]] = i + 1;
+                if(++freq[a[i]] >= maxFreq){
+                    if(freq[a[i]] > maxFreq)
+                        r = i - first[a[i]] + 2;
+                    else r = Math.min(r, i - first[a[i]] + 2);
+                    maxFreq = freq[a[i]];
+                }
+            }
+            return r;
+        }
+    }
 }
