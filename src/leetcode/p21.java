@@ -1084,4 +1084,21 @@ public class p21{
             return r;
         }
     }
+
+    static class s2189{//Number of Ways to Build House of Cards
+        public int houseOfCards(int n){
+            return house(n, n / 3 + 1, new Integer[n + 1][n / 3 + 2]);
+        }
+
+        int house(int n, int base, Integer[][] dp){
+            if(n == 0)
+                return 1;
+            if(dp[n][base] != null)
+                return dp[n][base];
+            int r = 0;
+            for(int i = 2, b = 0; i <= n && b < base; i += 3, b++)
+                r += house(n - i, b, dp);
+            return dp[n][base] = r;
+        }
+    }
 }
