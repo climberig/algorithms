@@ -201,6 +201,12 @@ public class p5{
         }
     }
 
+    static class s575{//Distribute Candies
+        public int distributeCandies(int[] candyType){
+            return Math.min(candyType.length / 2, (int) Arrays.stream(candyType).distinct().count());
+        }
+    }
+
     static class s582{//Kill Process
         /**
          * You have n processes forming a rooted tree structure. You are given two integer arrays pid and ppid, where pid[i] is
