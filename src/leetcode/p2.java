@@ -551,6 +551,10 @@ public class p2{
         }
     }
 
+    static class s292{//Nim Game
+        public boolean canWinNim(int n){return n % 4 != 0;}
+    }
+
     static class s293{//Flip Game
         public List<String> generatePossibleNextMoves(String s){
             List<String> r = new ArrayList<>();
