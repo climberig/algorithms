@@ -250,6 +250,19 @@ public class p6{
         }
     }
 
+    static class s696{//Count Binary Substrings
+        public int countBinarySubstrings(String s){
+            int r = 0, prevCount = 0, currCount = 1;
+            for(int i = 1; i < s.length(); i++)
+                if(s.charAt(i - 1) != s.charAt(i)){
+                    r += Math.min(prevCount, currCount);
+                    prevCount = currCount;
+                    currCount = 1;
+                }else currCount++;
+            return r + Math.min(currCount, prevCount);
+        }
+    }
+
     static class s697{//Degree of an Array
         public int findShortestSubArray(int[] a){
             int maxFreq = 0, freq[] = new int[50_000], first[] = new int[50_000], r = Integer.MAX_VALUE;
