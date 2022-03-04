@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p7{
@@ -66,6 +67,20 @@ public class p7{
                 left += a[i];
             }
             return -1;
+        }
+    }
+
+    static class s728{//Self Dividing Numbers
+        public List<Integer> selfDividingNumbers(int left, int right){
+            return IntStream.rangeClosed(left, right).filter(this::selfDividing).boxed().collect(Collectors.toList());
+        }
+        boolean selfDividing(int n){
+            for(int m = n; m > 0; m /= 10){
+                int d = m % 10;
+                if(d == 0 || n % d != 0)
+                    return false;
+            }
+            return true;
         }
     }
 
