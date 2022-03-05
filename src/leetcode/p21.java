@@ -1101,4 +1101,29 @@ public class p21{
             return dp[n][base] = r;
         }
     }
+
+    static class s2190{//Most Frequent Number Following Key In an Array
+        public int mostFrequent(int[] a, int key){
+            int r = 0, freq[] = new int[1_0001], maxFreq = 0;
+            for(int i = 0; i < a.length - 1; i++)
+                if(a[i] == key && ++freq[a[i + 1]] > maxFreq){
+                    maxFreq = freq[a[i + 1]];
+                    r = a[i + 1];
+                }
+            return r;
+        }
+    }
+
+    static class s2191{//Sort the Jumbled Numbers
+        public int[] sortJumbled(int[] mapping, int[] a){
+            return Arrays.stream(a).boxed().sorted(Comparator.comparingInt(n -> convert(n, mapping))).mapToInt(n -> n).toArray();
+        }
+
+        int convert(int n, int[] mapping){
+            int r = 0;
+            for(int p = 1, m = n; m > 0; m /= 10, p *= 10)
+                r = mapping[m % 10] * p + r;
+            return n == 0 ? mapping[0] : r;
+        }
+    }
 }
