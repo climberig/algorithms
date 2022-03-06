@@ -1126,4 +1126,40 @@ public class p21{
             return n == 0 ? mapping[0] : r;
         }
     }
+
+    static class s2192{//All Ancestors of a Node in a Directed Acyclic Graph
+        public List<List<Integer>> getAncestors(int n, int[][] edges){
+            List<List<Integer>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
+            for(int[] e : edges)
+                g.get(e[1]).add(e[0]);
+            List<List<Integer>> r = new ArrayList<>(n);
+            for(int i = 0; i < n; i++){
+                Set<Integer> ancestors = new HashSet<>();
+                dfs(i, g, ancestors);
+                r.add(ancestors.stream().sorted().collect(Collectors.toList()));
+            }
+            return r;
+        }
+
+        void dfs(int u, List<List<Integer>> g, Set<Integer> ancestors){
+            for(Integer v : g.get(u))
+                if(ancestors.add(v))
+                    dfs(v, g, ancestors);
+        }
+    }
+
+    static class s2193{//Minimum Number of Moves to Make Palindrome
+        public int minMovesToMakePalindrome(String s){
+            int r = 0;
+            while(s.length() > 0){
+                int i = s.indexOf(s.charAt(s.length() - 1));
+                if(i < s.length() - 1){
+                    r += i;
+                    s = s.substring(0, i) + s.substring(i + 1);
+                }else r += i / 2;
+                s = s.substring(0, s.length() - 1);
+            }
+            return r;
+        }
+    }
 }
