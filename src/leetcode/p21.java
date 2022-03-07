@@ -1188,4 +1188,23 @@ public class p21{
             return nodes.get(nodes.keySet().stream().filter(v -> !children.contains(v)).findFirst().get());
         }
     }
+
+    static class s2197{//Replace Non-Coprime Numbers in Array
+        public List<Integer> replaceNonCoprimes(int[] a){
+            LinkedList<Integer> r = new LinkedList<>();
+            for(int n : a){
+                while(true){
+                    int last = r.isEmpty() ? 1 : r.getLast();
+                    int gcd = gcd(last, n);
+                    if(gcd == 1)
+                        break;
+                    n *= r.removeLast() / gcd;
+                }
+                r.add(n);
+            }
+            return r;
+        }
+
+        int gcd(int a, int b){return b > 0 ? gcd(b, a % b) : a;}
+    }
 }
