@@ -1173,6 +1173,22 @@ public class p21{
         }
     }
 
+    static class s2195{//Append K Integers With Minimal Sum
+        public long minimalKSum(int[] a, int k){
+            Arrays.sort(a);
+            long prev = 0, sum = 0;
+            for(int i = 0; i < a.length && k > 0; prev = a[i++]){
+                int count = Math.min((int) (a[i] - prev - 1), k);
+                if(count > 0){
+                    k -= count;
+                    long from = prev + 1, to = prev + count;
+                    sum += (from + to) * count / 2;
+                }
+            }
+            return sum + (prev + 1 + prev + k) * k / 2;
+        }
+    }
+
     static class s2196{//Create Binary Tree From Descriptions
         public TreeNode createBinaryTree(int[][] descriptions){
             Map<Integer, TreeNode> nodes = new HashMap<>();
