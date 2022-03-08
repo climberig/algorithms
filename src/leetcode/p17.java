@@ -247,6 +247,40 @@ public class p17{
         }
     }
 
+    static class s1755{//Closest Subsequence Sum
+        public int minAbsDifference(int[] a, int goal){
+            List<Integer> sums = sums(Arrays.copyOfRange(a, 0, a.length / 2));
+            List<Integer> sortedSums = sums(Arrays.copyOfRange(a, a.length / 2, a.length)).stream().sorted().collect(Collectors.toList());
+            int r = Integer.MAX_VALUE;
+            for(Integer sum : sums){
+                int i = Collections.binarySearch(sortedSums, goal - sum);
+                if(i >= 0)
+                    return 0;
+                i = Math.min(-(i + 1), sortedSums.size() - 1);
+                r = Math.min(r, Math.abs(sum + sortedSums.get(i) - goal));
+                if(i + 1 < sortedSums.size())
+                    r = Math.min(r, Math.abs(sum + sortedSums.get(i + 1) - goal));
+                if(i - 1 >= 0)
+                    r = Math.min(r, Math.abs(sum + sortedSums.get(i - 1) - goal));
+            }
+            return r;
+        }
+
+        List<Integer> sums(int[] a){
+            Set<Integer> r = new HashSet<>();
+            dfs(0, 0, a, r);
+            return new ArrayList<>(r);
+        }
+
+        void dfs(int i, int currSum, int[] a, Set<Integer> r){
+            r.add(currSum);
+            if(i < a.length){
+                dfs(i + 1, currSum, a, r);
+                dfs(i + 1, currSum + a[i], a, r);
+            }
+        }
+    }
+
     static class s1756{//Design Most Recently Used Queue
         class MRUQueue{
             int[] q;
