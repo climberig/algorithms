@@ -71,6 +71,20 @@ public class p10{
         }
     }
 
+    static class s1021{//Remove Outermost Parentheses
+        public String removeOuterParentheses(String s){
+            StringBuilder r = new StringBuilder();
+            for(int i = 0, open = 0, j = 0; i < s.length(); i++){
+                open += s.charAt(i) == '(' ? 1 : -1;
+                if(open == 0){
+                    r.append(s, j + 1, i);
+                    j = i + 1;
+                }
+            }
+            return r.toString();
+        }
+    }
+
     static class s1022{//Sum of Root To Leaf Binary Numbers
         public int sumRootToLeaf(TreeNode root){
             return sum(root, 0);

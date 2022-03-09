@@ -1223,4 +1223,27 @@ public class p21{
 
         int gcd(int a, int b){return b > 0 ? gcd(b, a % b) : a;}
     }
+
+    static class s2198{//Number of Single Divisor Triplets
+        public long singleDivisorTriplet(int[] a){
+            int[] f = new int[101];
+            Arrays.stream(a).forEach(n -> f[n]++);
+            long r = 0;
+            for(int i = 1; i < f.length; i++)
+                for(int j = 1; j < f.length; j++)
+                    if(singleDiv(i, j, j))
+                        r += (long) f[i] * f[j] * (f[j] - 1) / 2;
+            for(int i = 1; i < f.length; i++)
+                for(int j = i + 1; j < f.length; j++)
+                    for(int k = j + 1; k < f.length; k++)
+                        if(singleDiv(i, j, k))
+                            r += (long) f[i] * f[j] * f[k];
+            return r * 6;
+
+        }
+        boolean singleDiv(int a, int b, int c){
+            int s = a + b + c;
+            return (s % a == 0 ? 1 : 0) + (s % b == 0 ? 1 : 0) + (s % c == 0 ? 1 : 0) == 1;
+        }
+    }
 }
