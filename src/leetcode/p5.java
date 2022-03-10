@@ -185,6 +185,17 @@ public class p5{
         }
     }
 
+    static class s566{//Reshape the Matrix
+        public int[][] matrixReshape(int[][] a, int r, int c){
+            if(r * c != a.length * a[0].length)
+                return a;
+            int res[][] = new int[r][c], m = a[0].length;
+            for(int i = 0; i < r * c; i++)
+                res[i / c][i % c] = a[i / m][i % m];
+            return res;
+        }
+    }
+
     static class s572{//Subtree of Another Tree
         public boolean isSubtree(TreeNode root, TreeNode sub){
             if(root == null)
