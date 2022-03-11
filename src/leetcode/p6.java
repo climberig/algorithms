@@ -103,6 +103,17 @@ public class p6{
         }
     }
 
+    static class s643{//Maximum Average Subarray I
+        public double findMaxAverage(int[] a, int k){
+            int sum = Arrays.stream(a, 0, k).sum(), maxSum = sum;
+            for(int i = k; i < a.length; i++){
+                sum += a[i] - a[i - k];
+                maxSum = Math.max(maxSum, sum);
+            }
+            return maxSum * 1.0 / k;
+        }
+    }
+
     static class s645{//Set Mismatch
         public int[] findErrorNums(int[] a){
             int[] r = new int[2];
