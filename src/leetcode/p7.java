@@ -84,6 +84,24 @@ public class p7{
         }
     }
 
+    static class s733{//Flood Fill
+        public int[][] floodFill(int[][] image, int sr, int sc, int newColor){
+            if(image[sr][sc] == newColor)
+                return image;
+            int dirs[] = {-1, 0, 1, 0, -1}, oldColor = image[sr][sc];
+            Queue<int[]> q = new LinkedList<>();
+            for(q.add(new int[]{sr, sc}), image[sr][sc] = newColor; !q.isEmpty(); )
+                for(int d = 1, p[] = q.poll(); d < dirs.length; d++){
+                    int x = p[0] + dirs[d - 1], y = p[1] + dirs[d];
+                    if(0 <= x && x < image.length && 0 <= y && y < image[0].length && image[x][y] == oldColor){
+                        image[x][y] = newColor;
+                        q.add(new int[]{x, y});
+                    }
+                }
+            return image;
+        }
+    }
+
     static class s734{//Sentence Similarity
         public boolean areSentencesSimilar(String[] s1, String[] s2, List<List<String>> pairs){
             if(s1.length != s2.length)
