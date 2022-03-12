@@ -128,6 +128,28 @@ public class p6{
         }
     }
 
+    static class s653{//Two Sum IV - Input is a BST
+        public boolean findTarget(TreeNode root, int k){
+            List<Integer> a = new ArrayList<>();
+            inorder(root, a);
+            for(int i = 0, j = a.size() - 1; i < j; )
+                if(a.get(i) + a.get(j) == k)
+                    return true;
+                else if(a.get(i) + a.get(j) < k)
+                    i++;
+                else j--;
+            return false;
+        }
+
+        void inorder(TreeNode node, List<Integer> vals){
+            if(node != null){
+                inorder(node.left, vals);
+                vals.add(node.val);
+                inorder(node.right, vals);
+            }
+        }
+    }
+
     static class s654{//Maximum Binary Tree
         public TreeNode constructMaximumBinaryTree(int[] a){return maxBt(a, 0, a.length - 1);}
 
