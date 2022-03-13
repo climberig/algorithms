@@ -1,9 +1,7 @@
 package leetcode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 public class p22{
     static class s2200{
         public List<Integer> findKDistantIndices(int[] a, int key, int k){
@@ -30,6 +28,19 @@ public class p22{
                     if(!s.contains(1000 * i + j))
                         return false;
             return true;
+        }
+    }
+
+    static class s2202{//Maximize the Topmost Element After K Moves
+        public int maximumTop(int[] a, int k){
+            if(a.length == 1 && k % 2 == 1)
+                return -1;
+            if(k > a.length)
+                return Arrays.stream(a).max().getAsInt();
+            PriorityQueue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
+            IntStream.range(0, k - 1).forEach(i -> q.offer(a[i]));
+            int r = !q.isEmpty() ? q.poll() : -1;
+            return k < a.length ? Math.max(r, a[k]) : r;
         }
     }
 }
