@@ -43,4 +43,37 @@ public class p22{
             return k < a.length ? Math.max(r, a[k]) : r;
         }
     }
+
+    static class s2203{//Minimum Weighted Subgraph With the Required Paths
+        public long minimumWeight(int n, int[][] edges, int src1, int src2, int dest){
+            List<Map<Integer, Integer>> g = IntStream.range(0, n).mapToObj(i -> new HashMap<Integer, Integer>()).collect(Collectors.toList());
+            List<Map<Integer, Integer>> g1 = IntStream.range(0, n).mapToObj(i -> new HashMap<Integer, Integer>()).collect(Collectors.toList());
+            for(int[] e : edges){
+                g.get(e[0]).put(e[1], Math.min(e[2], g.get(e[0]).getOrDefault(e[1], Integer.MAX_VALUE)));
+                g1.get(e[1]).put(e[0], Math.min(e[2], g1.get(e[1]).getOrDefault(e[0], Integer.MAX_VALUE)));
+            }
+            long a[] = dfs(src1, g), b[] = dfs(src2, g), c[] = dfs(dest, g1), r = Long.MAX_VALUE;
+            for(int i = 0; i < n; i++)
+                if(a[i] != Long.MAX_VALUE && b[i] != Long.MAX_VALUE && c[i] != Long.MAX_VALUE)
+                    r = Math.min(r, a[i] + b[i] + c[i]);
+            return r == Long.MAX_VALUE ? -1 : r;
+        }
+
+        long[] dfs(int start, List<Map<Integer, Integer>> g){
+            long[] dist = new long[g.size()];
+            Arrays.fill(dist, Long.MAX_VALUE);
+            PriorityQueue<long[]> q = new PriorityQueue<>(Comparator.comparingLong(a -> a[0]));
+            dist[start] = 0;
+            for(q.offer(new long[]{0, start}); !q.isEmpty(); ){
+                long p[] = q.poll(), d = p[0], u = p[1];
+                Map<Integer, Integer> adj = g.get((int) u);
+                for(int v : adj.keySet())
+                    if(d + adj.get(v) < dist[v]){
+                        dist[v] = d + adj.get(v);
+                        q.offer(new long[]{dist[v], v});
+                    }
+            }
+            return dist;
+        }
+    }
 }
