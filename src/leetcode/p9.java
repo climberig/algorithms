@@ -280,6 +280,24 @@ public class p9{
         }
     }
 
+    static class s995{//Minimum Number of K Consecutive Bit Flips
+        public int minKBitFlips(int[] a, int k){
+            int flipped = 0, r = 0, isFlipped[] = new int[a.length];
+            for(int i = 0; i < a.length; i++){
+                if(i >= k)
+                    flipped ^= isFlipped[i - k];
+                if(flipped == a[i]){
+                    if(i + k > a.length)
+                        return -1;
+                    isFlipped[i] = 1;
+                    flipped ^= 1;
+                    r++;
+                }
+            }
+            return r;
+        }
+    }
+
     static class s998{//Maximum Binary Tree II
         public TreeNode insertIntoMaxTree(TreeNode root, int val){
             if(root == null)
