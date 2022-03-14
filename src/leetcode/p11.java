@@ -22,6 +22,17 @@ public class p11{
         }
     }
 
+    static class s1121{//Divide Array Into Increasing Sequences
+        public boolean canDivideIntoSubsequences(int[] a, int k){
+            int count = 1, maxCount = 1;
+            for(int i = 1; i < a.length; i++){
+                count = a[i - 1] < a[i] ? 1 : count + 1;
+                maxCount = Math.max(maxCount, count);
+            }
+            return a.length >= k * maxCount;
+        }
+    }
+
     static class s1122{//Relative Sort Array
         public int[] relativeSortArray(int[] a1, int[] a2){
             int f[] = new int[1_001], i = 0;
