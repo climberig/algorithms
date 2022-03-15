@@ -371,6 +371,23 @@ public class p10{
         }
     }
 
+    static class s1088{//Confusing Number II
+        public int confusingNumberII(int lim){
+            Queue<Integer> q = new ArrayDeque<>();
+            int r = 0, m[] = {0, 1, -1, -1, -1, -1, 9, -1, 8, 6};
+            for(q.add(0); !q.isEmpty(); ){
+                int d = q.poll(), rotated = 0;
+                for(int k = d; k > 0; k /= 10)
+                    rotated = rotated * 10 + m[k % 10];
+                r += rotated != d ? 1 : 0;
+                for(int i = 0; i < 10; i++)
+                    if(m[i] >= 0 && d * 10L + i <= lim && d * 10 + i != 0)
+                        q.offer(10 * d + i);
+            }
+            return r;
+        }
+    }
+
     static class s1099{//Two Sum Less Than K
         public int twoSumLessThanK(int[] a, int k){
             Arrays.sort(a);
