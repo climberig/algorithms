@@ -525,6 +525,43 @@ public class p15{
         }
     }
 
+    static class s1597{//Build Binary Expression Tree From Infix Expression
+        public Node expTree(String s){
+            Stack<Node> nodes = new Stack<>();
+            Stack<Character> ops = new Stack<>();
+            Map<Character, Integer> priority = Map.of('+', 0, '-', 0, '*', 1, '/', 1);
+            for(char c : ('(' + s + ')').toCharArray())
+                if(Character.isDigit(c))
+                    nodes.push(new Node(c));
+                else if(c == '(')
+                    ops.push(c);
+                else if(c == ')'){
+                    while(ops.peek() != '(')
+                        nodes.push(newNode(ops.pop(), nodes.pop(), nodes.pop()));
+                    ops.pop(); // remove '('
+                }else{ // c == '+' || c == '-' || c == '*' || c == '/'
+                    while(ops.peek() != '(' && priority.get(ops.peek()) >= priority.get(c))
+                        nodes.push(newNode(ops.pop(), nodes.pop(), nodes.pop()));
+                    ops.push(c);
+                }
+            return nodes.peek();
+        }
+
+        Node newNode(char op, Node right, Node left){return new Node(op, left, right);}
+
+        class Node{
+            char val;
+            Node left, right;
+            Node(){this.val = ' ';}
+            Node(char val){this.val = val;}
+            Node(char val, Node left, Node right){
+                this.val = val;
+                this.left = left;
+                this.right = right;
+            }
+        }
+    }
+
     static class s1599{//Maximum Profit of Operating a Centennial Wheel
         public int minOperationsMaxProfit(int[] customers, int ticketPrice, int cost){
             int profit = 0, maxProfit = 0, i = 0, rotation = 0, maxRotation = 0, waiting = 0;
