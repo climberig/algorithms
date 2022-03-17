@@ -241,6 +241,20 @@ public class p9{
         }
     }
 
+    static class s972{//Equal Rational Numbers
+        public boolean isRationalEqual(String s, String t){return f(s) == f(t);}
+
+        double f(String s){
+            for(int i = s.indexOf('('); i > 0; ){
+                String base = s.substring(0, i), rep = s.substring(i + 1, s.length() - 1);
+                for(int j = 0; j < 20; j++)
+                    base += rep;
+                return Double.parseDouble(base);
+            }
+            return Double.parseDouble(s);
+        }
+    }
+
     static class s982{//Triples with Bitwise AND Equal To Zero
         public int countTriplets(int[] a){
             int m[] = new int[1 << 16], r = 0;
