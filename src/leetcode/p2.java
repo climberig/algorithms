@@ -1,9 +1,27 @@
 package leetcode;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class p2{
+    static class s207{//Course Schedule
+        public boolean canFinish(int n, int[][] prereq){
+            List<List<Integer>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
+            int[] in = new int[n];
+            for(int[] p : prereq){
+                g.get(p[1]).add(p[0]);
+                in[p[0]]++;
+            }
+            Queue<Integer> q = IntStream.range(0, n).filter(c -> in[c] == 0).boxed().collect(Collectors.toCollection(LinkedList::new));
+            while(!q.isEmpty())
+                for(Integer c : g.get(q.poll()))
+                    if(--in[c] == 0)
+                        q.offer(c);
+            return Arrays.stream(in).allMatch(v -> v == 0);
+        }
+    }
+
     static class s208{//Implement Trie (Prefix Tree)
         class Trie{
             Trie[] nodes = new Trie[26];
