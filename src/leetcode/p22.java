@@ -76,4 +76,38 @@ public class p22{
             return dist;
         }
     }
+
+    static class s2204{//Distance to a Cycle in Undirected Graph
+        public int[] distanceToCycle(int n, int[][] edges){
+            int[] degree = new int[n], r = new int[n];
+            List<List<Integer>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
+            for(int[] e : edges){
+                degree[e[0]]++;
+                degree[e[1]]++;
+                g.get(e[0]).add(e[1]);
+                g.get(e[1]).add(e[0]);
+            }
+            Queue<Integer> q = new LinkedList<>();
+            for(IntStream.range(0, n).filter(u -> degree[u] == 1).forEach(q::offer); !q.isEmpty(); ){
+                degree[q.peek()]--;
+                for(Integer v : g.get(q.poll()))
+                    if(degree[v] > 0 && --degree[v] == 1)
+                        q.add(v);
+            }
+            boolean[] seen = new boolean[n];
+            IntStream.range(0, n).filter(u -> degree[u] > 0).forEach(u -> {
+                seen[u] = true;
+                q.offer(u);
+            });
+            for(int d = 1; !q.isEmpty(); d++)
+                for(int size = q.size(); size > 0; size--)
+                    for(Integer v : g.get(q.poll()))
+                        if(!seen[v]){
+                            seen[v] = true;
+                            r[v] = d;
+                            q.offer(v);
+                        }
+            return r;
+        }
+    }
 }
