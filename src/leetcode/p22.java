@@ -87,12 +87,10 @@ public class p22{
                 g.get(e[0]).add(e[1]);
                 g.get(e[1]).add(e[0]);
             }
-            Queue<Integer> q = new LinkedList<>();
-            for(IntStream.range(0, n).filter(u -> degree[u] == 1).forEach(q::offer); !q.isEmpty(); ){
+            Queue<Integer> q = IntStream.range(0, n).filter(u -> degree[u] == 1).boxed().collect(Collectors.toCollection(LinkedList::new));
+            while(!q.isEmpty()){
                 degree[q.peek()]--;
-                for(Integer v : g.get(q.poll()))
-                    if(degree[v] > 0 && --degree[v] == 1)
-                        q.add(v);
+                g.get(q.poll()).stream().filter(u -> degree[u] > 0 && --degree[u] == 1).forEach(q::add);
             }
             boolean[] seen = new boolean[n];
             IntStream.range(0, n).filter(u -> degree[u] > 0).forEach(u -> {
