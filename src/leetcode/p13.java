@@ -207,6 +207,24 @@ public class p13{
         }
     }
 
+    static class s1373{//Maximum Sum BST in Binary Tree
+        int r = 0;
+        public int maxSumBST(TreeNode root){
+            post(root);
+            return r;
+        }
+        int[] post(TreeNode node){
+            if(node == null)
+                return new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE, 0}; //min, max, sum
+            int[] left = post(node.left), right = post(node.right);
+            if(left == null || right == null || node.val <= left[1] || node.val >= right[0])
+                return null;
+            int sum = node.val + left[2] + right[2];
+            r = Math.max(r, sum);
+            return new int[]{Math.min(node.val, left[0]), Math.max(node.val, right[1]), sum};
+        }
+    }
+
     static class s1375{//Bulb Switcher III
         public int numTimesAllBlue(int[] a){
             int right = 0, r = 0;
