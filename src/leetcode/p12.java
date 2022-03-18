@@ -267,6 +267,25 @@ public class p12{
         }
     }
 
+    static class s1246{//Palindrome Removal
+        public int minimumMoves(int[] a){
+            return min(0, a.length - 1, a, new int[a.length + 1][a.length + 1]);
+        }
+        int min(int i, int j, int[] a, int[][] dp){
+            if(i >= j)
+                return i == j ? 1 : 0;
+            if(dp[i][j] != 0)
+                return dp[i][j];
+            int r = min(i + 1, j, a, dp) + 1;
+            if(a[i] == a[i + 1])
+                r = Math.min(r, min(i + 2, j, a, dp) + 1);
+            for(int k = i + 2; k <= j; k++)
+                if(a[i] == a[k])
+                    r = Math.min(r, min(i + 1, k - 1, a, dp) + min(k + 1, j, a, dp));
+            return dp[i][j] = r;
+        }
+    }
+
     static class s1248{//Count Number of Nice Subarrays
         public int numberOfSubarrays(int[] a, int k){
             int r = 0;
