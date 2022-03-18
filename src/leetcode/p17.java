@@ -203,6 +203,21 @@ public class p17{
         }
     }
 
+    static class s1745{//Palindrome Partitioning IV
+        public boolean checkPartitioning(String s){
+            char[] a = s.toCharArray();
+            boolean[][] dp = new boolean[a.length][a.length];
+            for(int i = a.length - 1; i >= 0; i--)
+                for(int j = i; j < a.length; j++)
+                    dp[i][j] = a[i] == a[j] && (i + 1 > j - 1 || dp[i + 1][j - 1]);
+            for(int i = 1; i < a.length - 1; i++)
+                for(int j = i; j < a.length - 1; j++)
+                    if(dp[0][i - 1] && dp[i][j] && dp[j + 1][a.length - 1])
+                        return true;
+            return false;
+        }
+    }
+
     static class s1749{//Maximum Absolute Sum of Any Subarray
         public int maxAbsoluteSum(int[] a){
             int r = 0, maxSum = 0, minSum = 0;
