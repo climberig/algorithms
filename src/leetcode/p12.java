@@ -21,6 +21,28 @@ public class p12{
         }
     }
 
+    static class s1201{//Ugly Number III
+        public int nthUglyNumber(int n, int a, int b, int c){
+            int lo = 0, hi = 2 * 1_000_000_000, r = 0;
+            while(lo <= hi){
+                int mid = lo + (hi - lo) / 2;
+                if(count(mid, a, b, c) >= n){
+                    r = mid;
+                    hi = mid - 1;
+                }else lo = mid + 1;
+            }
+            return r;
+        }
+
+        int count(long n, long a, long b, long c){
+            return (int) (n / a + n / b + n / c - n / lcm(a, b) - n / lcm(b, c) - n / lcm(a, c) + n / (lcm(a, lcm(b, c))));
+        }
+
+        long gcd(long a, long b){return a == 0 ? b : gcd(b % a, a);}
+
+        long lcm(long a, long b){return a * b / gcd(a, b);}
+    }
+
     static class s1202{//Smallest String With Swaps
         public String smallestStringWithSwaps(String s, List<List<Integer>> pairs){
             List<List<Integer>> g = IntStream.range(0, s.length()).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
