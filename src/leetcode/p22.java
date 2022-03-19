@@ -108,4 +108,12 @@ public class p22{
             return r;
         }
     }
+
+    static class s2206{//Divide Array Into Equal Pairs
+        public boolean divideArray(int[] a){
+            int[] f = new int[501];
+            Arrays.stream(a).forEach(n -> f[n]++);
+            return Arrays.stream(f).allMatch(n -> n % 2 == 0);
+        }
+    }
 }
