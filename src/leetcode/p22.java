@@ -173,4 +173,19 @@ public class p22{
             return r;
         }
     }
+
+    static class s2211{//Count Collisions on a Road
+        public int countCollisions(String dir){
+            int r = 0, i = 0, right = 0;
+            for(; i < dir.length() && dir.charAt(i) == 'L'; i++) ;
+            for(; i < dir.length(); i++)
+                if(dir.charAt(i) == 'R')
+                    right++;
+                else{
+                    r += dir.charAt(i) == 'S' ? right : right + 1;
+                    right = 0;
+                }
+            return r;
+        }
+    }
 }
