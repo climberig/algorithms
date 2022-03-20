@@ -148,4 +148,29 @@ public class p22{
             return r;
         }
     }
+
+    static class s2209{//Minimum White Tiles After Covering With Carpets
+        public int minimumWhiteTiles(String floor, int nCarpets, int carpetLen){
+            int[][] dp = new int[floor.length() + 1][nCarpets + 1];
+            for(int i = 1; i <= floor.length(); i++)
+                for(int c = 0; c <= nCarpets; c++){
+                    int skip = dp[i - 1][c] + floor.charAt(i - 1) - '0';
+                    int cover = c > 0 ? dp[Math.max(0, i - carpetLen)][c - 1] : floor.length();
+                    dp[i][c] = Math.min(skip, cover);
+                }
+            return dp[floor.length()][nCarpets];
+        }
+    }
+
+    static class s2210{//Count Hills and Valleys in an Array
+        public int countHillValley(int[] a){
+            int r = 0, left = a[0];
+            for(int i = 1; i < a.length - 1; i++)
+                if(left < a[i] && a[i] > a[i + 1] || left > a[i] && a[i] < a[i + 1]){
+                    r++;
+                    left = a[i];
+                }
+            return r;
+        }
+    }
 }
