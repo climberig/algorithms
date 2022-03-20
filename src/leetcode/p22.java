@@ -132,4 +132,20 @@ public class p22{
             return r + (c1 != c2 ? c1Count : 0);
         }
     }
+
+    static class s2208{//Minimum Operations to Halve Array Sum
+        public int halveArray(int[] a){
+            double originSum = Arrays.stream(a).asLongStream().sum(), sum = originSum;
+            PriorityQueue<Double> q = new PriorityQueue<>(Comparator.reverseOrder());
+            Arrays.stream(a).forEach(n -> q.offer(1.0 * n));
+            int r = 0;
+            while(sum * 2 > originSum){
+                Double n = q.poll();
+                sum = sum - n + n / 2;
+                q.offer(n / 2);
+                r++;
+            }
+            return r;
+        }
+    }
 }
