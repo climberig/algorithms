@@ -188,4 +188,29 @@ public class p22{
             return r;
         }
     }
+
+    static class s2212{//Maximum Points in an Archery Competition
+        int r[] = new int[12], maxPoints = 0;
+        public int[] maximumBobPoints(int numArrows, int[] aliceArrows){
+            bt(0, numArrows, aliceArrows, new int[aliceArrows.length], 0);
+            return r;
+        }
+
+        void bt(int i, int numArrows, int[] aliceArrows, int[] bobArrows, int points){
+            if(i >= aliceArrows.length){
+                if(points > maxPoints){
+                    maxPoints = points;
+                    r = bobArrows.clone();
+                    r[0] += numArrows;
+                }
+            }else{
+                if(numArrows > aliceArrows[i]){
+                    bobArrows[i] = aliceArrows[i] + 1;
+                    bt(i + 1, numArrows - bobArrows[i], aliceArrows, bobArrows, points + i);
+                    bobArrows[i] = 0;
+                }
+                bt(i + 1, numArrows, aliceArrows, bobArrows, points);
+            }
+        }
+    }
 }
