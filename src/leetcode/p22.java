@@ -116,4 +116,20 @@ public class p22{
             return Arrays.stream(f).allMatch(n -> n % 2 == 0);
         }
     }
+
+    static class s2207{//Maximize Number of Subsequences in a String
+        public long maximumSubsequenceCount(String text, String pattern){
+            char c1 = pattern.charAt(0), c2 = pattern.charAt(1);
+            return Math.max(count(c1, c2, text, 0, 1), count(c2, c1, text, text.length() - 1, -1));
+        }
+
+        long count(char c1, char c2, String text, int start, int step){
+            long r = 0, c1Count = 0;
+            for(int i = start; 0 <= i && i < text.length(); i += step){
+                c1Count += text.charAt(i) == c1 ? 1 : 0;
+                r += text.charAt(i) == c2 ? c1Count : 0;
+            }
+            return r + (c1 != c2 ? c1Count : 0);
+        }
+    }
 }
