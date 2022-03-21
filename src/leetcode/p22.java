@@ -197,13 +197,11 @@ public class p22{
         }
 
         void bt(int i, int numArrows, int[] aliceArrows, int[] bobArrows, int points){
-            if(i >= aliceArrows.length){
-                if(points > maxPoints){
-                    maxPoints = points;
-                    r = bobArrows.clone();
-                    r[0] += numArrows;
-                }
-            }else{
+            if(i >= aliceArrows.length && points > maxPoints){
+                maxPoints = points;
+                r = bobArrows.clone();
+                r[0] += numArrows;
+            }else if(i < aliceArrows.length){
                 if(numArrows > aliceArrows[i]){
                     bobArrows[i] = aliceArrows[i] + 1;
                     bt(i + 1, numArrows - bobArrows[i], aliceArrows, bobArrows, points + i);
