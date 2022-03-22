@@ -108,6 +108,35 @@ public class p19{
         }
     }
 
+    static class s1950{//Maximum of Minimum Values in All Subarrays
+        public int[] findMaximums(int[] a){
+            int[] right = new int[a.length], left = new int[a.length], r = new int[a.length];
+            Arrays.fill(right, a.length);
+            Arrays.fill(left, -1);
+            Stack<Integer> s = new Stack<>();
+            for(int i = a.length - 1; i >= 0; i--){
+                while(!s.isEmpty() && a[i] <= a[s.peek()])
+                    s.pop();
+                right[i] = s.isEmpty() ? a.length : s.peek();
+                s.push(i);
+            }
+            s.clear();
+            for(int i = 0; i < a.length; i++){
+                while(!s.isEmpty() && a[s.peek()] >= a[i])
+                    s.pop();
+                left[i] = s.isEmpty() ? -1 : s.peek();
+                s.push(i);
+            }
+            for(int i = 0; i < a.length; i++){
+                int len = right[i] - left[i] - 2;
+                r[len] = Math.max(r[len], a[i]);
+            }
+            for(int i = a.length - 2; i >= 0; i--)
+                r[i] = Math.max(r[i], r[i + 1]);
+            return r;
+        }
+    }
+
     static class s1954{//Minimum Garden Perimeter to Collect Enough Apples
         public long minimumPerimeter(long neededApples){
             int side = 0, lo = 0, hi = 0;
