@@ -33,6 +33,23 @@ public class p3{
         }
     }
 
+    static class s304{//Range Sum Query 2D - Immutable
+        class NumMatrix{
+            int[][] cs;
+
+            public NumMatrix(int[][] m){
+                cs = new int[m.length + 1][m[0].length + 1];
+                for(int i = 0; i < m.length; i++)
+                    for(int j = 0; j < m[0].length; j++)
+                        cs[i + 1][j + 1] = m[i][j] + cs[i][j + 1] + cs[i + 1][j] - cs[i][j];
+            }
+
+            public int sumRegion(int r1, int c1, int r2, int c2){
+                return cs[r2 + 1][c2 + 1] - cs[r1][c2 + 1] - cs[r2 + 1][c1] + cs[r1][c1];
+            }
+        }
+    }
+
     static class s314{//Binary Tree Vertical Order Traversal
         public List<List<Integer>> verticalOrder(TreeNode root){
             Map<Integer, List<Integer>> m = new TreeMap<>();
