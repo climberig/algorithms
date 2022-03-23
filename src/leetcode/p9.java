@@ -78,6 +78,36 @@ public class p9{
         }
     }
 
+    static class s936{//Stamping The Sequence
+        public int[] movesToStamp(String stampS, String targetS){
+            char[] stamp = stampS.toCharArray(), target = targetS.toCharArray();
+            List<Integer> r = new ArrayList<>();
+            boolean[] seen = new boolean[target.length];
+            for(int allStars = 0, stars = 0; allStars < target.length; allStars += stars, stars = 0){
+                for(int i = 0; i <= target.length - stamp.length && allStars + stars < target.length; i++)
+                    if(!seen[i] && canReplace(target, i, stamp)){
+                        for(int j = 0; j < stamp.length; j++)
+                            if(target[j + i] != '*'){
+                                target[j + i] = '*';
+                                stars++;
+                            }
+                        seen[i] = true;
+                        r.add(i);
+                    }
+                if(stars == 0)
+                    return new int[0];
+            }
+            return IntStream.range(0, r.size()).map(i -> r.get(r.size() - i - 1)).toArray();
+        }
+
+        boolean canReplace(char[] target, int p, char[] stamp){
+            for(int i = 0; i < stamp.length; i++)
+                if(target[i + p] != '*' && target[i + p] != stamp[i])
+                    return false;
+            return true;
+        }
+    }
+
     static class s937{//Reorder Data in Log Files
         public String[] reorderLogFiles(String[] logs){
             return Arrays.stream(logs).sorted((s1, s2) -> {
