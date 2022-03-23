@@ -199,6 +199,33 @@ public class p13{
         }
     }
 
+    static class s1354{//Construct Target Array With Multiple Sums
+        public boolean isPossible(int[] target){
+            Queue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
+            long sum = 0;
+            for(int n : target){
+                if(n > 1)
+                    q.offer(n);
+                sum += n;
+            }
+            while(!q.isEmpty()){
+                if(q.size() == 1 && q.peek() + 1 == sum)
+                    return true;
+                Integer n = q.poll();
+                sum -= n;
+                if(sum >= n || sum == 0)
+                    return false;
+                n = Math.toIntExact(n % sum);
+                if(n == 0)
+                    return false;
+                if(n > 1)
+                    q.offer(n);
+                sum += n;
+            }
+            return true;
+        }
+    }
+
     static class s1359{//Count All Valid Pickup and Delivery Options
         public int countOrders(int n){
             if(n == 1)

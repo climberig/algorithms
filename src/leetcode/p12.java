@@ -86,6 +86,33 @@ public class p12{
         }
     }
 
+    static class s1210{//Minimum Moves to Reach Target with Rotations
+        public int minimumMoves(int[][] g){
+            int n = g.length, start[] = {0, 0, 0, 0}, target[] = {n - 1, n - 2, 0};
+            Queue<int[]> q = new LinkedList<>();
+            Set<String> seen = new HashSet<>();
+            for(q.offer(start); !q.isEmpty(); ){
+                int p[] = q.poll(), r = p[0], c = p[1], dir = p[2], dist = p[3];
+                if(Arrays.equals(new int[]{r, c, dir}, target))
+                    return dist;
+                if(seen.add(r + "," + c + "," + dir)){
+                    if(dir == 0){//horizontal
+                        if(r + 1 < n && g[r + 1][c] + g[r + 1][c + 1] == 0)
+                            q.addAll(Arrays.asList(new int[]{r + 1, c, 0, dist + 1}, new int[]{r, c, 1, dist + 1}));
+                        if(c + 2 < n && g[r][c + 2] == 0)
+                            q.offer(new int[]{r, c + 1, 0, dist + 1});
+                    }else{//vertical
+                        if(c + 1 < n && g[r][c + 1] + g[r + 1][c + 1] == 0)
+                            q.addAll(Arrays.asList(new int[]{r, c + 1, 1, dist + 1}, new int[]{r, c, 0, dist + 1}));
+                        if(r + 2 < n && g[r + 2][c] == 0)
+                            q.offer(new int[]{r + 1, c, 1, dist + 1});
+                    }
+                }
+            }
+            return -1;
+        }
+    }
+
     static class s1213{//Intersection of Three Sorted Arrays
         public List<Integer> arraysIntersection(int[] a1, int[] a2, int[] a3){
             List<Integer> r = new ArrayList<>();
