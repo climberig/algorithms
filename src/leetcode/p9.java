@@ -254,6 +254,26 @@ public class p9{
         }
     }
 
+    static class s960{//Delete Columns to Make Sorted III
+        public int minDeletionSize(String[] list){
+            int n = list[0].length(), dp[] = new int[n];
+            for(int i = 0; i < n; i++){
+                dp[i] = 1;
+                for(int j = 0; j < i; j++)
+                    if(ordered(list, j, i))
+                        dp[i] = Math.max(dp[i], dp[j] + 1);
+            }
+            return n - Arrays.stream(dp).max().getAsInt();
+        }
+
+        boolean ordered(String[] list, int j, int i){
+            for(String s : list)
+                if(s.charAt(j) > s.charAt(i))
+                    return false;
+            return true;
+        }
+    }
+
     static class s968{//Binary Tree Cameras
         int r, leaf = 0, covered = 1, leaf_parent = 2;
 
