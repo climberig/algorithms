@@ -211,4 +211,11 @@ public class p22{
             }
         }
     }
+
+    static class s2214{//Minimum Health to Beat Game
+        public long minimumHealth(int[] damage, int armor){
+            int maxProtect = Math.min(Arrays.stream(damage).max().getAsInt(), armor);
+            return Arrays.stream(damage).asLongStream().sum() + 1 - maxProtect;
+        }
+    }
 }
