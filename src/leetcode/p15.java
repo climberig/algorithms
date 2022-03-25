@@ -472,6 +472,23 @@ public class p15{
         }
     }
 
+    static class s1585{//Check If String Is Transformable With Substring Sort Operations
+        public boolean isTransformable(String s, String t){
+            List<LinkedList<Integer>> p = IntStream.range(0, 10).mapToObj(i -> new LinkedList<Integer>()).collect(Collectors.toList());
+            IntStream.range(0, s.length()).forEach(i -> p.get(s.charAt(i) - '0').add(i));
+            for(int i = 0; i < s.length(); i++){
+                int d = t.charAt(i) - '0';
+                if(p.get(d).isEmpty())
+                    return false;
+                int di = p.get(d).removeFirst();
+                for(int j = 0; j < d; j++)
+                    if(!p.get(j).isEmpty() && p.get(j).peekFirst() < di)
+                        return false;
+            }
+            return true;
+        }
+    }
+
     static class s1589{//Maximum Sum Obtained of Any Permutation
         public int maxSumRangeQuery(int[] a, int[][] requests){
             int[] count = new int[a.length];
