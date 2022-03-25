@@ -252,6 +252,24 @@ public class p15{
         }
     }
 
+    static class s1542{//Find Longest Awesome Substring
+        public int longestAwesome(String s){
+            Map<Integer, Integer> m = new HashMap<>();
+            int mask = 0, r = 0;
+            m.put(0, -1);
+            for(int i = 0; i < s.length(); i++){
+                mask ^= 1 << (s.charAt(i) - '0');
+                r = Math.max(i - m.getOrDefault(mask, i), r);
+                for(int j = 0; j < 10; j++){
+                    int other = mask ^ (1 << j);
+                    r = Math.max(i - m.getOrDefault(other, i), r);
+                }
+                m.putIfAbsent(mask, i);
+            }
+            return r;
+        }
+    }
+
     static class s1545{//Find Kth Bit in Nth Binary String
         public char findKthBit(int n, int k){
             String s = "0";
