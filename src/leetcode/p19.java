@@ -1,6 +1,7 @@
 package leetcode;
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class p19{
     static class s1902{//Depth of BST Given Insertion Order
@@ -30,6 +31,23 @@ public class p19{
             long r = a[0];
             for(int i = 1; i < a.length; i++)
                 r += Math.max(a[i] - a[i - 1], 0);
+            return r;
+        }
+    }
+
+    static class s1915{//Number of Wonderful Substrings
+        public long wonderfulSubstrings(String word){
+            long[] counts = new long[1024]; // counts[state] stores how many times the state occurs
+            counts[0] = 1;  //empty string gives case where all characters occur even number of times
+            int mask = 0; // current state
+            long r = 0;
+            for(char c : word.toCharArray()){
+                mask ^= 1 << (c - 'a'); // update state
+                r += counts[mask]; // add count of same previous states
+                for(int i = 0; i < 10; i++)
+                    r += counts[mask ^ (1 << i)];
+                counts[mask]++; // add 1 to count of times we've seen current state
+            }
             return r;
         }
     }
