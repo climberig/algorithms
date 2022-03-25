@@ -237,6 +237,18 @@ public class p19{
         }
     }
 
+    static class s1987{//Number of Unique Good Subsequences
+        public int numberOfUniqueGoodSubsequences(String binary){
+            int mod = 1_000_000_007, ends0 = 0, ends1 = 0, has0 = 0;
+            for(int i = 0; i < binary.length(); i++)
+                if(binary.charAt(i) == '0'){
+                    ends0 = (ends0 + ends1) % mod;
+                    has0 = 1;
+                }else ends1 = (ends0 + ends1 + 1) % mod;
+            return (ends0 + ends1 + has0) % mod;
+        }
+    }
+
     static class s1991{//Find the Middle Index in Array
         public int findMiddleIndex(int[] a){
             int left = 0, right = Arrays.stream(a).sum();
