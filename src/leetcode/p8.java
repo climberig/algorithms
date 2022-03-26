@@ -104,4 +104,15 @@ public class p8{
             return fives >= 0;
         }
     }
+
+    static class s881{//Boats to Save People
+        public int numRescueBoats(int[] people, int limit){
+            Arrays.sort(people);
+            int lo = 0, hi = people.length - 1, r = 0;
+            for(; lo <= hi; hi--, r++)
+                if(people[lo] + people[hi] <= limit)
+                    lo++;
+            return r;
+        }
+    }
 }
