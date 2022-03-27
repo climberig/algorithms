@@ -230,12 +230,24 @@ public class p22{
 
     static class s2216{//Minimum Deletions to Make Array Beautiful
         public int minDeletion(int[] a){
-            int r = 0;
-            for(int i = 0; i < a.length; i++)
-                if(i + 1 == a.length || a[i] == a[i + 1])
+            int r = 0, i = 0;
+            for(; i < a.length - 1; i++)
+                if(a[i] == a[i + 1])
                     r++;
-                else if(a[i] != a[i + 1])
-                    i++;
+                else i++;
+            return r + a.length - i;
+        }
+    }
+
+    static class s2217{//Find Palindrome With Fixed Length
+        public long[] kthPalindrome(int[] queries, int intLength){
+            long r[] = new long[queries.length], start = (long) Math.pow(10, (intLength + 1) / 2 - 1);
+            for(int i = 0; i < queries.length; i++){
+                String left = String.valueOf(start + queries[i] - 1);
+                String right = intLength % 2 == 1 ? left.substring(0, left.length() - 1) : left;
+                String s = left + new StringBuilder(right).reverse();
+                r[i] = s.length() != intLength ? -1 : Long.parseLong(s);
+            }
             return r;
         }
     }
