@@ -251,4 +251,22 @@ public class p22{
             return r;
         }
     }
+
+    static class s2218{//Maximum Value of K Coins From Piles
+        public int maxValueOfCoins(List<List<Integer>> piles, int k){
+            return maxVal(0, piles, k, new Integer[piles.size() + 1][k + 1]);
+        }
+        int maxVal(int pileIdx, List<List<Integer>> piles, int k, Integer[][] dp){
+            if(pileIdx >= piles.size())
+                return 0;
+            if(dp[pileIdx][k] != null)
+                return dp[pileIdx][k];
+            int r = maxVal(pileIdx + 1, piles, k, dp);
+            for(int i = 0, curr = 0; i < piles.get(pileIdx).size() && i < k; i++){
+                curr += piles.get(pileIdx).get(i);
+                r = Math.max(r, curr + maxVal(pileIdx + 1, piles, k - i - 1, dp));
+            }
+            return dp[pileIdx][k] = r;
+        }
+    }
 }
