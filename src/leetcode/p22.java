@@ -218,4 +218,25 @@ public class p22{
             return Arrays.stream(damage).asLongStream().sum() + 1 - maxProtect;
         }
     }
+
+    static class s2215{//Find the Difference of Two Arrays
+        public List<List<Integer>> findDifference(int[] a1, int[] a2){
+            Set<Integer> s1 = Arrays.stream(a1).boxed().collect(Collectors.toSet());
+            Set<Integer> s2 = Arrays.stream(a2).filter(n -> !s1.contains(n)).boxed().collect(Collectors.toSet());
+            Arrays.stream(a2).forEach(s1::remove);
+            return Arrays.asList(new ArrayList<>(s1), new ArrayList<>(s2));
+        }
+    }
+
+    static class s2216{//Minimum Deletions to Make Array Beautiful
+        public int minDeletion(int[] a){
+            int r = 0;
+            for(int i = 0; i < a.length; i++)
+                if(i + 1 == a.length || a[i] == a[i + 1])
+                    r++;
+                else if(a[i] != a[i + 1])
+                    i++;
+            return r;
+        }
+    }
 }
