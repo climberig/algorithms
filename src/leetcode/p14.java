@@ -61,6 +61,29 @@ public class p14{
         }
     }
 
+    static class s1416{//Restore The Array
+        public int numberOfArrays(String s, int k){
+            return dfs(s, k, 0, new Integer[s.length()]);
+        }
+
+        int dfs(String s, int k, int i, Integer[] dp){
+            if(i == s.length())
+                return 1;
+            if(s.charAt(i) == '0')
+                return 0;
+            if(dp[i] != null)
+                return dp[i];
+            int r = 0;
+            long n = 0;
+            for(int j = i; j < s.length() && n <= k; j++){
+                n = n * 10 + s.charAt(j) - '0';
+                if(n <= k)
+                    r = (r + dfs(s, k, j + 1, dp)) % 1_000_000_007;
+            }
+            return dp[i] = r;
+        }
+    }
+
     static class s1426{//Counting Elements
         /**
          * Given an integer array arr, count how many elements x there are, such that x + 1 is also in arr. If there are duplicates in arr,
