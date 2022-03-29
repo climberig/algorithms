@@ -131,6 +131,25 @@ public class p14{
         }
     }
 
+    static class s1449{//Form Largest Integer With Digits That Add up to Target
+        Map<Integer, String> dp = new HashMap<>();
+        public String largestNumber(int[] cost, int target){
+            if(target == 0)
+                return "";
+            if(dp.containsKey(target))
+                return dp.get(target);
+            String r = "0";
+            for(int d = 9; d >= 1; d--)
+                if(target - cost[d - 1] >= 0){
+                    String s = largestNumber(cost, target - cost[d - 1]);
+                    if(!s.equals("0") && (r.equals("0") || s.length() + 1 > r.length()))
+                        r = d + s;
+                }
+            dp.put(target, r);
+            return r;
+        }
+    }
+
     static class s1462{//Course Schedule IV
         public List<Boolean> checkIfPrerequisite(int n, int[][] prerequisites, int[][] queries){
             List<List<Integer>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
