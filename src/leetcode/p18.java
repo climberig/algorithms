@@ -142,6 +142,25 @@ public class p18{
         }
     }
 
+    static class s1820{//Maximum Number of Accepted Invitations
+        public int maximumInvitations(int[][] m){
+            int pairedGirls[] = new int[m[0].length], r = 0;
+            for(int boy = 0; boy < m.length; boy++)
+                if(dfs(m, boy, new HashSet<>(), pairedGirls))
+                    r++;
+            return r;
+        }
+
+        boolean dfs(int[][] m, int boy, Set<Integer> seenGirls, int[] pairedGirls){
+            for(int i = 0; i < m[0].length; i++)
+                if(m[boy][i] == 1 && seenGirls.add(i) && (pairedGirls[i] == 0 || dfs(m, pairedGirls[i] - 1, seenGirls, pairedGirls))){
+                    pairedGirls[i] = boy + 1;
+                    return true;
+                }
+            return false;
+        }
+    }
+
     static class s1832{//Check if the Sentence Is Pangram
         public boolean checkIfPangram(String s){
             return s.chars().boxed().collect(Collectors.toSet()).size() == 26;
