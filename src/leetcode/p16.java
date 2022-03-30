@@ -167,6 +167,32 @@ public class p16{
         }
     }
 
+    static class s1655{//Distribute Repeating Integers
+        public boolean canDistribute(int[] a, int[] quantity){
+            Map<Integer, Integer> m = new HashMap<>();
+            Arrays.stream(a).forEach(n -> m.put(n, m.getOrDefault(n, 0) + 1));
+            int count[] = new int[m.size()], i = 0;
+            for(int val : m.values())
+                count[i++] = val;
+            Arrays.sort(quantity);
+            return canAssign(quantity.length - 1, count, quantity);
+        }
+
+        boolean canAssign(int idx, int[] counts, int[] quantity){
+            if(idx < 0)
+                return true;
+            for(int i = 0; i < counts.length; i++)
+                if(counts[i] >= quantity[idx]){
+                    counts[i] -= quantity[idx];
+                    if(canAssign(idx - 1, counts, quantity))
+                        return true;
+                    counts[i] += quantity[idx];
+                }
+
+            return false;
+        }
+    }
+
     static class s1664{//Ways to Make a Fair Array
         public int waysToMakeFair(int[] a){
             int r = 0, L[] = new int[2], R[] = new int[2];
