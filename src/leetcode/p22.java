@@ -269,4 +269,16 @@ public class p22{
             return dp[pileIdx][k] = r;
         }
     }
+
+    static class s2219{//Maximum Sum Score of Array
+        public long maximumSumScore(int[] a){
+            long r = Long.MIN_VALUE, left = 0, right = Arrays.stream(a).asLongStream().sum();
+            for(int n : a){
+                left += n;
+                r = Math.max(r, Math.max(left, right));
+                right -= n;
+            }
+            return r;
+        }
+    }
 }
