@@ -315,4 +315,22 @@ public class p22{
             return r;
         }
     }
+
+    static class s2223{//Sum of Scores of Built Strings
+        public long sumScores(String s){
+            char[] a = s.toCharArray();
+            int n = a.length, x = 0, y = 0, z[] = new int[n];
+            long r = n;
+            for(int i = 1; i < n; i++){
+                z[i] = Math.max(0, Math.min(z[i - x], y - i + 1));
+                while(i + z[i] < n && a[z[i]] == a[i + z[i]]){
+                    x = i;
+                    y = i + z[i];
+                    z[i]++;
+                }
+                r += z[i];
+            }
+            return r;
+        }
+    }
 }
