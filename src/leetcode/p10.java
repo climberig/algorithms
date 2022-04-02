@@ -371,6 +371,25 @@ public class p10{
         }
     }
 
+    static class s1087{//Brace Expansion
+        public String[] expand(String s){
+            TreeSet<String> r = new TreeSet<>();
+            expand("", s, r);
+            return r.toArray(new String[0]);
+        }
+
+        void expand(String pre, String s, TreeSet<String> r){
+            int start = s.indexOf("{"), end = s.indexOf("}");
+            if(start < end){
+                String[] split = s.substring(start + 1, end).split(",");
+                pre = pre + s.substring(0, start);
+                s = s.substring(end + 1);
+                for(String p : split)
+                    expand(pre + p, s, r);
+            }else r.add(pre + s);
+        }
+    }
+
     static class s1088{//Confusing Number II
         public int confusingNumberII(int lim){
             Queue<Integer> q = new ArrayDeque<>();
