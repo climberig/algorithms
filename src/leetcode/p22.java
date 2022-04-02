@@ -281,4 +281,38 @@ public class p22{
             return r;
         }
     }
+
+    static class s2220{//Minimum Bit Flips to Convert Number
+        public int minBitFlips(int start, int goal){
+            return Integer.bitCount(start ^ goal);
+        }
+    }
+
+    static class s2221{//Find Triangular Sum of an Array
+        public int triangularSum(int[] a){
+            for(int len = a.length - 1; len > 0; len--){
+                int[] b = new int[len];
+                for(int i = 0; i < b.length; i++)
+                    b[i] = (a[i] + a[i + 1]) % 10;
+                a = b;
+            }
+            return a[0];
+        }
+    }
+
+    static class s2222{//Number of Ways to Select Buildings
+        public long numberOfWays(String s){
+            int n = s.length(), all1 = s.chars().map(c -> c - '0').sum(), all0 = s.length() - all1;
+            long r = 0;
+            for(int i = 0, ones = 0, zero = 0; i < s.length(); i++)
+                if(s.charAt(i) == '0'){
+                    r += (long) ones * (all1 - ones);
+                    zero++;
+                }else{
+                    r += (long) zero * (all0 - zero);
+                    ones++;
+                }
+            return r;
+        }
+    }
 }
