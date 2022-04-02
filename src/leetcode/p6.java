@@ -198,6 +198,21 @@ public class p6{
         boolean valid(int x, int y, int[][] m){return 0 <= x && x < m.length && 0 <= y && y < m[0].length;}
     }
 
+    static class s680{//Valid Palindrome II
+        public boolean validPalindrome(String s){
+            for(int lo = 0, hi = s.length() - 1; lo < hi; lo++, hi--)
+                if(s.charAt(lo) != s.charAt(hi))
+                    return isPali(lo + 1, hi, s) || isPali(lo, hi - 1, s);
+            return true;
+        }
+        boolean isPali(int lo, int hi, String s){
+            for(; lo < hi; lo++, hi--)
+                if(s.charAt(lo) != s.charAt(hi))
+                    return false;
+            return true;
+        }
+    }
+
     static class s684{//Redundant Connection
         public int[] findRedundantConnection(int[][] edges){
             int[] uf = IntStream.range(0, edges.length + 1).toArray();
