@@ -351,15 +351,15 @@ public class p22{
 
     static class s2225{//Find Players With Zero or One Losses
         public List<List<Integer>> findWinners(int[][] matches){
-            TreeMap<Integer, Integer> m = new TreeMap<>();
-            for(int[] match : matches){
-                m.put(match[0], m.getOrDefault(match[0], 0));
-                m.put(match[1], m.getOrDefault(match[1], 0) + 1);
+            Map<Integer, Integer> losses = new TreeMap<>();
+            for(int[] m : matches){
+                losses.put(m[0], losses.getOrDefault(m[0], 0));
+                losses.put(m[1], losses.getOrDefault(m[1], 0) + 1);
             }
             List<List<Integer>> r = Arrays.asList(new ArrayList<>(), new ArrayList<>());
-            for(Integer p : m.keySet())
-                if(m.get(p) <= 1)
-                    r.get(m.get(p)).add(p);
+            for(Integer player : losses.keySet())
+                if(losses.get(player) <= 1)
+                    r.get(losses.get(player)).add(player);
             return r;
         }
     }
