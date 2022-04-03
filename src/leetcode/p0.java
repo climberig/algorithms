@@ -15,6 +15,26 @@ public class p0{
         }
     }
 
+    static class s31{//Next Permutation
+        public void nextPermutation(int[] a){
+            int i = a.length - 1;
+            for(; i > 0 && a[i - 1] >= a[i]; i--) ;
+            if(i > 0){
+                int j = a.length - 1;
+                for(; i <= j && a[i - 1] >= a[j]; j--) ;
+                swap(a, i - 1, j);
+            }
+            for(int j = a.length - 1; i < j; i++, j--)
+                swap(a, i, j);
+        }
+
+        void swap(int[] a, int i, int j){
+            int t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+        }
+    }
+
     static class s51{//N-Queens
         public List<List<String>> solveNQueens(int n){
             char[][] b = new char[n][n];
