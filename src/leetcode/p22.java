@@ -337,9 +337,8 @@ public class p22{
     static class s2224{//Minimum Number of Operations to Convert Time
         public int convertTime(String from, String to){
             int diff = min(to) - min(from), ops[] = {60, 15, 5, 1}, r = 0;
-            for(int i = 0; i < ops.length && diff > 0; i++)
-                for(; diff >= ops[i]; r++)
-                    diff -= ops[i];
+            for(int i = 0; i < ops.length && diff > 0; diff = diff % ops[i++])
+                r += diff / ops[i];
             return r;
         }
 
