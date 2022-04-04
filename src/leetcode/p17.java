@@ -88,6 +88,21 @@ public class p17{
         }
     }
 
+    static class s1721{//Swapping Nodes in a Linked List
+        public ListNode swapNodes(ListNode head, int k){
+            ListNode first = head, second;
+            int len = 1, i = 1;
+            for(ListNode node = head; node != null; len++, node = node.next)
+                if(len == k)
+                    first = node;
+            for(second = head; i < len - k; second = second.next, i++) ;
+            int t = first.val;
+            first.val = second.val;
+            second.val = t;
+            return head;
+        }
+    }
+
     static class s1722{//Minimize Hamming Distance After Swap Operations
         public int minimumHammingDistance(int[] src, int[] tgt, int[][] swaps){
             List<List<Integer>> g = IntStream.range(0, src.length).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
