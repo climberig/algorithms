@@ -379,4 +379,24 @@ public class p22{
             return r;
         }
     }
+
+    static class s2227{//Encrypt and Decrypt Strings
+        class Encrypter{
+            Map<Character, String> enc = new HashMap<>();
+            Map<String, Integer> counts = new HashMap<>();
+
+            public Encrypter(char[] keys, String[] values, String[] dictionary){
+                for(int i = 0; i < keys.length; i++)
+                    enc.put(keys[i], values[i]);
+                for(String word : dictionary){
+                    String e = encrypt(word);
+                    counts.put(e, counts.getOrDefault(e, 0) + 1);
+                }
+            }
+
+            public String encrypt(String word){return word.chars().mapToObj(c -> enc.get((char) c)).collect(Collectors.joining());}
+
+            public int decrypt(String word){return counts.getOrDefault(word, 0);}
+        }
+    }
 }
