@@ -362,4 +362,21 @@ public class p22{
             return r;
         }
     }
+
+    static class s2226{//Maximum Candies Allocated to K Children
+        public int maximumCandies(int[] candies, long k){
+            int lo = 1, hi = 10_000_000, r = 0;
+            while(lo <= hi){
+                int amount = (lo + hi) / 2;
+                long n = 0;
+                for(int i = 0; i < candies.length && n < k; i++)
+                    n += candies[i] / amount;
+                if(n >= k){
+                    r = amount;
+                    lo = amount + 1;
+                }else hi = amount - 1;
+            }
+            return r;
+        }
+    }
 }
