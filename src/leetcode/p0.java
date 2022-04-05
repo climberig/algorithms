@@ -15,6 +15,19 @@ public class p0{
         }
     }
 
+    static class s11{//Container With Most Water
+        public int maxArea(int[] heights){
+            int r = 0;
+            for(int lo = 0, hi = heights.length - 1; lo < hi; ){
+                int minHeight = Math.min(heights[lo], heights[hi]);
+                r = Math.max(r, (hi - lo) * minHeight);
+                for(; heights[lo] <= minHeight && lo < hi; lo++) ;
+                for(; heights[hi] <= minHeight && lo < hi; hi--) ;
+            }
+            return r;
+        }
+    }
+
     static class s31{//Next Permutation
         public void nextPermutation(int[] a){
             int i = a.length - 1;
