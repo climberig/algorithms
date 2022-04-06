@@ -399,4 +399,14 @@ public class p22{
             public int decrypt(String word){return counts.getOrDefault(word, 0);}
         }
     }
+
+    static class s2229{//Check if an Array Is Consecutive
+        public boolean isConsecutive(int[] a){
+            Arrays.sort(a);
+            for(int i = 1; i < a.length; i++)
+                if(a[i - 1] + 1 != a[i])
+                    return false;
+            return true;
+        }
+    }
 }
