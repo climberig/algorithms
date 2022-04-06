@@ -30,6 +30,26 @@ public class p9{
         }
     }
 
+    static class s923{//3Sum With Multiplicity
+        public int threeSumMulti(int[] a, int target){
+            long f[] = new long[101], r = 0;
+            Arrays.stream(a).forEach(n -> f[n]++);
+            for(int i = 0; i < f.length; i++)
+                for(int j = i; j < f.length; j++){
+                    int k = target - i - j;
+                    if(0 <= k && k < f.length){
+                        if(i == j && j == k)
+                            r += f[i] * (f[i] - 1) * (f[i] - 2) / 6;
+                        else if(i == j)
+                            r += f[i] * (f[i] - 1) * f[k] / 2;
+                        else if(j < k)
+                            r += f[i] * f[j] * f[k];
+                    }
+                }
+            return (int) (r % 1_000_000_007);
+        }
+    }
+
     static class s925{
         public boolean isLongPressedName(String name, String typed){
             int i = 0, j = 0;
