@@ -203,6 +203,16 @@ public class p10{
         }
     }
 
+    static class s1046{//Last Stone Weight
+        public int lastStoneWeight(int[] a){
+            PriorityQueue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
+            Arrays.stream(a).forEach(q::offer);
+            while(q.size() > 1)
+                q.offer(q.poll() - q.poll());
+            return q.poll();
+        }
+    }
+
     static class s1047{//Remove All Adjacent Duplicates In String
         public String removeDuplicates(String str){
             Stack<Character> s = new Stack<>();
