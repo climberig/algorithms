@@ -177,6 +177,33 @@ public class p17{
         }
     }
 
+    static class s1733{//Minimum Number of People to Teach
+        public int minimumTeachings(int n, int[][] languages, int[][] friendships){
+            List<Set<Integer>> m = IntStream.range(0, languages.length + 1).mapToObj(f -> new HashSet<Integer>()).collect(Collectors.toList());
+            for(int i = 0; i < languages.length; i++)
+                for(int lang : languages[i])
+                    m.get(i + 1).add(lang);
+            boolean[] alreadyCan = new boolean[friendships.length];
+            for(int j = 1; j <= n; j++)
+                for(int i = 0; i < friendships.length; i++)
+                    if(m.get(friendships[i][0]).contains(j) && m.get(friendships[i][1]).contains(j))
+                        alreadyCan[i] = true;
+            int r = Integer.MAX_VALUE;
+            for(int i = 1; i <= n; i++){
+                Set<Integer> teachSet = new HashSet<>();
+                for(int j = 0; j < friendships.length; j++)
+                    if(!alreadyCan[j]){
+                        if(!m.get(friendships[j][0]).contains(i))
+                            teachSet.add(friendships[j][0]);
+                        if(!m.get(friendships[j][1]).contains(i))
+                            teachSet.add(friendships[j][1]);
+                    }
+                r = Math.min(teachSet.size(), r);
+            }
+            return r;
+        }
+    }
+
     static class s1734{//Decode XORed Permutation
         public int[] decode(int[] encoded){
             int allXor = 0, xor = 0, r[] = new int[encoded.length + 1];
