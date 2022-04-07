@@ -199,6 +199,39 @@ public class p13{
         }
     }
 
+    static class s1349{//Maximum Students Taking Exam
+        public int maxStudents(char[][] seats){
+            int[][] dp = new int[seats.length][1 << seats[0].length];
+            for(int i = 0; i < seats.length; i++)
+                Arrays.fill(dp[i], -1);
+            return maxSeats(seats, 0, 0, dp);
+        }
+
+        int maxSeats(char[][] seats, int row, int prevRowMask, int[][] dp){
+            if(row == seats.length)
+                return 0;
+            if(dp[row][prevRowMask] != -1)
+                return dp[row][prevRowMask];
+            List<Integer> currRowMasks = new ArrayList<>();
+            bt(seats[row], 0, prevRowMask, 0, currRowMasks);
+            int r = 0;
+            for(int currMask : currRowMasks)
+                r = Math.max(r, Integer.bitCount(currMask) + maxSeats(seats, row + 1, currMask, dp));
+            return dp[row][prevRowMask] = r;
+        }
+
+        void bt(char[] seatRow, int col, int prevRowMask, int currRowMask, List<Integer> masks){
+            if(col < seatRow.length){
+                bt(seatRow, col + 1, prevRowMask, currRowMask, masks);
+                if(seatRow[col] != '#'
+                        && (col == 0 || (((currRowMask & (1 << (col - 1))) == 0) && (prevRowMask & (1 << (col - 1))) == 0))
+                        && (col == seatRow.length - 1 || ((prevRowMask & (1 << (col + 1))) == 0))){
+                    bt(seatRow, col + 1, prevRowMask, currRowMask | (1 << col), masks);
+                }
+            }else masks.add(currRowMask);
+        }
+    }
+
     static class s1354{//Construct Target Array With Multiple Sums
         public boolean isPossible(int[] target){
             Queue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
