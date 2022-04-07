@@ -220,6 +220,27 @@ public class p17{
         }
     }
 
+    static class s1737{//Change Minimum Characters to Satisfy One of Three Conditions
+        public int minCharacters(String a, String b){
+            int m = a.length(), n = b.length(), r = m + n;
+            int[] c1 = new int[26], c2 = new int[26];
+            a.chars().forEach(c -> c1[c - 'a']++);
+            b.chars().forEach(c -> c2[c - 'a']++);
+            for(int i = 0; i < 26; ++i){
+                r = Math.min(r, m + n - c1[i] - c2[i]); // condition 3
+                if(i > 0){
+                    c1[i] += c1[i - 1];
+                    c2[i] += c2[i - 1];
+                }
+                if(i < 25){
+                    r = Math.min(r, m - c1[i] + c2[i]); // condition 1
+                    r = Math.min(r, n - c2[i] + c1[i]); // condition 2
+                }
+            }
+            return r;
+        }
+    }
+
     static class s1738{//Find Kth Largest XOR Coordinate Value
         public int kthLargestValue(int[][] mat, int k){
             int n = mat.length, m = mat[0].length, pre[][] = new int[n + 1][m + 1], r[] = new int[n * m];
