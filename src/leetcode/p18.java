@@ -262,6 +262,17 @@ public class p18{
         }
     }
 
+    static class s1874{//Minimize Product Sum of Two Arrays
+        public int minProductSum(int[] a, int[] b){
+            Arrays.sort(a);
+            Arrays.sort(b);
+            int r = 0;
+            for(int i = 0; i < a.length; i++)
+                r += a[i] * b[a.length - 1 - i];
+            return r;
+        }
+    }
+
     static class s1878{//Get Biggest Three Rhombus Sums in a Grid
         public int[] getBiggestThree(int[][] g){
             Set<Integer> sums = new HashSet<>();
