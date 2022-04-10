@@ -443,4 +443,17 @@ public class p22{
             return s;
         }
     }
+
+    static class s2233{//Maximum Product After K Increments
+        public int maximumProduct(int[] a, int k){
+            PriorityQueue<Integer> q = new PriorityQueue<>();
+            Arrays.stream(a).forEach(q::offer);
+            while(k-- > 0)
+                q.offer(q.poll() + 1);
+            long r = 1;
+            for(Integer n : q)
+                r = (r * n) % 1_000_000_007;
+            return (int) r;
+        }
+    }
 }
