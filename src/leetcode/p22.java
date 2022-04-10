@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 public class p22{
@@ -421,6 +422,25 @@ public class p22{
                         a[j] = t;
                     }
             return Integer.parseInt(new String(a));
+        }
+    }
+
+    static class s2232{//Minimize Result by Adding Parentheses to Expression
+        public String minimizeResult(String expression){
+            Function<String, Integer> toi = s -> s.isEmpty() ? 0 : Integer.parseInt(s);
+            String p[] = expression.split("\\+"), a = p[0], b = p[1], s = "(" + expression + ")";
+            for(int i = 0, minVal = Integer.MAX_VALUE; i < a.length(); i++){
+                int n1 = toi.apply(a.substring(0, i)), n2 = toi.apply(a.substring(i));
+                for(int j = b.length(); j >= 1; j--){
+                    int m2 = toi.apply(b.substring(0, j)), m1 = toi.apply(b.substring(j));
+                    int val = (n1 == 0 ? 1 : n1) * (n2 + m2) * (m1 == 0 ? 1 : m1);
+                    if(val < minVal){
+                        minVal = val;
+                        s = (n1 > 0 ? n1 : "") + "(" + n2 + "+" + m2 + ")" + (m1 > 0 ? m1 : "");
+                    }
+                }
+            }
+            return s;
         }
     }
 }
