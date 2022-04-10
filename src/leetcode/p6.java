@@ -213,6 +213,24 @@ public class p6{
         }
     }
 
+    static class s682{//Baseball Game
+        public int calPoints(String[] ops){
+            Stack<Integer> s = new Stack<>();
+            for(String op : ops)
+                switch(op){
+                    case "+" -> {
+                        Integer a = s.pop(), sum = a + s.peek();
+                        s.push(a);
+                        s.push(sum);
+                    }
+                    case "D" -> s.push(2 * s.peek());
+                    case "C" -> s.pop();
+                    default -> s.push(Integer.parseInt(op));
+                }
+            return s.stream().mapToInt(n -> n).sum();
+        }
+    }
+
     static class s684{//Redundant Connection
         public int[] findRedundantConnection(int[][] edges){
             int[] uf = IntStream.range(0, edges.length + 1).toArray();
