@@ -274,6 +274,26 @@ public class p9{
         }
     }
 
+    static class s956{//Tallest Billboard
+        public int tallestBillboard(int[] rods){
+            return tallest(rods, 0, 0, 0, new HashMap<>());
+        }
+
+        int tallest(int[] rods, int i, int s1, int s2, Map<String, Integer> dp){
+            if(i == rods.length)
+                return s1 == s2 ? s1 : -1;
+            String hash = i + "," + Math.abs(s1 - s2);
+            if(dp.containsKey(hash))
+                return dp.get(hash) == -1 ? -1 : Math.max(s1, s2) + dp.get(hash);
+            int left = tallest(rods, i + 1, s1 + rods[i], s2, dp);
+            int right = tallest(rods, i + 1, s1, s2 + rods[i], dp);
+            int skip = tallest(rods, i + 1, s1, s2, dp);
+            int r = Math.max(skip, Math.max(left, right));
+            dp.put(hash, r == -1 ? -1 : r - Math.max(s1, s2));
+            return r;
+        }
+    }
+
     static class s960{//Delete Columns to Make Sorted III
         public int minDeletionSize(String[] list){
             int n = list[0].length(), dp[] = new int[n];
