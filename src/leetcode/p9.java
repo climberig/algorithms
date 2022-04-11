@@ -345,6 +345,27 @@ public class p9{
         }
     }
 
+    static class s975{//Odd Even Jump
+        public int oddEvenJumps(int[] a){
+            int n = a.length, r = 1;
+            boolean[] lower = new boolean[n], higher = new boolean[n];
+            higher[n - 1] = lower[n - 1] = true;
+            TreeMap<Integer, Integer> m = new TreeMap<>();
+            m.put(a[n - 1], n - 1);
+            for(int i = n - 2; i >= 0; i--){
+                Map.Entry<Integer, Integer> hi = m.ceilingEntry(a[i]), lo = m.floorEntry(a[i]);
+                if(hi != null)
+                    higher[i] = lower[hi.getValue()];
+                if(lo != null)
+                    lower[i] = higher[lo.getValue()];
+                if(higher[i])
+                    r++;
+                m.put(a[i], i);
+            }
+            return r;
+        }
+    }
+
     static class s982{//Triples with Bitwise AND Equal To Zero
         public int countTriplets(int[] a){
             int m[] = new int[1 << 16], r = 0;
