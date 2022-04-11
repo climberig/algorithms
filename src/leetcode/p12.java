@@ -381,6 +381,18 @@ public class p12{
         }
     }
 
+    static class s1260{//Shift 2D Grid
+        public List<List<Integer>> shiftGrid(int[][] g, int k){
+            int[][] r = new int[g.length][g[0].length];
+            for(int i = 0, len = g[0].length; i < g.length; i++)
+                for(int j = 0; j < g[0].length; j++){
+                    int x = i * len + j + k;
+                    r[(x / len) % g.length][x % len] = g[i][j];
+                }
+            return Arrays.stream(r).map(row -> Arrays.stream(row).boxed().collect(Collectors.toList())).collect(Collectors.toList());
+        }
+    }
+
     static class s1263{//Minimum Moves to Move a Box to Their Target Location
         public int minPushBox(char[][] g){
             int user[] = null, box[] = null, target[] = null, dirs[] = {-1, 0, 1, 0, -1}, r = 0;
