@@ -417,6 +417,23 @@ public class p10{
         }
     }
 
+    static class s1096{//Brace Expansion II
+        public List<String> braceExpansionII(String expression){
+            Queue<String> q = new LinkedList<>();
+            Set<String> r = new TreeSet<>();
+            for(q.offer(expression); !q.isEmpty(); ){
+                String s = q.poll();
+                if(s.contains("{")){
+                    int right = s.indexOf("}"), left = right - 1;
+                    for(; s.charAt(left) != '{'; left--) ;
+                    String pre = s.substring(0, left), post = s.substring(right + 1);
+                    Arrays.stream(s.substring(left + 1, right).split(",")).forEach(ss -> q.offer(pre + ss + post));
+                }else r.add(s);
+            }
+            return new ArrayList<>(r);
+        }
+    }
+
     static class s1099{//Two Sum Less Than K
         public int twoSumLessThanK(int[] a, int k){
             Arrays.sort(a);
