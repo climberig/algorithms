@@ -382,21 +382,18 @@ public class p10{
     }
 
     static class s1087{//Brace Expansion
-        public String[] expand(String s){
-            TreeSet<String> r = new TreeSet<>();
-            expand("", s, r);
+        public String[] expand(String str){
+            Set<String> r = new TreeSet<>();
+            Queue<String> q = new LinkedList<>();
+            for(q.offer(str); !q.isEmpty(); ){
+                String s = q.poll();
+                int left = s.indexOf("{"), right = s.indexOf("}");
+                if(left < right){
+                    String pre = s.substring(0, left), post = s.substring(right + 1);
+                    Arrays.stream(s.substring(left + 1, right).split(",")).forEach(ss -> q.offer(pre + ss + post));
+                }else r.add(s);
+            }
             return r.toArray(new String[0]);
-        }
-
-        void expand(String pre, String s, TreeSet<String> r){
-            int start = s.indexOf("{"), end = s.indexOf("}");
-            if(start < end){
-                String[] split = s.substring(start + 1, end).split(",");
-                pre = pre + s.substring(0, start);
-                s = s.substring(end + 1);
-                for(String p : split)
-                    expand(pre + p, s, r);
-            }else r.add(pre + s);
         }
     }
 
@@ -423,8 +420,8 @@ public class p10{
             Set<String> r = new TreeSet<>();
             for(q.offer(expression); !q.isEmpty(); ){
                 String s = q.poll();
-                if(s.contains("{")){
-                    int right = s.indexOf("}"), left = right - 1;
+                int right = s.indexOf("}"), left = right;
+                if(right > 0){
                     for(; s.charAt(left) != '{'; left--) ;
                     String pre = s.substring(0, left), post = s.substring(right + 1);
                     Arrays.stream(s.substring(left + 1, right).split(",")).forEach(ss -> q.offer(pre + ss + post));
