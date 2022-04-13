@@ -166,6 +166,38 @@ public class p13{
         }
     }
 
+    static class s1345{//Jump Game IV
+        public int minJumps(int[] a){
+            Map<Integer, List<Integer>> m = new HashMap<>();
+            for(int i = 0; i < a.length; i++){
+                m.putIfAbsent(a[i], new ArrayList<>());
+                m.get(a[i]).add(i);
+            }
+            Queue<Integer> q = new LinkedList<>();
+            boolean[] seen = new boolean[a.length];
+            q.offer(0);
+            seen[0] = true;
+            for(int d = 1; !q.isEmpty(); d++)
+                for(int size = q.size(); size > 0; size--){
+                    Integer i = q.poll();
+                    List<Integer> next = m.getOrDefault(a[i], new ArrayList<>());
+                    if(i > 0)
+                        next.add(i - 1);
+                    if(i < a.length - 1)
+                        next.add(i + 1);
+                    for(Integer j : next)
+                        if(!seen[j]){
+                            if(j == a.length - 1)
+                                return d;
+                            seen[j] = true;
+                            q.offer(j);
+                        }
+                    next.clear();
+                }
+            return 0;
+        }
+    }
+
     static class s1346{//Check If N and Its Double Exist
         public boolean checkIfExist(int[] a){
             Set<Integer> s = new HashSet<>();
