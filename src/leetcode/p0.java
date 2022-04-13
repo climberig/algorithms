@@ -116,6 +116,23 @@ public class p0{
         }
     }
 
+    static class s59{//Spiral Matrix II
+        public int[][] generateMatrix(int n){
+            int[][] m = new int[n][n];
+            for(int r1 = 0, c1 = -1, r2 = n - 1, c2 = n - 1, v = 1; r1 <= r2 && c1 <= c2; ){
+                for(int c = ++c1; c <= c2 && r1 <= r2; c++)
+                    m[r1][c] = v++;
+                for(int r = ++r1; r <= r2 && c1 <= c2; r++)
+                    m[r][c2] = v++;
+                for(int c = --c2; c >= c1 && r1 <= r2; c--)
+                    m[r2][c] = v++;
+                for(int r = --r2; r >= r1 && c1 <= c2; r--)
+                    m[r][c1] = v++;
+            }
+            return m;
+        }
+    }
+
     static class s69{//Sqrt(x)
         public int mySqrt(int x){
             if(x <= 1)
