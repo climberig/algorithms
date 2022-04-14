@@ -456,4 +456,19 @@ public class p22{
             return (int) r;
         }
     }
+
+    static class s2237{//Count Positions on Street With Required Brightness
+        public int meetRequirement(int n, int[][] lights, int[] reqs){
+            int line[] = new int[n + 1], r = 0, sum = 0;
+            for(int[] l : lights){
+                line[Math.max(0, l[0] - l[1])]++;
+                line[Math.min(n, l[0] + l[1] + 1)]--;
+            }
+            for(int i = 0; i < n; i++){
+                sum += line[i];
+                r += sum >= reqs[i] ? 1 : 0;
+            }
+            return r;
+        }
+    }
 }
