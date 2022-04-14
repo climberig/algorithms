@@ -218,6 +218,24 @@ public class p18{
         }
     }
 
+    static class s1851{//Minimum Interval to Include Each Query
+        public int[] minInterval(int[][] intervals, int[] queries){
+            int[] r = new int[queries.length];
+            List<Integer> sortedIdx = IntStream.range(0, queries.length).boxed().sorted(Comparator.comparingInt(a -> queries[a])).collect(Collectors.toList());
+            Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+            PriorityQueue<int[]> q = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+            for(int j = 0, i = 0; j < queries.length; j++){
+                int query = queries[sortedIdx.get(j)];
+                while(i < intervals.length && intervals[i][0] <= query)
+                    q.add(new int[]{intervals[i][1] - intervals[i][0] + 1, intervals[i++][1]});
+                while(!q.isEmpty() && q.peek()[1] < query)
+                    q.poll();
+                r[sortedIdx.get(j)] = q.isEmpty() ? -1 : q.peek()[0];
+            }
+            return r;
+        }
+    }
+
     static class s1856{//Maximum Subarray Min-Product
         public int maxSumMinProduct(int[] a){
             long cs[] = new long[a.length + 1], r = 0;
