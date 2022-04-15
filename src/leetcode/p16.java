@@ -317,6 +317,26 @@ public class p16{
         }
     }
 
+    static class s1675{//Minimize Deviation in Array
+        public int minimumDeviation(int[] a){
+            TreeSet<Integer> s = new TreeSet<>();
+            for(int x : a)
+                if(x % 2 == 0)
+                    s.add(x);
+                else s.add(x * 2);
+            int r = Integer.MAX_VALUE;
+            while(true){
+                int val = s.last();
+                r = Math.min(r, s.last() - s.first());
+                if(s.last() % 2 == 0){
+                    s.pollLast();
+                    s.add(val / 2);
+                }else break;
+            }
+            return r;
+        }
+    }
+
     static class s1679{//Max Number of K-Sum Pairs
         public int maxOperations(int[] a, int k){
             int r = 0;
