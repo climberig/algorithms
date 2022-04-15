@@ -319,21 +319,11 @@ public class p16{
 
     static class s1675{//Minimize Deviation in Array
         public int minimumDeviation(int[] a){
-            TreeSet<Integer> s = new TreeSet<>();
-            for(int x : a)
-                if(x % 2 == 0)
-                    s.add(x);
-                else s.add(x * 2);
+            TreeSet<Integer> s = Arrays.stream(a).mapToObj(n -> n % 2 == 0 ? n : 2 * n).collect(Collectors.toCollection(TreeSet::new));
             int r = Integer.MAX_VALUE;
-            while(true){
-                int val = s.last();
-                r = Math.min(r, s.last() - s.first());
-                if(s.last() % 2 == 0){
-                    s.pollLast();
-                    s.add(val / 2);
-                }else break;
-            }
-            return r;
+            for(; s.last() % 2 == 0; r = Math.min(r, s.last() - s.first()))
+                s.add(s.pollLast() / 2);
+            return Math.min(r, s.last() - s.first());
         }
     }
 
