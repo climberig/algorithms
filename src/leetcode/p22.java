@@ -494,4 +494,27 @@ public class p22{
             return r;
         }
     }
+
+    static class s2241{//Design an ATM Machine
+        class ATM{
+            long[][] bank = {{0, 20}, {0, 50}, {0, 100}, {0, 200}, {0, 500}};
+
+            public void deposit(int[] banknotesCount){
+                for(int i = 0; i < banknotesCount.length; i++)
+                    bank[i][0] += banknotesCount[i];
+            }
+
+            public int[] withdraw(int amount){
+                int[] r = new int[bank.length];
+                for(int i = bank.length - 1; i >= 0 && amount > 0; i--){
+                    r[i] = (int) Math.min(amount / bank[i][1], bank[i][0]);
+                    amount -= r[i] * bank[i][1];
+                }
+                if(amount > 0)
+                    return new int[]{-1};
+                IntStream.range(0, bank.length).forEach(i -> bank[i][0] -= r[i]);
+                return r;
+            }
+        }
+    }
 }
