@@ -109,6 +109,19 @@ public class p5{
         }
     }
 
+    static class s538{//Convert BST to Greater Tree
+        int sum = 0;
+        public TreeNode convertBST(TreeNode root){
+            if(root == null)
+                return null;
+            convertBST(root.right);
+            root.val += sum;
+            sum = root.val;
+            convertBST(root.left);
+            return root;
+        }
+    }
+
     static class s541{//Reverse String II
         public String reverseStr(String s, int k){
             char[] a = s.toCharArray();
