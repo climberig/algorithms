@@ -471,4 +471,27 @@ public class p22{
             return r;
         }
     }
+
+    static class s2239{//Find Closest Number to Zero
+        public int findClosestNumber(int[] a){
+            int minDiff = Integer.MAX_VALUE, r = 0;
+            for(int n : a)
+                if(Math.abs(n) == minDiff)
+                    r = Math.max(r, n);
+                else if(Math.abs(n) < minDiff){
+                    minDiff = Math.abs(n);
+                    r = n;
+                }
+            return r;
+        }
+    }
+
+    static class s2240{//Number of Ways to Buy Pens and Pencils
+        public long waysToBuyPensPencils(int total, int cost1, int cost2){
+            long r = 0;
+            for(int amount = 0; amount <= total; amount += cost1)
+                r += 1 + (total - amount) / cost2;
+            return r;
+        }
+    }
 }
