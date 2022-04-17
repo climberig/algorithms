@@ -517,4 +517,29 @@ public class p22{
             }
         }
     }
+
+    static class s2242{//Maximum Score of a Node Sequence
+        public int maximumScore(int[] scores, int[][] edges){
+            List<PriorityQueue<Integer>> g = new ArrayList<>();
+            for(int i = 0; i < scores.length; i++)
+                g.add(new PriorityQueue<>(Comparator.comparingInt(o -> scores[o])));
+            for(int[] e : edges){
+                addToQueue(g.get(e[0]), e[1]);
+                addToQueue(g.get(e[1]), e[0]);
+            }
+            int r = -1;
+            for(int[] e : edges)
+                for(int x : g.get(e[0]))
+                    for(int y : g.get(e[1]))
+                        if(e[0] != y && e[1] != x && x != y)
+                            r = Math.max(r, scores[e[0]] + scores[x] + scores[y] + scores[e[1]]);
+            return r;
+        }
+
+        void addToQueue(PriorityQueue<Integer> q, int val){
+            q.offer(val);
+            if(q.size() > 3)
+                q.poll();
+        }
+    }
 }
