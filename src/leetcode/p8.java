@@ -115,4 +115,19 @@ public class p8{
             return r;
         }
     }
+
+    static class s897{//Increasing Order Search Tree
+        public TreeNode increasingBST(TreeNode root){
+            return increasingBST(root, null);
+        }
+
+        public TreeNode increasingBST(TreeNode root, TreeNode nextBigger){
+            if(root == null)
+                return nextBigger;
+            TreeNode r = increasingBST(root.left, root);
+            root.left = null;
+            root.right = increasingBST(root.right, nextBigger);
+            return r;
+        }
+    }
 }
