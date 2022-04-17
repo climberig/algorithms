@@ -558,4 +558,19 @@ public class p22{
             return digitSum(r.toString(), k);
         }
     }
+
+    static class s2244{//Minimum Rounds to Complete All Tasks
+        public int minimumRounds(int[] tasks){
+            Map<Integer, Integer> m = new HashMap<>();
+            for(int t : tasks)
+                m.put(t, m.getOrDefault(t, 0) + 1);
+            int r = 0;
+            for(Integer v : m.values()){
+                if(v == 1)
+                    return -1;
+                r += (v + 2) / 3;
+            }
+            return r;
+        }
+    }
 }
