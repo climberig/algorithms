@@ -573,4 +573,37 @@ public class p22{
             return r;
         }
     }
+
+    static class s2245{//Maximum Trailing Zeros in a Cornered Path
+        public int maxTrailingZeros(int[][] g){
+            int n = g.length, m = g[0].length, r = 0;
+            int[][] twos_h = new int[n + 1][m + 1], twos_v = new int[n + 1][m + 1];
+            int[][] fives_h = new int[n + 1][m + 1], fives_v = new int[n + 1][m + 1];
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j < m; j++){
+                    int two = two(g[i][j]), five = five(g[i][j]);
+                    twos_h[i + 1][j + 1] = two + twos_h[i + 1][j];
+                    twos_v[i + 1][j + 1] = two + twos_v[i][j + 1];
+                    fives_h[i + 1][j + 1] = five + fives_h[i + 1][j];
+                    fives_v[i + 1][j + 1] = five + fives_v[i][j + 1];
+                }
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j < m; j++){
+                    r = Math.max(r, Math.min(twos_h[i + 1][j + 1] + twos_v[i][j + 1], fives_h[i + 1][j + 1] + fives_v[i][j + 1]));
+                    r = Math.max(r, Math.min(twos_h[i][m], fives_h[i][m]));
+                    r = Math.max(r, Math.min(twos_h[n][j], fives_h[n][j]));
+                    r = Math.max(r, Math.min(twos_h[i + 1][m] - twos_h[i + 1][j] + twos_v[i][j + 1], fives_h[i + 1][m] - fives_h[i + 1][j] + fives_v[i][j + 1]));
+                    r = Math.max(r, Math.min(twos_h[i + 1][j + 1] + twos_v[n][j + 1] - twos_v[i + 1][j + 1], fives_h[i + 1][j + 1] + fives_v[n][j + 1] - fives_v[i + 1][j + 1]));
+                    r = Math.max(r, Math.min(twos_h[i + 1][m] - twos_h[i + 1][j] + twos_v[n][j + 1] - twos_v[i + 1][j + 1], fives_h[i + 1][m] - fives_h[i + 1][j] + fives_v[n][j + 1] - fives_v[i + 1][j + 1]));
+                }
+            return r;
+        }
+
+        int two(int n){
+            return n % 2 == 0 ? 1 + two(n / 2) : 0;
+        }
+        int five(int n){
+            return n % 5 == 0 ? 1 + five(n / 5) : 0;
+        }
+    }
 }
