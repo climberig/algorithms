@@ -606,4 +606,26 @@ public class p22{
             return n % 5 == 0 ? 1 + five(n / 5) : 0;
         }
     }
+
+    static class s2246{//Longest Path With Different Adjacent Characters
+        int r = 1;
+        public int longestPath(int[] parent, String s){
+            List<List<Integer>> g = IntStream.range(0, s.length()).mapToObj(v -> new ArrayList<Integer>()).collect(Collectors.toList());
+            IntStream.range(1, s.length()).forEach(i -> g.get(parent[i]).add(i));
+            dfs(0, g, s);
+            return r;
+        }
+
+        int dfs(int u, List<List<Integer>> g, String s){
+            Queue<Integer> q = new PriorityQueue<>();
+            for(int v : g.get(u)){
+                int len = dfs(v, g, s);
+                if(s.charAt(u) != s.charAt(v))
+                    q.offer(-len);
+            }
+            int a = q.isEmpty() ? 0 : -q.poll(), b = q.isEmpty() ? 0 : -q.poll();
+            r = Math.max(r, a + b + 1);
+            return a + 1;
+        }
+    }
 }
