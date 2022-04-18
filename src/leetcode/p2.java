@@ -89,6 +89,21 @@ public class p2{
         }
     }
 
+    static class s230{//Kth Smallest Element in a BST
+        public int kthSmallest(TreeNode root, int k){
+            int count = count(root.left);
+            if(k == count + 1)
+                return root.val;
+            else if(k <= count)
+                return kthSmallest(root.left, k);
+            else return kthSmallest(root.right, k - 1 - count);
+        }
+
+        public int count(TreeNode n){
+            return n != null ? 1 + count(n.left) + count(n.right) : 0;
+        }
+    }
+
     static class s231{//Power of Two
         public boolean isPowerOfTwo(int n){
             return n > 0 && (n & (n - 1)) == 0;
