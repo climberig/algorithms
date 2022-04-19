@@ -150,5 +150,28 @@ public class p0{
             return (int) r;
         }
     }
+
+    static class s99{//Recover Binary Search Tree
+        TreeNode a, b, pre;
+
+        public void recoverTree(TreeNode root){
+            traverse(root);
+            int t = a.val;
+            a.val = b.val;
+            b.val = t;
+        }
+
+        void traverse(TreeNode node){
+            if(node != null){
+                traverse(node.left);
+                if(a == null && (pre == null || pre.val >= node.val))
+                    a = pre;
+                if(a != null && pre.val >= node.val)
+                    b = node;
+                pre = node;
+                traverse(node.right);
+            }
+        }
+    }
 }
 
