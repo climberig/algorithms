@@ -152,7 +152,7 @@ public class p0{
     }
 
     static class s99{//Recover Binary Search Tree
-        TreeNode a, b, pre;
+        TreeNode a, b, pre = new TreeNode(Integer.MIN_VALUE);
 
         public void recoverTree(TreeNode root){
             traverse(root);
@@ -164,9 +164,9 @@ public class p0{
         void traverse(TreeNode node){
             if(node != null){
                 traverse(node.left);
-                if(a == null && (pre == null || pre.val >= node.val))
+                if(a == null && pre.val > node.val)
                     a = pre;
-                if(a != null && pre.val >= node.val)
+                if(a != null && pre.val > node.val)
                     b = node;
                 pre = node;
                 traverse(node.right);
