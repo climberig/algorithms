@@ -27,6 +27,20 @@ public class p1{
         }
     }
 
+    static class s125{//Valid Palindrome
+        public boolean isPalindrome(String s){
+            char[] a = s.toCharArray();
+            for(int i = 0, j = a.length - 1; i < j; )
+                if(!Character.isLetterOrDigit(a[i]))
+                    i++;
+                else if(!Character.isLetterOrDigit(a[j]))
+                    j--;
+                else if(Character.toLowerCase(a[i++]) != Character.toLowerCase(a[j--]))
+                    return false;
+            return true;
+        }
+    }
+
     static class s127{//Word Ladder
         public int ladderLength(String start, String end, List<String> wordList){
             Set<String> words = new HashSet<>(wordList), seen = new HashSet<>();
