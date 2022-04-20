@@ -628,4 +628,33 @@ public class p22{
             return a + 1;
         }
     }
+
+    static class s2247{//Maximum Cost of Trip With K Highways
+        public int maximumCost(int n, int[][] highways, int k){
+            List<List<int[]>> g = IntStream.range(0, n).mapToObj(u -> new ArrayList<int[]>()).collect(Collectors.toList());
+            for(int[] h : highways){
+                g.get(h[0]).add(new int[]{h[1], h[2]});
+                g.get(h[1]).add(new int[]{h[0], h[2]});
+            }
+            int[][] dp = new int[n][1 << n];
+            return IntStream.range(0, n).map(u -> maxCost(u, g, k - 1, 1 << u, dp)).max().getAsInt();
+        }
+
+        int maxCost(int u, List<List<int[]>> g, int k, int mask, int[][] dp){
+            if(k < 0)
+                return 0;
+            if(dp[u][mask] != 0)
+                return dp[u][mask];
+            int r = -1;
+            for(int[] e : g.get(u)){
+                int v = e[0], cost = e[1];
+                if((mask & (1 << v)) == 0){
+                    int rr = maxCost(v, g, k - 1, mask | (1 << v), dp);
+                    if(rr != -1)
+                        r = Math.max(r, cost + rr);
+                }
+            }
+            return dp[u][mask] = r;
+        }
+    }
 }
