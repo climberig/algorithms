@@ -261,6 +261,27 @@ public class p1{
         }
     }
 
+    static class s173{//Binary Search Tree Iterator
+        class BSTIterator{
+            Stack<TreeNode> s = new Stack<>();
+
+            public BSTIterator(TreeNode root){fill(root);}
+
+            public int next(){
+                TreeNode node = s.pop();
+                fill(node.right);
+                return node.val;
+            }
+
+            public boolean hasNext(){return !s.isEmpty();}
+
+            void fill(TreeNode node){
+                for(; node != null; node = node.left)
+                    s.push(node);
+            }
+        }
+    }
+
     static class s186{//Reverse Words in a String II
         public void reverseWords(char[] s){
             reverse(s, 0, s.length - 1);
