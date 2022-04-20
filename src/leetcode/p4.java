@@ -179,6 +179,22 @@ public class p4{
         }
     }
 
+    static class s448{//Find All Numbers Disappeared in an Array
+        public List<Integer> findDisappearedNumbers(int[] a){
+            for(int i = 0; i < a.length; i++)
+                while(a[i] != a[a[i] - 1]){
+                    int t = a[i];
+                    a[i] = a[t - 1];
+                    a[t - 1] = t;
+                }
+            List<Integer> r = new ArrayList<>();
+            for(int i = 0; i < a.length; i++)
+                if(a[i] != i + 1)
+                    r.add(i + 1);
+            return r;
+        }
+    }
+
     static class s451{//Sort Characters By Frequency
         public String frequencySort(String s){
             int[] counts = new int[256];
