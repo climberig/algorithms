@@ -405,6 +405,24 @@ public class p9{
         }
     }
 
+    static class s992{//Subarrays with K Different Integers
+        public int subarraysWithKDistinct(int[] a, int k){
+            return atMost(a, k) - atMost(a, k - 1);
+        }
+        int atMost(int[] a, int k){
+            int r = 0, f[] = new int[a.length + 1];
+            for(int i = 0, j = 0; j < a.length; j++){
+                if(f[a[j]]++ == 0)
+                    k--;
+                for(; k < 0; i++)
+                    if(--f[a[i]] == 0)
+                        k++;
+                r += j - i + 1;
+            }
+            return r;
+        }
+    }
+
     static class s995{//Minimum Number of K Consecutive Bit Flips
         public int minKBitFlips(int[] a, int k){
             int flipped = 0, r = 0, isFlipped[] = new int[a.length];
