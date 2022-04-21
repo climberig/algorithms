@@ -46,6 +46,33 @@ public class p7{
         }
     }
 
+    static class s705{//Design HashSet
+        class MyHashSet{
+            static int MAX = 1_000_000, BITS = 32;
+            int a[] = new int[MAX / BITS + 1];
+
+            public void add(int key){
+                a[getIdx(key)] |= getMask(key);
+            }
+
+            public void remove(int key){
+                a[getIdx(key)] &= (~getMask(key));
+            }
+
+            public boolean contains(int key){
+                return (a[getIdx(key)] & getMask(key)) != 0;
+            }
+
+            int getIdx(int key){
+                return (key / BITS);
+            }
+
+            int getMask(int key){
+                return 1 << (key % BITS);
+            }
+        }
+    }
+
     static class s717{//1-bit and 2-bit Characters
         public boolean isOneBitCharacter(int[] bits){
             int n = bits.length, i = 0;
