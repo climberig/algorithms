@@ -49,27 +49,23 @@ public class p7{
     static class s705{//Design HashSet
         class MyHashSet{
             static int MAX = 1_000_000, BITS = 32;
-            int a[] = new int[MAX / BITS + 1];
+            int buckets[] = new int[MAX / BITS + 1];
 
             public void add(int key){
-                a[getIdx(key)] |= getMask(key);
+                buckets[bucketN(key)] |= slot(key);
             }
 
             public void remove(int key){
-                a[getIdx(key)] &= (~getMask(key));
+                buckets[bucketN(key)] &= ~slot(key);
             }
 
             public boolean contains(int key){
-                return (a[getIdx(key)] & getMask(key)) != 0;
+                return (buckets[bucketN(key)] & slot(key)) != 0;
             }
 
-            int getIdx(int key){
-                return (key / BITS);
-            }
+            int bucketN(int key){return key / BITS;}
 
-            int getMask(int key){
-                return 1 << (key % BITS);
-            }
+            int slot(int key){return 1 << (key % BITS);}
         }
     }
 
