@@ -1,6 +1,7 @@
 package leetcode;
 import java.util.*;
 import java.util.stream.*;
+import leetcode.NTree.Node;
 
 public class p15{
     static class s1503{//Last Moment Before All Ants Fall Out of a Plank
@@ -120,19 +121,7 @@ public class p15{
             return false;
         }
 
-        class Node{
-            public int val;
-            public List<Node> children = new ArrayList<>();
 
-            public Node(){}
-
-            public Node(int _val){val = _val;}
-
-            public Node(int _val, ArrayList<Node> _children){
-                val = _val;
-                children = _children;
-            }
-        }
     }
 
     static class s1519{

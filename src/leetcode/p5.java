@@ -2,6 +2,7 @@ package leetcode;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import leetcode.NTree.Node;
 
 public class p5{
     static class s500{//Keyboard Row
@@ -170,6 +171,17 @@ public class p5{
             int left = depth(node.left), right = depth(node.right);
             r = Math.max(r, left + right);
             return 1 + Math.max(left, right);
+        }
+    }
+
+    static class s559{//Maximum Depth of N-ary Tree
+        public int maxDepth(Node root){
+            if(root == null)
+                return 0;
+            int r = 0;
+            for(Node node : root.children)
+                r = Math.max(r, maxDepth(node));
+            return r + 1;
         }
     }
 
