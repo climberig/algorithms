@@ -297,6 +297,15 @@ public class p4{
         }
     }
 
+    static class s492{//Construct the Rectangle
+        public int[] constructRectangle(int area){
+            for(int w = (int) Math.sqrt(area); w >= 1; w--)
+                if(area % w == 0)
+                    return new int[]{area / w, w};
+            return null;
+        }
+    }
+
     static class s495{//Teemo Attacking
         public int findPoisonedDuration(int[] timeSeries, int duration){
             int r = duration;

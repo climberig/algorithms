@@ -221,6 +221,22 @@ public class p5{
         }
     }
 
+    static class s563{//Binary Tree Tilt
+        int r = 0;
+        public int findTilt(TreeNode root){
+            traverse(root);
+            return r;
+        }
+
+        int traverse(TreeNode node){
+            if(node == null)
+                return 0;
+            int left = traverse(node.left), right = traverse(node.right);
+            r += Math.abs(left - right);
+            return left + right + node.val;
+        }
+    }
+
     static class s565{//Array Nesting
         public int arrayNesting(int[] a){
             int r = 0;
