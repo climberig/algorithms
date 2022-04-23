@@ -321,4 +321,10 @@ public class p7{
         }
     }
 
+
+    static class s771{//Jewels and Stones
+        public int numJewelsInStones(String jewels, String stones){
+            return stones.chars().map(c -> jewels.contains((char) c + "") ? 1 : 0).sum();
+        }
+    }
 }
