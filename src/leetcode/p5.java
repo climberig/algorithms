@@ -110,6 +110,32 @@ public class p5{
         }
     }
 
+    static class s535{//Encode and Decode TinyURL
+        public class Codec{
+            Map<String, String> index = new HashMap<>(), revIndex = new HashMap<>();
+            static String BASE_HOST = "http://tinyurl.com/", CHAR_SET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            public String encode(String longUrl){
+                String shortUrl = revIndex.get(longUrl);
+                while(shortUrl == null){
+                    StringBuilder b = new StringBuilder();
+                    for(int i = 0; i < 6; i++)
+                        b.append(CHAR_SET.charAt(new Random().nextInt(CHAR_SET.length())));
+                    if(!index.containsKey(b.toString())){
+                        shortUrl = b.toString();
+                        index.put(shortUrl, longUrl);
+                        revIndex.put(longUrl, shortUrl);
+                    }
+                }
+                return BASE_HOST + shortUrl;
+            }
+
+            public String decode(String shortUrl){
+                return index.get(shortUrl.replace(BASE_HOST, ""));
+            }
+        }
+    }
+
     static class s538{//Convert BST to Greater Tree
         int sum = 0;
         public TreeNode convertBST(TreeNode root){
