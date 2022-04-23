@@ -328,6 +328,30 @@ public class p13{
         }
     }
 
+    static class s1377{//Frog Position After T Seconds
+        double r = 0;
+        public double frogPosition(int n, int[][] edges, int t, int target){
+            List<List<Integer>> g = IntStream.range(0, n + 1).mapToObj(u -> new ArrayList<Integer>()).collect(Collectors.toList());
+            for(int[] e : edges){
+                g.get(e[0]).add(e[1]);
+                g.get(e[1]).add(e[0]);
+            }
+            dfs(1, g, new boolean[n + 1], 1, target, t);
+            return r;
+        }
+
+        void dfs(int u, List<List<Integer>> g, boolean[] seen, double p, int target, int t){
+            if(t >= 0){
+                seen[u] = true;
+                List<Integer> list = g.get(u).stream().filter(v -> !seen[v]).collect(Collectors.toList());
+                if(u == target && (t == 0 || list.isEmpty()))
+                    r = p;
+                for(Integer v : list)
+                    dfs(v, g, seen, p / list.size(), target, t - 1);
+            }
+        }
+    }
+
     static class s1380{//Lucky Numbers in a Matrix
         public List<Integer> luckyNumbers(int[][] m){
             int[] rows = IntStream.range(0, m.length).map(i -> Integer.MAX_VALUE).toArray(), cols = new int[m[0].length];
