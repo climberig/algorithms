@@ -679,4 +679,26 @@ public class p22{
             return s.size();
         }
     }
+
+    static class s2251{//Number of Flowers in Full Bloom
+        public int[] fullBloomFlowers(int[][] flowers, int[] persons){
+            Queue<int[]> q = new PriorityQueue<>((a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
+            for(int i = 0; i < persons.length; i++)
+                q.offer(new int[]{persons[i], 1, i});//time, event, idx
+            for(int[] f : flowers){
+                q.offer(new int[]{f[0], 0});
+                q.offer(new int[]{f[1], 2});
+            }
+            int r[] = new int[persons.length], blooms = 0;
+            while(!q.isEmpty()){
+                int[] p = q.poll();
+                switch(p[1]){
+                    case 0 -> blooms++;
+                    case 2 -> blooms--;
+                    default -> r[p[2]] = blooms;
+                }
+            }
+            return r;
+        }
+    }
 }
