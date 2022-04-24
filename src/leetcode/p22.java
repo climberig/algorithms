@@ -657,4 +657,26 @@ public class p22{
             return dp[u][mask] = r;
         }
     }
+
+    static class s2248{//Intersection of Multiple Arrays
+        public List<Integer> intersection(int[][] aa){
+            int[] counts = new int[1_001];
+            Arrays.stream(aa).forEach(a -> Arrays.stream(a).forEach(n -> counts[n]++));
+            return IntStream.range(0, counts.length).filter(n -> counts[n] == aa.length).boxed().collect(Collectors.toList());
+        }
+    }
+
+    static class s2249{//Count Lattice Points Inside a Circle
+        public int countLatticePoints(int[][] circles){
+            Set<Integer> s = new HashSet<>();
+            for(int[] c : circles){
+                int x = c[0], y = c[1], r = c[2];
+                for(int a = x - r; a <= x + r; a++)
+                    for(int b = y - r; b <= y + r; b++)
+                        if((x - a) * (x - a) + (y - b) * (y - b) <= r * r)
+                            s.add(301 * a + b);
+            }
+            return s.size();
+        }
+    }
 }
