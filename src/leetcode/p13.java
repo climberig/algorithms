@@ -387,4 +387,28 @@ public class p13{
             return (int) (r % 1_000_000_007);
         }
     }
+
+    static class s1396{//Design Underground System
+        class UndergroundSystem{
+            Map<Integer, String> currStation = new HashMap<>();
+            Map<Integer, Integer> currTime = new HashMap<>();
+            Map<String, Integer> stationSumTime = new HashMap<>(), numberOfTrips = new HashMap<>();
+
+            public void checkIn(int id, String stationName, int t){
+                currStation.put(id, stationName);
+                currTime.put(id, t);
+            }
+
+            public void checkOut(int id, String stationName, int t){
+                String startStation = currStation.get(id), stationStr = startStation + "_" + stationName;
+                stationSumTime.put(stationStr, stationSumTime.getOrDefault(stationStr, 0) + t - currTime.get(id));
+                numberOfTrips.put(stationStr, numberOfTrips.getOrDefault(stationStr, 0) + 1);
+            }
+
+            public double getAverageTime(String startStation, String endStation){
+                String s = startStation + "_" + endStation;
+                return stationSumTime.get(s) * 1.0 / numberOfTrips.get(s);
+            }
+        }
+    }
 }
