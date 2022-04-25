@@ -491,6 +491,28 @@ public class p2{
         }
     }
 
+    static class s284{//Peeking Iterator
+        class PeekingIterator implements Iterator<Integer>{
+            Iterator<Integer> it;
+            Integer next;
+            public PeekingIterator(Iterator<Integer> it){
+                this.it = it;
+                if(it.hasNext())
+                    next = it.next();
+            }
+
+            @Override public Integer next(){
+                Integer r = next;
+                next = it.hasNext() ? it.next() : null;
+                return r;
+            }
+
+            public Integer peek(){return next;}
+
+            @Override public boolean hasNext(){return next != null;}
+        }
+    }
+
     static class s286{//Walls and Gates
         public void wallsAndGates(int[][] rooms){
             Queue<int[]> q = new LinkedList<>();
