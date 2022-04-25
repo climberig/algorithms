@@ -680,6 +680,32 @@ public class p22{
         }
     }
 
+    static class s2250{//Count Number of Rectangles Containing Each Point
+        public int[] countRectangles(int[][] rectangles, int[][] points){
+            Arrays.sort(rectangles, Comparator.comparingInt(a -> a[0]));
+            List<List<Integer>> heights = IntStream.range(0, 101).mapToObj(h -> new ArrayList<Integer>()).collect(Collectors.toList());
+            for(int[] rec : rectangles)
+                heights.get(rec[1]).add(rec[0]);
+            int[] r = new int[points.length];
+            for(int i = 0; i < points.length; i++)
+                for(int h = points[i][1]; h < heights.size(); h++)
+                    r[i] += bs(heights.get(h), points[i][0]);
+            return r;
+        }
+
+        int bs(List<Integer> list, int val){
+            int lo = 0, hi = list.size() - 1, r = list.size();
+            while(lo <= hi){
+                int mid = (lo + hi) / 2;
+                if(list.get(mid) >= val){
+                    r = mid;
+                    hi = mid - 1;
+                }else lo = mid + 1;
+            }
+            return list.size() - r;
+        }
+    }
+
     static class s2251{//Number of Flowers in Full Bloom
         public int[] fullBloomFlowers(int[][] flowers, int[] persons){
             Queue<int[]> q = new PriorityQueue<>((a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
