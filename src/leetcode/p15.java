@@ -479,6 +479,25 @@ public class p15{
         }
     }
 
+    static class s1584{//Min Cost to Connect All Points
+        public int minCostConnectPoints(int[][] points){
+            PriorityQueue<int[]> q = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+            int r = 0;
+            boolean[] connected = new boolean[points.length];
+            for(int i = 0, size = points.length - 1; size > 0; size--){
+                connected[i] = true;
+                for(int j = 0; j < points.length; j++)
+                    if(!connected[j])
+                        q.offer(new int[]{Math.abs(points[i][0] - points[j][0]) + Math.abs(points[i][1] - points[j][1]), j});
+                for(; connected[q.peek()[1]]; q.poll()) ;
+                int[] p = q.poll();
+                r += p[0];
+                i = p[1];
+            }
+            return r;
+        }
+    }
+
     static class s1585{//Check If String Is Transformable With Substring Sort Operations
         public boolean isTransformable(String s, String t){
             List<LinkedList<Integer>> p = IntStream.range(0, 10).mapToObj(i -> new LinkedList<Integer>()).collect(Collectors.toList());
