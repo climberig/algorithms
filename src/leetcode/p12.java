@@ -71,6 +71,29 @@ public class p12{
                 if(!seen[j])
                     dfs(j, seen, indices, s, g);
         }
+
+        public String smallestStringWithSwaps1(String s, List<List<Integer>> pairs){
+            int[] uf = IntStream.range(0, s.length()).toArray();
+            for(List<Integer> p : pairs){
+                int x = find(p.get(0), uf), y = find(p.get(1), uf);
+                if(x < y)
+                    uf[y] = x;
+                else uf[x] = y;
+            }
+            Map<Integer, PriorityQueue<Character>> m = new HashMap<>();
+            for(int i = 0; i < s.length(); i++){
+                int j = find(i, uf);
+                m.putIfAbsent(j, new PriorityQueue<>());
+                m.get(j).offer(s.charAt(i));
+            }
+            StringBuilder r = new StringBuilder();
+            for(int i = 0; i < s.length(); i++)
+                r.append(m.get(find(i, uf)).poll());
+            return r.toString();
+        }
+        int find(int i, int[] uf){
+            return i != uf[i] ? uf[i] = find(uf[i], uf) : i;
+        }
     }
 
     static class s1208{//Get Equal Substrings Within Budget
