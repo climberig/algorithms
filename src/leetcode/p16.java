@@ -118,6 +118,26 @@ public class p16{
         }
     }
 
+    static class s1631{//Path With Minimum Effort
+        public int minimumEffortPath(int[][] h){
+            int n = h.length, m = h[0].length, dp[][] = new int[n][m], dirs[] = {-1, 0, 1, 0, -1};
+            Arrays.stream(dp).forEach(r -> Arrays.fill(r, Integer.MAX_VALUE));
+            Queue<int[]> q = new LinkedList<>();
+            for(dp[0][0] = 0, q.add(new int[]{0, 0}); !q.isEmpty(); )
+                for(int d = 1, p[] = q.poll(); d < dirs.length; d++){
+                    int r = p[0] + dirs[d - 1], c = p[1] + dirs[d];
+                    if(0 <= r && r < n && 0 <= c && c < m){
+                        int effort = Math.max(Math.abs(h[r][c] - h[p[0]][p[1]]), dp[p[0]][p[1]]);
+                        if(effort < dp[r][c]){
+                            dp[r][c] = effort;
+                            q.add(new int[]{r, c});
+                        }
+                    }
+                }
+            return dp[n - 1][m - 1];
+        }
+    }
+
     static class s1644{//Lowest Common Ancestor of a Binary Tree II
         int count = 0;
 
