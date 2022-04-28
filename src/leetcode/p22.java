@@ -727,4 +727,62 @@ public class p22{
             return r;
         }
     }
+
+    static class s2254{//Design Video Sharing Platform
+        class VideoSharingPlatform{
+            Map<Integer, Video> videos = new HashMap<>();
+            PriorityQueue<Integer> available = new PriorityQueue<>();
+
+            public VideoSharingPlatform(){
+                IntStream.range(0, 100_000).forEach(n -> available.offer(n));
+            }
+
+            public int upload(String video){
+                int id = available.poll();
+                videos.put(id, new Video(video));
+                return id;
+            }
+
+            public void remove(int videoId){
+                if(videos.containsKey(videoId)){
+                    videos.remove(videoId);
+                    available.add(videoId);
+                }
+            }
+
+            public String watch(int videoId, int startMinute, int endMinute){
+                if(!videos.containsKey(videoId))
+                    return "-1";
+                Video video = videos.get(videoId);
+                video.views++;
+                return video.s.substring(startMinute, Math.min(endMinute + 1, video.s.length()));
+            }
+
+            public void like(int videoId){
+                if(videos.containsKey(videoId))
+                    videos.get(videoId).likes++;
+            }
+
+            public void dislike(int videoId){
+                if(videos.containsKey(videoId))
+                    videos.get(videoId).dislikes++;
+            }
+
+            public int[] getLikesAndDislikes(int videoId){
+                Video v = videos.get(videoId);
+                return v != null ? new int[]{v.likes, v.dislikes} : new int[]{-1};
+            }
+
+            public int getViews(int videoId){
+                return videos.containsKey(videoId) ? videos.get(videoId).views : -1;
+            }
+
+            class Video{
+                int likes, dislikes, views;
+                String s;
+
+                public Video(String s){this.s = s;}
+            }
+        }
+    }
 }
