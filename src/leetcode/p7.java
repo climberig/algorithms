@@ -327,4 +327,24 @@ public class p7{
             return stones.chars().map(c -> jewels.contains((char) c + "") ? 1 : 0).sum();
         }
     }
+
+    static class s785{//Is Graph Bipartite?
+        public boolean isBipartite(int[][] g){
+            int[] colors = new int[g.length];
+            for(int u = 0; u < g.length; u++)
+                if(colors[u] == 0 && !validColor(g, colors, 1, u))
+                    return false;
+            return true;
+        }
+
+        boolean validColor(int[][] g, int[] colors, int color, int u){
+            if(colors[u] != 0)
+                return colors[u] == color;
+            colors[u] = color;
+            for(int v : g[u])
+                if(!validColor(g, colors, -color, v))
+                    return false;
+            return true;
+        }
+    }
 }
