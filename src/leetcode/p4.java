@@ -1,4 +1,6 @@
 package leetcode;
+import leetcode.NTree.Node;
+
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -145,6 +147,32 @@ public class p4{
                     if(j >= n || i >= words.get(j).length() || words.get(i).charAt(j) != words.get(j).charAt(i))
                         return false;
             return true;
+        }
+    }
+
+    static class s431{//Encode N-ary Tree to Binary Tree
+        public TreeNode encode(Node root){
+            if(root == null)
+                return null;
+            TreeNode r = new TreeNode(root.val);
+            if(root.children.isEmpty())
+                return r;
+            r.left = encode(root.children.get(0));
+            TreeNode node = r.left;
+            for(int i = 1; i < root.children.size(); i++){
+                node.right = encode(root.children.get(i));
+                node = node.right;
+            }
+            return r;
+        }
+
+        public Node decode(TreeNode root){
+            if(root == null)
+                return null;
+            List<Node> children = new ArrayList<>();
+            for(TreeNode node = root.left; node != null; node = node.right)
+                children.add(decode(node));
+            return new Node(root.val, children);
         }
     }
 
