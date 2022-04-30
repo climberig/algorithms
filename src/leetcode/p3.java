@@ -505,4 +505,35 @@ public class p3{
             return s.isEmpty();
         }
     }
+
+    static class s399{//Evaluate Division
+        public double[] calcEquation(List<List<String>> eq, double[] vals, List<List<String>> queries){
+            Map<String, Map<String, Double>> m = new HashMap<>();
+            for(int i = 0; i < eq.size(); i++){
+                List<String> e = eq.get(i);
+                m.putIfAbsent(e.get(0), new HashMap<>());
+                m.get(e.get(0)).put(e.get(1), vals[i]);
+                m.putIfAbsent(e.get(1), new HashMap<>());
+                m.get(e.get(1)).put(e.get(0), 1 / vals[i]);
+            }
+            double[] r = new double[queries.size()];
+            for(int i = 0; i < r.length; i++)
+                r[i] = dfs(queries.get(i).get(0), queries.get(i).get(1), m, new HashSet<>(), 1);
+            return r;
+        }
+
+        double dfs(String s, String t, Map<String, Map<String, Double>> m, Set<String> seen, double mult){
+            if(!m.containsKey(s) || !seen.add(s))
+                return -1;
+            if(s.equals(t))
+                return mult;
+            Map<String, Double> next = m.get(s);
+            for(String s1 : next.keySet()){
+                double r = dfs(s1, t, m, seen, mult * next.get(s1));
+                if(r != -1)
+                    return r;
+            }
+            return -1;
+        }
+    }
 }
