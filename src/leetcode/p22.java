@@ -785,4 +785,27 @@ public class p22{
             }
         }
     }
+
+    static class s2255{//Count Prefixes of a Given String
+        public int countPrefixes(String[] words, String s){
+            return (int) Arrays.stream(words).filter(s::startsWith).count();
+        }
+    }
+
+    static class s2256{//Minimum Average Difference
+        public int minimumAverageDifference(int[] a){
+            long left = 0, right = Arrays.stream(a).asLongStream().sum(), minAvr = Integer.MAX_VALUE;
+            int r = 0;
+            for(int i = 0; i < a.length; i++){
+                left += a[i];
+                right -= a[i];
+                long v = Math.abs(left / (i + 1) - (i == a.length - 1 ? 0 : right / (a.length - i - 1)));
+                if(v < minAvr){
+                    minAvr = v;
+                    r = i;
+                }
+            }
+            return r;
+        }
+    }
 }
