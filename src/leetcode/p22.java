@@ -831,4 +831,16 @@ public class p22{
             return r == Integer.MAX_VALUE ? -1 : r;
         }
     }
+
+    static class s2262{// Total Appeal of A String
+        public long appealSum(String s){
+            long r = 0, cur = 0, prev[] = new long[26];
+            for(int i = 0; i < s.length(); ++i){
+                cur += i + 1 - prev[s.charAt(i) - 'a'];
+                prev[s.charAt(i) - 'a'] = i + 1;
+                r += cur;
+            }
+            return r;
+        }
+    }
 }
