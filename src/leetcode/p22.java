@@ -818,4 +818,17 @@ public class p22{
             return r.last();
         }
     }
+
+    static class s2260{//Minimum Consecutive Cards to Pick Up
+        public int minimumCardPickup(int[] cards){
+            int r = Integer.MAX_VALUE;
+            Map<Integer, Integer> m = new HashMap<>();
+            for(int i = 0; i < cards.length; i++){
+                if(m.containsKey(cards[i]))
+                    r = Math.min(r, i - m.get(cards[i]) + 1);
+                m.put(cards[i], i);
+            }
+            return r == Integer.MAX_VALUE ? -1 : r;
+        }
+    }
 }
