@@ -808,4 +808,14 @@ public class p22{
             return r;
         }
     }
+
+    static class s2259{//Remove Digit From Number to Maximize Result
+        public String removeDigit(String number, char digit){
+            TreeSet<String> r = new TreeSet<>();
+            for(int i = 0; i < number.length(); i++)
+                if(number.charAt(i) == digit)
+                    r.add(number.substring(0, i) + number.substring(i + 1));
+            return r.last();
+        }
+    }
 }
