@@ -4,6 +4,19 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p9{
+    static class s905{//Sort Array By Parity
+        public int[] sortArrayByParity(int[] a){
+            for(int i = 0, j = 0; j < a.length; j++)
+                if(a[j] % 2 == 0){
+                    int t = a[i];
+                    a[i++] = a[j];
+                    a[j] = t;
+                    ;
+                }
+            return a;
+        }
+    }
+
     static class s914{//X of a Kind in a Deck of Cards
         public boolean hasGroupsSizeX(int[] deck){
             int f[] = new int[10_000], r = 0;
