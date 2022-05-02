@@ -832,6 +832,31 @@ public class p22{
         }
     }
 
+    static class s2261{//K Divisible Elements Subarrays
+        public int countDistinct(int[] a, int k, int p){
+            int r = 0;
+            Trie trie = new Trie();
+            for(int i = 0; i < a.length; i++){
+                int count = 0;
+                Trie node = trie;
+                for(int j = i; j < a.length && count <= k; j++){
+                    if(a[j] % p == 0)
+                        count++;
+                    if(count <= k && node.nodes[a[j]] == null)
+                        r++;
+                    if(node.nodes[a[j]] == null)
+                        node.nodes[a[j]] = new Trie();
+                    node = node.nodes[a[j]];
+                }
+            }
+            return r;
+        }
+
+        class Trie{
+            Trie[] nodes = new Trie[201];
+        }
+    }
+
     static class s2262{// Total Appeal of A String
         public long appealSum(String s){
             long r = 0, cur = 0, prev[] = new long[26];
