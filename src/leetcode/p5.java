@@ -285,6 +285,22 @@ public class p5{
         }
     }
 
+    static class s581{//Shortest Unsorted Continuous Subarray
+        public int findUnsortedSubarray(int[] a){
+            int[] max = new int[a.length], min = new int[a.length];
+            max[0] = a[0];
+            min[a.length - 1] = a[a.length - 1];
+            for(int i = 1, j = a.length - 2; i < a.length; i++, j--){
+                max[i] = Math.max(max[i - 1], a[i]);
+                min[j] = Math.min(min[j + 1], a[j]);
+            }
+            int lo = 0, hi = a.length - 1;
+            for(; lo <= hi && a[lo] == min[lo]; lo++) ;
+            for(; lo <= hi && a[hi] == max[hi]; hi--) ;
+            return hi - lo + 1;
+        }
+    }
+
     static class s582{//Kill Process
         /**
          * You have n processes forming a rooted tree structure. You are given two integer arrays pid and ppid, where pid[i] is
