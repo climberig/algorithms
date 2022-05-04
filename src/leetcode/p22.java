@@ -809,6 +809,41 @@ public class p22{
         }
     }
 
+    static class s2257{//Count Unguarded Cells in the Grid
+        public int countUnguarded(int n, int m, int[][] guards, int[][] walls){
+            List<TreeMap<Integer, Integer>> rows = new ArrayList<>(n), cols = new ArrayList<>(m);
+            for(int i = 0; i < n; i++){
+                rows.add(new TreeMap<>());
+                rows.get(i).put(-1, 1);
+                rows.get(i).put(m, 1);
+            }
+            for(int i = 0; i < m; i++){
+                cols.add(new TreeMap<>());
+                cols.get(i).put(-1, 1);
+                cols.get(i).put(n, 1);
+            }
+            boolean[][] occupied = new boolean[n][m];
+            for(int[] g : guards){
+                rows.get(g[0]).put(g[1], 0);
+                cols.get(g[1]).put(g[0], 0);
+                occupied[g[0]][g[1]] = true;
+            }
+            for(int[] w : walls){
+                rows.get(w[0]).put(w[1], 1);
+                cols.get(w[1]).put(w[0], 1);
+                occupied[w[0]][w[1]] = true;
+            }
+            int r = 0;
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j < m; j++)
+                    if(!occupied[i][j]){
+                        TreeMap<Integer, Integer> m1 = rows.get(i), m2 = cols.get(j);
+                        r += m1.lowerEntry(j).getValue() * m1.higherEntry(j).getValue() * m2.lowerEntry(i).getValue() * m2.higherEntry(i).getValue();
+                    }
+            return r;
+        }
+    }
+
     static class s2259{//Remove Digit From Number to Maximize Result
         public String removeDigit(String number, char digit){
             TreeSet<String> r = new TreeSet<>();
