@@ -903,4 +903,32 @@ public class p22{
             return r;
         }
     }
+
+    static class s2263{//Make Array Non-decreasing or Non-increasing
+        public int convertArray(int[] a){
+            return Math.min(minOps(a), minOps(reverse(a)));
+        }
+
+        int minOps(int[] a){
+            int dp[] = new int[1_001];
+            for(int n : a){
+                int nextDp[] = new int[dp.length], min = dp[0];
+                for(int d = 0; d < dp.length; d++){
+                    min = Math.min(min, dp[d]);
+                    nextDp[d] = min + Math.abs(n - d);
+                }
+                dp = nextDp;
+            }
+            return Arrays.stream(dp).min().getAsInt();
+        }
+
+        int[] reverse(int[] a){
+            for(int i = 0, j = a.length - 1; i < j; i++, j--){
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+            return a;
+        }
+    }
 }
