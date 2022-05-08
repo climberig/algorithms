@@ -325,6 +325,43 @@ public class p4{
         }
     }
 
+    static class s489{//Robot Room Cleaner
+        public void cleanRoom(Robot robot){clean(robot, new HashSet<>(), 0, 0, 0);}
+
+        void clean(Robot robot, Set<String> seen, int row, int col, int dir){
+            String position = row + ":" + col;
+            if(seen.add(position)){
+                robot.clean();
+                for(int n = 0; n < 4; n++){
+                    if(robot.move()){
+                        int r = row, c = col;
+                        switch(dir){
+                            case 0 -> r -= 1;
+                            case 1 -> c += 1;
+                            case 2 -> r += 1;
+                            default -> c -= 1;
+                        }
+                        clean(robot, seen, r, c, dir);
+                        robot.turnLeft();
+                        robot.turnLeft();
+                        robot.move();
+                        robot.turnRight();
+                        robot.turnRight();
+                    }
+                    robot.turnRight();
+                    dir = (dir + 1) % 4;
+                }
+            }
+        }
+
+        interface Robot{
+            boolean move();
+            void turnLeft();
+            void turnRight();
+            void clean();
+        }
+    }
+
     static class s492{//Construct the Rectangle
         public int[] constructRectangle(int area){
             for(int w = (int) Math.sqrt(area); w >= 1; w--)
