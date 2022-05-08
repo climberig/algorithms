@@ -940,4 +940,38 @@ public class p22{
             return "";
         }
     }
+
+    static class s2265{//Count Nodes Equal to Average of Subtree
+        int r = 0;
+        public int averageOfSubtree(TreeNode root){
+            tr(root);
+            return r;
+        }
+        int[] tr(TreeNode node){
+            if(node == null)
+                return new int[]{0, 0};
+            int[] left = tr(node.left), right = tr(node.right);
+            int count = left[0] + right[0] + 1, sum = left[1] + right[1] + node.val;
+            if(sum / count == node.val)
+                r++;
+            return new int[]{count, sum};
+        }
+    }
+
+    static class s2266{//Count Number of Texts
+        public int countTexts(String pressedKeys){
+            int[] m = {0, 0, 3, 3, 3, 3, 3, 4, 3, 4};
+            return count(0, pressedKeys.toCharArray(), m, new Integer[pressedKeys.length() + 1]);
+        }
+        int count(int i, char[] a, int[] m, Integer[] dp){
+            if(i >= a.length)
+                return 1;
+            if(dp[i] != null)
+                return dp[i];
+            int r = 0;
+            for(int j = 0; i + j < a.length && a[i] == a[i + j] && j < m[a[i] - '0']; j++)
+                r = (r + count(i + j + 1, a, m, dp)) % 1_000_000_007;
+            return dp[i] = r;
+        }
+    }
 }
