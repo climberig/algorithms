@@ -931,4 +931,13 @@ public class p22{
             return a;
         }
     }
+
+    static class s2264{//Largest 3-Same-Digit Number in String
+        public String largestGoodInteger(String n){
+            for(int i = 9; i >= 0; i--)
+                if(n.contains("" + i + i + i))
+                    return "" + i + i + i;
+            return "";
+        }
+    }
 }
