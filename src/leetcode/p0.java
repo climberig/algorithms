@@ -28,6 +28,20 @@ public class p0{
         }
     }
 
+    static class s17{//Letter Combinations of a Phone Number
+        public List<String> letterCombinations(String digits){
+            String[] m = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+            LinkedList<String> r = new LinkedList<>();
+            r.add("");
+            for(char d : digits.toCharArray())
+                for(int size = r.size(); size > 0; size--){
+                    String s = r.poll();
+                    m[d - '0'].chars().forEach(c -> r.add(s + (char) c));
+                }
+            return r.size() == 1 ? Collections.emptyList() : r;
+        }
+    }
+
     static class s31{//Next Permutation
         public void nextPermutation(int[] a){
             int i = a.length - 1;
