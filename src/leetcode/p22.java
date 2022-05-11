@@ -974,4 +974,15 @@ public class p22{
             return dp[i] = r;
         }
     }
+
+    static class s2268{//Minimum Number of Keypresses
+        public int minimumKeypresses(String s){
+            int f[] = new int[26], r = 0, n = f.length;
+            s.chars().forEach(c -> f[c - 'a']++);
+            Arrays.sort(f);
+            for(int i = 0; i < n; i++)
+                r += (i / 9 + 1) * f[n - 1 - i];
+            return r;
+        }
+    }
 }

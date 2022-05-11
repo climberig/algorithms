@@ -138,6 +138,19 @@ public class p16{
         }
     }
 
+    static class s1641{//Count Sorted Vowel Strings
+        public int countVowelStrings(int n){
+            int a = 1, e = 1, i = 1, o = 1, u = 1;
+            while(--n > 0){
+                a = (a + e + i + o + u); // a, e, i, o, u -> aa, ae, ai, ao, au
+                e = (e + i + o + u); // e, i, o, u -> ee, ei, eo, eu
+                i = (i + o + u); // i, o, u -> ii, io, iu
+                o = (o + u); // o, u -> oo, ou
+            }
+            return a + e + i + o + u;
+        }
+    }
+
     static class s1644{//Lowest Common Ancestor of a Binary Tree II
         int count = 0;
 
