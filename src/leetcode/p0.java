@@ -62,6 +62,30 @@ public class p0{
         }
     }
 
+    static class s47{//Permutations II
+        public List<List<Integer>> permuteUnique(int[] a){
+            List<List<Integer>> r = new LinkedList<>();
+            Arrays.sort(a);
+            dfs(a, new boolean[a.length], new LinkedList<>(), r);
+            return r;
+        }
+
+        void dfs(int[] a, boolean[] used, LinkedList<Integer> curr, List<List<Integer>> r){
+            if(curr.size() == a.length)
+                r.add(new ArrayList<>(curr));
+            else for(int i = 0; i < a.length; i++)
+                if(!used[i]){
+                    if(i > 0 && !used[i - 1] && a[i - 1] == a[i])
+                        continue;
+                    used[i] = true;
+                    curr.add(a[i]);
+                    dfs(a, used, curr, r);
+                    curr.remove(curr.size() - 1);
+                    used[i] = false;
+                }
+        }
+    }
+
     static class s51{//N-Queens
         public List<List<String>> solveNQueens(int n){
             char[][] b = new char[n][n];
