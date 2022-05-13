@@ -16,6 +16,46 @@ public class p1{
         }
     }
 
+    static class s117{//Populating Next Right Pointers in Each Node II
+        public Node connect(Node root){
+            Node curr = root, head = null, prev = null;
+            while(curr != null){
+                while(curr != null){
+                    if(curr.left != null){
+                        if(prev != null)
+                            prev.next = curr.left;
+                        else head = curr.left;
+                        prev = curr.left;
+                    }
+                    if(curr.right != null){
+                        if(prev != null)
+                            prev.next = curr.right;
+                        else head = curr.right;
+                        prev = curr.right;
+                    }
+                    curr = curr.next;
+                }
+                curr = head;
+                prev = head = null;
+            }
+            return root;
+        }
+
+        class Node{
+            int val;
+            Node left, right, next;
+            public Node(int _val){
+                val = _val;
+            }
+            public Node(int _val, Node _left, Node _right, Node _next){
+                val = _val;
+                left = _left;
+                right = _right;
+                next = _next;
+            }
+        }
+    }
+
     static class s121{//Best Time to Buy and Sell Stock
         public int maxProfit(int[] prices){
             int r = 0, min = prices[0];
