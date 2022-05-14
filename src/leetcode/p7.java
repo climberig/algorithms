@@ -214,8 +214,7 @@ public class p7{
 
     static class s743{//Network Delay Time
         public int networkDelayTime(int[][] times, int n, int k){
-            List<List<int[]>> g = new ArrayList<>(n);
-            IntStream.range(0, n).forEach(u -> g.add(new ArrayList<>()));
+            List<List<int[]>> g = IntStream.range(0, n).mapToObj(u -> new ArrayList<int[]>()).collect(Collectors.toList());
             for(int[] t : times)
                 g.get(t[0] - 1).add(new int[]{t[1] - 1, t[2]});
             int[] received = new int[n];
@@ -224,9 +223,9 @@ public class p7{
             for(var q = new LinkedList<>(Arrays.asList(k - 1)); !q.isEmpty(); ){
                 Integer u = q.poll();
                 for(int[] a : g.get(u)){
-                    int v = a[0], t = a[1];
-                    if(received[u] + t < received[v]){
-                        received[v] = received[u] + t;
+                    int v = a[0], w = a[1];
+                    if(received[u] + w < received[v]){
+                        received[v] = received[u] + w;
                         q.offer(v);
                     }
                 }
@@ -320,7 +319,6 @@ public class p7{
             return r;
         }
     }
-
 
     static class s771{//Jewels and Stones
         public int numJewelsInStones(String jewels, String stones){
