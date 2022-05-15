@@ -1011,4 +1011,22 @@ public class p22{
             return r;
         }
     }
+
+    static class s2273{//Find Resultant Array After Removing Anagrams
+        public List<String> removeAnagrams(String[] words){
+            List<String> r = new ArrayList<>();
+            for(int i = 0; i < words.length; i++){
+                String ana = ana(words[i]);
+                r.add(words[i]);
+                for(; i + 1 < words.length && ana.equals(ana(words[i + 1])); i++) ;
+            }
+            return r;
+        }
+
+        String ana(String s){
+            char[] a = s.toCharArray();
+            Arrays.sort(a);
+            return new String(a);
+        }
+    }
 }
