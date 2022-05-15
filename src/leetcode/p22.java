@@ -985,4 +985,17 @@ public class p22{
             return r;
         }
     }
+
+    static class s2269{//Find the K-Beauty of a Number
+        public int divisorSubstrings(int n, int k){
+            int r = 0;
+            String s = String.valueOf(n);
+            for(int i = 0; i + k <= s.length(); i++){
+                int m = Integer.parseInt(s.substring(i, i + k));
+                if(m != 0 && n % m == 0)
+                    r++;
+            }
+            return r;
+        }
+    }
 }
