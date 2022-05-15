@@ -1029,4 +1029,14 @@ public class p22{
             return new String(a);
         }
     }
+
+    static class s2274{//Maximum Consecutive Floors Without Special Floors
+        public int maxConsecutive(int bottom, int top, int[] special){
+            Arrays.sort(special);
+            int r = Math.max(special[0] - bottom, top - special[special.length - 1]);
+            for(int i = 1; i < special.length; i++)
+                r = Math.max(r, special[i] - special[i - 1] - 1);
+            return r == 1 ? 0 : r;
+        }
+    }
 }
