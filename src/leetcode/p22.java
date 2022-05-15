@@ -998,4 +998,17 @@ public class p22{
             return r;
         }
     }
+
+    static class s2270{//Number of Ways to Split Array
+        public int waysToSplitArray(int[] a){
+            long right = Arrays.stream(a).asLongStream().sum(), left = 0;
+            int r = 0;
+            for(int i = 0; i < a.length - 1; i++){
+                left += a[i];
+                right -= a[i];
+                r += left >= right ? 1 : 0;
+            }
+            return r;
+        }
+    }
 }
