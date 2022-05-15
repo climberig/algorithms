@@ -35,6 +35,25 @@ public class p13{
         }
     }
 
+    static class s1302{//Deepest Leaves Sum
+        public int deepestLeavesSum(TreeNode root){
+            int r = 0;
+            Queue<TreeNode> q = new LinkedList<>();
+            for(q.add(root); !q.isEmpty(); ){
+                r = 0;
+                for(int size = q.size(); size > 0; size--){
+                    TreeNode node = q.poll();
+                    r += node.val;
+                    if(node.left != null)
+                        q.add(node.left);
+                    if(node.right != null)
+                        q.add(node.right);
+                }
+            }
+            return r;
+        }
+    }
+
     static class s1312{//Minimum Insertion Steps to Make a String Palindrome
         public int minInsertions(String s){
             return s.length() - lcs(s, new StringBuilder(s).reverse().toString());
