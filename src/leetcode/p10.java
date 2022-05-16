@@ -414,6 +414,32 @@ public class p10{
         }
     }
 
+    static class s1091{//Shortest Path in Binary Matrix
+        public int shortestPathBinaryMatrix(int[][] g){
+            int r = 1, n = g.length, m = g[0].length;
+            Queue<int[]> q = new LinkedList<>();
+            if(g[0][0] == 0){
+                g[0][0] = 1;
+                q.add(new int[]{0, 0});
+            }
+            for(; !q.isEmpty(); r++)
+                for(int size = q.size(); size > 0; size--){
+                    int p[] = q.poll(), x = p[0], y = p[1];
+                    if(x == n - 1 && y == m - 1)
+                        return r;
+                    for(int i = -1; i <= 1; i++)
+                        for(int j = -1; j <= 1; j++){
+                            int xx = x + i, yy = y + j;
+                            if(0 <= xx && xx < n && 0 <= yy && yy < m && g[xx][yy] == 0){
+                                g[xx][yy] = 1;
+                                q.offer(new int[]{xx, yy});
+                            }
+                        }
+                }
+            return -1;
+        }
+    }
+
     static class s1096{//Brace Expansion II
         public List<String> braceExpansionII(String expression){
             Queue<String> q = new LinkedList<>();
