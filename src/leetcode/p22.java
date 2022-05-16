@@ -1039,4 +1039,15 @@ public class p22{
             return r == 1 ? 0 : r;
         }
     }
+
+    static class s2275{//Largest Combination With Bitwise AND Greater Than Zero
+        public int largestCombination(int[] a){
+            int r = 0;
+            for(int i = 0; i < 32; i++){
+                int d = i;
+                r = Math.max(r, Arrays.stream(a).map(n -> (n >> d) & 1).sum());
+            }
+            return r;
+        }
+    }
 }
