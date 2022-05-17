@@ -291,22 +291,27 @@ public class p6{
 
     static class s694{//Number of Distinct Islands
         public int numDistinctIslands(int[][] g){
-            Set<String> s = new HashSet<>();
+            Set<String> r = new HashSet<>();
             for(int i = 0; i < g.length; i++)
                 for(int j = 0; j < g[0].length; j++)
-                    if(g[i][j] == 1)
-                        s.add(dfs(i, j, g, '.'));
-            return s.size();
+                    if(g[i][j] == 1){
+                        StringBuilder s = new StringBuilder();
+                        dfs(i, j, g, s, 's');
+                        r.add(s.toString());
+                    }
+            return r.size();
         }
 
-        String dfs(int i, int j, int[][] g, char d){
-            StringBuilder r = new StringBuilder().append(d);
+        void dfs(int i, int j, int[][] g, StringBuilder s, char dir){
             if(0 <= i && i < g.length && 0 <= j && j < g[0].length && g[i][j] == 1){
+                s.append(dir);
                 g[i][j] = 0;
-                r.append(dfs(i + 1, j, g, 'd')).append(dfs(i - 1, j, g, 'u'));
-                r.append(dfs(i, j + 1, g, 'r')).append(dfs(i, j - 1, g, 'l'));
+                dfs(i + 1, j, g, s, 'd');
+                dfs(i, j + 1, g, s, 'r');
+                dfs(i - 1, j, g, s, 'u');
+                dfs(i, j - 1, g, s, 'l');
+                s.append('b');
             }
-            return r.toString();
         }
     }
 
