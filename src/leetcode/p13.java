@@ -371,6 +371,21 @@ public class p13{
         }
     }
 
+    static class s1379{//Find a Corresponding Node of a Binary Tree in a Clone of That Tree
+        public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target){
+            return find(original, cloned, target);
+        }
+
+        TreeNode find(TreeNode original, TreeNode cloned, TreeNode target){
+            if(original == null)
+                return null;
+            if(original == target)
+                return cloned;
+            TreeNode r = find(original.left, cloned.left, target);
+            return r != null ? r : find(original.right, cloned.right, target);
+        }
+    }
+
     static class s1380{//Lucky Numbers in a Matrix
         public List<Integer> luckyNumbers(int[][] m){
             int[] rows = IntStream.range(0, m.length).map(i -> Integer.MAX_VALUE).toArray(), cols = new int[m[0].length];
