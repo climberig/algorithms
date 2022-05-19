@@ -126,6 +126,28 @@ public class p3{
         }
     }
 
+    static class s329{//Longest Increasing Path in a Matrix
+        public int longestIncreasingPath(int[][] m){
+            int dirs[] = {-1, 0, 1, 0, -1}, r = 1, dp[][] = new int[m.length][m[0].length];
+            for(int i = 0; i < m.length; i++)
+                for(int j = 0; j < m[0].length; j++)
+                    r = Math.max(r, dfs(m, i, j, dirs, dp));
+            return r;
+        }
+
+        int dfs(int[][] m, int i, int j, int[] dirs, int[][] dp){
+            if(dp[i][j] > 0)
+                return dp[i][j];
+            int r = 1;
+            for(int d = 1; d < dirs.length; d++){
+                int x = i + dirs[d - 1], y = j + dirs[d];
+                if(0 <= x && x < m.length && 0 <= y && y < m[0].length && m[x][y] > m[i][j])
+                    r = Math.max(r, 1 + dfs(m, x, y, dirs, dp));
+            }
+            return dp[i][j] = r;
+        }
+    }
+
     static class s332{//Reconstruct Itinerary
         public List<String> findItinerary(List<List<String>> tickets){
             Map<String, PriorityQueue<String>> g = new HashMap<>();
