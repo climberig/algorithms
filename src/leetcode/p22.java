@@ -1050,4 +1050,20 @@ public class p22{
             return r;
         }
     }
+
+    static class s2278{//Percentage of Letter in String
+        public int percentageLetter(String s, char letter){
+            return (int) s.chars().filter(c -> c == letter).count() * 100 / s.length();
+        }
+    }
+
+    static class s2279{//Maximum Bags With Full Capacity of Rocks
+        public int maximumBags(int[] capacity, int[] rocks, int extra){
+            int[] diff = IntStream.range(0, rocks.length).map(i -> capacity[i] - rocks[i]).sorted().toArray();
+            int r = 0;
+            for(int i = 0; i < rocks.length && extra - diff[i] >= 0; extra -= diff[i++])
+                r++;
+            return r;
+        }
+    }
 }
