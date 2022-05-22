@@ -128,6 +128,20 @@ public class p6{
         }
     }
 
+    static class s647{//Palindromic Substrings
+        public int countSubstrings(String s){
+            int r = 0;
+            for(int i = 0; i < s.length(); i++)
+                r += count(s, i, i) + count(s, i - 1, i);
+            return r;
+        }
+        int count(String s, int lo, int hi){
+            int r = 0;
+            for(; 0 <= lo && hi < s.length() && s.charAt(lo) == s.charAt(hi); lo--, hi++, r++) ;
+            return r;
+        }
+    }
+
     static class s653{//Two Sum IV - Input is a BST
         public boolean findTarget(TreeNode root, int k){
             List<Integer> a = new ArrayList<>();

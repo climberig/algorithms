@@ -466,6 +466,24 @@ public class p2{
         }
     }
 
+    static class s277{//Find the Celebrity
+        public int findCelebrity(int n){
+            int celebrity = 0;
+            for(int person = 1; person < n; person++)
+                if(knows(celebrity, person))
+                    celebrity = person;
+            for(int person = 0; person < n; person++)
+                if(person != celebrity && !celebrity(celebrity, person))
+                    return -1;
+            return celebrity;
+        }
+        boolean celebrity(int celebrity, int person){
+            return knows(person, celebrity) && !knows(celebrity, person);
+        }
+
+        boolean knows(int a, int b){return true;}
+    }
+
     static class s278{//First Bad Version
         public int firstBadVersion(int n){
             int lo = 1, hi = n;
