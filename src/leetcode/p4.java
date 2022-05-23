@@ -285,6 +285,20 @@ public class p4{
         }
     }
 
+    static class s474{//Ones and Zeroes
+        public int findMaxForm(String[] strs, int m, int n){
+            int[][] dp = new int[m + 1][n + 1];
+            for(String s : strs){
+                int[] a = new int[2];
+                s.chars().forEach(c -> a[c - '0']++);
+                for(int i = m; i >= a[0]; i--)
+                    for(int j = n; j >= a[1]; j--)
+                        dp[i][j] = Math.max(dp[i][j], 1 + dp[i - a[0]][j - a[1]]);
+            }
+            return dp[m][n];
+        }
+    }
+
     static class s482{//License Key Formatting
         public String licenseKeyFormatting(String s, int k){
             StringBuilder r = new StringBuilder();
