@@ -1065,4 +1065,18 @@ public class p22{
             return r;
         }
     }
+
+    static class s2280{//Minimum Lines to Represent a Line Chart
+        public int minimumLines(int[][] prices){
+            Arrays.sort(prices, Comparator.comparingInt(a -> a[0]));
+            int r = 1;
+            for(int i = 2; i < prices.length; i++){
+                int x1 = prices[i - 2][0], x2 = prices[i - 1][0], x3 = prices[i][0];
+                int y1 = prices[i - 2][1], y2 = prices[i - 1][1], y3 = prices[i][1];
+                if((y2 - y1) * (x3 - x1) != (y3 - y1) * (x2 - x1))
+                    r++;
+            }
+            return prices.length == 1 ? 0 : r;
+        }
+    }
 }
