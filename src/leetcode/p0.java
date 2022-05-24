@@ -62,6 +62,24 @@ public class p0{
         }
     }
 
+    static class s32{//Longest Valid Parentheses
+        public int longestValidParentheses(String str){
+            boolean[] valid = new boolean[str.length()];
+            Stack<Integer> s = new Stack<>();
+            for(int i = 0; i < str.length(); i++)
+                if(str.charAt(i) == '(')
+                    s.push(i);
+                else if(!s.isEmpty())
+                    valid[s.pop()] = valid[i] = true;
+            int r = 0, len = 0;
+            for(boolean v : valid){
+                len = v ? len + 1 : 0;
+                r = Math.max(r, len);
+            }
+            return r;
+        }
+    }
+
     static class s47{//Permutations II
         public List<List<Integer>> permuteUnique(int[] a){
             List<List<Integer>> r = new LinkedList<>();
