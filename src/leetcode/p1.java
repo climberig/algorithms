@@ -363,4 +363,13 @@ public class p1{
             return r;
         }
     }
+
+    static class s191{//Number of 1 Bits
+        public int hammingWeight(int n){
+            int r = 0;
+            for(; n != 0; n >>>= 1)
+                r += n & 1;
+            return r;
+        }
+    }
 }
