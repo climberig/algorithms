@@ -1101,4 +1101,29 @@ public class p22{
             return prices.length == 1 ? 0 : r;
         }
     }
+
+    static class s2282{//Number of People That Can Be Seen in a Grid
+        public int[][] seePeople(int[][] h){
+            int[][] r = new int[h.length][h[0].length];
+            for(int i = 0; i < h.length; i++){
+                Stack<Integer> s = new Stack<>();
+                for(int j = h[0].length - 1; j >= 0; j--)
+                    process(s, r, h, i, j);
+            }
+            for(int j = 0; j < h[0].length; j++){
+                Stack<Integer> s = new Stack<>();
+                for(int i = h.length - 1; i >= 0; i--)
+                    process(s, r, h, i, j);
+            }
+            return r;
+        }
+
+        void process(Stack<Integer> s, int[][] r, int[][] h, int i, int j){
+            for(; !s.isEmpty() && h[i][j] > s.peek(); s.pop())
+                r[i][j]++;
+            r[i][j] += !s.isEmpty() && h[i][j] <= s.peek() ? 1 : 0;
+            if(s.isEmpty() || h[i][j] != s.peek())
+                s.push(h[i][j]);
+        }
+    }
 }
