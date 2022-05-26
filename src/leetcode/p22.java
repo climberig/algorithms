@@ -1051,6 +1051,28 @@ public class p22{
         }
     }
 
+    static class s2276{//Count Integers in Intervals
+        class CountIntervals{
+            TreeMap<Integer, Integer> m = new TreeMap<>();
+            int count = 0;
+
+            public void add(int left, int right){
+                int l = left, r = right;
+                while(m.floorKey(r) != null && m.get(m.floorKey(r)) >= l){
+                    int preL = m.floorKey(r), preR = m.get(preL);
+                    count -= (preR - preL + 1);
+                    m.remove(preL);
+                    l = Math.min(l, preL);
+                    r = Math.max(r, preR);
+                }
+                m.put(l, r);
+                count += (r - l + 1);
+            }
+
+            public int count(){return count;}
+        }
+    }
+
     static class s2278{//Percentage of Letter in String
         public int percentageLetter(String s, char letter){
             return (int) s.chars().filter(c -> c == letter).count() * 100 / s.length();
