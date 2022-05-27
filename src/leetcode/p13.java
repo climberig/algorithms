@@ -185,6 +185,17 @@ public class p13{
         }
     }
 
+    static class s1342{//Number of Steps to Reduce a Number to Zero
+        public int numberOfSteps(int n){
+            if(n == 0)
+                return 0;
+            int r = 0;
+            for(; n > 0; n >>= 1)
+                r += (n & 1) + 1;
+            return r - 1;
+        }
+    }
+
     static class s1345{//Jump Game IV
         public int minJumps(int[] a){
             Map<Integer, List<Integer>> m = new HashMap<>();
