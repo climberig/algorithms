@@ -1126,4 +1126,27 @@ public class p22{
                 s.push(h[i][j]);
         }
     }
+
+    static class s2283{//Check if Number Has Equal Digit Count and Digit Value
+        public boolean digitCount(String n){
+            int[] f = new int[10];
+            n.chars().forEach(c -> f[c - '0']++);
+            for(int i = 0; i < n.length(); i++)
+                if(n.charAt(i) - '0' != f[i])
+                    return false;
+            return true;
+        }
+    }
+
+    static class s2284{//Sender With Largest Word Count
+        public String largestWordCount(String[] messages, String[] senders){
+            Map<String, Integer> counts = new HashMap<>();
+            for(int i = 0; i < messages.length; i++)
+                counts.put(senders[i], counts.getOrDefault(senders[i], 0) + messages[i].split(" ").length);
+            TreeMap<Integer, TreeSet<String>> m = new TreeMap<>();
+            for(String sender : counts.keySet())
+                m.computeIfAbsent(counts.get(sender), e -> new TreeSet<>()).add(sender);
+            return m.lastEntry().getValue().last();
+        }
+    }
 }
