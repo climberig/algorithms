@@ -1149,4 +1149,16 @@ public class p22{
             return m.lastEntry().getValue().last();
         }
     }
+
+    static class s2285{//Maximum Total Importance of Roads
+        public long maximumImportance(int n, int[][] roads){
+            int f[] = new int[n], r = 0;
+            for(int[] road : roads){
+                f[road[0]]++;
+                f[road[1]]++;
+            }
+            Arrays.sort(f);
+            return IntStream.range(0, n).mapToLong(i -> f[i] * (i + 1L)).sum();
+        }
+    }
 }
