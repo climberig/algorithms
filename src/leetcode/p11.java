@@ -90,6 +90,25 @@ public class p11{
         }
     }
 
+    static class s1136{//Parallel Courses
+        public int minimumSemesters(int n, int[][] relations){
+            List<ArrayList<Integer>> g = IntStream.range(0, n + 1).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
+            int inDegree[] = new int[n + 1], semesters = 0;
+            for(int[] r : relations){
+                g.get(r[0]).add(r[1]);
+                ++inDegree[r[1]];
+            }
+            Queue<Integer> q = new LinkedList<>();
+            IntStream.range(1, n + 1).filter(i -> inDegree[i] == 0).forEach(q::offer);
+            for(; !q.isEmpty(); ++semesters)
+                for(int size = q.size(); size > 0; size--, n--)
+                    for(int v : g.get(q.poll()))
+                        if(--inDegree[v] == 0)
+                            q.offer(v);
+            return n == 0 ? semesters : -1;
+        }
+    }
+
     static class s1140{//Stone Game II
         public int stoneGameII(int[] piles){
             int[] cs = Arrays.copyOf(piles, piles.length);
