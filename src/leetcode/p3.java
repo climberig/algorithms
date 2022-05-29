@@ -67,6 +67,20 @@ public class p3{
         }
     }
 
+    static class s318{//Maximum Product of Word Lengths
+        public int maxProduct(String[] words){
+            int masks[] = new int[words.length], r = 0;
+            for(int i = 0; i < words.length; i++)
+                for(int j = 0; j < words[i].length(); j++)
+                    masks[i] |= 1 << (words[i].charAt(j) - 'a');
+            for(int i = 0; i < words.length; i++)
+                for(int j = i + 1; j < words.length; j++)
+                    if((masks[i] & masks[j]) == 0)
+                        r = Math.max(words[i].length() * words[j].length(), r);
+            return r;
+        }
+    }
+
     static class s320{//Generalized Abbreviation
         public List<String> generateAbbreviations(String word){
             List<String> r = new ArrayList<>((int) Math.pow(2, word.length()));
