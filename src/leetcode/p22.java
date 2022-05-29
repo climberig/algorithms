@@ -1161,4 +1161,13 @@ public class p22{
             return IntStream.range(0, n).mapToLong(i -> f[i] * (i + 1L)).sum();
         }
     }
+
+    static class s2287{//Rearrange Characters to Make Target String
+        public int rearrangeCharacters(String s, String t){
+            int[] sf = new int[26], tf = new int[26];
+            s.chars().forEach(c -> sf[c - 'a']++);
+            t.chars().forEach(c -> tf[c - 'a']++);
+            return t.chars().map(c -> sf[c - 'a'] / tf[c - 'a']).min().getAsInt();
+        }
+    }
 }
