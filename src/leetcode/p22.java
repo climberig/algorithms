@@ -1170,4 +1170,16 @@ public class p22{
             return t.chars().map(c -> sf[c - 'a'] / tf[c - 'a']).min().getAsInt();
         }
     }
+
+    static class s2288{//Apply Discount to Prices
+        public String discountPrices(String sentence, int discount){
+            String[] s = sentence.split(" ");
+            for(int i = 0; i < s.length; i++)
+                if(s[i].length() > 1 && s[i].startsWith("$") && s[i].substring(1).chars().allMatch(Character::isDigit)){
+                    long n = Long.parseLong(s[i].substring(1));
+                    s[i] = String.format("$%.2f", n - n * discount / 100.0);
+                }
+            return String.join(" ", s);
+        }
+    }
 }
