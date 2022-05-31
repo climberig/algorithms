@@ -165,6 +165,15 @@ public class p14{
         }
     }
 
+    static class s1461{//Check If a String Contains All Binary Codes of Size K
+        public boolean hasAllCodes(String s, int k){
+            Set<String> codes = new HashSet<>();
+            for(int i = k; i <= s.length() && codes.size() < 1 << k; i++)
+                codes.add(s.substring(i - k, i));
+            return codes.size() == 1 << k;
+        }
+    }
+
     static class s1462{//Course Schedule IV
         public List<Boolean> checkIfPrerequisite(int n, int[][] prerequisites, int[][] queries){
             List<List<Integer>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
