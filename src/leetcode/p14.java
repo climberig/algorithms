@@ -301,6 +301,14 @@ public class p14{
         }
     }
 
+    static class s1480{//Running Sum of 1d Array
+        public int[] runningSum(int[] a){
+            for(int i = 1; i < a.length; i++)
+                a[i] += a[i - 1];
+            return a;
+        }
+    }
+
     static class s1482{//Minimum Number of Days to Make m Bouquets
         public int minDays(int[] bloomDays, int m, int k){
             int lo = 1, hi = 1_000_000_000, r = 0;

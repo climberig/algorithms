@@ -302,6 +302,28 @@ public class p11{
         }
     }
 
+    static class s1197{//Minimum Knight Moves
+        public int minKnightMoves(int x, int y){
+            int dirs[][] = {{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}}, r = 0;
+            Queue<int[]> q = new LinkedList<>();
+            x = Math.abs(x);
+            y = Math.abs(y);
+            Set<String> seen = new HashSet<>();
+            for(q.add(new int[]{0, 0}), seen.add("0,0"); !q.isEmpty(); r++)
+                for(int size = q.size(); size > 0; size--){
+                    int[] ab = q.poll();
+                    if(ab[0] == x && ab[1] == y)
+                        return r;
+                    for(int[] d : dirs){
+                        int a = ab[0] + d[0], b = ab[1] + d[1];
+                        if(seen.add(a + "," + b) && a >= -1 && b >= -1)
+                            q.offer(new int[]{a, b});
+                    }
+                }
+            return r;
+        }
+    }
+
     static class s1199{//Minimum Time to Build Blocks
         public int minBuildTime(int[] blocks, int split){
             PriorityQueue<Integer> q = new PriorityQueue<>();

@@ -1182,4 +1182,15 @@ public class p22{
             return String.join(" ", s);
         }
     }
+
+    static class s2291{//Maximum Profit From Trading Stocks
+        public int maximumProfit(int[] present, int[] future, int budget){
+            int[] dp = new int[budget + 1];
+            for(int i = 0; i < present.length; i++)
+                for(int money = budget; money >= present[i]; money--)
+                    if(future[i] - present[i] > 0)
+                        dp[money] = Math.max(dp[money], future[i] - present[i] + dp[money - present[i]]);
+            return dp[budget];
+        }
+    }
 }
