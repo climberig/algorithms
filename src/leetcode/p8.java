@@ -105,6 +105,16 @@ public class p8{
         }
     }
 
+    static class s867{//Transpose Matrix
+        public int[][] transpose(int[][] m){
+            int[][] r = new int[m[0].length][m.length];
+            for(int i = 0; i < m.length; i++)
+                for(int j = 0; j < m[0].length; j++)
+                    r[j][i] = m[i][j];
+            return r;
+        }
+    }
+
     static class s881{//Boats to Save People
         public int numRescueBoats(int[] people, int limit){
             Arrays.sort(people);
