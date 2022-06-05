@@ -1235,4 +1235,49 @@ public class p22{
             return r;
         }
     }
+
+    static class s2295{//Replace Elements in an Array
+        public int[] arrayChange(int[] a, int[][] ops){
+            Map<Integer, Integer> m = new HashMap<>();
+            for(int i = ops.length - 1; i >= 0; i--)
+                if(m.containsKey(ops[i][1]))
+                    m.put(ops[i][0], m.remove(ops[i][1]));
+                else m.put(ops[i][0], ops[i][1]);
+            return Arrays.stream(a).map(n -> m.getOrDefault(n, n)).toArray();
+        }
+    }
+
+    static class s2296{//Design a Text Editor
+        class TextEditor{
+            StringBuilder s = new StringBuilder();
+            int cursor = 0;
+
+            public void addText(String text){
+                s.insert(cursor, text);
+                cursor += text.length();
+            }
+
+            public int deleteText(int k){
+                int n = Math.min(cursor, k);
+                s.delete(Math.max(0, cursor - k), cursor);
+                cursor -= n;
+                return n;
+            }
+
+            public String cursorLeft(int k){
+                cursor = Math.max(0, cursor - k);
+                return r();
+            }
+
+            public String cursorRight(int k){
+                cursor = Math.min(cursor + k, s.length());
+                return r();
+            }
+
+            String r(){
+                int left = Math.max(0, cursor - 10);
+                return s.substring(left, cursor);
+            }
+        }
+    }
 }
