@@ -1210,4 +1210,29 @@ public class p22{
             return dp[budget];
         }
     }
+
+    static class s2293{//Min Max Game
+        public int minMaxGame(int[] a){
+            while(a.length > 1){
+                int[] b = new int[a.length / 2];
+                for(int i = 0, j = 0; i < a.length; i += 2, j++)
+                    b[j] = i % 4 == 0 ? Math.min(a[i], a[i + 1]) : Math.max(a[i], a[i + 1]);
+                a = b;
+            }
+            return a[0];
+        }
+    }
+
+    static class s2294{//Partition Array Such That Maximum Difference Is K
+        public int partitionArray(int[] a, int k){
+            int r = 1;
+            Arrays.sort(a);
+            for(int i = 0, j = 0; i < a.length; i++)
+                if(a[i] - a[j] > k){
+                    r++;
+                    j = i;
+                }
+            return r;
+        }
+    }
 }
