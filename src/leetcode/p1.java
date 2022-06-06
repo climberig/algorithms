@@ -235,6 +235,17 @@ public class p1{
         }
     }
 
+    static class s160{//Intersection of Two Linked Lists
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB){
+            ListNode a = headA, b = headB;
+            while(a != b){
+                a = a == null ? headB : a.next;
+                b = b == null ? headA : b.next;
+            }
+            return a;
+        }
+    }
+
     static class s161{//One Edit Distance
         public boolean isOneEditDistance(String s, String t){
             if(Math.abs(s.length() - t.length()) > 1)
