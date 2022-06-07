@@ -222,6 +222,19 @@ public class p0{
         }
     }
 
+    static class s88{//Merge Sorted Array
+        public void merge(int[] a1, int m, int[] a2, int n){
+            for(int i1 = m - 1, i2 = n - 1, j = a1.length - 1; j >= 0; j--)
+                if(i1 >= 0 && i2 >= 0){
+                    if(a1[i1] >= a2[i2])
+                        a1[j] = a1[i1--];
+                    else a1[j] = a2[i2--];
+                }else if(i1 >= 0)
+                    a1[j] = a1[i1--];
+                else a1[j] = a2[i2--];
+        }
+    }
+
     static class s99{//Recover Binary Search Tree
         TreeNode a, b, pre = new TreeNode(Integer.MIN_VALUE);
 
