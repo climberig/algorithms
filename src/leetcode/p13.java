@@ -101,6 +101,15 @@ public class p13{
         }
     }
 
+    static class s1332{//Remove Palindromic Subsequences
+        public int removePalindromeSub(String s){
+            for(int lo = 0, hi = s.length() - 1; lo < hi; lo++, hi--)
+                if(s.charAt(lo) != s.charAt(hi))
+                    return 2;
+            return 1;
+        }
+    }
+
     static class s1334{//Find the City With the Smallest Number of Neighbors at a Threshold Distance
         public int findTheCity(int n, int[][] edges, int distanceThreshold){
             int d[][] = new int[n][n], r = 0;
