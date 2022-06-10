@@ -15,6 +15,20 @@ public class p0{
         }
     }
 
+    static class s3{//Longest Substring Without Repeating Characters
+        public int lengthOfLongestSubstring(String str){
+            int r = 0;
+            boolean[] f = new boolean[256];
+            for(int i = 0, j = 0; i < str.length(); i++){
+                while(f[str.charAt(i)])
+                    f[str.charAt(j++)] = false;
+                f[str.charAt(i)] = true;
+                r = Math.max(r, i - j + 1);
+            }
+            return r;
+        }
+    }
+
     static class s11{//Container With Most Water
         public int maxArea(int[] heights){
             int r = 0;
