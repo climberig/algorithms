@@ -6,12 +6,11 @@ import java.util.stream.IntStream;
 public class p0{
     static class s1{//Two Sum
         public int[] twoSum(int[] a, int t){
+            int i = 0;
             Map<Integer, Integer> m = new HashMap<>();
-            for(int i = 0; i < a.length; i++)
-                if(m.containsKey(t - a[i]))
-                    return new int[]{m.get(t - a[i]), i};
-                else m.put(a[i], i);
-            return null;
+            for(; i < a.length && !m.containsKey(t - a[i]); i++)
+                m.put(a[i], i);
+            return new int[]{m.get(t - a[i]), i};
         }
     }
 
