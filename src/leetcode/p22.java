@@ -1280,4 +1280,27 @@ public class p22{
             }
         }
     }
+
+    static class s2299{//Strong Password Checker II
+        public boolean strongPasswordCheckerII(String p){
+            if(p.length() < 8)
+                return false;
+            String specialS = "!@#$%^&*()-+";
+            int special = 0, lowercase = 0, uppercase = 0, digit = 0;
+            for(int i = 0; i < p.length(); i++){
+                char c = p.charAt(i);
+                if(Character.isUpperCase(c))
+                    uppercase++;
+                else if(Character.isLowerCase(c))
+                    lowercase++;
+                else if(Character.isDigit(c))
+                    digit++;
+                else if(specialS.contains(c + ""))
+                    special++;
+                if(i > 0 && c == p.charAt(i - 1))
+                    return false;
+            }
+            return special * lowercase * uppercase * digit != 0;
+        }
+    }
 }
