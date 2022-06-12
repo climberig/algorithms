@@ -477,6 +477,22 @@ public class p16{
         }
     }
 
+    static class s1695{//Maximum Erasure Value
+        public int maximumUniqueSubarray(int[] a){
+            Set<Integer> s = new HashSet<>();
+            int sum = 0, r = 0;
+            for(int lo = 0, hi = 0; hi < a.length; )
+                if(s.add(a[hi])){
+                    sum += a[hi++];
+                    r = Math.max(sum, r);
+                }else{
+                    sum -= a[lo];
+                    s.remove(a[lo++]);
+                }
+            return r;
+        }
+    }
+
     static class s1696{//Jump Game VI
         public int maxResult(int[] a, int k){
             Deque<Integer> q = new ArrayDeque<>();
