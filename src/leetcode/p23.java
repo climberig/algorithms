@@ -27,4 +27,25 @@ public class p23{
             return Arrays.stream(r).min().getAsInt();
         }
     }
+
+    static class s2305{//Fair Distribution of Cookies
+        int r = Integer.MAX_VALUE;
+        public int distributeCookies(int[] cookies, int k){
+            bt(0, cookies, new int[k]);
+            return r;
+        }
+
+        void bt(int i, int[] cookies, int[] kids){
+            if(i == cookies.length){
+                int max = 0;
+                for(int c : kids)
+                    max = Math.max(max, c);
+                r = Math.min(r, max);
+            }else for(int j = 0; j < kids.length; j++){
+                kids[j] += cookies[i];
+                bt(i + 1, cookies, kids);
+                kids[j] -= cookies[i];
+            }
+        }
+    }
 }
