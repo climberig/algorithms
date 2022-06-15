@@ -224,6 +224,22 @@ public class p10{
         }
     }
 
+    static class s1048{//Longest String Chain
+        public int longestStrChain(String[] words){
+            Arrays.sort(words, Comparator.comparingInt(String::length));
+            Map<String, Integer> dp = new HashMap<>();
+            int r = 0;
+            for(String w : words){
+                int max = 0;
+                for(int i = 0; i < w.length(); i++)
+                    max = Math.max(max, dp.getOrDefault(w.substring(0, i) + w.substring(i + 1), 0) + 1);
+                dp.put(w, max);
+                r = Math.max(r, max);
+            }
+            return r;
+        }
+    }
+
     static class s1049{//Last Stone Weight II
         public int lastStoneWeightII(int[] stones){
             boolean[] dp = new boolean[1501];
