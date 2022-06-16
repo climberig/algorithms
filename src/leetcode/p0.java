@@ -28,6 +28,25 @@ public class p0{
         }
     }
 
+    static class s5{//Longest Palindromic Substring
+        public String longestPalindrome(String s){
+            int[] r = {0, 1};
+            for(int i = 0; i < s.length(); i++){
+                extend(s, i - 1, i + 1, r);
+                extend(s, i - 1, i, r);
+            }
+            return s.substring(r[0], r[1]);
+        }
+
+        void extend(String s, int lo, int hi, int[] r){
+            for(; 0 <= lo && hi < s.length() && s.charAt(lo) == s.charAt(hi); lo--, hi++) ;
+            if(hi - lo - 1 > r[1] - r[0]){
+                r[0] = lo + 1;
+                r[1] = hi;
+            }
+        }
+    }
+
     static class s11{//Container With Most Water
         public int maxArea(int[] heights){
             int r = 0;
