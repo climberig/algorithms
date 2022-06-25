@@ -62,4 +62,16 @@ public class p23{
             return "";
         }
     }
+
+    static class s2315{//Count Asterisks
+        public int countAsterisks(String s){
+            int r = 0, count = 0;
+            for(int i = 0; i < s.length(); i++)
+                if(s.charAt(i) == '*' && count % 2 == 0)
+                    r++;
+                else if(s.charAt(i) == '|')
+                    count++;
+            return r;
+        }
+    }
 }
