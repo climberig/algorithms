@@ -1,5 +1,7 @@
 package leetcode;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 public class p23{
     static class s2303{//Calculate Amount Paid in Taxes
         public double calculateTax(int[][] brackets, int income){
@@ -46,6 +48,18 @@ public class p23{
                 bt(i + 1, cookies, kids);
                 kids[j] -= cookies[i];
             }
+        }
+    }
+
+    static class s2309{//Greatest English Letter in Upper and Lower Case
+        public String greatestLetter(String str){
+            Set<Character> s = new HashSet<>();
+            for(char c : str.toCharArray())
+                s.add(c);
+            for(char c = 'Z'; c >= 'A'; c--)
+                if(s.contains(c) && s.contains(Character.toLowerCase(c)))
+                    return c + "";
+            return "";
         }
     }
 }
