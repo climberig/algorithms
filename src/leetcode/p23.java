@@ -74,4 +74,30 @@ public class p23{
             return r;
         }
     }
+
+    static class s2319{//Check if Matrix Is X-Matrix
+        public boolean checkXMatrix(int[][] g){
+            for(int i = 0; i < g.length; i++)
+                for(int j = 0; j < g.length; j++){
+                    boolean diag = i - j == 0 || i + j == g.length - 1;
+                    if(diag && g[i][j] == 0)
+                        return false;
+                    else if(!diag && g[i][j] != 0)
+                        return false;
+                }
+            return true;
+        }
+    }
+
+    static class s2320{//Count Number of Ways to Place Houses
+        public int countHousePlacements(int n){
+            long x = 1, o = 1, total = x + o;
+            for(int i = 2; i <= n; i++){
+                x = o;
+                o = total;
+                total = (x + o) % 1_000_000_007;
+            }
+            return (int) ((total * total) % 1_000_000_007);
+        }
+    }
 }
