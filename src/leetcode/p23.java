@@ -1,7 +1,6 @@
 package leetcode;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 public class p23{
     static class s2303{//Calculate Amount Paid in Taxes
         public double calculateTax(int[][] brackets, int income){
@@ -98,6 +97,27 @@ public class p23{
                 total = (x + o) % 1_000_000_007;
             }
             return (int) ((total * total) % 1_000_000_007);
+        }
+    }
+
+    static class s2325{//Decode the Message
+        public String decodeMessage(String key, String message){
+            Map<Character, Character> m = new HashMap<>();
+            m.put(' ', ' ');
+            char to = 'a';
+            for(char from : key.toCharArray())
+                if(!m.containsKey(from))
+                    m.put(from, to++);
+            return message.chars().mapToObj(c -> m.get((char) c) + "").collect(Collectors.joining(""));
+        }
+    }
+
+    static class s2331{//Evaluate Boolean Binary Tree
+        public boolean evaluateTree(TreeNode node){
+            if(node.val < 2)
+                return node.val == 1;
+            boolean left = evaluateTree(node.left), right = evaluateTree(node.right);
+            return node.val == 2 ? left | right : left & right;
         }
     }
 }
