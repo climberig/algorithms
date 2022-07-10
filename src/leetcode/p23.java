@@ -1,6 +1,7 @@
 package leetcode;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 public class p23{
     static class s2303{//Calculate Amount Paid in Taxes
         public double calculateTax(int[][] brackets, int income){
@@ -118,6 +119,34 @@ public class p23{
                 return node.val == 1;
             boolean left = evaluateTree(node.left), right = evaluateTree(node.right);
             return node.val == 2 ? left | right : left & right;
+        }
+    }
+
+    static class s2335{//Minimum Amount of Time to Fill Cups
+        public int fillCups(int[] amount){
+            PriorityQueue<Integer> q = new PriorityQueue<>();
+            Arrays.stream(amount).filter(a -> a > 0).forEach(a -> q.offer(-a));
+            int r = 0;
+            for(; q.size() > 1; r++){
+                Integer a = q.poll(), b = q.poll();
+                if(++a != 0)
+                    q.offer(a);
+                if(++b != 0)
+                    q.offer(b);
+            }
+            return q.isEmpty() ? r : r - q.poll();
+        }
+    }
+
+    static class s2336{//Smallest Number in Infinite Set
+        class SmallestInfiniteSet{
+            TreeSet<Integer> s = new TreeSet<>();
+
+            public SmallestInfiniteSet(){IntStream.range(1, 1_001).forEach(n -> s.add(n));}
+
+            public int popSmallest(){return s.pollFirst();}
+
+            public void addBack(int n){s.add(n);}
         }
     }
 }
