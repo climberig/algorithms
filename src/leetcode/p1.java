@@ -392,4 +392,24 @@ public class p1{
             return r;
         }
     }
+
+    static class s199{//Binary Tree Right Side View
+        public List<Integer> rightSideView(TreeNode root){
+            List<Integer> r = new LinkedList<>();
+            if(root == null)
+                return r;
+            Queue<TreeNode> q = new LinkedList<>();
+            for(q.add(root); !q.isEmpty(); ){
+                r.add(q.peek().val);
+                for(int size = q.size(); size > 0; size--){
+                    TreeNode node = q.poll();
+                    if(node.right != null)
+                        q.add(node.right);
+                    if(node.left != null)
+                        q.add(node.left);
+                }
+            }
+            return r;
+        }
+    }
 }
