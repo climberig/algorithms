@@ -285,6 +285,29 @@ public class p4{
         }
     }
 
+    static class s473{//Matchsticks to Square
+        public boolean makesquare(int[] a){
+            int sum = Arrays.stream(a).sum();
+            if(sum % 4 != 0 || a.length < 4)
+                return false;
+            Arrays.sort(a);
+            return can(a, new int[4], sum / 4, a.length - 1);
+        }
+
+        boolean can(int[] a, int[] s, int w, int i){
+            if(i == -1)
+                return s[0] == w && s[1] == w && s[2] == w;
+            for(int j = 0; j < 4; j++)
+                if(s[j] + a[i] <= w){
+                    s[j] += a[i];
+                    if(can(a, s, w, i - 1))
+                        return true;
+                    s[j] -= a[i];
+                }
+            return false;
+        }
+    }
+
     static class s474{//Ones and Zeroes
         public int findMaxForm(String[] strs, int m, int n){
             int[][] dp = new int[m + 1][n + 1];
