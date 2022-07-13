@@ -3,6 +3,28 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class p1{
+    static class s102{//Binary Tree Level Order Traversal
+        public List<List<Integer>> levelOrder(TreeNode root){
+            List<List<Integer>> r = new ArrayList<>();
+            if(root == null)
+                return r;
+            Queue<TreeNode> q = new LinkedList<>();
+            for(q.add(root); !q.isEmpty(); ){
+                List<Integer> level = new ArrayList<>();
+                for(int size = q.size(); size > 0; size--){
+                    TreeNode node = q.poll();
+                    level.add(node.val);
+                    if(node.left != null)
+                        q.offer(node.left);
+                    if(node.right != null)
+                        q.offer(node.right);
+                }
+                r.add(level);
+            }
+            return r;
+        }
+    }
+
     static class s108{//Convert Sorted Array to Binary Search Tree
         public TreeNode sortedArrayToBST(int[] a){
             return bst(a, 0, a.length - 1);
