@@ -149,4 +149,17 @@ public class p23{
             public void addBack(int n){s.add(n);}
         }
     }
+
+    static class s2340{//Minimum Adjacent Swaps to Make a Valid Array
+        public int minimumSwaps(int[] a){
+            int minIdx = a.length - 1, maxIdx = 0;
+            for(int i = 0; i < a.length; i++)
+                if(a[i] >= a[maxIdx])
+                    maxIdx = i;
+            for(int i = a.length - 1; i >= 0; i--)
+                if(a[i] <= a[minIdx])
+                    minIdx = i;
+            return minIdx + a.length - 1 - maxIdx - (minIdx > maxIdx ? 1 : 0);
+        }
+    }
 }
