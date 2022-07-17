@@ -174,4 +174,21 @@ public class p23{
             return r;
         }
     }
+
+    static class s2342{//Max Sum of a Pair With Equal Sum of Digits
+        public int maximumSum(int[] a){
+            Map<Integer, Integer> m = new HashMap<>();
+            int r = -1;
+            for(int n : a){
+                int sum = 0;
+                for(int k = n; k > 0; k /= 10)
+                    sum += k % 10;
+                if(m.containsKey(sum)){
+                    r = Math.max(r, n + m.get(sum));
+                    m.put(sum, Math.max(m.get(sum), n));
+                }else m.put(sum, n);
+            }
+            return r;
+        }
+    }
 }
