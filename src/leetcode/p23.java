@@ -162,4 +162,16 @@ public class p23{
             return minIdx + a.length - 1 - maxIdx - (minIdx > maxIdx ? 1 : 0);
         }
     }
+
+    static class s2341{//Maximum Number of Pairs in Array
+        public int[] numberOfPairs(int[] a){
+            int[] r = new int[2], f = new int[101];
+            Arrays.stream(a).forEach(n -> f[n]++);
+            for(int n : f){
+                r[0] += n / 2;
+                r[1] += n % 2;
+            }
+            return r;
+        }
+    }
 }
