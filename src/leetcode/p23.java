@@ -191,4 +191,20 @@ public class p23{
             return r;
         }
     }
+
+    static class s2347{//Best Poker Hand
+        public String bestHand(int[] ranks, char[] suits){
+            Arrays.sort(suits);
+            if(suits[0] == suits[4])
+                return "Flush";
+            int[] f = new int[14];
+            Arrays.stream(ranks).forEach(r -> f[r]++);
+            int maxRank = Arrays.stream(f).max().getAsInt();
+            if(maxRank >= 3)
+                return "Three of a Kind";
+            if(maxRank == 2)
+                return "Pair";
+            return "High Card";
+        }
+    }
 }
