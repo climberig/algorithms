@@ -218,4 +218,14 @@ public class p23{
             return r;
         }
     }
+
+    static class s2351{// First Letter to Appear Twice
+        public char repeatedCharacter(String s){
+            boolean[] appeared = new boolean[26];
+            int i = 0;
+            for(; i < s.length() && !appeared[s.charAt(i) - 'a']; i++)
+                appeared[s.charAt(i) - 'a'] = true;
+            return s.charAt(i);
+        }
+    }
 }
