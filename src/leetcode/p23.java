@@ -228,4 +228,20 @@ public class p23{
             return s.charAt(i);
         }
     }
+
+    static class s2352{//Equal Row and Column Pairs
+        public int equalPairs(int[][] g){
+            int r = 0;
+            for(int i = 0; i < g.length; i++)
+                for(int j = 0; j < g.length; j++)
+                    r += equals(g, i, j);
+            return r;
+        }
+        int equals(int[][] g, int r, int c){
+            for(int i = 0; i < g.length; i++)
+                if(g[r][i] != g[i][c])
+                    return 0;
+            return 1;
+        }
+    }
 }
