@@ -207,4 +207,15 @@ public class p23{
             return "High Card";
         }
     }
+
+    static class s2348{//Number of Zero-Filled Subarrays
+        public long zeroFilledSubarray(int[] a){
+            long r = 0;
+            for(int i = 0, f = 0; i < a.length; i++)
+                if(a[i] == 0)
+                    r += ++f;
+                else f = 0;
+            return r;
+        }
+    }
 }
