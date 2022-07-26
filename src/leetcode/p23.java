@@ -219,6 +219,28 @@ public class p23{
         }
     }
 
+    static class s2349{//Design a Number Container System
+        class NumberContainers{
+            Map<Integer, TreeSet<Integer>> nToIds = new HashMap<>();
+            Map<Integer, Integer> idxToN = new HashMap<>();
+
+            public void change(int idx, int n){
+                if(idxToN.containsKey(idx)){
+                    Integer prev = idxToN.get(idx);
+                    nToIds.get(prev).remove(idx);
+                }
+                idxToN.put(idx, n);
+                nToIds.putIfAbsent(n, new TreeSet<>());
+                nToIds.get(n).add(idx);
+            }
+
+            public int find(int n){
+                TreeSet<Integer> ids = nToIds.get(n);
+                return ids == null || ids.isEmpty() ? -1 : ids.first();
+            }
+        }
+    }
+
     static class s2351{// First Letter to Appear Twice
         public char repeatedCharacter(String s){
             boolean[] appeared = new boolean[26];
