@@ -205,6 +205,15 @@ public class p2{
         }
     }
 
+    static class s242{//Valid Anagram
+        public boolean isAnagram(String s, String t){
+            int[] f = new int[26];
+            s.chars().forEach(c -> f[c - 'a']++);
+            t.chars().forEach(c -> f[c - 'a']--);
+            return Arrays.stream(f).allMatch(n -> n == 0);
+        }
+    }
+
     static class s243{//Shortest Word Distance
         public int shortestDistance(String[] words, String w1, String w2){
             int j1 = -1, j2 = -1, r = Integer.MAX_VALUE;
