@@ -266,4 +266,10 @@ public class p23{
             return 1;
         }
     }
+
+    static class s2357{//Make Array Zero by Subtracting Equal Amounts
+        public int minimumOperations(int[] a){
+            return (int) Arrays.stream(a).filter(n -> n > 0).distinct().count();
+        }
+    }
 }
