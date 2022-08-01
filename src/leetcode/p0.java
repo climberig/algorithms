@@ -221,6 +221,18 @@ public class p0{
         }
     }
 
+    static class s62{//Unique Paths
+        public int uniquePaths(int m, int n){
+            int[][] g = new int[m][n];
+            IntStream.range(0, n).forEach(i -> g[0][i] = 1);
+            IntStream.range(0, m).forEach(i -> g[i][0] = 1);
+            for(int i = 1; i < m; i++)
+                for(int j = 1; j < n; j++)
+                    g[i][j] = g[i - 1][j] + g[i][j - 1];
+            return g[m - 1][n - 1];
+        }
+    }
+
     static class s63{//Unique Paths II
         public int uniquePathsWithObstacles(int[][] g){
             int[][] dp = new int[g.length][g[0].length];
