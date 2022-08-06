@@ -272,4 +272,19 @@ public class p23{
             return (int) Arrays.stream(a).filter(n -> n > 0).distinct().count();
         }
     }
+
+    static class s2358{//Maximum Number of Groups Entering a Competition
+        public int maximumGroups(int[] grades){
+            return (int) ((Math.sqrt(1 + 8 * grades.length) - 1) / 2);
+        }
+    }
+
+    static class s2363{//Merge Similar Items
+        public List<List<Integer>> mergeSimilarItems(int[][] a1, int[][] a2){
+            Map<Integer, Integer> m = new TreeMap<>();
+            Arrays.stream(a1).forEach(a -> m.put(a[0], a[1]));
+            Arrays.stream(a2).forEach(a -> m.put(a[0], m.getOrDefault(a[0], 0) + a[1]));
+            return m.keySet().stream().map(v -> Arrays.asList(v, m.get(v))).collect(Collectors.toList());
+        }
+    }
 }
