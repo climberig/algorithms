@@ -287,4 +287,17 @@ public class p23{
             return m.keySet().stream().map(v -> Arrays.asList(v, m.get(v))).collect(Collectors.toList());
         }
     }
+
+    static class s2367{//Number of Arithmetic Triplets
+        public int arithmeticTriplets(int[] a, int diff){
+            int r = 0;
+            Set<Integer> seen = new HashSet<>();
+            for(int n : a){
+                seen.add(n);
+                if(seen.contains(n - diff) && seen.contains(n - 2 * diff))
+                    r++;
+            }
+            return r;
+        }
+    }
 }
