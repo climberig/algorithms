@@ -300,4 +300,19 @@ public class p23{
             return r;
         }
     }
+
+    static class s2368{//Reachable Nodes With Restrictions
+        public int reachableNodes(int n, int[][] edges, int[] restricted){
+            List<List<Integer>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
+            for(int[] e : edges){
+                g.get(e[0]).add(e[1]);
+                g.get(e[1]).add(e[0]);
+            }
+            Set<Integer> seen = Arrays.stream(restricted).boxed().collect(Collectors.toSet());
+            Queue<Integer> q = new LinkedList<>();
+            for(q.add(0), seen.add(0); !q.isEmpty(); )
+                g.get(q.poll()).stream().filter(seen::add).forEach(q::add);
+            return seen.size() - restricted.length;
+        }
+    }
 }
