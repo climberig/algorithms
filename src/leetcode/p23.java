@@ -315,4 +315,16 @@ public class p23{
             return seen.size() - restricted.length;
         }
     }
+
+    static class s2373{//Largest Local Values in a Matrix
+        public int[][] largestLocal(int[][] g){
+            int[][] r = new int[g.length - 2][g.length - 2];
+            for(int i = 0; i < g.length - 2; i++)
+                for(int j = 0; j < g.length - 2; j++)
+                    for(int i1 = 0; i1 < 3; i1++)
+                        for(int j1 = 0; j1 < 3; j1++)
+                            r[i][j] = Math.max(r[i][j], g[i + i1][j + j1]);
+            return r;
+        }
+    }
 }
