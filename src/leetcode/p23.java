@@ -327,4 +327,17 @@ public class p23{
             return r;
         }
     }
+
+    static class s2374{//Node With Highest Edge Score
+        public int edgeScore(int[] edges){
+            long scores[] = new long[edges.length];
+            int r = 0;
+            for(int i = 0; i < edges.length; i++)
+                scores[edges[i]] += i;
+            for(int i = 0; i < edges.length; i++)
+                if(scores[i] > scores[r])
+                    r = i;
+            return r;
+        }
+    }
 }
