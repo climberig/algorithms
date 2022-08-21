@@ -340,4 +340,18 @@ public class p23{
             return r;
         }
     }
+
+    static class s2379{//Minimum Recolors to Get K Consecutive Black Blocks
+        public int minimumRecolors(String blocks, int k){
+            int r = k, b = 0;
+            for(int i = 0; i < blocks.length(); i++){
+                b += blocks.charAt(i) == 'B' ? 1 : 0;
+                if(i >= k - 1){
+                    r = Math.min(r, k - b);
+                    b -= blocks.charAt(i - k + 1) == 'B' ? 1 : 0;
+                }
+            }
+            return r;
+        }
+    }
 }
