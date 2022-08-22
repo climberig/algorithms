@@ -355,6 +355,27 @@ public class p23{
         }
     }
 
+    static class s2380{//Time Needed to Rearrange a Binary String
+        public int secondsToRemoveOccurrences(String s){
+            int r = 0;
+            char[] a = s.toCharArray();
+            while(true){
+                int changes = 0;
+                for(int i = 0; i < a.length - 1; i++)
+                    if(a[i] == '0' && a[i + 1] == '1'){
+                        a[i] = '1';
+                        a[i + 1] = '0';
+                        i += 1;
+                        changes++;
+                    }
+                if(changes == 0)
+                    break;
+                r++;
+            }
+            return r;
+        }
+    }
+
     static class s2383{//Minimum Hours of Training to Win a Competition
         public int minNumberOfHours(int initialEnergy, int initialExperience, int[] energy, int[] experience){
             int r = 0;
