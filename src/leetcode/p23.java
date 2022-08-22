@@ -354,4 +354,23 @@ public class p23{
             return r;
         }
     }
+
+    static class s2383{//Minimum Hours of Training to Win a Competition
+        public int minNumberOfHours(int initialEnergy, int initialExperience, int[] energy, int[] experience){
+            int r = 0;
+            for(int i = 0; i < energy.length; i++){
+                if(initialExperience <= experience[i]){
+                    r += experience[i] - initialExperience + 1;
+                    initialExperience += experience[i] - initialExperience + 1;
+                }
+                if(initialEnergy <= energy[i]){
+                    r += energy[i] - initialEnergy + 1;
+                    initialEnergy += energy[i] - initialEnergy + 1;
+                }
+                initialExperience += experience[i];
+                initialEnergy -= energy[i];
+            }
+            return r;
+        }
+    }
 }
