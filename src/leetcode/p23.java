@@ -394,4 +394,26 @@ public class p23{
             return r;
         }
     }
+
+    static class s2384{//Largest Palindromic Number
+        public String largestPalindromic(String s){
+            int fr[] = new int[10], a[] = new int[s.length()], lo = 0, hi = s.length() - 1;
+            Arrays.fill(a, -1);
+            s.chars().forEach(c -> fr[c - '0']++);
+            for(int d = 9; d >= 0; d--)
+                if(lo > 0 || d > 0)
+                    for(; fr[d] > 1; fr[d] -= 2)
+                        a[lo++] = a[hi--] = d;
+            for(int d = 9; d >= 0; d--)
+                if(fr[d] > 0){
+                    a[lo] = d;
+                    break;
+                }
+            StringBuilder r = new StringBuilder();
+            for(int n : a)
+                if(n > -1)
+                    r.append(n);
+            return r.toString();
+        }
+    }
 }
