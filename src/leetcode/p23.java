@@ -416,4 +416,30 @@ public class p23{
             return r.toString();
         }
     }
+
+    static class s2385{//Amount of Time for Binary Tree to Be Infected
+        public int amountOfTime(TreeNode root, int start){
+            Map<Integer, List<Integer>> g = new HashMap<>();
+            populate(null, root, g);
+            Set<Integer> seen = new HashSet<>();
+            Queue<Integer> q = new LinkedList<>();
+            int r = 0;
+            for(q.add(start), seen.add(start); !q.isEmpty(); r++)
+                for(int size = q.size(); size > 0; size--)
+                    g.get(q.poll()).stream().filter(seen::add).forEach(q::offer);
+            return r - 1;
+        }
+
+        void populate(TreeNode parent, TreeNode node, Map<Integer, List<Integer>> g){
+            if(node != null){
+                g.put(node.val, new ArrayList<>());
+                if(parent != null){
+                    g.get(node.val).add(parent.val);
+                    g.get(parent.val).add(node.val);
+                }
+                populate(node, node.left, g);
+                populate(node, node.right, g);
+            }
+        }
+    }
 }
