@@ -452,4 +452,15 @@ public class p23{
             return r;
         }
     }
+
+    static class s2390{//Removing Stars From a String
+        public String removeStars(String s){
+            StringBuilder r = new StringBuilder();
+            for(int i = 0; i < s.length(); i++)
+                if(s.charAt(i) == '*')
+                    r.deleteCharAt(r.length() - 1);
+                else r.append(s.charAt(i));
+            return r.toString();
+        }
+    }
 }
