@@ -442,4 +442,14 @@ public class p23{
             }
         }
     }
+
+    static class s2389{//Longest Subsequence With Limited Sum
+        public int[] answerQueries(int[] a, int[] queries){
+            int[] r = new int[queries.length];
+            Arrays.sort(a);
+            for(int i = 0; i < queries.length; i++)
+                for(int j = 0, sum = 0; j < a.length && sum + a[j] <= queries[i]; r[i]++, sum += a[j++]) ;
+            return r;
+        }
+    }
 }
