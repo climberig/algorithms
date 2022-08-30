@@ -463,4 +463,37 @@ public class p23{
             return r.toString();
         }
     }
+
+    static class s2391{//Minimum Amount of Time to Collect Garbage
+        public int garbageCollection(String[] garbage, int[] travel){
+            int r = 0, m = 0, g = 0, p = 0;
+            for(int i = 0; i < garbage.length; i++){
+                int mCount = 0, gCount = 0, pCount = 0;
+                for(char c : garbage[i].toCharArray())
+                    switch(c){
+                        case 'G' -> gCount++;
+                        case 'P' -> pCount++;
+                        case 'M' -> mCount++;
+                    }
+                if(mCount > 0){
+                    r += mCount + m;
+                    m = 0;
+                }
+                if(pCount > 0){
+                    r += pCount + p;
+                    p = 0;
+                }
+                if(gCount > 0){
+                    r += gCount + g;
+                    g = 0;
+                }
+                if(i < travel.length){
+                    m += travel[i];
+                    g += travel[i];
+                    p += travel[i];
+                }
+            }
+            return r;
+        }
+    }
 }
