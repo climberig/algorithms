@@ -496,4 +496,16 @@ public class p23{
             return r;
         }
     }
+
+    static class s2393{//Count Strictly Increasing Subarrays
+        public long countSubarrays(int[] a){
+            long r = 1;
+            for(int i = 1, count = 1; i < a.length; i++)
+                if(a[i - 1] >= a[i]){
+                    r++;
+                    count = 1;
+                }else r += ++count;
+            return r;
+        }
+    }
 }
