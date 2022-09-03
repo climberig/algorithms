@@ -508,4 +508,14 @@ public class p23{
             return r;
         }
     }
+
+    static class s2395{//Find Subarrays With Equal Sum
+        public boolean findSubarrays(int[] a){
+            Set<Integer> sums = new HashSet<>();
+            for(int i = 0; i < a.length - 1; i++)
+                if(!sums.add(a[i] + a[i + 1]))
+                    return true;
+            return false;
+        }
+    }
 }
