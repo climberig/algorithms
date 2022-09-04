@@ -518,4 +518,16 @@ public class p23{
             return false;
         }
     }
+
+    static class s2399{//Check Distances Between Same Letters
+        public boolean checkDistances(String s, int[] distance){
+            int[] idx = new int[26];
+            for(int i = 0; i < s.length(); i++)
+                if(idx[s.charAt(i) - 'a'] > 0){
+                    if(i - idx[s.charAt(i) - 'a'] != distance[s.charAt(i) - 'a'])
+                        return false;
+                }else idx[s.charAt(i) - 'a'] = i + 1;
+            return true;
+        }
+    }
 }
