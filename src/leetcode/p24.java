@@ -15,4 +15,17 @@ public class p24{
             return fr.keySet().stream().filter(n -> fr.get(n) == max).findFirst().orElse(-1);
         }
     }
+
+    static class s2405{//Optimal Partition of String
+        public int partitionString(String s){
+            int r = 0;
+            for(int i = 0, j; i < s.length(); i = j){
+                boolean[] used = new boolean[26];
+                for(j = i; j < s.length() && !used[s.charAt(j) - 'a']; j++)
+                    used[s.charAt(j) - 'a'] = true;
+                r++;
+            }
+            return r;
+        }
+    }
 }
