@@ -1,4 +1,6 @@
 package leetcode;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 public class p24{
@@ -26,6 +28,29 @@ public class p24{
                 r++;
             }
             return r;
+        }
+    }
+
+    static class s2408{//Design SQL
+        class SQL{
+            Map<String, Integer> id = new HashMap<>();
+            Map<String, Map<Integer, List<String>>> data = new HashMap<>();
+
+            public SQL(List<String> names, List<Integer> columns){
+                names.forEach(name -> data.put(name, new HashMap<>()));
+                names.forEach(name -> id.put(name, 1));
+            }
+
+            public void insertRow(String name, List<String> row){
+                data.get(name).put(id.get(name), row);
+                id.put(name, id.get(name) + 1);
+            }
+
+            public void deleteRow(String name, int rowId){}
+
+            public String selectCell(String name, int rowId, int columnId){
+                return data.get(name).get(rowId).get(columnId - 1);
+            }
         }
     }
 }
