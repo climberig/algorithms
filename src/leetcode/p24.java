@@ -4,6 +4,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 public class p24{
+    static class s2401{//Longest Nice Subarray
+        public int longestNiceSubarray(int[] a){
+            int r = 1, and = 0;
+            for(int i = 0, j = 0; j < a.length; j++){
+                while((and & a[j]) > 0)
+                    and ^= a[i++];
+                and |= a[j];
+                r = Math.max(r, j - i + 1);
+            }
+            return r;
+        }
+    }
+
     static class s2404{//Most Frequent Even Element
         public int mostFrequentEven(int[] a){
             Map<Integer, Integer> fr = new TreeMap<>();
