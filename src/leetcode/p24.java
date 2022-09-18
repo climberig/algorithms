@@ -1,8 +1,5 @@
 package leetcode;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 public class p24{
     static class s2401{//Longest Nice Subarray
         public int longestNiceSubarray(int[] a){
@@ -64,6 +61,21 @@ public class p24{
             public String selectCell(String name, int rowId, int columnId){
                 return data.get(name).get(rowId).get(columnId - 1);
             }
+        }
+    }
+
+    static class s2410{//Maximum Matching of Players With Trainers
+        public int matchPlayersAndTrainers(int[] players, int[] trainers){
+            Arrays.sort(players);
+            Arrays.sort(trainers);
+            int r = 0;
+            for(int i = 0, j = 0; i < players.length && j < trainers.length; )
+                if(players[i] <= trainers[j]){
+                    r++;
+                    i++;
+                    j++;
+                }else j++;
+            return r;
         }
     }
 }
