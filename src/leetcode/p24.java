@@ -82,4 +82,15 @@ public class p24{
     static class s2413{//Smallest Even Multiple
         public int smallestEvenMultiple(int n){return n % 2 == 0 ? n : n * 2;}
     }
+
+    static class s2414{//Length of the Longest Alphabetical Continuous Substring
+        public int longestContinuousSubstring(String s){
+            int r = 1;
+            for(int i = 1, conseq = 1; i < s.length(); i++)
+                if(s.charAt(i - 1) + 1 == s.charAt(i))
+                    r = Math.max(r, ++conseq);
+                else conseq = 1;
+            return r;
+        }
+    }
 }
