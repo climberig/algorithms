@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.*;
+import java.util.stream.IntStream;
 public class p24{
     static class s2401{//Longest Nice Subarray
         public int longestNiceSubarray(int[] a){
@@ -91,6 +92,16 @@ public class p24{
                     r = Math.max(r, ++conseq);
                 else conseq = 1;
             return r;
+        }
+    }
+
+    static class s2418{//Sort the People
+        public String[] sortPeople(String[] names, int[] heights){
+            int[][] m = new int[heights.length][2];
+            for(int i = 0; i < heights.length; i++)
+                m[i] = new int[]{heights[i], i};
+            Arrays.sort(m, (a, b) -> b[0] - a[0]);
+            return IntStream.range(0, names.length).mapToObj(i -> names[m[i][1]]).toArray(String[]::new);
         }
     }
 }
