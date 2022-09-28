@@ -104,4 +104,15 @@ public class p24{
             return IntStream.range(0, names.length).mapToObj(i -> names[m[i][1]]).toArray(String[]::new);
         }
     }
+
+    static class s2419{//Longest Subarray With Maximum Bitwise AND
+        public int longestSubarray(int[] a){
+            int max = Arrays.stream(a).max().getAsInt(), r = 1;
+            for(int i = 1, count = 1; i < a.length; i++)
+                if(a[i - 1] == max && a[i] == max)
+                    r = Math.max(r, ++count);
+                else count = 1;
+            return r;
+        }
+    }
 }
