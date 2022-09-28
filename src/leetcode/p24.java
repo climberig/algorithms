@@ -115,4 +115,22 @@ public class p24{
             return r;
         }
     }
+
+    static class s2422{//Merge Operations to Turn Array Into a Palindrome
+        public int minimumOperations(int[] a){
+            int r = 0, left = a[0], right = a[a.length - 1];
+            for(int i = 0, j = a.length - 1; i < j; )
+                if(left == right){
+                    left = a[++i];
+                    right = a[--j];
+                }else if(left < right){
+                    left += a[++i];
+                    r++;
+                }else{
+                    right += a[--j];
+                    r++;
+                }
+            return r;
+        }
+    }
 }
