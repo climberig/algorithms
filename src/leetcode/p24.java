@@ -133,4 +133,18 @@ public class p24{
             return r;
         }
     }
+
+    static class s2423{//Remove Letter To Equalize Frequency
+        public boolean equalFrequency(String word){
+            int[] f = new int[26];
+            word.chars().forEach(c -> f[c - 'a']++);
+            TreeMap<Integer, Integer> m = new TreeMap<>();
+            Arrays.stream(f).filter(c -> c > 0).forEach(c -> m.put(c, m.getOrDefault(c, 0) + 1));
+            if(m.size() == 1 && (m.firstKey() == 1 || m.firstEntry().getValue() == 1))
+                return true;
+            if(m.size() != 2)
+                return false;
+            return Math.abs(m.firstKey() - m.lastKey()) == 1 && (m.firstEntry().getValue() == 1 || m.lastEntry().getValue() == 1);
+        }
+    }
 }
