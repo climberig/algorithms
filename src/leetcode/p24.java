@@ -147,4 +147,14 @@ public class p24{
             return Math.abs(m.firstKey() - m.lastKey()) == 1 && (m.firstEntry().getValue() == 1 || m.lastEntry().getValue() == 1);
         }
     }
+
+    static class s2428{//Maximum Sum of an Hourglass
+        public int maxSum(int[][] g){
+            int r = 0;
+            for(int i = 0; i + 3 <= g.length; i++)
+                for(int j = 0; j + 3 <= g[0].length; j++)
+                    r = Math.max(r, g[i][j] + g[i][j + 1] + g[i][j + 2] + g[i + 1][j + 1] + g[i + 2][j] + g[i + 2][j + 1] + g[i + 2][j + 2]);
+            return r;
+        }
+    }
 }
