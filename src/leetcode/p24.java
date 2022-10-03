@@ -148,6 +148,23 @@ public class p24{
         }
     }
 
+    static class s2424{//Longest Uploaded Prefix
+        class LUPrefix{
+            Set<Integer> s = new HashSet<>();
+            int max = 0;
+
+            public LUPrefix(int n){}
+
+            public void upload(int video){
+                s.add(video);
+                while(s.contains(max + 1))
+                    max++;
+            }
+
+            public int longest(){return max;}
+        }
+    }
+
     static class s2428{//Maximum Sum of an Hourglass
         public int maxSum(int[][] g){
             int r = 0;
