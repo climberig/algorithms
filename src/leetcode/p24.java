@@ -174,4 +174,28 @@ public class p24{
             return r;
         }
     }
+
+    static class s2432{//The Employee That Worked on the Longest Task
+        public int hardestWorker(int n, int[][] logs){
+            int r = logs[0][0], maxTime = logs[0][1];
+            for(int i = 1; i < logs.length; i++)
+                if(logs[i][1] - logs[i - 1][1] == maxTime)
+                    r = Math.min(r, logs[i][0]);
+                else if(logs[i][1] - logs[i - 1][1] > maxTime){
+                    maxTime = logs[i][1] - logs[i - 1][1];
+                    r = logs[i][0];
+                }
+            return r;
+        }
+    }
+
+    static class s2433{//Find The Original Array of Prefix Xor
+        public int[] findArray(int[] pref){
+            int[] r = new int[pref.length];
+            r[0] = pref[0];
+            for(int i = 1; i < r.length; i++)
+                r[i] = pref[i] ^ pref[i - 1];
+            return r;
+        }
+    }
 }
