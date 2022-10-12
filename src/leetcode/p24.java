@@ -198,4 +198,20 @@ public class p24{
             return r;
         }
     }
+
+    static class s2436{//Minimum Split Into Subarrays With GCD Greater Than One
+        public int minimumSplits(int[] a){
+            int r = 1, gcd = a[0];
+            for(int n : a){
+                gcd = gcd(n, gcd);
+                if(gcd == 1){
+                    r++;
+                    gcd = n;
+                }
+            }
+            return r;
+        }
+
+        int gcd(int a, int b){return b == 0 ? a : gcd(b, a % b);}
+    }
 }
