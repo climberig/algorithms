@@ -214,4 +214,19 @@ public class p24{
 
         int gcd(int a, int b){return b == 0 ? a : gcd(b, a % b);}
     }
+
+    static class s2437{//Number of Valid Clock Times
+        public int countTime(String time){
+            if(!time.contains("?")){
+                int h = Integer.parseInt(time.substring(0, 2));
+                int m = Integer.parseInt(time.substring(3, 5));
+                return 0 <= h && h <= 23 && 0 <= m && m < 60 ? 1 : 0;
+            }else{
+                int r = 0;
+                for(int d = 0; d <= 9; d++)
+                    r += countTime(time.replaceFirst("\\?", d + ""));
+                return r;
+            }
+        }
+    }
 }
