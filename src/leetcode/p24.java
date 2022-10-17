@@ -229,4 +229,22 @@ public class p24{
             }
         }
     }
+
+    static class s2442{//Count Number of Distinct Integers After Reverse Operations
+        public int countDistinctIntegers(int[] a){
+            Set<Integer> s = new HashSet<>();
+            for(int n : a){
+                s.add(n);
+                s.add(reverse(n));
+            }
+            return s.size();
+        }
+
+        int reverse(int n){
+            int r = 0;
+            for(; n > 0; n /= 10)
+                r = 10 * r + n % 10;
+            return r;
+        }
+    }
 }
