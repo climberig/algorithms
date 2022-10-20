@@ -247,4 +247,26 @@ public class p24{
             return r;
         }
     }
+
+    static class s2445{//Number of Nodes With Value One
+        public int numberOfNodes(int n, int[] qs){
+            int[] a = new int[n + 1];
+            for(int q : qs)
+                a[q] ^= 1;
+            return dfs(a, 1);
+        }
+
+        int dfs(int[] a, int u){
+            int r = a[u];
+            if(u * 2 < a.length){
+                a[u * 2] ^= a[u];
+                r += dfs(a, u * 2);
+            }
+            if(u * 2 + 1 < a.length){
+                a[u * 2 + 1] ^= a[u];
+                r += dfs(a, u * 2 + 1);
+            }
+            return r;
+        }
+    }
 }
