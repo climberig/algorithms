@@ -269,4 +269,16 @@ public class p24{
             return r;
         }
     }
+
+    static class s2446{//Determine if Two Events Have Conflict
+        public boolean haveConflict(String[] t1, String[] t2){
+            int s1 = toInt(t1[0]), e1 = toInt(t1[1]);
+            int s2 = toInt(t2[0]), e2 = toInt(t2[1]);
+            return !(s2 - e1 > 0) && !(s1 - e2 > 0);
+        }
+
+        int toInt(String t){
+            return Integer.parseInt(t.substring(0, 2)) * 60 + Integer.parseInt(t.substring(3, 5));
+        }
+    }
 }
