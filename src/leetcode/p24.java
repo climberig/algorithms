@@ -281,4 +281,19 @@ public class p24{
             return Integer.parseInt(t.substring(0, 2)) * 60 + Integer.parseInt(t.substring(3, 5));
         }
     }
+
+    static class s2447{//Number of Subarrays With GCD Equal to K
+        public int subarrayGCD(int[] a, int k){
+            int r = 0;
+            for(int i = 0; i < a.length; i++)
+                for(int j = i, gcd = a[j]; j < a.length && gcd % k == 0; j++){
+                    gcd = gcd(a[j], gcd);
+                    if(gcd == k)
+                        r++;
+                }
+            return r;
+        }
+
+        int gcd(int a, int b){return b == 0 ? a : gcd(b, a % b);}
+    }
 }
