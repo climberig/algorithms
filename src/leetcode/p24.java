@@ -296,4 +296,13 @@ public class p24{
 
         int gcd(int a, int b){return b == 0 ? a : gcd(b, a % b);}
     }
+
+    static class s2450{//Number of Distinct Binary Strings After Applying Operations
+        public int countDistinctStrings(String s, int k){
+            long r = 1;
+            for(int i = 0; i <= s.length() - k; i++)
+                r = (r * 2) % 1_000_000_007;
+            return (int) r;
+        }
+    }
 }
