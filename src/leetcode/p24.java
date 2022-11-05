@@ -305,4 +305,14 @@ public class p24{
             return (int) r;
         }
     }
+
+    static class s2452{//Words Within Two Edits of Dictionary
+        public List<String> twoEditWords(String[] queries, String[] dictionary){
+            List<String> r = new ArrayList<>();
+            for(String q : queries)
+                if(Arrays.stream(dictionary).anyMatch(w -> IntStream.range(0, w.length()).filter(i -> q.charAt(i) != w.charAt(i)).count() <= 2))
+                    r.add(q);
+            return r;
+        }
+    }
 }
