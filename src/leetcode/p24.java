@@ -95,6 +95,28 @@ public class p24{
         }
     }
 
+    static class s2415{//Reverse Odd Levels of Binary Tree
+        public TreeNode reverseOddLevels(TreeNode root){
+            Queue<TreeNode> q = new LinkedList<>();
+            q.offer(root);
+            for(int level = 0; !q.isEmpty(); level++){
+                if(level % 2 == 1){
+                    int vals[] = q.stream().mapToInt(node -> node.val).toArray(), i = vals.length - 1;
+                    for(TreeNode node : q)
+                        node.val = vals[i--];
+                }
+                for(int size = q.size(); size > 0; size--){
+                    TreeNode node = q.poll();
+                    if(node.left != null){
+                        q.offer(node.left);
+                        q.offer(node.right);
+                    }
+                }
+            }
+            return root;
+        }
+    }
+
     static class s2418{//Sort the People
         public String[] sortPeople(String[] names, int[] heights){
             int[][] m = new int[heights.length][2];
