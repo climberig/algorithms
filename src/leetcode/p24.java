@@ -337,4 +337,21 @@ public class p24{
             return r;
         }
     }
+
+    static class s2460{//Apply Operations to an Array
+        public int[] applyOperations(int[] a){
+            for(int i = 0; i < a.length - 1; i++)
+                if(a[i] == a[i + 1]){
+                    a[i] *= 2;
+                    a[i + 1] = 0;
+                }
+            int i = 0;
+            for(int j = 0; j < a.length; j++)
+                if(a[j] != 0)
+                    a[i++] = a[j];
+            for(; i < a.length; i++)
+                a[i] = 0;
+            return a;
+        }
+    }
 }
