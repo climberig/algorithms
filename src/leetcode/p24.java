@@ -354,4 +354,24 @@ public class p24{
             return a;
         }
     }
+
+    static class s2461{//Maximum Sum of Distinct Subarrays With Length K
+        public long maximumSubarraySum(int[] a, int k){
+            long r = 0, sum = 0;
+            Map<Integer, Integer> m = new HashMap<>();
+            for(int i = 0; i < a.length; i++){
+                m.put(a[i], m.getOrDefault(a[i], 0) + 1);
+                sum += a[i];
+                if(i >= k - 1){
+                    if(m.size() == k)
+                        r = Math.max(r, sum);
+                    m.put(a[i - k + 1], m.get(a[i - k + 1]) - 1);
+                    if(m.get(a[i - k + 1]) == 0)
+                        m.remove(a[i - k + 1]);
+                    sum -= a[i - k + 1];
+                }
+            }
+            return r;
+        }
+    }
 }
