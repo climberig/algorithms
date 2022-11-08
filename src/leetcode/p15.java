@@ -259,6 +259,22 @@ public class p15{
         }
     }
 
+    static class s1544{//Make The String Great
+        public String makeGood(String s) {
+            StringBuilder r = new StringBuilder();
+            for (int i = 0; i < s.length(); i++)
+                if (r.isEmpty())
+                    r.append(s.charAt(i));
+                else {
+                    char c1 = r.charAt(r.length() - 1), c2 = s.charAt(i);
+                    if (c1 != c2 && Character.toLowerCase(c1) == Character.toLowerCase(c2))
+                        r.deleteCharAt(r.length() - 1);
+                    else r.append(s.charAt(i));
+                }
+            return r.toString();
+        }
+    }
+
     static class s1545{//Find Kth Bit in Nth Binary String
         public char findKthBit(int n, int k){
             String s = "0";
