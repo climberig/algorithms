@@ -374,4 +374,19 @@ public class p24{
             return r;
         }
     }
+
+    static class s2464{//Minimum Subarrays in a Valid Split
+        public int validSubarraySplit(int[] a) {
+            int[] dp = new int[a.length + 1];
+            Arrays.fill(dp, -1);
+            dp[0] = 0;
+            for (int i = 0; i < a.length; i++)
+                for (int j = 0; j <= i; j++)
+                    if (dp[j] != -1 && gcd(a[i], a[j]) > 1)
+                        dp[i + 1] = dp[i + 1] != -1 ? Math.min(1 + dp[j], dp[i + 1]) : 1 + dp[j];
+            return dp[a.length];
+        }
+
+        int gcd(int a, int b) {return b == 0 ? a : gcd(b, a % b);}
+    }
 }
