@@ -389,4 +389,14 @@ public class p24{
 
         int gcd(int a, int b) {return b == 0 ? a : gcd(b, a % b);}
     }
+
+    static class s2465{//Number of Distinct Averages
+        public int distinctAverages(int[] a) {
+            Set<Integer> s = new HashSet<>();
+            Arrays.sort(a);
+            for (int i = 0, j = a.length - 1; i < j; i++, j--)
+                s.add(a[i] + a[j]);
+            return s.size();
+        }
+    }
 }
