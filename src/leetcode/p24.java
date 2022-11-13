@@ -399,4 +399,20 @@ public class p24{
             return s.size();
         }
     }
+
+    static class s2466{//Count Ways To Build Good Strings
+        public int countGoodStrings(int low, int high, int zero, int one) {
+            int dp[] = new int[high + 1], r = 0, mod = 1_000_000_007;
+            dp[0] = 1;
+            for (int i = 1; i <= high; i++) {
+                if (i >= zero)
+                    dp[i] = (dp[i] + dp[i - zero]) % mod;
+                if (i >= one)
+                    dp[i] = (dp[i] + dp[i - one]) % mod;
+                if (i >= low)
+                    r = (r + dp[i]) % mod;
+            }
+            return r;
+        }
+    }
 }
