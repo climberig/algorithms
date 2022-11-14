@@ -415,4 +415,20 @@ public class p24{
             return r;
         }
     }
+
+    static class s2470{//Number of Subarrays With LCM Equal to K
+        public int subarrayLCM(int[] a, int k) {
+            int r = 0;
+            for (int i = 0, lcm = 1; i < a.length; i++, lcm = 1) {
+                for (int j = i; j < a.length && lcm <= k; j++) {
+                    lcm = lcm * a[j] / gcd(lcm, a[j]);
+                    if (lcm == k)
+                        r++;
+                }
+            }
+            return r;
+        }
+
+        int gcd(int a, int b) {return b == 0 ? a : gcd(b, a % b);}
+    }
 }
