@@ -431,4 +431,36 @@ public class p24{
 
         int gcd(int a, int b) {return b == 0 ? a : gcd(b, a % b);}
     }
+
+    static class s2473{//Minimum Cost to Buy Apples
+        public long[] minCost(int n, int[][] roads, int[] appleCost, int k) {
+            List<ArrayList<int[]>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<int[]>()).toList();
+            for (int[] road : roads) {
+                int a = road[0] - 1, b = road[1] - 1, c = road[2];
+                g.get(a).add(new int[]{b, c});
+                g.get(b).add(new int[]{a, c});
+            }
+            return IntStream.range(0, n).mapToLong(i -> min(i, appleCost, k, n, g)).toArray();
+        }
+
+        long min(int u, int[] w, int k, int n, List<ArrayList<int[]>> g) {
+            Queue<long[]> q = new PriorityQueue<>(Comparator.comparingLong(o -> o[0]));
+            long dist[] = new long[n], r = Long.MAX_VALUE;
+            Arrays.fill(dist, Long.MAX_VALUE);
+            for (q.offer(new long[]{w[u], 0, u}); !q.isEmpty(); ) {
+                long t[] = q.poll(), cost = t[0], path = t[1];
+                int v = (int) t[2];
+                if (cost < dist[v]) {
+                    dist[v] = cost;
+                    r = Math.min(r, cost);
+                    for (int[] next : g.get(v)) {
+                        int id = next[0], weight = next[1];
+                        if ((path + weight) * (k + 1) < r)
+                            q.offer(new long[]{(long) w[id] + (path + weight) * (k + 1), path + weight, id});
+                    }
+                }
+            }
+            return r;
+        }
+    }
 }
