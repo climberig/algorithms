@@ -463,4 +463,22 @@ public class p24{
             return r;
         }
     }
+
+    static class s2476{//Closest Nodes Queries in a Binary Search Tree
+        public List<List<Integer>> closestNodes(TreeNode root, List<Integer> queries) {
+            TreeSet<Integer> s = new TreeSet<>();
+            inorder(root, s);
+            return queries.stream().map(n -> Arrays.asList(val(s.floor(n)), val(s.ceiling(n)))).collect(Collectors.toList());
+        }
+
+        void inorder(TreeNode node, TreeSet<Integer> s) {
+            if (node != null) {
+                inorder(node.left, s);
+                s.add(node.val);
+                inorder(node.right, s);
+            }
+        }
+
+        int val(Integer n) {return n != null ? n : -1;}
+    }
 }
