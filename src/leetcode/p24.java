@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 public class p24{
     static class s2401{//Longest Nice Subarray
@@ -480,5 +481,28 @@ public class p24{
         }
 
         int val(Integer n) {return n != null ? n : -1;}
+    }
+
+    static class s2477{//Minimum Fuel Cost to Report to the Capital
+        long r = 0;
+
+        public long minimumFuelCost(int[][] roads, int seats) {
+            List<List<Integer>> g = IntStream.range(0, roads.length + 1).mapToObj(i -> new ArrayList<Integer>()).collect(Collectors.toList());
+            for (int[] road : roads) {
+                g.get(road[0]).add(road[1]);
+                g.get(road[1]).add(road[0]);
+            }
+            dfs(0, 0, g, seats);
+            return r;
+        }
+        int dfs(int u, int parent, List<List<Integer>> g, int seats) {
+            int people = 1;
+            for (int v : g.get(u))
+                if (v != parent)
+                    people += dfs(v, u, g, seats);
+            if (u != 0)
+                r += (people + seats - 1) / seats;
+            return people;
+        }
     }
 }
