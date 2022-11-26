@@ -505,4 +505,20 @@ public class p24{
             return people;
         }
     }
+
+    static class s2482{//Difference Between Ones and Zeros in Row and Column
+        public int[][] onesMinusZeros(int[][] g) {
+            int[] rows = new int[g.length], cols = new int[g[0].length];
+            for (int i = 0; i < g.length; i++)
+                for (int j = 0; j < g[0].length; j++) {
+                    rows[i] += g[i][j];
+                    cols[j] += g[i][j];
+                }
+            int[][] r = new int[g.length][g[0].length];
+            for (int i = 0; i < g.length; i++)
+                for (int j = 0; j < g[0].length; j++)
+                    r[i][j] = 2 * rows[i] + 2 * cols[j] - g.length - g[0].length;
+            return r;
+        }
+    }
 }
