@@ -537,4 +537,16 @@ public class p24{
             return r;
         }
     }
+
+    static class s2485{//Find the Pivot Integer
+        public int pivotInteger(int n) {
+            for (int right = (n + 1) * n / 2, left = 0, i = 1; left < right; i++) {
+                left += i;
+                if (left == right)
+                    return i;
+                right -= i;
+            }
+            return -1;
+        }
+    }
 }
