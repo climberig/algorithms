@@ -339,6 +339,22 @@ public class p24{
         }
     }
 
+    static class s2453{//Destroy Sequential Targets
+        public int destroyTargets(int[] a, int space) {
+            Map<Integer, Integer> m = new HashMap<>();
+            for (int n : a) {
+                n = n % space;
+                m.put(n, m.getOrDefault(n, 0) + 1);
+            }
+            int max = Collections.max(m.values());
+            Arrays.sort(a);
+            for (int n : a)
+                if (m.get(n % space) == max)
+                    return n;
+            return 0;
+        }
+    }
+
     static class s2460{//Apply Operations to an Array
         public int[] applyOperations(int[] a){
             for(int i = 0; i < a.length - 1; i++)
