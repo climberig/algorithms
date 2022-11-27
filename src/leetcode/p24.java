@@ -549,4 +549,14 @@ public class p24{
             return -1;
         }
     }
+
+    static class s2486{//Append Characters to String to Make Subsequence
+        public int appendCharacters(String s, String t) {
+            int i = 0, j = 0;
+            for (; i < s.length() && j < t.length(); i++)
+                if (s.charAt(i) == t.charAt(j))
+                    j++;
+            return t.length() - j;
+        }
+    }
 }
