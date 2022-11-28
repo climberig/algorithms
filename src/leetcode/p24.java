@@ -559,4 +559,13 @@ public class p24{
             return t.length() - j;
         }
     }
+
+    static class s2487{//Remove Nodes From Linked List
+        public ListNode removeNodes(ListNode node) {
+            if (node == null)
+                return null;
+            node.next = removeNodes(node.next);
+            return node.next != null && node.val < node.next.val ? node.next : node;
+        }
+    }
 }
