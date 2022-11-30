@@ -96,6 +96,14 @@ public class p12{
         }
     }
 
+    static class s1207{//Unique Number of Occurrences
+        public boolean uniqueOccurrences(int[] a) {
+            Map<Integer, Integer> m = new HashMap<>();
+            Arrays.stream(a).forEach(n -> m.put(n, m.getOrDefault(n, 0) + 1));
+            return new HashSet<>(m.values()).size() == m.values().size();
+        }
+    }
+
     static class s1208{//Get Equal Substrings Within Budget
         public int equalSubstring(String s, String t, int maxCost){
             int r = 0;
