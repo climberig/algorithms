@@ -568,4 +568,14 @@ public class p24{
             return node.next != null && node.val < node.next.val ? node.next : node;
         }
     }
+
+    static class s2490{//Circular Sentence
+        public boolean isCircularSentence(String s) {
+            for (int i = 0; i < s.length(); i++)
+                if (s.charAt(i) == ' ')
+                    if (s.charAt(i - 1) != s.charAt(i + 1))
+                        return false;
+            return s.charAt(0) == s.charAt(s.length() - 1);
+        }
+    }
 }
