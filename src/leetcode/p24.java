@@ -578,4 +578,17 @@ public class p24{
             return s.charAt(0) == s.charAt(s.length() - 1);
         }
     }
+
+    static class s2491{//Divide Players Into Teams of Equal Skill
+        public long dividePlayers(int[] skill) {
+            Arrays.sort(skill);
+            long r = 0, target = skill[0] + skill[skill.length - 1];
+            for (int i = 0, j = skill.length - 1; i < j; i++, j--) {
+                if (skill[i] + skill[j] != target)
+                    return -1;
+                r += (long) skill[i] * skill[j];
+            }
+            return r;
+        }
+    }
 }
