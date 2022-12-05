@@ -115,6 +115,13 @@ public class p8{
         }
     }
 
+    static class s876{//Middle of the Linked List
+        public ListNode middleNode(ListNode head) {
+            for (ListNode fast = head; fast != null && fast.next != null; head = head.next, fast = fast.next.next) ;
+            return head;
+        }
+    }
+
     static class s881{//Boats to Save People
         public int numRescueBoats(int[] people, int limit){
             Arrays.sort(people);
