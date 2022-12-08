@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 public class p8{
     static class s800{//Similar RGB Color
         public String similarRGB(String color){
@@ -112,6 +110,30 @@ public class p8{
                 for(int j = 0; j < m[0].length; j++)
                     r[j][i] = m[i][j];
             return r;
+        }
+    }
+
+    static class s872{//Leaf-Similar Trees
+        public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+            List<Integer> l1 = new ArrayList<>(), l2 = new ArrayList<>();
+            collect(root1, l1);
+            collect(root2, l2);
+            if (l1.size() != l2.size())
+                return false;
+            for (int i = 0; i < l1.size(); i++)
+                if (l1.get(i) != l2.get(i))
+                    return false;
+            return true;
+        }
+        void collect(TreeNode node, List<Integer> vals) {
+            if (node != null) {
+                if (node.left == null && node.right == null) {
+                    vals.add(node.val);
+                } else {
+                    collect(node.left, vals);
+                    collect(node.right, vals);
+                }
+            }
         }
     }
 
