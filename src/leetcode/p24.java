@@ -591,4 +591,19 @@ public class p24{
             return r;
         }
     }
+
+    static class s2496{//Maximum Value of a String in an Array
+        public int maximumValue(String[] strs) {
+            return (int) Arrays.stream(strs).mapToLong(this::val).max().getAsLong();
+        }
+
+        long val(String s) {
+            long r = 0;
+            for (int i = 0; i < s.length(); i++)
+                if (Character.isDigit(s.charAt(i)))
+                    r = r * 10 + (s.charAt(i) - '0');
+                else return s.length();
+            return r;
+        }
+    }
 }
