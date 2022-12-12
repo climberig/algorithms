@@ -606,4 +606,13 @@ public class p24{
             return r;
         }
     }
+
+    static class s2498{//Frog Jump II
+        public int maxJump(int[] a) {
+            int r = a[1];
+            for (int i = 2; i < a.length; ++i)
+                r = Math.max(r, a[i] - a[i - 2]);
+            return r;
+        }
+    }
 }
