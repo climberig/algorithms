@@ -97,6 +97,21 @@ public class p9{
         }
     }
 
+    static class s931{//Minimum Falling Path Sum
+        public int minFallingPathSum(int[][] a) {
+            for (int i = 1; i < a.length; i++)
+                for (int c = 0; c < a.length; c++) {
+                    int min = a[i - 1][c];
+                    if (c > 0)
+                        min = Math.min(min, a[i - 1][c - 1]);
+                    if (c < a.length - 1)
+                        min = Math.min(min, a[i - 1][c + 1]);
+                    a[i][c] += min;
+                }
+            return Arrays.stream(a[a.length - 1]).min().getAsInt();
+        }
+    }
+
     static class s935{//Knight Dialer
         public int knightDialer(int n){
             int m[][] = {{4, 6}, {6, 8}, {7, 9}, {4, 8}, {0, 3, 9}, {}, {0, 1, 7}, {2, 6}, {1, 3}, {2, 4}}, counts[] = new int[10];
