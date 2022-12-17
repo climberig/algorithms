@@ -189,6 +189,27 @@ public class p1{
         }
     }
 
+    static class s150{//Evaluate Reverse Polish Notation
+        public int evalRPN(String[] tokens) {
+            Deque<Integer> s = new ArrayDeque<>(tokens.length);
+            for (String token : tokens)
+                switch (token) {
+                    case "/" -> {
+                        Integer n = s.pop();
+                        s.push(s.pop() / n);
+                    }
+                    case "*" -> s.push(s.pop() * s.pop());
+                    case "+" -> s.push(s.pop() + s.pop());
+                    case "-" -> {
+                        Integer n = s.pop();
+                        s.push(s.pop() - n);
+                    }
+                    default -> s.push(Integer.parseInt(token));
+                }
+            return s.pop();
+        }
+    }
+
     static class s151{//Reverse Words in a String
         public String reverseWords(String s){
             String[] words = s.trim().split("\\s+");
