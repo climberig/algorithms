@@ -29,4 +29,22 @@ public class p25{
             return r > 1 ? r : -1;
         }
     }
+
+    static class s2506{//Count Pairs Of Similar Strings
+        public int similarPairs(String[] words) {
+            int r = 0;
+            for (int i = 0; i < words.length; i++)
+                for (int j = i + 1; j < words.length; j++)
+                    if (toInt(words[i]) == toInt(words[j]))
+                        r++;
+            return r;
+        }
+
+        int toInt(String w) {
+            int r = 0;
+            for (char c : w.toCharArray())
+                r |= 1 << (c - 'a');
+            return r;
+        }
+    }
 }
