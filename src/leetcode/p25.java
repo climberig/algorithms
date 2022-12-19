@@ -47,4 +47,20 @@ public class p25{
             return r;
         }
     }
+
+    static class s2507{//Smallest Value After Replacing With Sum of Prime Factors
+        public int smallestValue(int n) {
+            while (true) {
+                int sum = 0, k = n;
+                for (int f = 2; k > 1; )
+                    if (k % f == 0) {
+                        sum += f;
+                        k /= f;
+                    } else f++;
+                if (sum == n) break;
+                n = sum;
+            }
+            return n;
+        }
+    }
 }
