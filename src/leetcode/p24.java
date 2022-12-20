@@ -66,6 +66,24 @@ public class p24{
         }
     }
 
+    static class s2409{//Count Days Spent Together
+        public int countDaysTogether(String a1s, String l1s, String a2s, String l2s) {
+            int[] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+            int a1 = c(a1s, days), l1 = c(l1s, days), a2 = c(a2s, days), l2 = c(l2s, days), r = 0;
+            for (int d = 1; d <= Arrays.stream(days).sum(); d++)
+                if (a1 <= d && d <= l1 && a2 <= d && d <= l2)
+                    r++;
+            return r;
+        }
+
+        int c(String s, int[] days) {
+            int r = 0, m = Integer.parseInt(s.substring(0, 2)) - 1, d = Integer.parseInt(s.substring(3, 5));
+            for (int month = 0; month < m; month++)
+                r += days[month];
+            return r + d;
+        }
+    }
+
     static class s2410{//Maximum Matching of Players With Trainers
         public int matchPlayersAndTrainers(int[] players, int[] trainers){
             Arrays.sort(players);
