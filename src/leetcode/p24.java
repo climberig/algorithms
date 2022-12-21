@@ -289,6 +289,22 @@ public class p24{
         }
     }
 
+    static class s2443{//Sum of Number and Its Reverse
+        public boolean sumOfNumberAndReverse(int n) {
+            for (int i = 0; i <= n; i++)
+                if (i + reverse(i) == n)
+                    return true;
+            return false;
+        }
+
+        int reverse(int n) {
+            int r = 0;
+            for (; n > 0; n /= 10)
+                r = 10 * r + n % 10;
+            return r;
+        }
+    }
+
     static class s2445{//Number of Nodes With Value One
         public int numberOfNodes(int n, int[] qs){
             int[] a = new int[n + 1];
