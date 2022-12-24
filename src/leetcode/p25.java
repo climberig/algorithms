@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 public class p25{
@@ -74,6 +75,17 @@ public class p25{
                     j = i;
                 }
             return r;
+        }
+    }
+
+    static class s2512{//Reward Top K Students
+        public List<Integer> topStudents(String[] positive, String[] negative, String[] reports, int[] ids, int k) {
+            Set<String> good = Arrays.stream(positive).collect(Collectors.toSet()), bad = Arrays.stream(negative).collect(Collectors.toSet());
+            int[][] r = new int[ids.length][2];
+            for (int i = 0; i < reports.length; i++)
+                r[i] = new int[]{ids[i], Arrays.stream(reports[i].split(" ")).mapToInt(w -> good.contains(w) ? 3 : (bad.contains(w) ? -1 : 0)).sum()};
+            Arrays.sort(r, (a, b) -> a[1] != b[1] ? b[1] - a[1] : a[0] - b[0]);
+            return Arrays.stream(r).mapToInt(i -> i[0]).limit(k).boxed().collect(Collectors.toList());
         }
     }
 }
