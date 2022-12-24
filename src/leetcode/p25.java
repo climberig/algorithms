@@ -63,4 +63,17 @@ public class p25{
             return n;
         }
     }
+
+    static class s2511{//Maximum Enemy Forts That Can Be Captured
+        public int captureForts(int[] forts) {
+            int r = 0;
+            for (int i = 0, j = 0; i < forts.length; i++)
+                if (forts[i] != 0) {
+                    if (forts[j] == -forts[i])
+                        r = Math.max(r, i - j - 1);
+                    j = i;
+                }
+            return r;
+        }
+    }
 }
