@@ -88,4 +88,17 @@ public class p25{
             return Arrays.stream(r).mapToInt(i -> i[0]).limit(k).boxed().collect(Collectors.toList());
         }
     }
+
+    static class s2515{//Shortest Distance to Target String in a Circular Array
+        public int closetTarget(String[] words, String target, int startIndex) {
+            int r = Integer.MAX_VALUE;
+            for (int i = 0; i < words.length; i++)
+                if (target.equals(words[i])) {
+                    int d = Math.abs(i - startIndex);
+                    r = Math.min(r, d);
+                    r = Math.min(r, words.length - d);
+                }
+            return r == Integer.MAX_VALUE ? -1 : r;
+        }
+    }
 }
