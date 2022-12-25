@@ -101,4 +101,20 @@ public class p25{
             return r == Integer.MAX_VALUE ? -1 : r;
         }
     }
+
+    static class s2516{//Take K of Each Character From Left and Right
+        public int takeCharacters(String str, int k) {
+            int r = Integer.MAX_VALUE, f[] = {0, 0, 0};
+            str.chars().forEach(c -> f[c - 'a']++);
+            if (f[0] < k || f[1] < k || f[2] < k)
+                return -1;
+            for (int s = 0, e = 0; e < str.length(); e++) {
+                f[str.charAt(e) - 'a']--;
+                while (s <= e && (f[0] < k || f[1] < k || f[2] < k))
+                    f[str.charAt(s++) - 'a']++;
+                r = Math.min(r, str.length() - (e - s + 1));
+            }
+            return r;
+        }
+    }
 }
