@@ -117,4 +117,29 @@ public class p25{
             return r;
         }
     }
+
+    static class s2517{//Maximum Tastiness of Candy Basket
+        public int maximumTastiness(int[] prices, int k) {
+            Arrays.sort(prices);
+            int lo = 0, hi = 1_000_000_000, r = 0;
+            while (lo <= hi) {
+                int mid = (lo + hi) / 2;
+                if (works(prices, mid, k)) {
+                    r = mid;
+                    lo = mid + 1;
+                } else hi = mid - 1;
+            }
+            return r;
+        }
+
+        boolean works(int[] prices, int diff, int k) {
+            int count = 1, idx = 0;
+            for (int i = 1; i < prices.length && count < k; i++)
+                if (prices[i] - prices[idx] >= diff) {
+                    count++;
+                    idx = i;
+                }
+            return count == k;
+        }
+    }
 }
