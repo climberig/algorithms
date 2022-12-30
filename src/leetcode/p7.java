@@ -345,4 +345,22 @@ public class p7{
             return true;
         }
     }
+
+    static class s797{//All Paths From Source to Target
+        public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+            List<List<Integer>> r = new LinkedList<>();
+            dfs(0, graph, new LinkedList<>(Arrays.asList(0)), r);
+            return r;
+        }
+
+        void dfs(int u, int[][] graph, LinkedList<Integer> path, List<List<Integer>> paths) {
+            if (u == graph.length - 1)
+                paths.add(new ArrayList<>(path));
+            else for (int v : graph[u]) {
+                path.add(v);
+                dfs(v, graph, path, paths);
+                path.removeLast();
+            }
+        }
+    }
 }
