@@ -142,4 +142,10 @@ public class p25{
             return count == k;
         }
     }
+
+    static class s2520{//Count the Digits That Divide a Number
+        public int countDigits(int n) {
+            return (int) String.valueOf(n).chars().filter(c -> n % (c - '0') == 0).count();
+        }
+    }
 }
