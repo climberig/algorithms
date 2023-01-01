@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -146,6 +147,20 @@ public class p25{
     static class s2520{//Count the Digits That Divide a Number
         public int countDigits(int n) {
             return (int) String.valueOf(n).chars().filter(c -> n % (c - '0') == 0).count();
+        }
+    }
+
+    static class s2521{//Distinct Prime Factors of Product of Array
+        public int distinctPrimeFactors(int[] a) {
+            Set<Integer> primes = new HashSet<>();
+            for (int n : a) {
+                for (int d = 2; d <= n; d++)
+                    if (n % d == 0) {
+                        primes.add(d);
+                        for (; n % d == 0; n /= d) ;
+                    }
+            }
+            return primes.size();
         }
     }
 }
