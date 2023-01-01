@@ -163,4 +163,19 @@ public class p25{
             return primes.size();
         }
     }
+
+    static class s2522{//Partition String Into Substrings With Values at Most K
+        public int minimumPartition(String s, int k) {
+            int r = 0;
+            for (int i = 0; i < s.length(); r++) {
+                long curr = s.charAt(i++) - '0';
+                if (curr > k)
+                    return -1;
+                for (; i < s.length() && curr <= k; i++)
+                    curr = 10 * curr + (s.charAt(i) - '0');
+                i = curr > k ? i - 1 : i;
+            }
+            return r;
+        }
+    }
 }
