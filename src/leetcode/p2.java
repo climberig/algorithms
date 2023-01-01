@@ -627,6 +627,25 @@ public class p2{
         }
     }
 
+    static class s290{//Word Pattern
+        public boolean wordPattern(String letters, String s) {
+            Map<Character, String> a = new HashMap<>();
+            Map<String, Character> b = new HashMap<>();
+            String[] words = s.split(" ");
+            if (words.length != letters.length())
+                return false;
+            for (int i = 0; i < words.length; i++) {
+                String w = a.put(letters.charAt(i), words[i]);
+                Character c = b.put(words[i], letters.charAt(i));
+                if (w != null || c != null) {
+                    if (c == null || !words[i].equals(w) || letters.charAt(i) != c)
+                        return false;
+                }
+            }
+            return true;
+        }
+    }
+
     static class s291{//Word Pattern II
         public boolean wordPatternMatch(String p, String s){return match(p, s, new HashMap<>());}
 
