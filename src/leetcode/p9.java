@@ -192,6 +192,19 @@ public class p9{
         }
     }
 
+    static class s944{//Delete Columns to Make Sorted
+        public int minDeletionSize(String[] a) {
+            int r = 0;
+            for (int j = 0; j < a[0].length(); j++)
+                for (int i = 1; i < a.length; i++)
+                    if (a[i - 1].charAt(j) > a[i].charAt(j)) {
+                        r++;
+                        break;
+                    }
+            return r;
+        }
+    }
+
     static class s947{//Most Stones Removed with Same Row or Column
         public int removeStones(int[][] stones){
             int[] uf = IntStream.range(0, stones.length).toArray();
