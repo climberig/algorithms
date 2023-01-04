@@ -113,6 +113,23 @@ public class p23{
         }
     }
 
+    static class s2326{//Spiral Matrix IV
+        public int[][] spiralMatrix(int m, int n, ListNode head) {
+            int[][] res = new int[m][n];
+            Arrays.stream(res).forEach(row -> Arrays.fill(row, -1));
+            int r = 0, c = 0, ri = 0, ci = 1;
+            for (; head != null; head = head.next, r += ri, c += ci) {
+                res[r][c] = head.val;
+                if (res[(r + ri + m) % m][(c + ci + n) % n] != -1) {
+                    int t = ri;
+                    ri = ci;
+                    ci = -t;
+                }
+            }
+            return res;
+        }
+    }
+
     static class s2331{//Evaluate Boolean Binary Tree
         public boolean evaluateTree(TreeNode node){
             if(node.val < 2)
