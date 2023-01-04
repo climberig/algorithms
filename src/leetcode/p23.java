@@ -333,6 +333,18 @@ public class p23{
         }
     }
 
+    static class s2369{//Check if There is a Valid Partition For The Array
+        public boolean validPartition(int[] n) {
+            boolean[] dp = {true, false, n[0] == n[1], false};
+            for (int i = 2; i < n.length; i++) {
+                boolean two = n[i] == n[i - 1];
+                boolean three = (two && n[i] == n[i - 2]) || (n[i] - 1 == n[i - 1] && n[i] - 2 == n[i - 2]);
+                dp[(i + 1) % 4] = (two && dp[(i - 1) % 4]) || (three && dp[(i - 2) % 4]);
+            }
+            return dp[n.length % 4];
+        }
+    }
+
     static class s2373{//Largest Local Values in a Matrix
         public int[][] largestLocal(int[][] g){
             int[][] r = new int[g.length - 2][g.length - 2];
