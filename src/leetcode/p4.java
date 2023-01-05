@@ -238,6 +238,19 @@ public class p4{
         }
     }
 
+    static class s452{//Minimum Number of Arrows to Burst Balloons
+        public int findMinArrowShots(int[][] points) {
+            Arrays.sort(points, Comparator.comparingInt(a -> a[1]));
+            int r = 1, end = points[0][1];
+            for (int[] p : points)
+                if (end < p[0]) {
+                    end = p[1];
+                    r++;
+                }
+            return r;
+        }
+    }
+
     static class s453{//Minimum Moves to Equal Array Elements
         public int minMoves(int[] a){
             int min = Arrays.stream(a).min().getAsInt();
