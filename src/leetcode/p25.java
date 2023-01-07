@@ -204,4 +204,14 @@ public class p25{
             return prime;
         }
     }
+
+    static class s2525{//Categorize Box According to Criteria
+        public String categorizeBox(int l, int w, int h, int mass) {
+            boolean bulky = l >= 1e4 || w >= 1e4 || h >= 1e4 || (long) l * w * h >= 1e9;
+            boolean heavy = mass >= 100;
+            if (bulky && heavy)
+                return "Both";
+            return bulky ? "Bulky" : (heavy ? "Heavy" : "Neither");
+        }
+    }
 }
