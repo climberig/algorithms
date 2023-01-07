@@ -214,4 +214,20 @@ public class p25{
             return bulky ? "Bulky" : (heavy ? "Heavy" : "Neither");
         }
     }
+
+    static class s2526{//Find Consecutive Integers from a Data Stream
+        class DataStream{
+            int count = 0, val, k;
+
+            public DataStream(int val, int k) {
+                this.val = val;
+                this.k = k;
+            }
+
+            public boolean consec(int n) {
+                count = n == val ? count + 1 : 0;
+                return count >= k;
+            }
+        }
+    }
 }
