@@ -548,6 +548,24 @@ public class p23{
         }
     }
 
+    static class s2397{//Maximum Rows Covered by Columns
+        public int maximumRows(int[][] m, int nSelect) {
+            int r = 0;
+            for (int i = 1; i < Math.pow(2, m[0].length); i++)
+                if (Integer.bitCount(i) == nSelect) {
+                    int mask = i;
+                    r = Math.max(r, (int) Arrays.stream(m).filter(row -> covered(row, mask)).count());
+                }
+            return r;
+        }
+        boolean covered(int[] a, int mask) {
+            for (int i = 0; i < a.length; i++)
+                if (a[i] == 1 && (mask & (1 << i)) == 0)
+                    return false;
+            return true;
+        }
+    }
+
     static class s2399{//Check Distances Between Same Letters
         public boolean checkDistances(String s, int[] distance){
             int[] idx = new int[26];
