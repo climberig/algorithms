@@ -247,4 +247,28 @@ public class p25{
             return r;
         }
     }
+
+    static class s2531{//Make Number of Distinct Characters Equal
+        public boolean isItPossible(String w1, String w2) {
+            int[] f1 = new int[26], f2 = new int[26];
+            w1.chars().forEach(c -> f1[c - 'a']++);
+            w2.chars().forEach(c -> f2[c - 'a']++);
+            for (int i = 0; i < f1.length; i++)
+                for (int j = 0; j < f2.length; j++)
+                    if (f1[i] > 0 && f2[j] > 0) {
+                        f1[i]--;
+                        f2[i]++;
+                        f1[j]++;
+                        f2[j]--;
+                        if (uniq(f1) == uniq(f2))
+                            return true;
+                        f1[i]++;
+                        f2[i]--;
+                        f1[j]--;
+                        f2[j]++;
+                    }
+            return false;
+        }
+        long uniq(int[] f) {return Arrays.stream(f).filter(n -> n > 0).count();}
+    }
 }
