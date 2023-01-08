@@ -1,8 +1,5 @@
 package leetcode;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 public class p25{
@@ -234,6 +231,20 @@ public class p25{
     static class s2529{//Maximum Count of Positive Integer and Negative Integer
         public int maximumCount(int[] a) {
             return (int) Math.max(Arrays.stream(a).filter(n -> n > 0).count(), Arrays.stream(a).filter(n -> n < 0).count());
+        }
+    }
+
+    static class s2530{//Maximal Score After Applying K Operations
+        public long maxKelements(int[] a, int k) {
+            PriorityQueue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
+            Arrays.stream(a).forEach(q::offer);
+            long r = 0;
+            while (k-- > 0) {
+                Integer n = q.poll();
+                r += n;
+                q.offer((int) Math.ceil(n / 3.0));
+            }
+            return r;
         }
     }
 }
