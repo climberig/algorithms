@@ -230,4 +230,10 @@ public class p25{
             }
         }
     }
+
+    static class s2529{//Maximum Count of Positive Integer and Negative Integer
+        public int maximumCount(int[] a) {
+            return (int) Math.max(Arrays.stream(a).filter(n -> n > 0).count(), Arrays.stream(a).filter(n -> n < 0).count());
+        }
+    }
 }
