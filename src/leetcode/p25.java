@@ -30,6 +30,37 @@ public class p25{
         }
     }
 
+    static class s2502{//Design Memory Allocator
+        class Allocator{
+            int[] m;
+
+            public Allocator(int n) {m = new int[n];}
+
+            public int allocate(int size, int mID) {
+                for (int i = 0; i < m.length; i++) {
+                    int count = 0, j = i;
+                    for (; j < m.length && m[j] == 0 && size > count; j++, count++) ;
+                    if (size == count) {
+                        Arrays.fill(m, i, i + count, mID);
+                        return i;
+                    }
+                    i = j;
+                }
+                return -1;
+            }
+
+            public int free(int mID) {
+                int r = 0;
+                for (int i = 0; i < m.length; i++)
+                    if (m[i] == mID) {
+                        m[i] = 0;
+                        r++;
+                    }
+                return r;
+            }
+        }
+    }
+
     static class s2506{//Count Pairs Of Similar Strings
         public int similarPairs(String[] words) {
             int r = 0;
