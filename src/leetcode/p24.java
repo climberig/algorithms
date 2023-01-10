@@ -626,6 +626,17 @@ public class p24{
         }
     }
 
+    static class s2495{//Number of Subarrays Having Even Product
+        public long evenProduct(int[] a) {
+            long count = 0, odd = 0;
+            for (int n : a)
+                if (n % 2 != 0)
+                    odd += ++count;
+                else count = 0;
+            return (1L + a.length) * a.length / 2 - odd;
+        }
+    }
+
     static class s2496{//Maximum Value of a String in an Array
         public int maximumValue(String[] strs) {
             return (int) Arrays.stream(strs).mapToLong(this::val).max().getAsLong();
