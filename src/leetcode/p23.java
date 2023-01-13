@@ -130,6 +130,16 @@ public class p23{
         }
     }
 
+    static class s2330{//Valid Palindrome IV
+        public boolean makePalindrome(String s) {
+            int r = 0;
+            for (int i = 0, j = s.length() - 1; i < j && r <= 2; i++, j--)
+                if (s.charAt(i) != s.charAt(j))
+                    r++;
+            return r <= 2;
+        }
+    }
+
     static class s2331{//Evaluate Boolean Binary Tree
         public boolean evaluateTree(TreeNode node){
             if(node.val < 2)
