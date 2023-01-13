@@ -302,4 +302,20 @@ public class p25{
         }
         long uniq(int[] f) {return Arrays.stream(f).filter(n -> n > 0).count();}
     }
+
+    static class s2533{//Number of Good Binary Strings
+        public int goodBinaryStrings(int minLength, int maxLength, int oneGroup, int zeroGroup) {
+            long mod = 1_000_000_007, r = 0, dp[] = new long[maxLength + 1];
+            dp[0] = 1;
+            for (int n = 1; n <= maxLength; n++) {
+                if (n >= zeroGroup)
+                    dp[n] = dp[n - zeroGroup];
+                if (n >= oneGroup)
+                    dp[n] = (dp[n] + dp[n - oneGroup]) % mod;
+                if (n >= minLength)
+                    r = (r + dp[n]) % mod;
+            }
+            return (int) r;
+        }
+    }
 }

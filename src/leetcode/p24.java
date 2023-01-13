@@ -216,6 +216,22 @@ public class p24{
         }
     }
 
+    static class s2431{//Maximize Total Tastiness of Purchased Fruits
+        public int maxTastiness(int[] price, int[] tastiness, int maxAmount, int maxCoupons) {
+            int[][][] dp = new int[price.length + 1][maxAmount + 1][maxCoupons + 1];
+            for (int i = 1; i <= price.length; i++)
+                for (int amount = 0; amount <= maxAmount; amount++)
+                    for (int coupon = 0; coupon <= maxCoupons; coupon++) {
+                        dp[i][amount][coupon] = dp[i - 1][amount][coupon];
+                        if (amount >= price[i - 1])
+                            dp[i][amount][coupon] = Math.max(dp[i][amount][coupon], tastiness[i - 1] + dp[i - 1][amount - price[i - 1]][coupon]);
+                        if (coupon > 0 && amount >= price[i - 1] / 2)
+                            dp[i][amount][coupon] = Math.max(dp[i][amount][coupon], tastiness[i - 1] + dp[i - 1][amount - price[i - 1] / 2][coupon - 1]);
+                    }
+            return dp[price.length][maxAmount][maxCoupons];
+        }
+    }
+
     static class s2432{//The Employee That Worked on the Longest Task
         public int hardestWorker(int n, int[][] logs){
             int r = logs[0][0], maxTime = logs[0][1];
