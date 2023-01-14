@@ -619,6 +619,25 @@ public class p24{
         }
     }
 
+    static class s2489{//Number of Substrings With Fixed Ratio
+        public long fixedRatio(String s, int num1, int num2) {
+            int zero = 0, one = 0;
+            Map<Integer, Integer> dp = new HashMap<>();
+            dp.put(0, 1);
+            long r = 0;
+            for (char c : s.toCharArray()) {
+                if (c == '0')
+                    zero++;
+                else one++;
+                int f = zero * num2 - one * num1;
+                if (dp.containsKey(f))
+                    r += dp.get(f);
+                dp.put(f, dp.getOrDefault(f, 0) + 1);
+            }
+            return r;
+        }
+    }
+
     static class s2490{//Circular Sentence
         public boolean isCircularSentence(String s) {
             for (int i = 0; i < s.length(); i++)
