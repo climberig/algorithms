@@ -380,6 +380,27 @@ public class p23{
         }
     }
 
+    static class s2375{//Construct Smallest Number From DI String
+        public String smallestNumber(String pattern) {
+            Queue<String> q = new LinkedList<>();
+            for (char d = '1'; d <= '9'; d++)
+                q.offer(d + "");
+            for (int i = 0; i < pattern.length(); i++)
+                for (int size = q.size(); size > 0; size--) {
+                    String n = q.poll();
+                    char d1 = n.charAt(n.length() - 1);
+                    for (char d2 = '1'; d2 <= '9'; d2++) {
+                        if (!n.contains(d2 + ""))
+                            if (pattern.charAt(i) == 'I' && d1 < d2)
+                                q.offer(n + d2);
+                            else if (pattern.charAt(i) == 'D' && d1 > d2)
+                                q.offer(n + d2);
+                    }
+                }
+            return q.stream().sorted().toList().get(0);
+        }
+    }
+
     static class s2379{//Minimum Recolors to Get K Consecutive Black Blocks
         public int minimumRecolors(String blocks, int k){
             int r = k, b = 0;
