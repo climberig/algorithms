@@ -95,6 +95,30 @@ public class p25{
         }
     }
 
+    static class s2510{//Check if There is a Path With Equal Number of 0's And 1's
+        public boolean isThereAPath(int[][] g) {
+            Set<Integer>[][] dp = new Set[g.length][g[0].length];
+            for (int i = 0; i < g.length; i++)
+                for (int j = 0; j < g[0].length; j++)
+                    dp[i][j] = new HashSet<>();
+            for (int i = 1, diff = g[0][0] == 1 ? 1 : -1; i < g[0].length; i++) {
+                diff += g[0][i] == 1 ? 1 : -1;
+                dp[0][i].add(diff);
+            }
+            for (int i = 1, diff = g[0][0] == 1 ? 1 : -1; i < g.length; i++) {
+                diff += g[i][0] == 1 ? 1 : -1;
+                dp[i][0].add(diff);
+            }
+            for (int i = 1; i < g.length; i++)
+                for (int j = 1; j < g[0].length; j++) {
+                    int diff = g[i][j] == 1 ? 1 : -1, r = i, c = j;
+                    dp[i - 1][j].forEach(n -> dp[r][c].add(n + diff));
+                    dp[i][j - 1].forEach(n -> dp[r][c].add(n + diff));
+                }
+            return dp[g.length - 1][g[0].length - 1].contains(0);
+        }
+    }
+
     static class s2511{//Maximum Enemy Forts That Can Be Captured
         public int captureForts(int[] forts) {
             int r = 0;
