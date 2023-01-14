@@ -482,6 +482,33 @@ public class p23{
         }
     }
 
+    static class s2387{//Median of a Row Wise Sorted Matrix
+        public int matrixMedian(int[][] g) {
+            int lo = 1, hi = 1_000_000, k = g.length * g[0].length / 2 + 1;
+            while (lo < hi) {
+                int mid = (lo + hi + 1) / 2, sum = 0;
+                for (int[] row : g) {
+                    int idx = helper(row, mid);
+                    sum += g[0].length - idx;
+                }
+                if (sum < k) hi = mid - 1;
+                else lo = mid;
+            }
+            return hi;
+        }
+
+        int helper(int[] a, int val) {
+            int lo = 0, hi = a.length - 1;
+            while (lo < hi) {
+                int mid = (lo + hi) / 2;
+                if (a[mid] < val)
+                    lo = mid + 1;
+                else hi = mid;
+            }
+            return a[hi] >= val ? hi : hi + 1;
+        }
+    }
+
     static class s2389{//Longest Subsequence With Limited Sum
         public int[] answerQueries(int[] a, int[] queries){
             int[] r = new int[queries.length];
