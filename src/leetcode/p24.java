@@ -206,6 +206,24 @@ public class p24{
         }
     }
 
+    static class s2425{//Bitwise XOR of All Pairings
+        public int xorAllNums(int[] a1, int[] a2) {
+            if (a1.length % 2 == 0 && a2.length % 2 == 0)
+                return 0;
+            if (a1.length % 2 == 0)
+                return xor(a1);
+            if (a2.length % 2 == 0)
+                return xor(a2);
+            return xor(a1) ^ xor(a2);
+        }
+        int xor(int[] a) {
+            int r = 0;
+            for (int n : a)
+                r ^= n;
+            return r;
+        }
+    }
+
     static class s2428{//Maximum Sum of an Hourglass
         public int maxSum(int[][] g){
             int r = 0;
