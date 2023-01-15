@@ -342,4 +342,32 @@ public class p25{
             return (int) r;
         }
     }
+
+    static class s2535{//Difference Between Element Sum and Digit Sum of an Array
+        public int differenceOfSum(int[] a) {
+            int r = Arrays.stream(a).sum();
+            for (int n : a)
+                for (; n > 0; n = n / 10)
+                    r -= n % 10;
+            return Math.abs(r);
+        }
+    }
+
+    static class s2536{//Increment Submatrices by One
+        public int[][] rangeAddQueries(int n, int[][] queries) {
+            int[][] m = new int[n][n];
+            for (int[] q : queries) {
+                int r1 = q[0], r2 = q[2], c1 = q[1], c2 = q[3];
+                for (int r = r1; r <= r2; r++) {
+                    m[r][c1] += 1;
+                    if (c2 + 1 < n)
+                        m[r][c2 + 1] -= 1;
+                }
+            }
+            for (int r = 0; r < n; r++)
+                for (int c = 1; c < n; c++)
+                    m[r][c] += m[r][c - 1];
+            return m;
+        }
+    }
 }
