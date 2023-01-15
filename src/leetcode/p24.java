@@ -687,6 +687,20 @@ public class p24{
         }
     }
 
+    static class s2497{//Maximum Star Sum of a Graph
+        public int maxStarSum(int[] vals, int[][] edges, int k) {
+            var ll = IntStream.range(0, vals.length).mapToObj(i -> new ArrayList<Integer>()).toList();
+            for (int[] e : edges) {
+                int u = e[0], v = e[1];
+                if (vals[v] > 0)
+                    ll.get(u).add(vals[v]);
+                if (vals[u] > 0)
+                    ll.get(v).add(vals[u]);
+            }
+            return IntStream.range(0, vals.length).map(i -> vals[i] + ll.get(i).stream().sorted(Comparator.reverseOrder()).limit(k).mapToInt(n -> n).sum()).max().getAsInt();
+        }
+    }
+
     static class s2498{//Frog Jump II
         public int maxJump(int[] a) {
             int r = a[1];
