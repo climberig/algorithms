@@ -606,6 +606,20 @@ public class p24{
         }
     }
 
+    static class s2483{//Minimum Penalty for a Shop
+        public int bestClosingTime(String a) {
+            int penalty = a.chars().filter(c -> c == 'Y').sum(), min = penalty, r = 0;
+            for (int i = 0; i < a.length(); i++) {
+                penalty += a.charAt(i) == 'N' ? 1 : -1;
+                if (penalty < min) {
+                    min = penalty;
+                    r = i + 1;
+                }
+            }
+            return r;
+        }
+    }
+
     static class s2485{//Find the Pivot Integer
         public int pivotInteger(int n) {
             for (int right = (n + 1) * n / 2, left = 0, i = 1; left < right; i++) {
