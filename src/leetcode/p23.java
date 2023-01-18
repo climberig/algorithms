@@ -436,6 +436,23 @@ public class p23{
         }
     }
 
+    static class s2381{//Shifting Letters II
+        public String shiftingLetters(String str, int[][] shifts) {
+            int[] line = new int[str.length() + 1];
+            for (int[] s : shifts) {
+                line[s[0]] += s[2] == 1 ? 1 : -1;
+                line[s[1] + 1] += s[2] == 1 ? -1 : 1;
+            }
+            StringBuilder r = new StringBuilder(str.length());
+            for (int i = 0, p = 0; i < str.length(); i++) {
+                p = (p + line[i]) % 26;
+                int j = ((str.charAt(i) - 'a') + p + 26) % 26;
+                r.append((char) (j + 'a'));
+            }
+            return r.toString();
+        }
+    }
+
     static class s2383{//Minimum Hours of Training to Win a Competition
         public int minNumberOfHours(int initialEnergy, int initialExperience, int[] energy, int[] experience){
             int r = 0;
