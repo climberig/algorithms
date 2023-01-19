@@ -343,6 +343,37 @@ public class p25{
         }
     }
 
+    static class s2534{//Time Taken to Cross the Door
+        public int[] timeTaken(int[] arrivals, int[] states) {
+            DoorState doorState = DoorState.NOT_USED;
+            int[] r = new int[arrivals.length];
+            Queue<Integer> in = new LinkedList<>(), out = new LinkedList<>();
+            for (int t = arrivals[0], i = 0; t <= arrivals[arrivals.length - 1] || !in.isEmpty() || !out.isEmpty(); t++) {
+                while (i < arrivals.length && t == arrivals[i])
+                    if (states[i] == 0)
+                        in.offer(i++);
+                    else out.offer(i++);
+                switch (doorState) {
+                    case NOT_USED, USED_OUT -> doorState = cross(out, DoorState.USED_OUT, in, DoorState.USED_IN, r, t);
+                    case USED_IN -> doorState = cross(in, DoorState.USED_IN, out, DoorState.USED_OUT, r, t);
+                }
+            }
+            return r;
+        }
+
+        DoorState cross(Queue<Integer> q1, DoorState s1, Queue<Integer> q2, DoorState s2, int[] r, int t) {
+            if (!q1.isEmpty()) {
+                r[q1.poll()] = t;
+                return s1;
+            } else if (!q2.isEmpty()) {
+                r[q2.poll()] = t;
+                return s2;
+            } else return DoorState.NOT_USED;
+        }
+
+        enum DoorState{NOT_USED, USED_IN, USED_OUT}
+    }
+
     static class s2535{//Difference Between Element Sum and Digit Sum of an Array
         public int differenceOfSum(int[] a) {
             int r = Arrays.stream(a).sum();
