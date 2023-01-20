@@ -693,6 +693,29 @@ public class p24{
         }
     }
 
+    static class s2492{//Minimum Score of a Path Between Two Cities
+        public int minScore(int n, int[][] roads) {
+            int r = Integer.MAX_VALUE;
+            List<HashMap<Integer, Integer>> g = IntStream.range(0, n + 1).mapToObj(i -> new HashMap<Integer, Integer>()).toList();
+            for (int[] road : roads) {
+                g.get(road[0]).put(road[1], road[2]);
+                g.get(road[1]).put(road[0], road[2]);
+            }
+            Queue<Integer> q = new LinkedList<>();
+            Set<Integer> seen = new HashSet<>();
+            for (q.add(1); !q.isEmpty(); ) {
+                Integer u = q.poll();
+                HashMap<Integer, Integer> m = g.get(u);
+                for (Integer v : m.keySet()) {
+                    r = Math.min(r, m.get(v));
+                    if (seen.add(v))
+                        q.offer(v);
+                }
+            }
+            return r;
+        }
+    }
+
     static class s2495{//Number of Subarrays Having Even Product
         public long evenProduct(int[] a) {
             long count = 0, odd = 0;
