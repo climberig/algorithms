@@ -412,6 +412,25 @@ public class p4{
         }
     }
 
+    static class s491{//Non-decreasing Subsequences
+        public List<List<Integer>> findSubsequences(int[] a) {
+            Set<List<Integer>> r = new HashSet<>();
+            find(r, new LinkedList<>(), 0, a);
+            return new ArrayList<>(r);
+        }
+
+        void find(Set<List<Integer>> r, LinkedList<Integer> list, int j, int[] a) {
+            if (list.size() >= 2)
+                r.add(new ArrayList<>(list));
+            for (int i = j; i < a.length; i++)
+                if (list.size() == 0 || list.getLast() <= a[i]) {
+                    list.add(a[i]);
+                    find(r, list, i + 1, a);
+                    list.removeLast();
+                }
+        }
+    }
+
     static class s492{//Construct the Rectangle
         public int[] constructRectangle(int area){
             for(int w = (int) Math.sqrt(area); w >= 1; w--)
