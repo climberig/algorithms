@@ -279,6 +279,30 @@ public class p0{
         }
     }
 
+    static class s93{//Restore IP Addresses
+        public List<String> restoreIpAddresses(String s) {
+            if (s.length() < 4 || s.length() > 12)
+                return Collections.emptyList();
+            List<String> r = new ArrayList<>();
+            dfs(s, new LinkedList<>(), r);
+            return r;
+        }
+
+        void dfs(String s, LinkedList<String> parts, List<String> r) {
+            if (s.isEmpty()) {
+                if (parts.size() == 4)
+                    r.add(String.join(".", parts));
+            } else for (int i = 1; i <= (s.charAt(0) == '0' ? 1 : 3) && i <= s.length(); i++) {
+                Integer p = Integer.parseInt(s.substring(0, i));
+                if (p <= 255) {
+                    parts.add(String.valueOf(p));
+                    dfs(s.substring(i), parts, r);
+                    parts.removeLast();
+                }
+            }
+        }
+    }
+
     static class s99{//Recover Binary Search Tree
         TreeNode a, b, pre = new TreeNode(Integer.MIN_VALUE);
 
