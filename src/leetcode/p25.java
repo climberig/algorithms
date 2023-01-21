@@ -413,4 +413,22 @@ public class p25{
             return -1;
         }
     }
+
+    static class s2541{//Minimum Operations to Make Array Equal II
+        public long minOperations(int[] a1, int[] a2, int k) {
+            if (k == 0)
+                return Arrays.equals(a1, a2) ? 0 : -1;
+            long pos = 0, neg = 0;
+            for (int i = 0; i < a1.length; i++) {
+                int diff = a1[i] - a2[i], f = Math.abs(diff) / k;
+                if (diff % k != 0)
+                    return -1;
+                if (diff > 0)
+                    pos += f;
+                else if (diff < 0)
+                    neg += f;
+            }
+            return pos == neg ? pos : -1;
+        }
+    }
 }
