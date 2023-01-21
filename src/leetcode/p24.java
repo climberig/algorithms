@@ -460,6 +460,30 @@ public class p24{
         }
     }
 
+    static class s2462{//Total Cost to Hire K Workers
+        public long totalCost(int[] costs, int k, int candidates) {
+            int left = 0, right = costs.length - 1;
+            PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> (costs[a] - costs[b] != 0 ? costs[a] - costs[b] : a - b));
+            for (int i = 0; i < candidates && left <= right; i++) {
+                q.add(left++);
+                if (left <= right)
+                    q.add(right--);
+            }
+
+            long r = 0;
+            while (k-- > 0) {
+                int i = q.poll();
+                if (left <= right && left < costs.length && right >= 0) {
+                    if (i <= left)
+                        q.add(left++);
+                    else q.add(right--);
+                }
+                r += costs[i];
+            }
+            return r;
+        }
+    }
+
     static class s2464{//Minimum Subarrays in a Valid Split
         public int validSubarraySplit(int[] a) {
             int[] dp = new int[a.length + 1];
