@@ -401,4 +401,16 @@ public class p25{
             return m;
         }
     }
+
+    static class s2540{//Minimum Common Value
+        public int getCommon(int[] a1, int[] a2) {
+            for (int i = 0, j = 0; i < a1.length && j < a2.length; )
+                if (a1[i] == a2[j])
+                    return a1[i];
+                else if (a1[i] < a2[j])
+                    i++;
+                else j++;
+            return -1;
+        }
+    }
 }
