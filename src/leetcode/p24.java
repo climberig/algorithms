@@ -423,6 +423,22 @@ public class p24{
         }
     }
 
+    static class s2457{//Minimum Addition to Make Integer Beautiful
+        public long makeIntegerBeautiful(long n, int target) {
+            long origin = n, base = 1;
+            for (; sum(n) > target; base *= 10)
+                n = n / 10 + 1;
+            return n * base - origin;
+        }
+
+        int sum(long n) {
+            int r = 0;
+            for (; n > 0; n /= 10)
+                r += n % 10;
+            return r;
+        }
+    }
+
     static class s2460{//Apply Operations to an Array
         public int[] applyOperations(int[] a){
             for(int i = 0; i < a.length - 1; i++)
