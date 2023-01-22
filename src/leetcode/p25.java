@@ -431,4 +431,29 @@ public class p25{
             return pos == neg ? pos : -1;
         }
     }
+
+    static class s2547{//Minimum Cost to Split an Array
+        public int minCost(int[] a, int k) {
+            int[][] trimmed = new int[a.length][a.length];
+            for (int i = 0; i < a.length; i++) {
+                int freq[] = new int[a.length], len = 0;
+                for (int j = i; j < a.length; j++) {
+                    freq[a[j]]++;
+                    if (freq[a[j]] == 2)
+                        len += 2;
+                    else if (freq[a[j]] > 2)
+                        len++;
+                    trimmed[i][j] = len;
+                }
+            }
+            int[] dp = new int[a.length + 1];
+            for (int i = 1; i <= a.length; i++) {
+                int min = Integer.MAX_VALUE;
+                for (int j = 0; j < i; j++)
+                    min = Math.min(min, dp[j] + k + trimmed[j][i - 1]);
+                dp[i] = min;
+            }
+            return dp[a.length];
+        }
+    }
 }
