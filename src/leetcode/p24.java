@@ -305,6 +305,17 @@ public class p24{
         }
     }
 
+    static class s2439{//Minimize Maximum of Array
+        public int minimizeArrayValue(int[] a) {
+            long sum = 0, r = 0;
+            for (int i = 0; i < a.length; i++) {
+                sum += a[i];
+                r = Math.max(r, (long) Math.ceil(1.0 * sum / (i + 1)));
+            }
+            return (int) r;
+        }
+    }
+
     static class s2442{//Count Number of Distinct Integers After Reverse Operations
         public int countDistinctIntegers(int[] a){
             Set<Integer> s = new HashSet<>();
