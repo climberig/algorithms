@@ -568,6 +568,50 @@ public class p24{
         int gcd(int a, int b) {return b == 0 ? a : gcd(b, a % b);}
     }
 
+    static class s2471{//Minimum Number of Operations to Sort a Binary Tree by Level
+        public int minimumOperations(TreeNode root) {
+            Queue<TreeNode> q = new LinkedList<>();
+            int r = 0;
+            for (q.offer(root); !q.isEmpty(); ) {
+                for (int size = q.size(); size > 0; size--) {
+                    TreeNode node = q.poll();
+                    if (node.left != null)
+                        q.offer(node.left);
+                    if (node.right != null)
+                        q.offer(node.right);
+                }
+                r += swaps(q.stream().mapToInt(n -> n.val).toArray());
+            }
+
+            return r;
+        }
+
+        int swaps(int[] a) {
+            Map<Integer, Integer> m = new TreeMap<>();
+            for (int i = 0; i < a.length; i++)
+                m.put(a[i], i);
+            int p2 = 0, swaps = 0;
+            for (Integer n1 : m.keySet()) {
+                int p1 = m.get(n1);
+                if (p1 != p2) {
+                    swaps++;
+                    int n2 = a[p2];
+                    swap(a, p1, p2);
+                    m.put(n1, p2);
+                    m.put(n2, p1);
+                }
+                p2++;
+            }
+            return swaps;
+        }
+
+        void swap(int[] a, int i, int j) {
+            int t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+        }
+    }
+
     static class s2473{//Minimum Cost to Buy Apples
         public long[] minCost(int n, int[][] roads, int[] appleCost, int k) {
             List<ArrayList<int[]>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<int[]>()).toList();
