@@ -305,6 +305,23 @@ public class p24{
         }
     }
 
+    static class s2438{//Range Product Queries of Powers
+        public int[] productQueries(int n, int[][] queries) {
+            int[] a = new int[Integer.bitCount(n)];
+            for (int i = 0, p = 1; n > 0; n /= 2, p *= 2)
+                if ((n & 1) == 1)
+                    a[i++] = p;
+            int[] r = new int[queries.length];
+            for (int i = 0; i < queries.length; i++) {
+                long p = 1;
+                for (int j = queries[i][0]; j <= queries[i][1]; j++)
+                    p = (p * a[j]) % 1_000_000_007;
+                r[i] = (int) p;
+            }
+            return r;
+        }
+    }
+
     static class s2439{//Minimize Maximum of Array
         public int minimizeArrayValue(int[] a) {
             long sum = 0, r = 0;
