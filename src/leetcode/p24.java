@@ -136,6 +136,21 @@ public class p24{
         }
     }
 
+    static class s2417{//Closest Fair Integer
+        public int closestFair(int n) {
+            for (; ; n++) {
+                int len = (int) Math.log10(n) + 1;
+                if (len % 2 == 1)
+                    n = (int) Math.pow(10, len);
+                int m = n, evenOdd[] = new int[2];
+                for (; m > 0; m /= 10)
+                    evenOdd[(m % 10) % 2]++;
+                if (evenOdd[0] == evenOdd[1])
+                    return n;
+            }
+        }
+    }
+
     static class s2418{//Sort the People
         public String[] sortPeople(String[] names, int[] heights){
             int[][] m = new int[heights.length][2];
