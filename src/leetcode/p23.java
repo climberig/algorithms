@@ -149,6 +149,25 @@ public class p23{
         }
     }
 
+    static class s2333{//Minimum Sum of Squared Difference
+        public long minSumSquareDiff(int[] a1, int[] a2, int k1, int k2) {
+            int buckets[] = new int[100_001], k = k1 + k2;
+            for (int i = 0; i < a1.length; i++)
+                buckets[Math.abs(a1[i] - a2[i])]++;
+            for (int i = buckets.length - 1; i > 0; i--)
+                if (buckets[i] != 0) {
+                    int minus = Math.min(buckets[i], k);
+                    buckets[i] -= minus;
+                    buckets[i - 1] += minus;
+                    k -= minus;
+                }
+            long r = 0;
+            for (int i = 1; i < buckets.length; i++)
+                r += ((long) buckets[i]) * i * i;
+            return r;
+        }
+    }
+
     static class s2335{//Minimum Amount of Time to Fill Cups
         public int fillCups(int[] amount){
             PriorityQueue<Integer> q = new PriorityQueue<>();
