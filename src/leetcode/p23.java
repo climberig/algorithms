@@ -75,6 +75,36 @@ public class p23{
         }
     }
 
+    static class s2316{//Count Unreachable Pairs of Nodes in an Undirected Graph
+        public long countPairs(int n, int[][] edges) {
+            List<ArrayList<Integer>> g = IntStream.range(0, n).mapToObj(i -> new ArrayList<Integer>()).toList();
+            for (int[] e : edges) {
+                g.get(e[0]).add(e[1]);
+                g.get(e[1]).add(e[0]);
+            }
+            boolean[] seen = new boolean[n];
+            long r = 0, prev = 0;
+            for (int u = 0; u < n; u++)
+                if (!seen[u]) {
+                    seen[u] = true;
+                    int m = dfs(u, g, seen);
+                    r += prev * m;
+                    prev += m;
+                }
+            return r;
+        }
+        int dfs(int u, List<ArrayList<Integer>> g, boolean[] seen) {
+            int r = 1;
+            for (Integer v : g.get(u)) {
+                if (!seen[v]) {
+                    seen[v] = true;
+                    r += dfs(v, g, seen);
+                }
+            }
+            return r;
+        }
+    }
+
     static class s2319{//Check if Matrix Is X-Matrix
         public boolean checkXMatrix(int[][] g){
             for(int i = 0; i < g.length; i++)
