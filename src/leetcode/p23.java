@@ -357,6 +357,39 @@ public class p23{
         }
     }
 
+    static class s2353{//Design a Food Rating System
+        class FoodRatings{
+            Map<String, Integer> ratings = new HashMap<>();
+            Map<String, String> cuisines = new HashMap<>();
+            Map<String, TreeMap<Integer, TreeSet<String>>> m = new HashMap<>();
+
+            public FoodRatings(String[] food, String[] cuisine, int[] rating) {
+                for (int i = 0; i < food.length; i++) {
+                    ratings.put(food[i], rating[i]);
+                    cuisines.put(food[i], cuisine[i]);
+                    m.putIfAbsent(cuisine[i], new TreeMap<>());
+                    m.get(cuisine[i]).putIfAbsent(rating[i], new TreeSet<>());
+                    m.get(cuisine[i]).get(rating[i]).add(food[i]);
+                }
+            }
+
+            public void changeRating(String food, int newRating) {
+                int oldRating = ratings.get(food);
+                ratings.put(food, newRating);
+                String cuisine = cuisines.get(food);
+                m.get(cuisine).get(oldRating).remove(food);
+                if (m.get(cuisine).get(oldRating).isEmpty())
+                    m.get(cuisine).remove(oldRating);
+                m.get(cuisine).putIfAbsent(newRating, new TreeSet<>());
+                m.get(cuisine).get(newRating).add(food);
+            }
+
+            public String highestRated(String cuisine) {
+                return m.get(cuisine).lastEntry().getValue().first();
+            }
+        }
+    }
+
     static class s2357{//Make Array Zero by Subtracting Equal Amounts
         public int minimumOperations(int[] a){
             return (int) Arrays.stream(a).filter(n -> n > 0).distinct().count();
