@@ -177,6 +177,20 @@ public class p23{
         }
     }
 
+    static class s2337{//Move Pieces to Obtain a String
+        public boolean canChange(String start, String target) {
+            if (!(start.replaceAll("_", "")).equals(target.replaceAll("_", "")))
+                return false;
+            for (int i = 0, j = 0, n = start.length(); i < n && j < n; i++, j++) {
+                for (; i < n && start.charAt(i) == '_'; i++) ;
+                for (; j < n && target.charAt(j) == '_'; j++) ;
+                if (i < n && j < n && (start.charAt(i) == 'L' && i < j || target.charAt(j) == 'R' && i > j))
+                    return false;
+            }
+            return true;
+        }
+    }
+
     static class s2340{//Minimum Adjacent Swaps to Make a Valid Array
         public int minimumSwaps(int[] a){
             int minIdx = a.length - 1, maxIdx = 0;
