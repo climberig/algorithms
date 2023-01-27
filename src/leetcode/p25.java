@@ -456,4 +456,17 @@ public class p25{
             return dp[a.length];
         }
     }
+
+    static class s2548{//Maximum Price to Fill a Bag
+        public double maxPrice(int[][] items, int capacity) {
+            Arrays.sort(items, (a, b) -> Double.compare(1.0 * b[0] / b[1], 1.0 * a[0] / a[1]));
+            double r = 0;
+            for (int i = 0; i < items.length && capacity > 0; i++) {
+                int weight = Math.min(capacity, items[i][1]);
+                r += 1.0 * weight / items[i][1] * items[i][0];
+                capacity -= weight;
+            }
+            return capacity == 0 ? r : -1;
+        }
+    }
 }
