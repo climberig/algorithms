@@ -402,6 +402,19 @@ public class p23{
         }
     }
 
+    static class s2361{//Minimum Costs Using the Train Linek
+        public long[] minimumCosts(int[] regular, int[] express, int expressCost) {
+            long[] dp1 = new long[regular.length + 1], dp2 = new long[regular.length + 1], r = new long[regular.length];
+            dp2[0] = expressCost;
+            for (int i = 0; i < regular.length; i++) {
+                dp1[i + 1] = Math.min(dp1[i] + regular[i], dp2[i] + express[i]);
+                dp2[i + 1] = Math.min(dp2[i] + express[i], dp1[i] + regular[i] + expressCost);
+                r[i] = Math.min(dp1[i + 1], dp2[i + 1]);
+            }
+            return r;
+        }
+    }
+
     static class s2363{//Merge Similar Items
         public List<List<Integer>> mergeSimilarItems(int[][] a1, int[][] a2){
             Map<Integer, Integer> m = new TreeMap<>();
