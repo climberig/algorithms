@@ -197,6 +197,30 @@ public class p25{
         }
     }
 
+    static class s2519{//Count the Number of K-Big Indices
+        public int kBigIndices(int[] a, int k) {
+            boolean[] big = new boolean[a.length];
+            Queue<Integer> q = new PriorityQueue<>(Collections.reverseOrder());
+            for (int i = 0; i < a.length; i++) {
+                if (q.size() == k && q.peek() < a[i])
+                    big[i] = true;
+                q.add(a[i]);
+                if (q.size() > k)
+                    q.poll();
+            }
+            int r = 0;
+            q.clear();
+            for (int i = a.length - 1; i >= 0; i--) {
+                if (q.size() == k && q.peek() < a[i] && big[i])
+                    r++;
+                q.add(a[i]);
+                if (q.size() > k)
+                    q.poll();
+            }
+            return r;
+        }
+    }
+
     static class s2520{//Count the Digits That Divide a Number
         public int countDigits(int n) {
             return (int) String.valueOf(n).chars().filter(c -> n % (c - '0') == 0).count();
