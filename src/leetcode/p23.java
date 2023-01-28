@@ -464,6 +464,24 @@ public class p23{
         }
     }
 
+    static class s2371{//Minimize Maximum Value in a Grid
+        public int[][] minScore(int[][] g) {
+            PriorityQueue<int[]> q = new PriorityQueue<>(Comparator.comparingInt(a -> g[a[0]][a[1]]));
+            for (int i = 0; i < g.length; i++)
+                for (int j = 0; j < g[0].length; j++)
+                    q.offer(new int[]{i, j});
+            int[] rowMax = new int[g.length], colMax = new int[g[0].length];
+            int[][] r = new int[g.length][g[0].length];
+            while (q.size() > 0) {
+                int p[] = q.poll(), i = p[0], j = p[1];
+                r[i][j] = Math.max(rowMax[i], colMax[j]) + 1;
+                rowMax[i] = r[i][j];
+                colMax[j] = r[i][j];
+            }
+            return r;
+        }
+    }
+
     static class s2373{//Largest Local Values in a Matrix
         public int[][] largestLocal(int[][] g){
             int[][] r = new int[g.length - 2][g.length - 2];
