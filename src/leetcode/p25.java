@@ -493,4 +493,16 @@ public class p25{
             return capacity == 0 ? r : -1;
         }
     }
+
+    static class s2551{//Put Marbles in Bags
+        public long putMarbles(int[] a, int k) {
+            long cuts[] = new long[a.length - 1], r = 0;
+            for (int i = 0; i < cuts.length; i++)
+                cuts[i] = a[i] + a[i + 1];
+            Arrays.sort(cuts);
+            for (int i = 0; i < k - 1; i++)
+                r += cuts[a.length - 1 - 1 - i] - cuts[i];
+            return r;
+        }
+    }
 }
