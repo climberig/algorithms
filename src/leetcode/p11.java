@@ -109,6 +109,15 @@ public class p11{
         }
     }
 
+    static class s1137{//N-th Tribonacci Number
+        public int tribonacci(int n) {
+            int[] a = {0, 1, 1};
+            for (int i = 3; i <= n; i++)
+                a[i % 3] = Arrays.stream(a).sum();
+            return a[n % 3];
+        }
+    }
+
     static class s1140{//Stone Game II
         public int stoneGameII(int[] piles){
             int[] cs = Arrays.copyOf(piles, piles.length);
