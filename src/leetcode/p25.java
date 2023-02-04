@@ -505,4 +505,14 @@ public class p25{
             return r;
         }
     }
+
+    static class s2553{//Separate the Digits in an Array
+        public int[] separateDigits(int[] a) {
+            List<Integer> r = new ArrayList<>();
+            for (int n : a)
+                for (char c : String.valueOf(n).toCharArray())
+                    r.add(c - '0');
+            return r.stream().mapToInt(i -> i).toArray();
+        }
+    }
 }
