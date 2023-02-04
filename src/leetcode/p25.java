@@ -515,4 +515,18 @@ public class p25{
             return r.stream().mapToInt(i -> i).toArray();
         }
     }
+
+    static class s2554{//Maximum Number of Integers to Choose From a Range I
+        public int maxCount(int[] banned, int n, int maxSum) {
+            int r = 0;
+            Set<Integer> s = Arrays.stream(banned).boxed().collect(Collectors.toSet());
+            for (int i = 1; i <= n && maxSum > 0; i++)
+                if (!s.contains(i)) {
+                    maxSum -= i;
+                    if (maxSum >= 0)
+                        r++;
+                }
+            return r;
+        }
+    }
 }
