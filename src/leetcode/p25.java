@@ -530,6 +530,24 @@ public class p25{
         }
     }
 
+    static class s2556{//Disconnect Path in a Binary Matrix by at Most One Flip
+        public boolean isPossibleToCutPath(int[][] g) {
+            if (!possible(g, 0, 0))
+                return true;
+            g[0][0] = 1;
+            return !possible(g, 0, 0);
+        }
+
+        boolean possible(int[][] g, int i, int j) {
+            if (i == g.length - 1 && j == g[0].length - 1)
+                return true;
+            if (i >= g.length || j >= g[0].length || g[i][j] == 0)
+                return false;
+            g[i][j] = 0;
+            return possible(g, i + 1, j) || possible(g, i, j + 1);
+        }
+    }
+
     static class s2558{//Take Gifts From the Richest Pile
         public long pickGifts(int[] gifts, int k) {
             PriorityQueue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
