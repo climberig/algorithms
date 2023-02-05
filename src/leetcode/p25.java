@@ -539,4 +539,19 @@ public class p25{
             return q.stream().mapToLong(n -> n).sum();
         }
     }
+
+    static class s2559{//Count Vowel Strings in Ranges
+        public int[] vowelStrings(String[] words, int[][] queries) {
+            Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u');
+            int[] cs = new int[words.length + 1];
+            for (int i = 0; i < words.length; i++) {
+                char c1 = words[i].charAt(0), c2 = words[i].charAt(words[i].length() - 1);
+                cs[i + 1] = cs[i] + (vowels.contains(c1) && vowels.contains(c2) ? 1 : 0);
+            }
+            int[] r = new int[queries.length];
+            for (int i = 0; i < queries.length; i++)
+                r[i] = cs[queries[i][1] + 1] - cs[queries[i][0]];
+            return r;
+        }
+    }
 }
