@@ -572,4 +572,27 @@ public class p25{
             return r;
         }
     }
+
+    static class s2560{//House Robber IV
+        public int minCapability(int[] a, int k) {
+            int lo = 1, hi = 1_000_000_000, r = hi;
+            while (lo <= hi) {
+                int mid = (hi + lo) / 2;
+                if (possible(mid, k, a)) {
+                    r = mid;
+                    hi = mid - 1;
+                } else lo = mid + 1;
+            }
+            return r;
+        }
+        boolean possible(int cap, int k, int[] a) {
+            int r = 0;
+            for (int i = 0; i < a.length; i++)
+                if (a[i] <= cap) {
+                    r++;
+                    i++;
+                }
+            return r >= k;
+        }
+    }
 }
