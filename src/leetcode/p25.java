@@ -529,4 +529,14 @@ public class p25{
             return r;
         }
     }
+
+    static class s2558{//Take Gifts From the Richest Pile
+        public long pickGifts(int[] gifts, int k) {
+            PriorityQueue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
+            Arrays.stream(gifts).forEach(q::offer);
+            while (k-- > 0)
+                q.offer((int) Math.sqrt(q.poll()));
+            return q.stream().mapToLong(n -> n).sum();
+        }
+    }
 }
