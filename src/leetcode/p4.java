@@ -183,6 +183,23 @@ public class p4{
         }
     }
 
+    static class s438{//Find All Anagrams in a String
+        public List<Integer> findAnagrams(String s, String p) {
+            List<Integer> r = new ArrayList<>();
+            int[] f = new int[26];
+            p.chars().forEach(c -> f[c - 'a']++);
+            for (int i = 0; i < Math.min(p.length(), s.length()) - 1; i++)
+                f[s.charAt(i) - 'a']--;
+            for (int i = p.length() - 1, j = 0; i < s.length(); i++, j++) {
+                f[s.charAt(i) - 'a']--;
+                if (Arrays.stream(f).allMatch(n -> n == 0))
+                    r.add(j);
+                f[s.charAt(j) - 'a']++;
+            }
+            return r;
+        }
+    }
+
     static class s441{//Arranging Coins
         public int arrangeCoins(int n){
             int r = 0;
