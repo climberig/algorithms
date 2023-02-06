@@ -548,6 +548,31 @@ public class p25{
         }
     }
 
+    static class s2557{//Maximum Number of Integers to Choose From a Range II
+        public int maxCount(int[] banned, int n, long maxSum) {
+            Set<Integer> s = Arrays.stream(banned).boxed().collect(Collectors.toCollection(TreeSet::new));
+            s.add(n + 1);
+            int r = 0, a = 1;
+            for (int hi : s) {
+                int b = hi - 1;
+                if (a <= b) {
+                    long sum = (a + b) * (b - a + 1L) / 2;
+                    if (maxSum >= sum) {
+                        maxSum -= sum;
+                        r += b - a + 1;
+                    } else {
+                        r += (Math.sqrt((2L * a - 1) * (2L * a - 1) + 8L * maxSum) - 2 * a + 1) / 2;
+                        maxSum = 0;
+                    }
+                }
+                a = hi + 1;
+                if (maxSum == 0)
+                    break;
+            }
+            return r;
+        }
+    }
+
     static class s2558{//Take Gifts From the Richest Pile
         public long pickGifts(int[] gifts, int k) {
             PriorityQueue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
