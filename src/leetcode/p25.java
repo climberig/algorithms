@@ -530,6 +530,31 @@ public class p25{
         }
     }
 
+    static class s2555{//Maximize Win From Two Segments
+        public int maximizeWin(int[] prizePositions, int k) {
+            int[] dp = new int[prizePositions.length];
+            int max = 0, r = 1;
+            for (int i = prizePositions.length - 1, j = prizePositions.length - 1; i >= 0; i--) {
+                if (prizePositions[j] - prizePositions[i] <= k) {
+                    max = Math.max(max, j - i + 1);
+                } else {
+                    while (prizePositions[j] - prizePositions[i] > k)
+                        j--;
+                }
+                dp[i] = max;
+            }
+            max = 0;
+            for (int i = 0, j = 0; j < prizePositions.length - 1; j++) {
+                if (prizePositions[j] - prizePositions[i] <= k)
+                    max = Math.max(max, j - i + 1);
+                else while (prizePositions[j] - prizePositions[i] > k)
+                    i++;
+                r = Math.max(r, max + dp[j + 1]);
+            }
+            return r;
+        }
+    }
+
     static class s2556{//Disconnect Path in a Binary Matrix by at Most One Flip
         public boolean isPossibleToCutPath(int[][] g) {
             if (!possible(g, 0, 0))
