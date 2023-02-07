@@ -532,19 +532,15 @@ public class p25{
 
     static class s2555{//Maximize Win From Two Segments
         public int maximizeWin(int[] prizePositions, int k) {
-            int[] dp = new int[prizePositions.length];
-            int max = 0, r = 1;
-            for (int i = prizePositions.length - 1, j = prizePositions.length - 1; i >= 0; i--) {
-                if (prizePositions[j] - prizePositions[i] <= k) {
+            int dp[] = new int[prizePositions.length], r = 1;
+            for (int i = prizePositions.length - 1, j = prizePositions.length - 1, max = 0; i >= 0; i--) {
+                if (prizePositions[j] - prizePositions[i] <= k)
                     max = Math.max(max, j - i + 1);
-                } else {
-                    while (prizePositions[j] - prizePositions[i] > k)
-                        j--;
-                }
+                else while (prizePositions[j] - prizePositions[i] > k)
+                    j--;
                 dp[i] = max;
             }
-            max = 0;
-            for (int i = 0, j = 0; j < prizePositions.length - 1; j++) {
+            for (int i = 0, j = 0, max = 0; j < prizePositions.length - 1; j++) {
                 if (prizePositions[j] - prizePositions[i] <= k)
                     max = Math.max(max, j - i + 1);
                 else while (prizePositions[j] - prizePositions[i] > k)
