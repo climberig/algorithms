@@ -641,4 +641,15 @@ public class p25{
             return r >= k;
         }
     }
+
+    static class s2562{//Find the Array Concatenation Value
+        public long findTheArrayConcVal(int[] a) {
+            long r = 0;
+            for (int i = 0, j = a.length - 1; i <= j; i++, j--)
+                if (i == j)
+                    r += a[i];
+                else r += Integer.parseInt(String.valueOf(a[i]) + a[j]);
+            return r;
+        }
+    }
 }
