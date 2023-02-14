@@ -248,6 +248,24 @@ public class p0{
         }
     }
 
+    static class s67{//Add Binary
+        public String addBinary(String a, String b) {
+            int carry = 0;
+            StringBuilder r = new StringBuilder();
+            for (int i = a.length() - 1, j = b.length() - 1; i >= 0 || j >= 0; i--, j--) {
+                if (i >= 0)
+                    carry += a.charAt(i) - '0';
+                if (j >= 0)
+                    carry += b.charAt(j) - '0';
+                r.append(carry % 2);
+                carry /= 2;
+            }
+            if (carry > 0)
+                r.append(carry);
+            return r.reverse().toString();
+        }
+    }
+
     static class s69{//Sqrt(x)
         public int mySqrt(int x){
             if(x <= 1)
