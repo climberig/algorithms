@@ -25,6 +25,12 @@ public class p1{
         }
     }
 
+    static class s104{//Maximum Depth of Binary Tree
+        public int maxDepth(TreeNode root) {
+            return root != null ? 1 + Math.max(maxDepth(root.left), maxDepth(root.right)) : 0;
+        }
+    }
+
     static class s108{//Convert Sorted Array to Binary Search Tree
         public TreeNode sortedArrayToBST(int[] a){
             return bst(a, 0, a.length - 1);
