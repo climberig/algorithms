@@ -652,4 +652,23 @@ public class p25{
             return r;
         }
     }
+
+    static class s2566{//Maximum Difference by Remapping a Digit
+        public int minMaxDifference(int n) {
+            String s = String.valueOf(n);
+            return max(s) - min(s);
+        }
+        int min(String s) {
+            for (int i = 0; i < s.length(); i++)
+                if (s.charAt(i) != '0')
+                    return Integer.parseInt(s.replaceAll(s.charAt(i) + "", "0"));
+            return Integer.parseInt(s);
+        }
+        int max(String s) {
+            for (int i = 0; i < s.length(); i++)
+                if (s.charAt(i) != '9')
+                    return Integer.parseInt(s.replaceAll(s.charAt(i) + "", "9"));
+            return Integer.parseInt(s);
+        }
+    }
 }
