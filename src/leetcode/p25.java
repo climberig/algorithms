@@ -671,4 +671,12 @@ public class p25{
             return Integer.parseInt(s);
         }
     }
+
+    static class s2567{//Minimum Score by Changing Two Elements
+        public int minimizeSum(int[] a) {
+            int last = a.length - 1;
+            Arrays.sort(a);
+            return Math.min(Math.min(a[last] - a[2], a[last - 2] - a[0]), a[last - 1] - a[1]);
+        }
+    }
 }
