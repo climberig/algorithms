@@ -706,4 +706,19 @@ public class p25{
             return r.toArray(new int[0][]);
         }
     }
+
+    static class s2571{//Minimum Operations to Reduce an Integer to 0
+        public int minOperations(int n) {
+            int r = 0;
+            while (n > 0)
+                if ((n & 3) == 3) {
+                    n++;
+                    r++;
+                } else {
+                    r += n & 1;
+                    n >>= 1;
+                }
+            return r;
+        }
+    }
 }
