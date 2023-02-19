@@ -688,4 +688,22 @@ public class p25{
             return r;
         }
     }
+
+    static class s2570{//Merge Two 2D Arrays by Summing Values
+        public int[][] mergeArrays(int[][] a1, int[][] a2) {
+            List<int[]> r = new ArrayList<>();
+            int i = 0, j = 0;
+            while (i < a1.length && j < a2.length)
+                if (a1[i][0] == a2[j][0])
+                    r.add(new int[]{a1[i][0], a1[i++][1] + a2[j++][1]});
+                else if (a1[i][0] < a2[j][0])
+                    r.add(a1[i++]);
+                else r.add(a2[j++]);
+            while (i < a1.length)
+                r.add(a1[i++]);
+            while (j < a2.length)
+                r.add(a2[j++]);
+            return r.toArray(new int[0][]);
+        }
+    }
 }
