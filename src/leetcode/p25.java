@@ -679,4 +679,13 @@ public class p25{
             return Math.min(Math.min(a[last] - a[2], a[last - 2] - a[0]), a[last - 1] - a[1]);
         }
     }
+
+    static class s2568{//Minimum Impossible OR
+        public int minImpossibleOR(int[] a) {
+            Set<Integer> s = Arrays.stream(a).boxed().collect(Collectors.toSet());
+            int r = 1;
+            for (; s.contains(r); r *= 2) ;
+            return r;
+        }
+    }
 }
