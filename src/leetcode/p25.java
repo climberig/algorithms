@@ -705,6 +705,13 @@ public class p25{
                 r.add(a2[j++]);
             return r.toArray(new int[0][]);
         }
+
+        public int[][] mergeArrays1(int[][] a1, int[][] a2) {
+            Map<Integer, Integer> m = new TreeMap<>();
+            Arrays.stream(a1).forEach(n -> m.put(n[0], n[1]));
+            Arrays.stream(a2).forEach(n -> m.put(n[0], m.getOrDefault(n[0], 0) + n[1]));
+            return m.keySet().stream().map(k -> new int[]{k, m.get(k)}).toList().toArray(new int[0][]);
+        }
     }
 
     static class s2571{//Minimum Operations to Reduce an Integer to 0
