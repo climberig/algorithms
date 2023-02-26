@@ -752,4 +752,30 @@ public class p25{
             return r;
         }
     }
+
+    static class s2577{//Minimum Time to Visit a Cell In a Grid
+        public int minimumTime(int[][] g) {
+            if (g[0][1] > 1 && g[1][0] > 1)
+                return -1;
+            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+            boolean[][] seen = new boolean[g.length][g[0].length];
+            PriorityQueue<int[]> q = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+            for (q.offer(new int[]{g[0][0], 0, 0}); !q.isEmpty(); ) {
+                int p[] = q.poll(), t = p[0], x = p[1], y = p[2];
+                if (x == g.length - 1 && y == g[0].length - 1)
+                    return t;
+                if (!seen[x][y]) {
+                    seen[x][y] = true;
+                    for (int[] d : dirs) {
+                        int nx = x + d[0], ny = y + d[1];
+                        if (0 <= nx && nx < g.length && 0 <= ny && ny < g[0].length && !seen[nx][ny]) {
+                            int wait = ((g[nx][ny] - t) % 2 == 0) ? 1 : 0;
+                            q.offer(new int[]{Math.max(g[nx][ny] + wait, t + 1), nx, ny});
+                        }
+                    }
+                }
+            }
+            return -1;
+        }
+    }
 }
