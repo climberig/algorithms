@@ -740,4 +740,16 @@ public class p25{
             return r;
         }
     }
+
+    static class s2575{//Find the Divisibility Array of a String
+        public int[] divisibilityArray(String word, int m) {
+            int r[] = new int[word.length()];
+            long d = 0;
+            for (int i = 0; i < word.length(); i++) {
+                d = (10 * d + (word.charAt(i) - '0')) % m;
+                r[i] = d % m == 0 ? 1 : 0;
+            }
+            return r;
+        }
+    }
 }
