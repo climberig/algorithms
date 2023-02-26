@@ -728,4 +728,16 @@ public class p25{
             return r;
         }
     }
+
+    static class s2574{//Left and Right Sum Differences
+        public int[] leftRigthDifference(int[] a) {
+            int left = 0, right = Arrays.stream(a).sum(), r[] = new int[a.length];
+            for (int i = 0; i < a.length; i++) {
+                right -= a[i];
+                r[i] = Math.abs(right - left);
+                left += a[i];
+            }
+            return r;
+        }
+    }
 }
