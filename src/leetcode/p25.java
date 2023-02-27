@@ -753,6 +753,17 @@ public class p25{
         }
     }
 
+    static class s2576{//Find the Maximum Number of Marked Indices
+        public int maxNumOfMarkedIndices(int[] a) {
+            Arrays.sort(a);
+            int i = 0;
+            for (int j = (a.length + 1) / 2; j < a.length; j++)
+                if (2 * a[i] <= a[j])
+                    i++;
+            return i * 2;
+        }
+    }
+
     static class s2577{//Minimum Time to Visit a Cell In a Grid
         public int minimumTime(int[][] g) {
             if (g[0][1] > 1 && g[1][0] > 1)
