@@ -653,6 +653,22 @@ public class p25{
         }
     }
 
+    static class s2563{//Count the Number of Fair Pairs
+        public long countFairPairs(int[] a, int lower, int upper) {
+            Arrays.sort(a);
+            return countLessOrEqual(a, upper) - countLessOrEqual(a, lower - 1);
+        }
+
+        long countLessOrEqual(int[] a, int val) {
+            long r = 0;
+            for (int i = 0, j = a.length - 1; i < j; i++) {
+                for (; i < j && a[i] + a[j] > val; j--) ;
+                r += j - i;
+            }
+            return r;
+        }
+    }
+
     static class s2566{//Maximum Difference by Remapping a Digit
         public int minMaxDifference(int n) {
             String s = String.valueOf(n);
