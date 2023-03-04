@@ -820,4 +820,13 @@ public class p25{
             return n1 + n2;
         }
     }
+
+    static class s2579{//Count Total Number of Colored Cells
+        public long coloredCells(int n) {
+            long s = 0;
+            for (int i = 1; i <= 2 * n - 1; i += 2)
+                s += i;
+            return 2 * s - 2L * n + 1;
+        }
+    }
 }
