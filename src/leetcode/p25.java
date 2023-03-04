@@ -805,4 +805,19 @@ public class p25{
             return -1;
         }
     }
+
+    static class s2578{//Split With Minimum Sum
+        public int splitNum(int n) {
+            PriorityQueue<Integer> q = new PriorityQueue<>();
+            int n1 = 0, n2 = 0;
+            for (; n > 0; n /= 10)
+                q.offer(n % 10);
+            while (!q.isEmpty()) {
+                n1 = 10 * n1 + q.poll();
+                if (!q.isEmpty())
+                    n2 = 10 * n2 + q.poll();
+            }
+            return n1 + n2;
+        }
+    }
 }
