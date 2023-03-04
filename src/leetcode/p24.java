@@ -382,6 +382,25 @@ public class p24{
         }
     }
 
+    static class s2444{//Count Subarrays With Fixed Bounds
+        public long countSubarrays(int[] a, int minK, int maxK) {
+            long r = 0;
+            int startIdx = 0, lastMinIdx = -1, lastMaxIdx = -1;
+            for (int i = 0; i < a.length; i++) {
+                if (a[i] < minK || a[i] > maxK) {
+                    lastMinIdx = lastMaxIdx = -1;
+                    startIdx = i + 1;
+                }
+                if (a[i] == minK)
+                    lastMinIdx = i;
+                if (a[i] == maxK)
+                    lastMaxIdx = i;
+                r += Math.max(0L, Math.min(lastMinIdx, lastMaxIdx) - startIdx + 1);
+            }
+            return r;
+        }
+    }
+
     static class s2445{//Number of Nodes With Value One
         public int numberOfNodes(int n, int[] qs){
             int[] a = new int[n + 1];
