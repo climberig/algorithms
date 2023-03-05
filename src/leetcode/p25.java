@@ -841,4 +841,25 @@ public class p25{
             return n - time;
         }
     }   
+
+    static class s2583{//Kth Largest Sum in a Binary Tree
+        public long kthLargestLevelSum(TreeNode root, int k) {
+            Queue<TreeNode> q = new LinkedList<>();
+            List<Long> sums = new ArrayList<>();
+            for (q.offer(root); !q.isEmpty(); ) {
+                long sum = 0;
+                for (int size = q.size(); size > 0; size--) {
+                    TreeNode node = q.poll();
+                    sum += node.val;
+                    if (node.left != null)
+                        q.offer(node.left);
+                    if (node.right != null)
+                        q.offer(node.right);
+                }
+                sums.add(sum);
+            }
+            Collections.sort(sums);
+            return sums.size() >= k ? sums.get(sums.size() - k) : -1;
+        }
+    }
 }
