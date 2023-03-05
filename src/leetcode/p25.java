@@ -829,4 +829,16 @@ public class p25{
             return 2 * s - 2L * n + 1;
         }
     }
+
+    static class s2582{//Pass the Pillow
+        public int passThePillow(int n, int time) {
+            int d = 2 * (n - 1);
+            if (time >= d)
+                time = time % d;
+            if (1 + time <= n)
+                return 1 + time;
+            time -= n - 1;
+            return n - time;
+        }
+    }   
 }
