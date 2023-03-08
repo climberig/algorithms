@@ -137,6 +137,27 @@ public class p8{
         }
     }
 
+    static class s875{//Koko Eating Bananas
+        public int minEatingSpeed(int[] piles, int h) {
+            int lo = 1, hi = 1_000_000_000, r = hi;
+            while (lo <= hi) {
+                int mid = (lo + hi) / 2;
+                if (time(piles, mid) <= h) {
+                    r = mid;
+                    hi = mid - 1;
+                } else lo = mid + 1;
+            }
+            return r;
+        }
+
+        long time(int[] piles, int k) {
+            long t = 0;
+            for (int pile : piles)
+                t += Math.ceil(1.0 * pile / k);
+            return t;
+        }
+    }
+
     static class s876{//Middle of the Linked List
         public ListNode middleNode(ListNode head) {
             for (ListNode fast = head; fast != null && fast.next != null; head = head.next, fast = fast.next.next) ;
