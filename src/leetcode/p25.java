@@ -877,4 +877,19 @@ public class p25{
             return r;
         }
     }
+
+    static class s2588{//Count the Number of Beautiful Subarrays
+        public long beautifulSubarrays(int[] a) {
+            long r = 0, pre = 0;
+            Map<Long, Long> m = new HashMap<>();
+            m.put(0L, 1L);
+            for (int n : a) {
+                pre ^= n;
+                long v = m.getOrDefault(pre, 0L);
+                r += v;
+                m.put(pre, v + 1);
+            }
+            return r;
+        }
+    }
 }
