@@ -862,4 +862,19 @@ public class p25{
             return sums.size() >= k ? sums.get(sums.size() - k) : -1;
         }
     }
+
+    static class s2587{//Rearrange Array to Maximize Prefix Score
+        public int maxScore(int[] a) {
+            Arrays.sort(a);
+            int r = 0;
+            long s = 0;
+            for (int i = a.length - 1; i >= 0; i--) {
+                s += a[i];
+                if (s > 0)
+                    r++;
+                else break;
+            }
+            return r;
+        }
+    }
 }
