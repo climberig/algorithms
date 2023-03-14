@@ -3,6 +3,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class p1{
+    static class s101{//Symmetric Tree
+        public boolean isSymmetric(TreeNode root) {return symmetric(root.left, root.right);}
+
+        boolean symmetric(TreeNode left, TreeNode right) {
+            if (left == null || right == null)
+                return left == right;
+            if (left.val != right.val)
+                return false;
+            return symmetric(left.left, right.right) && symmetric(left.right, right.left);
+        }
+    }
+
     static class s102{//Binary Tree Level Order Traversal
         public List<List<Integer>> levelOrder(TreeNode root){
             List<List<Integer>> r = new ArrayList<>();
