@@ -156,6 +156,17 @@ public class p1{
         }
     }
 
+    static class s129{//Sum Root to Leaf Numbers
+        public int sumNumbers(TreeNode root) {return sum(root, 0);}
+
+        public int sum(TreeNode n, int val) {
+            if (n == null)
+                return 0;
+            val = 10 * val + n.val;
+            return n.right == null && n.left == null ? val : sum(n.left, val) + sum(n.right, val);
+        }
+    }
+
     static class s131{//Palindrome Partitioning
         public List<List<String>> partition(String s) {
             return partition(s, new LinkedList<>(), new LinkedList<>());
