@@ -863,6 +863,26 @@ public class p25{
         }
     }
 
+    static class s2585{//Number of Ways to Earn Points
+        public int waysToReachTarget(int target, int[][] types) {
+            return ways(0, types, target, new Integer[target + 1][types.length]);
+        }
+
+        int ways(int i, int[][] types, int target, Integer[][] dp) {
+            if (target == 0)
+                return 1;
+            if (i >= types.length)
+                return 0;
+            if (dp[target][i] != null)
+                return dp[target][i];
+            int r = 0;
+            for (int n = 0; n <= Math.min(target, types[i][0]) && n * types[i][1] <= target; n++)
+                r = (r + ways(i + 1, types, target - n * types[i][1], dp)) % 1_000_000_007;
+            dp[target][i] = r;
+            return r;
+        }
+    }
+
     static class s2587{//Rearrange Array to Maximize Prefix Score
         public int maxScore(int[] a) {
             Arrays.sort(a);
