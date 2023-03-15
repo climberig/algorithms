@@ -335,6 +335,19 @@ public class p9{
         }
     }
 
+    static class s958{//Check Completeness of a Binary Tree
+        public boolean isCompleteTree(TreeNode root) {
+            Queue<TreeNode> q = new LinkedList<>();
+            for (q.offer(root); q.peek() != null; ) {
+                TreeNode node = q.poll();
+                q.add(node.left);
+                q.add(node.right);
+            }
+            for (; !q.isEmpty() && q.peek() == null; q.poll()) ;
+            return q.isEmpty();
+        }
+    }
+
     static class s960{//Delete Columns to Make Sorted III
         public int minDeletionSize(String[] list){
             int n = list[0].length(), dp[] = new int[n];
