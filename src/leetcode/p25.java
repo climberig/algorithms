@@ -954,4 +954,26 @@ public class p25{
             return r;
         }
     }
+
+    static class s2593{//Find Score of an Array After Marking All Elements
+        public long findScore(int[] a) {
+            PriorityQueue<int[]> q = new PriorityQueue<>((x, y) -> x[0] != y[0] ? x[0] - y[0] : x[1] - y[1]);
+            for (int i = 0; i < a.length; i++)
+                q.offer(new int[]{a[i], i});
+            boolean[] used = new boolean[a.length];
+            long r = 0;
+            while (!q.isEmpty()) {
+                int p[] = q.poll(), val = p[0], i = p[1];
+                if (!used[i]) {
+                    used[i] = true;
+                    r += val;
+                    if (i > 0)
+                        used[i - 1] = true;
+                    if (i < a.length - 1)
+                        used[i + 1] = true;
+                }
+            }
+            return r;
+        }
+    }
 }
