@@ -941,4 +941,17 @@ public class p25{
             return r;
         }
     }
+
+    static class s2592{//Maximize Greatness of an Array
+        public int maximizeGreatness(int[] a) {
+            Arrays.sort(a);
+            int r = 0;
+            for (int i = a.length - 1, j = i; i >= 0; i--)
+                if (a[i] < a[j]) {
+                    r++;
+                    j--;
+                }
+            return r;
+        }
+    }
 }
