@@ -925,4 +925,20 @@ public class p25{
             return r;
         }
     }
+
+    static class s2591{//Distribute Money to Maximum Children
+        public int distMoney(int money, int children) {
+            money -= children;
+            int r = -1;
+            for (int n = 0; n <= children; n++) {
+                int moneyLeft = money - 7 * n;
+                if (moneyLeft < 0)
+                    return r;
+                if (n + 1 == children && moneyLeft == 3 || n == children && moneyLeft != 0)
+                    continue;
+                r = n;
+            }
+            return r;
+        }
+    }
 }
