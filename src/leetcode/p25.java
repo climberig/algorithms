@@ -830,6 +830,19 @@ public class p25{
         }
     }
 
+    static class s2580{//Count Ways to Group Overlapping Ranges
+        public int countWays(int[][] ranges) {
+            Arrays.sort(ranges, Comparator.comparingInt(a -> a[0]));
+            long r = 2, end = ranges[0][1];
+            for (int[] range : ranges) {
+                if (end < range[0])
+                    r = (r * 2L) % 1_000_000_007;
+                end = Math.max(end, range[1]);
+            }
+            return (int) r;
+        }
+    }
+
     static class s2582{//Pass the Pillow
         public int passThePillow(int n, int time) {
             int d = 2 * (n - 1);
