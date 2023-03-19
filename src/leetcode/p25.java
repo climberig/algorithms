@@ -996,4 +996,13 @@ public class p25{
             return r;
         }
     }
+
+    static class s2595{//Number of Even and Odd Bits
+        public int[] evenOddBit(int n) {
+            int[] r = new int[2];
+            for (int i = 0; n > 0; n /= 2, i++)
+                r[i % 2] += n & 1;
+            return r;
+        }
+    }
 }
