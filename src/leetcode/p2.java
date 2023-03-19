@@ -49,6 +49,42 @@ public class p2{
         }
     }
 
+    static class s211{//Design Add and Search Words Data Structure
+        class WordDictionary{
+            Node trie = new Node();
+
+            public void addWord(String word) {
+                Node node = trie;
+                for (char c : word.toCharArray()) {
+                    if (node.nodes[c - 'a'] == null)
+                        node.nodes[c - 'a'] = new Node();
+                    node = node.nodes[c - 'a'];
+                }
+                node.word = true;
+            }
+
+            public boolean search(String word) {return search(0, word.toCharArray(), trie);}
+
+            boolean search(int i, char[] word, Node node) {
+                if (node == null)
+                    return false;
+                if (i == word.length)
+                    return node.word;
+                if (word[i] != '.')
+                    return search(i + 1, word, node.nodes[word[i] - 'a']);
+                else for (Node next : node.nodes)
+                    if (search(i + 1, word, next))
+                        return true;
+                return false;
+            }
+
+            class Node{
+                Node[] nodes = new Node[26];
+                boolean word;
+            }
+        }
+    }
+
     static class s216{//Combination Sum III
         public List<List<Integer>> combinationSum3(int k, int n){
             List<List<Integer>> r = new LinkedList<>();

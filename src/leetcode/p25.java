@@ -976,4 +976,24 @@ public class p25{
             return r;
         }
     }
+
+    static class s2594{//Minimum Time to Repair Cars
+        public long repairCars(int[] ranks, int cars) {
+            long lo = 1, hi = 1L * ranks[0] * cars * cars, r = hi;
+            while (lo <= hi) {
+                long mid = (lo + hi) / 2;
+                if (cars(ranks, mid) >= cars) {
+                    r = mid;
+                    hi = mid - 1;
+                } else lo = mid + 1;
+            }
+            return r;
+        }
+        long cars(int[] ranks, long time) {
+            long r = 0;
+            for (int rank : ranks)
+                r += (long) Math.sqrt(time * 1.0 / rank);
+            return r;
+        }
+    }
 }
