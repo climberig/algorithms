@@ -1005,4 +1005,28 @@ public class p25{
             return r;
         }
     }
+
+    static class s2596{//Check Knight Tour Configuration
+        public boolean checkValidGrid(int[][] g) {
+            if (g[0][0] != 0)
+                return false;
+            int n = g.length;
+            int[][] dir = {{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
+            for (int x = 0, y = 0, i = 1; i < n * n; i++) {
+                boolean found = false;
+                for (int[] d : dir) {
+                    int nx = x + d[0], ny = y + d[1];
+                    if (0 <= nx && nx < n && 0 <= ny && ny < n && g[nx][ny] == i) {
+                        x = nx;
+                        y = ny;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                    return false;
+            }
+            return true;
+        }
+    }
 }
