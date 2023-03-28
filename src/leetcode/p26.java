@@ -1,4 +1,7 @@
 package leetcode;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 public class p26{
     static class s2600{//K Items With the Maximum Sum
         public int kItemsWithMaximumSum(int nOnes, int nZero, int nNegOnes, int k) {
@@ -25,6 +28,23 @@ public class p26{
                 if (p % d == 0)
                     return false;
             return true;
+        }
+    }
+
+    static class s2602{//Minimum Operations to Make All Array Elements Equal
+        public List<Long> minOperations(int[] a, int[] queries) {
+            Arrays.sort(a);
+            List<Long> r = new ArrayList<>();
+            long[] cs = new long[a.length + 1];
+            for (int i = 1; i <= a.length; i++)
+                cs[i] = cs[i - 1] + a[i - 1];
+            for (int x : queries) {
+                int i = Arrays.binarySearch(a, x);
+                if (i < 0)
+                    i = -(i + 1);
+                r.add(1L * x * (2 * i - a.length) + cs[a.length] - 2 * cs[i]);
+            }
+            return r;
         }
     }
 }
