@@ -61,4 +61,18 @@ public class p26{
             return 10 * Math.min(a1[0], a2[0]) + Math.max(a1[0], a2[0]);
         }
     }
+
+    static class s2606{//Find the Substring With Maximum Cost
+        public int maximumCostSubstring(String s, String chars, int[] vals) {
+            Map<Character, Integer> m = new HashMap<>();
+            for (int i = 0; i < chars.length(); i++)
+                m.put(chars.charAt(i), vals[i]);
+            int r = 0, cur = 0;
+            for (int i = 0; i < s.length(); ++i) {
+                cur = Math.max(cur + m.getOrDefault(s.charAt(i), s.charAt(i) - 'a' + 1), 0);
+                r = Math.max(r, cur);
+            }
+            return r;
+        }
+    }
 }
