@@ -47,4 +47,18 @@ public class p26{
             return r;
         }
     }
+
+    static class s2605{//Form Smallest Number From Two Digit Arrays
+        public int minNumber(int[] a1, int[] a2) {
+            int[] d = new int[10];
+            Arrays.stream(a1).forEach(n -> d[n]++);
+            Arrays.stream(a2).forEach(n -> d[n]++);
+            for (int n = 1; n <= 9; n++)
+                if (d[n] == 2)
+                    return n;
+            Arrays.sort(a1);
+            Arrays.sort(a2);
+            return 10 * Math.min(a1[0], a2[0]) + Math.max(a1[0], a2[0]);
+        }
+    }
 }
