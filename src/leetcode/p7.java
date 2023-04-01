@@ -5,8 +5,8 @@ import java.util.stream.IntStream;
 
 public class p7{
     static class s700{//Search in a Binary Search Tree
-        public TreeNode searchBST(TreeNode root, int val){
-            while(root != null && root.val != val)
+        public TreeNode searchBST(TreeNode root, int val) {
+            while (root != null && root.val != val)
                 root = val < root.val ? root.left : root.right;
             return root;
         }
@@ -17,14 +17,14 @@ public class p7{
             PriorityQueue<Integer> q = new PriorityQueue<>();
             int k;
 
-            public KthLargest(int k, int[] a){
+            public KthLargest(int k, int[] a) {
                 this.k = k;
                 Arrays.stream(a).forEach(this::add);
             }
 
-            public int add(int val){
+            public int add(int val) {
                 q.offer(val);
-                if(q.size() > k)
+                if (q.size() > k)
                     q.poll();
                 return q.peek();
             }
@@ -32,17 +32,17 @@ public class p7{
     }
 
     static class s704{//Binary Search
-        public int search(int[] a, int target){
+        public int search(int[] a, int target) {
             int lo = 0, hi = a.length - 1;
-            while(lo <= hi){
-                int i = (lo + hi) / 2;
-                if(a[i] == target)
-                    return i;
-                if(a[i] < target)
-                    lo = i + 1;
-                else hi = i - 1;
+            while (lo <= hi) {
+                int mid = (lo + hi) / 2;
+                if (a[mid] == target)
+                    return mid;
+                if (a[mid] < target)
+                    lo = mid + 1;
+                else hi = mid - 1;
             }
-            return lo < a.length && a[lo] == target ? lo : -1;
+            return -1;
         }
     }
 
@@ -51,21 +51,21 @@ public class p7{
             static int MAX = 1_000_000, BITS = 32;
             int buckets[] = new int[MAX / BITS + 1];
 
-            public void add(int key){
+            public void add(int key) {
                 buckets[bucketN(key)] |= slot(key);
             }
 
-            public void remove(int key){
+            public void remove(int key) {
                 buckets[bucketN(key)] &= ~slot(key);
             }
 
-            public boolean contains(int key){
+            public boolean contains(int key) {
                 return (buckets[bucketN(key)] & slot(key)) != 0;
             }
 
-            int bucketN(int key){return key / BITS;}
+            int bucketN(int key) {return key / BITS;}
 
-            int slot(int key){return 1 << (key % BITS);}
+            int slot(int key) {return 1 << (key % BITS);}
         }
     }
 
@@ -73,38 +73,38 @@ public class p7{
         class MyHashMap{
             final ListNode[] nodes = new ListNode[10_000];
 
-            public void put(int key, int value){
+            public void put(int key, int value) {
                 int i = idx(key);
-                if(nodes[i] == null)
+                if (nodes[i] == null)
                     nodes[i] = new ListNode(-1, -1);
                 ListNode prev = find(nodes[i], key);
-                if(prev.next == null)
+                if (prev.next == null)
                     prev.next = new ListNode(key, value);
                 else prev.next.val = value;
             }
 
-            public int get(int key){
+            public int get(int key) {
                 int i = idx(key);
-                if(nodes[i] == null)
+                if (nodes[i] == null)
                     return -1;
                 ListNode node = find(nodes[i], key);
                 return node.next == null ? -1 : node.next.val;
             }
 
-            public void remove(int key){
+            public void remove(int key) {
                 int i = idx(key);
-                if(nodes[i] != null){
+                if (nodes[i] != null) {
                     ListNode prev = find(nodes[i], key);
-                    if(prev.next != null)
+                    if (prev.next != null)
                         prev.next = prev.next.next;
                 }
             }
 
-            int idx(int key){return Integer.hashCode(key) % nodes.length;}
+            int idx(int key) {return Integer.hashCode(key) % nodes.length;}
 
-            ListNode find(ListNode bucket, int key){
+            ListNode find(ListNode bucket, int key) {
                 ListNode node = bucket, prev = null;
-                for(; node != null && node.key != key; node = node.next)
+                for (; node != null && node.key != key; node = node.next)
                     prev = node;
                 return prev;
             }
@@ -113,7 +113,7 @@ public class p7{
                 int key, val;
                 ListNode next;
 
-                ListNode(int key, int val){
+                ListNode(int key, int val) {
                     this.key = key;
                     this.val = val;
                 }
@@ -122,41 +122,41 @@ public class p7{
     }
 
     static class s717{//1-bit and 2-bit Characters
-        public boolean isOneBitCharacter(int[] bits){
+        public boolean isOneBitCharacter(int[] bits) {
             int n = bits.length, i = 0;
-            while(i < n - 1)
+            while (i < n - 1)
                 i += bits[i] == 0 ? 1 : 2;
             return i == n - 1;
         }
     }
 
     static class s723{//Candy Crush
-        public int[][] candyCrush(int[][] b){
+        public int[][] candyCrush(int[][] b) {
             Set<Integer> s = new HashSet<>();
-            for(int i = 0; i < b.length; i++)
-                for(int j = 0; j < b[0].length; j++){
-                    if(b[i][j] > 0 && j - 2 >= 0 && b[i][j - 1] == b[i][j] && b[i][j - 2] == b[i][j])
+            for (int i = 0; i < b.length; i++)
+                for (int j = 0; j < b[0].length; j++) {
+                    if (b[i][j] > 0 && j - 2 >= 0 && b[i][j - 1] == b[i][j] && b[i][j - 2] == b[i][j])
                         s.addAll(Arrays.asList(51 * i + j, 51 * i + j - 1, 51 * i + j - 2));
-                    if(b[i][j] > 0 && i - 2 >= 0 && b[i - 1][j] == b[i][j] && b[i - 2][j] == b[i][j])
+                    if (b[i][j] > 0 && i - 2 >= 0 && b[i - 1][j] == b[i][j] && b[i - 2][j] == b[i][j])
                         s.addAll(Arrays.asList(51 * i + j, 51 * (i - 1) + j, 51 * (i - 2) + j));
                 }
             s.forEach(p -> b[p / 51][p % 51] = 0);
-            for(int c = 0; c < b[0].length; c++){
+            for (int c = 0; c < b[0].length; c++) {
                 int bot = b.length - 1;
-                for(int j = b.length - 1; j >= 0; j--)
-                    if(b[j][c] > 0)
+                for (int j = b.length - 1; j >= 0; j--)
+                    if (b[j][c] > 0)
                         b[bot--][c] = b[j][c];
-                for(; bot >= 0; b[bot--][c] = 0) ;
+                for (; bot >= 0; b[bot--][c] = 0) ;
             }
             return s.isEmpty() ? b : candyCrush(b);
         }
     }
     static class s724{//Find Pivot Index
-        public int pivotIndex(int[] a){
+        public int pivotIndex(int[] a) {
             int right = Arrays.stream(a).sum(), left = 0;
-            for(int i = 0; i < a.length; i++){
+            for (int i = 0; i < a.length; i++) {
                 right -= a[i];
-                if(left == right)
+                if (left == right)
                     return i;
                 left += a[i];
             }
@@ -165,13 +165,13 @@ public class p7{
     }
 
     static class s728{//Self Dividing Numbers
-        public List<Integer> selfDividingNumbers(int left, int right){
+        public List<Integer> selfDividingNumbers(int left, int right) {
             return IntStream.rangeClosed(left, right).filter(this::selfDividing).boxed().collect(Collectors.toList());
         }
-        boolean selfDividing(int n){
-            for(int m = n; m > 0; m /= 10){
+        boolean selfDividing(int n) {
+            for (int m = n; m > 0; m /= 10) {
                 int d = m % 10;
-                if(d == 0 || n % d != 0)
+                if (d == 0 || n % d != 0)
                     return false;
             }
             return true;
@@ -179,15 +179,15 @@ public class p7{
     }
 
     static class s733{//Flood Fill
-        public int[][] floodFill(int[][] image, int sr, int sc, int newColor){
-            if(image[sr][sc] == newColor)
+        public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+            if (image[sr][sc] == newColor)
                 return image;
             int dirs[] = {-1, 0, 1, 0, -1}, oldColor = image[sr][sc];
             Queue<int[]> q = new LinkedList<>();
-            for(q.add(new int[]{sr, sc}), image[sr][sc] = newColor; !q.isEmpty(); )
-                for(int d = 1, p[] = q.poll(); d < dirs.length; d++){
+            for (q.add(new int[]{sr, sc}), image[sr][sc] = newColor; !q.isEmpty(); )
+                for (int d = 1, p[] = q.poll(); d < dirs.length; d++) {
                     int x = p[0] + dirs[d - 1], y = p[1] + dirs[d];
-                    if(0 <= x && x < image.length && 0 <= y && y < image[0].length && image[x][y] == oldColor){
+                    if (0 <= x && x < image.length && 0 <= y && y < image[0].length && image[x][y] == oldColor) {
                         image[x][y] = newColor;
                         q.add(new int[]{x, y});
                     }
@@ -197,34 +197,34 @@ public class p7{
     }
 
     static class s734{//Sentence Similarity
-        public boolean areSentencesSimilar(String[] s1, String[] s2, List<List<String>> pairs){
-            if(s1.length != s2.length)
+        public boolean areSentencesSimilar(String[] s1, String[] s2, List<List<String>> pairs) {
+            if (s1.length != s2.length)
                 return false;
             Map<String, Set<String>> m = new HashMap<>();
-            for(List<String> p : pairs){
+            for (List<String> p : pairs) {
                 m.computeIfAbsent(p.get(0), s -> new HashSet<>()).add(p.get(1));
                 m.computeIfAbsent(p.get(1), s -> new HashSet<>()).add(p.get(0));
             }
-            for(int i = 0; i < s1.length; i++)
-                if(!s1[i].equals(s2[i]) && !m.getOrDefault(s1[i], Collections.emptySet()).contains(s2[i]))
+            for (int i = 0; i < s1.length; i++)
+                if (!s1[i].equals(s2[i]) && !m.getOrDefault(s1[i], Collections.emptySet()).contains(s2[i]))
                     return false;
             return true;
         }
     }
 
     static class s743{//Network Delay Time
-        public int networkDelayTime(int[][] times, int n, int k){
+        public int networkDelayTime(int[][] times, int n, int k) {
             List<List<int[]>> g = IntStream.range(0, n).mapToObj(u -> new ArrayList<int[]>()).collect(Collectors.toList());
-            for(int[] t : times)
+            for (int[] t : times)
                 g.get(t[0] - 1).add(new int[]{t[1] - 1, t[2]});
             int[] received = new int[n];
             Arrays.fill(received, Integer.MAX_VALUE);
             received[k - 1] = 0;
-            for(var q = new LinkedList<>(Arrays.asList(k - 1)); !q.isEmpty(); ){
+            for (var q = new LinkedList<>(Arrays.asList(k - 1)); !q.isEmpty(); ) {
                 Integer u = q.poll();
-                for(int[] a : g.get(u)){
+                for (int[] a : g.get(u)) {
                     int v = a[0], w = a[1];
-                    if(received[u] + w < received[v]){
+                    if (received[u] + w < received[v]) {
                         received[v] = received[u] + w;
                         q.offer(v);
                     }
@@ -236,45 +236,45 @@ public class p7{
     }
 
     static class s746{//Min Cost Climbing Stairs
-        public int minCostClimbingStairs(int[] cost){
-            for(int i = 2; i < cost.length; i++)
+        public int minCostClimbingStairs(int[] cost) {
+            for (int i = 2; i < cost.length; i++)
                 cost[i] += Math.min(cost[i - 2], cost[i - 1]);
             return Math.min(cost[cost.length - 1], cost[cost.length - 2]);
         }
     }
 
     static class s749{//Contain Virus
-        public int containVirus(int[][] g){
+        public int containVirus(int[][] g) {
             int[] dirs = {-1, 0, 1, 0, -1};
             PriorityQueue<Region> q = new PriorityQueue<>(Comparator.comparingInt(r -> -r.spread.size()));
-            for(int i = 0; i < g.length; i++)
-                for(int j = 0; j < g[0].length; j++)
-                    if(g[i][j] == 1){
+            for (int i = 0; i < g.length; i++)
+                for (int j = 0; j < g[0].length; j++)
+                    if (g[i][j] == 1) {
                         Region region = new Region();
                         dfs(i, j, g, region, dirs);
                         q.offer(region);
                     }
-            if(q.isEmpty())
+            if (q.isEmpty())
                 return 0;
             Region biggestRegion = q.poll();
             biggestRegion.area.forEach(p -> g[p.getKey()][p.getValue()] = 2);
-            for(Region region : q){
+            for (Region region : q) {
                 region.area.forEach(p -> g[p.getKey()][p.getValue()] = 1);
                 region.spread.forEach(p -> g[p.getKey()][p.getValue()] = 1);
             }
             return biggestRegion.walls + containVirus(g);
         }
 
-        void dfs(int row, int col, int[][] g, Region region, int[] dirs){
+        void dfs(int row, int col, int[][] g, Region region, int[] dirs) {
             region.area.add(new Pair<>(row, col));
             g[row][col] = -1;
-            for(int d = 1; d < dirs.length; d++){
+            for (int d = 1; d < dirs.length; d++) {
                 int x = row + dirs[d - 1], y = col + dirs[d];
-                if(0 <= x && x < g.length && 0 <= y && y < g[0].length)
-                    if(g[x][y] == 0){
+                if (0 <= x && x < g.length && 0 <= y && y < g[0].length)
+                    if (g[x][y] == 0) {
                         region.spread.add(new Pair<>(x, y));
                         region.walls++;
-                    }else if(g[x][y] == 1)
+                    } else if (g[x][y] == 1)
                         dfs(x, y, g, region, dirs);
             }
         }
@@ -286,13 +286,13 @@ public class p7{
     }
 
     static class s758{//Bold Words in String
-        public String boldWords(String[] words, String s){
+        public String boldWords(String[] words, String s) {
             boolean[] bold = new boolean[s.length() + 1];
-            for(String w : words)
-                for(int i = s.indexOf(w); i != -1; i = s.indexOf(w, i + 1))
+            for (String w : words)
+                for (int i = s.indexOf(w); i != -1; i = s.indexOf(w, i + 1))
                     Arrays.fill(bold, i, i + w.length(), true);
             StringBuilder r = new StringBuilder(bold[0] ? "<b>" : "");
-            for(int i = 0; i < bold.length - 1; i++){
+            for (int i = 0; i < bold.length - 1; i++) {
                 r.append(s.charAt(i));
                 r.append(bold[i] && !bold[i + 1] ? "</b>" : "");
                 r.append(!bold[i] && bold[i + 1] ? "<b>" : "");
@@ -309,38 +309,38 @@ public class p7{
          * If there are multiple answers, return any of them. An array a is an anagram of an array b
          * means b is made by randomizing the order of the elements in a.
          */
-        public int[] anagramMappings(int[] a1, int[] a2){
+        public int[] anagramMappings(int[] a1, int[] a2) {
             Map<Integer, Stack<Integer>> m = new HashMap<>();
-            for(int i = 0; i < a2.length; i++)
+            for (int i = 0; i < a2.length; i++)
                 m.computeIfAbsent(a2[i], s -> new Stack<>()).add(i);
             int[] r = new int[a1.length];
-            for(int i = 0; i < a1.length; i++)
+            for (int i = 0; i < a1.length; i++)
                 r[i] = m.get(a1[i]).pop();
             return r;
         }
     }
 
     static class s771{//Jewels and Stones
-        public int numJewelsInStones(String jewels, String stones){
+        public int numJewelsInStones(String jewels, String stones) {
             return stones.chars().map(c -> jewels.contains((char) c + "") ? 1 : 0).sum();
         }
     }
 
     static class s785{//Is Graph Bipartite?
-        public boolean isBipartite(int[][] g){
+        public boolean isBipartite(int[][] g) {
             int[] colors = new int[g.length];
-            for(int u = 0; u < g.length; u++)
-                if(colors[u] == 0 && !validColor(g, colors, 1, u))
+            for (int u = 0; u < g.length; u++)
+                if (colors[u] == 0 && !validColor(g, colors, 1, u))
                     return false;
             return true;
         }
 
-        boolean validColor(int[][] g, int[] colors, int color, int u){
-            if(colors[u] != 0)
+        boolean validColor(int[][] g, int[] colors, int color, int u) {
+            if (colors[u] != 0)
                 return colors[u] == color;
             colors[u] = color;
-            for(int v : g[u])
-                if(!validColor(g, colors, -color, v))
+            for (int v : g[u])
+                if (!validColor(g, colors, -color, v))
                     return false;
             return true;
         }
