@@ -1,7 +1,5 @@
 package leetcode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 public class p26{
     static class s2600{//K Items With the Maximum Sum
         public int kItemsWithMaximumSum(int nOnes, int nZero, int nNegOnes, int k) {
