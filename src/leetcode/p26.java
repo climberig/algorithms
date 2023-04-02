@@ -90,4 +90,19 @@ public class p26{
             return r;
         }
     }
+
+    static class s2610{//Convert an Array Into a 2D Array With Conditions
+        public List<List<Integer>> findMatrix(int[] a) {
+            List<List<Integer>> r = new ArrayList<>();
+            int[] count = new int[201];
+            Arrays.stream(a).forEach(n -> count[n]++);
+            for (int n = 1; n < count.length; n++)
+                for (int i = 0; i < count[n]; i++) {
+                    if (r.size() == i)
+                        r.add(new ArrayList<>());
+                    r.get(i).add(n);
+                }
+            return r;
+        }
+    }
 }
