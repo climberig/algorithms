@@ -3,6 +3,25 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 public class p23{
+    static class s2300{//Successful Pairs of Spells and Potions
+        public int[] successfulPairs(int[] spells, int[] potions, long success) {
+            Arrays.sort(potions);
+            int[] pairs = new int[spells.length];
+            for (int i = 0; i < pairs.length; i++) {
+                int lo = 0, hi = potions.length - 1, r = 0;
+                while (lo <= hi) {
+                    int mid = (lo + hi) / 2;
+                    if (1L * spells[i] * potions[mid] >= success) {
+                        r = potions.length - mid;
+                        hi = mid - 1;
+                    } else lo = mid + 1;
+                }
+                pairs[i] = r;
+            }
+            return pairs;
+        }
+    }
+
     static class s2303{//Calculate Amount Paid in Taxes
         public double calculateTax(int[][] brackets, int income){
             double r = 0;
