@@ -73,4 +73,21 @@ public class p26{
             return r;
         }
     }
+
+    static class s2609{//Find the Longest Balanced Substring of a Binary String
+        public int findTheLongestBalancedSubstring(String s) {
+            char[] a = s.toCharArray();
+            int r = 0;
+            for (int i = 1; i < a.length; i++)
+                r = Math.max(r, balanceLen(i - 1, i, a));
+            return r;
+        }
+        int balanceLen(int i, int j, char[] a) {
+            int r = 0;
+            for (; i >= 0 && j < a.length; i--, j++, r += 2)
+                if (a[i] != '0' || a[j] != '1')
+                    return r;
+            return r;
+        }
+    }
 }
