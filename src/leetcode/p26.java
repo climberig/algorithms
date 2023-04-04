@@ -105,4 +105,18 @@ public class p26{
             return r;
         }
     }
+
+    static class s2611{//Mice and Cheese
+        public int miceAndCheese(int[] reward1, int[] reward2, int k) {
+            int r = 0, diff[] = new int[reward1.length];
+            for (int i = 0; i < diff.length; i++) {
+                r += reward2[i];
+                diff[i] = reward1[i] - reward2[i];
+            }
+            Arrays.sort(diff);
+            for (int i = diff.length - 1; k > 0; i--, k--)
+                r += diff[i];
+            return r;
+        }
+    }
 }
