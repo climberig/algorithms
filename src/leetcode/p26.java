@@ -124,19 +124,17 @@ public class p26{
         public int diagonalPrime(int[][] a) {
             int r = 0;
             for (int i = 0, j = 0, k = a.length - 1; i < a.length; i++, j++, k--) {
-                if (isPrime(a[i][j]))
-                    r = Math.max(r, a[i][j]);
-                if (isPrime(a[i][k]))
-                    r = Math.max(r, a[i][k]);
+                r = Math.max(r, prime(a[i][j]));
+                r = Math.max(r, prime(a[i][k]));
             }
             return r;
         }
 
-        boolean isPrime(int p) {
+        int prime(int p) {
             for (int d = 2; d <= Math.sqrt(p); d++)
                 if (p % d == 0)
-                    return false;
-            return p > 1;
+                    return 0;
+            return p > 1 ? p : 0;
         }
     }
 }
