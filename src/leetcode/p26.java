@@ -119,4 +119,24 @@ public class p26{
             return r;
         }
     }
+
+    static class s2614{//Prime In Diagonal
+        public int diagonalPrime(int[][] a) {
+            int r = 0;
+            for (int i = 0, j = 0, k = a.length - 1; i < a.length; i++, j++, k--) {
+                if (isPrime(a[i][j]))
+                    r = Math.max(r, a[i][j]);
+                if (isPrime(a[i][k]))
+                    r = Math.max(r, a[i][k]);
+            }
+            return r;
+        }
+
+        boolean isPrime(int p) {
+            for (int d = 2; d <= Math.sqrt(p); d++)
+                if (p % d == 0)
+                    return false;
+            return p > 1;
+        }
+    }
 }

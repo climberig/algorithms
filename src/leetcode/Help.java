@@ -15,4 +15,11 @@ public class Help{
                     prime[i] = false;
         return prime;
     }
+
+    boolean isPrime(int p) {
+        for (int d = 2; d <= Math.sqrt(p); d++)
+            if (p % d == 0)
+                return false;
+        return p > 1;
+    }
 }
