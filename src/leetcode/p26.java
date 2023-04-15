@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.*;
+import java.util.stream.IntStream;
 public class p26{
     static class s2600{//K Items With the Maximum Sum
         public int kItemsWithMaximumSum(int nOnes, int nZero, int nNegOnes, int k) {
@@ -135,6 +136,38 @@ public class p26{
                 if (p % d == 0)
                     return 0;
             return p > 1 ? p : 0;
+        }
+    }
+
+    static class s2615{//Sum of Distances
+        public long[] distance(int[] a) {
+            long[] r1 = distance(a, 0, 1), r2 = distance(a, a.length - 1, -1);
+            return IntStream.range(0, a.length).mapToLong(i -> r1[i] + r2[i]).toArray();
+        }
+        public long[] distance(int[] a, int start, int inc) {
+            long[] r = new long[a.length];
+            Map<Integer, Integer> counts = new HashMap<>(), lastIdx = new HashMap<>();
+            Map<Integer, Long> lastSum = new HashMap<>();
+            for (int i = start; i >= 0 && i < a.length; i += inc) {
+                if (lastIdx.containsKey(a[i]))
+                    r[i] = lastSum.get(a[i]) + (long) counts.get(a[i]) * Math.abs(i - lastIdx.get(a[i]));
+                lastIdx.put(a[i], i);
+                counts.put(a[i], counts.getOrDefault(a[i], 0) + 1);
+                lastSum.put(a[i], r[i]);
+            }
+            return r;
+        }
+    }
+
+    static class s2639{//Find the Width of Columns of a Grid
+        public int[] findColumnWidth(int[][] g) {
+            int[] r = new int[g[0].length];
+            Arrays.fill(r, 1);
+            for (int j = 0; j < r.length; j++)
+                for (int[] row : g)
+                    if (row[j] != 0)
+                        r[j] = Math.max(r[j], 1 + (int) Math.log10(Math.abs(row[j])) + (row[j] < 0 ? 1 : 0));
+            return r;
         }
     }
 }
