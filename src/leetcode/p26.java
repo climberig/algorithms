@@ -170,4 +170,16 @@ public class p26{
             return r;
         }
     }
+
+    static class s2640{//Find the Score of All Prefixes of an Array
+        public long[] findPrefixScore(int[] a) {
+            long r[] = new long[a.length], sum = 0, max = 0;
+            for (int i = 0; i < a.length; i++) {
+                max = Math.max(max, a[i]);
+                sum += a[i] + max;
+                r[i] = sum;
+            }
+            return r;
+        }
+    }
 }
