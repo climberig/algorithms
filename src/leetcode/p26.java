@@ -182,4 +182,56 @@ public class p26{
             return r;
         }
     }
+
+    static class s2643{//Row With Maximum Ones
+        public int[] rowAndMaximumOnes(int[][] m) {
+            int n = 0, maxCount = -1;
+            for (int i = 0; i < m.length; i++) {
+                int count = (int) Arrays.stream(m[i]).filter(a -> a == 1).count();
+                if (count > maxCount) {
+                    maxCount = count;
+                    n = i;
+                }
+            }
+            return new int[]{n, maxCount};
+        }
+    }
+
+    static class s2644{//Find the Maximum Divisibility Score
+        public int maxDivScore(int[] a, int[] divisors) {
+            int maxScore = 0, r = Integer.MAX_VALUE;
+            for (int d : divisors) {
+                int score = (int) Arrays.stream(a).filter(n -> n % d == 0).count();
+                if (score > maxScore) {
+                    maxScore = score;
+                    r = d;
+                } else if (score == maxScore)
+                    r = Math.min(r, d);
+            }
+            return r;
+        }
+    }
+
+    static class s2645{//Minimum Additions to Make Valid String
+        public int addMinimum(String w) {
+            int n = w.length(), i = 0, r = 0;
+            while (i < n) {
+                int count = 0;
+                if (w.charAt(i) == 'a') {
+                    count++;
+                    i++;
+                }
+                if (i < n && w.charAt(i) == 'b') {
+                    count++;
+                    i++;
+                }
+                if (i < n && w.charAt(i) == 'c') {
+                    count++;
+                    i++;
+                }
+                r += 3 - count;
+            }
+            return r;
+        }
+    }
 }
