@@ -106,6 +106,13 @@ public class p14{
         }
     }
 
+    static class s1431{//Kids With the Greatest Number of Candies
+        public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+            int max = Arrays.stream(candies).max().getAsInt();
+            return Arrays.stream(candies).mapToObj(c -> c + extraCandies >= max).collect(Collectors.toList());
+        }
+    }
+
     static class s1432{// Max Difference You Can Get From Changing an Integer
         public int maxDiff(int num){
             String s = String.valueOf(num);
