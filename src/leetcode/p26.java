@@ -183,6 +183,38 @@ public class p26{
         }
     }
 
+    static class s2641{//Cousins in Binary Tree II
+        public TreeNode replaceValueInTree(TreeNode root) {
+            List<Integer> levelSum = new ArrayList<>();
+            Queue<TreeNode> q = new LinkedList<>();
+            for (q.offer(root); !q.isEmpty(); ) {
+                int sum = 0;
+                for (int size = q.size(); size > 0; size--) {
+                    TreeNode node = q.poll();
+                    sum += node.val;
+                    if (node.left != null)
+                        q.offer(node.left);
+                    if (node.right != null)
+                        q.offer(node.right);
+                }
+                levelSum.add(sum);
+            }
+            dfs(root, 0, levelSum);
+            return root;
+        }
+        void dfs(TreeNode node, int depth, List<Integer> levelSum) {
+            if (node != null) {
+                node.val = levelSum.get(depth) - node.val;
+                if (node.left != null && node.right != null) {
+                    int cousinsSum = node.left.val + node.right.val;
+                    node.left.val = node.right.val = cousinsSum;
+                }
+                dfs(node.left, depth + 1, levelSum);
+                dfs(node.right, depth + 1, levelSum);
+            }
+        }
+    }
+
     static class s2643{//Row With Maximum Ones
         public int[] rowAndMaximumOnes(int[][] m) {
             int n = 0, maxCount = -1;
