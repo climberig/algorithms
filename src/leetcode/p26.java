@@ -266,4 +266,18 @@ public class p26{
             return r;
         }
     }
+
+    static class s2657{//Find the Prefix Common Array of Two Arrays
+        public int[] findThePrefixCommonArray(int[] a, int[] b) {
+            int r[] = new int[a.length], pre = 0, count[] = new int[a.length + 1];
+            for (int i = 0; i < a.length; i++) {
+                if (++count[a[i]] == 2)
+                    pre++;
+                if (++count[b[i]] == 2)
+                    pre++;
+                r[i] = pre;
+            }
+            return r;
+        }
+    }
 }
