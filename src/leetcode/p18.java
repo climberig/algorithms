@@ -161,6 +161,18 @@ public class p18{
         }
     }
 
+    static class s1822{//Sign of the Product of an Array
+        public int arraySign(int[] a) {
+            int r = 1;
+            for (int i : a)
+                if (i == 0)
+                    return 0;
+                else if (i < 0)
+                    r = -r;
+            return r;
+        }
+    }
+
     static class s1832{//Check if the Sentence Is Pangram
         public boolean checkIfPangram(String s){
             return s.chars().boxed().collect(Collectors.toSet()).size() == 26;
