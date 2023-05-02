@@ -280,4 +280,22 @@ public class p26{
             return r;
         }
     }
+
+    static class s2661{//First Completely Painted Row or Column
+        public int firstCompleteIndex(int[] arr, int[][] mat) {
+            int n = mat.length, m = mat[0].length;
+            int[] getRow = new int[arr.length + 1], getCol = new int[arr.length + 1], rowCount = new int[n], colCount = new int[m];
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < m; j++) {
+                    getRow[mat[i][j]] = i;
+                    getCol[mat[i][j]] = j;
+                }
+            for (int i = 0; i < arr.length; i++) {
+                int row = getRow[arr[i]], col = getCol[arr[i]];
+                if (++rowCount[row] == m || ++colCount[col] == n)
+                    return i;
+            }
+            return -1;
+        }
+    }
 }
