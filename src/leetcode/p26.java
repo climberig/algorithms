@@ -298,4 +298,20 @@ public class p26{
             return -1;
         }
     }
+
+    static class s2670{//Find the Distinct Difference Array
+        public int[] distinctDifferenceArray(int[] a) {
+            Map<Integer, Integer> m1 = new HashMap<>(), m2 = new HashMap<>();
+            Arrays.stream(a).forEach(n -> m2.put(n, m2.getOrDefault(n, 0) + 1));
+            int[] r = new int[a.length];
+            for (int i = 0; i < a.length; i++) {
+                m1.put(a[i], m1.getOrDefault(a[i], 0) + 1);
+                m2.put(a[i], m2.get(a[i]) - 1);
+                if (m2.get(a[i]) == 0)
+                    m2.remove(a[i]);
+                r[i] = m1.size() - m2.size();
+            }
+            return r;
+        }
+    }
 }
