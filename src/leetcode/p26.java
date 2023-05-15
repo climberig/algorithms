@@ -314,4 +314,16 @@ public class p26{
             return r;
         }
     }
+
+    static class s2679{//Sum in a Matrix
+        public int matrixSum(int[][] a) {
+            Arrays.stream(a).forEach(Arrays::sort);
+            int r = 0;
+            for (int i = 0; i < a[0].length; i++) {
+                final int j = i;
+                r += Arrays.stream(a).mapToInt(row -> row[j]).max().getAsInt();
+            }
+            return r;
+        }
+    }
 }
