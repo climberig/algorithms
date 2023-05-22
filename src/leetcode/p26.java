@@ -326,4 +326,11 @@ public class p26{
             return r;
         }
     }
+
+    static class s2696{//Minimum String Length After Removing Substrings
+        public int minLength(String s) {
+            String r = s.replaceAll("AB", "").replaceAll("CD", "");
+            return s.equals(r) ? s.length() : minLength(r);
+        }
+    }
 }
