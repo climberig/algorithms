@@ -333,4 +333,16 @@ public class p26{
             return s.equals(r) ? s.length() : minLength(r);
         }
     }
+
+    static class s2697{//Lexicographically Smallest Palindrome
+        public String makeSmallestPalindrome(String s) {
+            char[] a = s.toCharArray();
+            for (int i = 0, j = a.length - 1; i < j; i++, j--)
+                if (a[i] < a[j])
+                    a[j] = a[i];
+                else if (a[i] > a[j])
+                    a[i] = a[j];
+            return new String(a);
+        }
+    }
 }
