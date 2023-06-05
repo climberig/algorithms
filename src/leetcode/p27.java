@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-public class s27{
+public class p27{
     static class s2707{//Extra Characters in a String
         public int minExtraChar(String s, String[] dictionary) {
             Set<String> words = Arrays.stream(dictionary).collect(Collectors.toSet());
@@ -27,5 +27,9 @@ public class s27{
             dp.put(s, r);
             return r;
         }
+    }
+
+    static class s2716{//Minimize String Length
+        public int minimizedStringLength(String s) {return (int) s.chars().distinct().count();}
     }
 }
