@@ -32,4 +32,16 @@ public class p27{
     static class s2716{//Minimize String Length
         public int minimizedStringLength(String s) {return (int) s.chars().distinct().count();}
     }
+
+    static class s2717{//Semi-Ordered Permutation
+        public int semiOrderedPermutation(int[] a) {
+            int onePosition = 0, nPosition = 0;
+            for (int i = 0; i < a.length; i++)
+                if (a[i] == 1)
+                    onePosition = i;
+                else if (a[i] == a.length)
+                    nPosition = i;
+            return onePosition + a.length - 1 - nPosition - (onePosition > nPosition ? 1 : 0);
+        }
+    }
 }
