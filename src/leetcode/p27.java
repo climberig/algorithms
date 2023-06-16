@@ -44,4 +44,13 @@ public class p27{
             return onePosition + a.length - 1 - nPosition - (onePosition > nPosition ? 1 : 0);
         }
     }
+
+    static class s2733{//Neither Minimum nor Maximum
+        public int findNonMinOrMax(int[] a) {
+            if (a.length < 3)
+                return -1;
+            int max = Math.max(a[0], Math.max(a[1], a[2])), min = Math.min(a[0], Math.min(a[1], a[2]));
+            return a[0] + a[1] + a[2] - min - max;
+        }
+    }
 }
