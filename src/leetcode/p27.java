@@ -53,4 +53,12 @@ public class p27{
             return a[0] + a[1] + a[2] - min - max;
         }
     }
+
+    static class s2739{//Total Distance Traveled
+        public int distanceTraveled(int mainTank, int additionalTank) {
+            if (additionalTank == 0 || mainTank < 5)
+                return 10 * mainTank;
+            return 50 + distanceTraveled(mainTank - 4, additionalTank - 1);
+        }
+    }
 }
