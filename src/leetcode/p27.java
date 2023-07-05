@@ -61,4 +61,17 @@ public class p27{
             return 50 + distanceTraveled(mainTank - 4, additionalTank - 1);
         }
     }
+
+    static class s2760{//Longest Even Odd Subarray With Threshold
+        public int longestAlternatingSubarray(int[] a, int max) {
+            int r = 0;
+            for (int i = 0; i < a.length; i++)
+                if (a[i] % 2 == 0 && a[i] <= max) {
+                    int len = 1;
+                    for (int j = i + 1; j < a.length && a[j] <= max && a[j - 1] % 2 != a[j] % 2; j++, len++) ;
+                    r = Math.max(r, len);
+                }
+            return r;
+        }
+    }
 }
