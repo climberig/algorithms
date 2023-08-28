@@ -1,8 +1,5 @@
 package leetcode;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 public class p27{
     static class s2707{//Extra Characters in a String
@@ -71,6 +68,17 @@ public class p27{
                     for (int j = i + 1; j < a.length && a[j] <= max && a[j - 1] % 2 != a[j] % 2; j++, len++) ;
                     r = Math.max(r, len);
                 }
+            return r;
+        }
+    }
+
+    static class s2788{//Split Strings by Separator
+        public List<String> splitWordsBySeparator(List<String> words, char separator) {
+            List<String> r = new ArrayList<>();
+            for (String w : words) {
+                String[] split = w.split("[" + separator + "]");
+                Arrays.stream(split).filter(s -> !s.isEmpty()).forEach(r::add);
+            }
             return r;
         }
     }
