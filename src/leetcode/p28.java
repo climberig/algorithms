@@ -46,4 +46,16 @@ public class p28{
             return words.stream().map(w -> w.charAt(0) + "").collect(Collectors.joining("")).equals(s);
         }
     }
+
+    static class s2833{//Furthest Point From Origin
+        public int furthestDistanceFromOrigin(String moves) {
+            int r = 0, l = 0;
+            for (char c : moves.toCharArray())
+                switch (c) {
+                    case 'R' -> r++;
+                    case 'L' -> l++;
+                }
+            return Math.abs(r - l) + moves.length() - r - l;
+        }
+    }
 }
