@@ -1,7 +1,7 @@
 package leetcode;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 public class p28{
     static class s2810{//Faulty Keyboard
         public String finalString(String s) {
@@ -11,6 +11,21 @@ public class p28{
                     r.reverse();
                 else r.append(c);
             return r.toString();
+        }
+    }
+
+    static class s2815{//Max Pair Sum in an Array
+        public int maxSum(int[] a) {
+            List<PriorityQueue<Integer>> ll = IntStream.range(0, 10).mapToObj(i -> new PriorityQueue<Integer>(Comparator.reverseOrder())).toList();
+            Arrays.stream(a).forEach(n -> ll.get(maxDigit(n)).offer(n));
+            return ll.stream().filter(q -> q.size() > 1).mapToInt(q -> q.poll() + q.poll()).max().orElse(-1);
+        }
+
+        int maxDigit(int n) {
+            int d = 0;
+            for (; n > 0; n /= 10)
+                d = Math.max(d, n % 10);
+            return d;
         }
     }
 
