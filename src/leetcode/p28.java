@@ -69,4 +69,14 @@ public class p28{
             return Math.abs(r - l) + moves.length() - r - l;
         }
     }
+
+    static class s2839{//Check if Strings Can be Made Equal With Operations I
+        public boolean canBeEqual(String s1, String s2) {
+            return s(s1, 0).equals(s(s2, 0)) && s(s1, 1).equals(s(s2, 1));
+        }
+
+        Set<Character> s(String s, int i) {
+            return new TreeSet<>(Arrays.asList(s.charAt(i), s.charAt(i + 2)));
+        }
+    }
 }
