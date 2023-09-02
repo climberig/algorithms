@@ -47,6 +47,17 @@ public class p28{
         }
     }
 
+    static class s2829{//Determine the Minimum Sum of a k-avoiding Array
+        public int minimumSum(int n, int k) {
+            int r = 0, i = 1;
+            for (; i - 1 + i < k && n > 0; n--, i++)
+                r += i;
+            for (i = k; n > 0; i++, n--)
+                r += i;
+            return r;
+        }
+    }
+
     static class s2833{//Furthest Point From Origin
         public int furthestDistanceFromOrigin(String moves) {
             int r = 0, l = 0;
