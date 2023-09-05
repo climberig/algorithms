@@ -192,6 +192,30 @@ public class p1{
         }
     }
 
+    static class s138{//Copy List with Random Pointer
+        public Node copyRandomList(Node head) {
+            Map<Node, Node> map = new HashMap<>();
+            for (Node node = head; node != null; node = node.next)
+                map.put(node, new Node(node.val));
+            for (Node node = head; node != null; node = node.next) {
+                map.get(node).next = map.get(node.next);
+                map.get(node).random = map.get(node.random);
+            }
+            return map.get(head);
+        }
+
+        class Node{
+            int val;
+            Node next, random;
+
+            public Node(int val) {
+                this.val = val;
+                this.next = null;
+                this.random = null;
+            }
+        }
+    }
+
     static class s139{//Word Break
         public boolean wordBreak(String s, List<String> wordDict){
             Set<String> words = new HashSet<>(wordDict);
