@@ -79,4 +79,20 @@ public class p28{
             return new TreeSet<>(Arrays.asList(s.charAt(i), s.charAt(i + 2)));
         }
     }
+
+    static class s2843{//Count Symmetric Integers
+        public int countSymmetricIntegers(int low, int high) {
+            int r = 0;
+            for (int n = low; n <= high; n++) {
+                String s = String.valueOf(n);
+                if (s.length() % 2 == 0) {
+                    int sum = 0;
+                    for (int i = 0; i < s.length() / 2; sum += s.charAt(i++) - '0') ;
+                    for (int i = s.length() / 2; i < s.length(); sum -= s.charAt(i++) - '0') ;
+                    r += sum == 0 ? 1 : 0;
+                }
+            }
+            return r;
+        }
+    }
 }
