@@ -70,6 +70,17 @@ public class p28{
         }
     }
 
+    static class s2834{//Find the Minimum Possible Sum of a Beautiful Array
+        public int minimumPossibleSum(int n, int target) {
+            long t = Math.min((target + 2) / 2 - 1, n);
+            long r = ((1L + t) * t / 2) % 1_000_000_007;
+            n -= t;
+            if (n > 0)
+                r = (r + (((long) target + target + n - 1L) * n / 2)) % 1_000_000_007;
+            return (int) r;
+        }
+    }
+
     static class s2839{//Check if Strings Can be Made Equal With Operations I
         public boolean canBeEqual(String s1, String s2) {
             return s(s1, 0).equals(s(s2, 0)) && s(s1, 1).equals(s(s2, 1));
