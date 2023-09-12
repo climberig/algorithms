@@ -106,4 +106,13 @@ public class p28{
             return r;
         }
     }
+
+    static class s2848{//Points That Intersect With Cars
+        public int numberOfPoints(List<List<Integer>> a) {
+            int[] line = new int[101];
+            for (List<Integer> i : a)
+                Arrays.fill(line, i.get(0), i.get(1) + 1, 1);
+            return Arrays.stream(line).sum();
+        }
+    }
 }
