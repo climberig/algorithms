@@ -115,4 +115,22 @@ public class p28{
             return Arrays.stream(line).sum();
         }
     }
+
+    static class s2865{//Beautiful Towers I
+        public long maximumSumOfHeights(List<Integer> a) {
+            long r = 0;
+            for (int i = 0; i < a.size(); i++)
+                r = Math.max(r, a.get(i) + sum(a, i, -1) + sum(a, i, 1));
+            return r;
+        }
+
+        long sum(List<Integer> a, int start, int d) {
+            long r = 0;
+            for (int i = start + d, val = a.get(start); 0 <= i && i < a.size(); i += d) {
+                val = Math.min(val, a.get(i));
+                r += val;
+            }
+            return r;
+        }
+    }
 }
