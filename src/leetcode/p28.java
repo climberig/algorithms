@@ -133,4 +133,14 @@ public class p28{
             return r;
         }
     }
+
+    static class s2869{//Minimum Operations to Collect Elements
+        public int minOperations(List<Integer> a, int k) {
+            int r = 0, i = a.size() - 1;
+            for (var s = new HashSet<>(); i >= 0 && s.size() < k; i--, r++)
+                if (a.get(i) <= k)
+                    s.add(a.get(i));
+            return r;
+        }
+    }
 }
