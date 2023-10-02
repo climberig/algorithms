@@ -143,4 +143,16 @@ public class p28{
             return r;
         }
     }
+
+    static class s2873{//Maximum Value of an Ordered Triplet I
+        public long maximumTripletValue(int[] a) {
+            long r = 0, maxAb = 0, maxA = 0;
+            for (int n : a) {
+                r = Math.max(r, maxAb * n);
+                maxA = Math.max(maxA, n);
+                maxAb = Math.max(maxAb, maxA - n);
+            }
+            return r;
+        }
+    }
 }
