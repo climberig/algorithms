@@ -68,6 +68,15 @@ public class p15{
         }
     }
 
+    static class s1512{//Number of Good Pairs
+        public int numIdenticalPairs(int[] a) {
+            int fr[] = new int[101], r = 0;
+            for (int n : a)
+                r += fr[n]++;
+            return r;
+        }
+    }
+
     static class s1513{//Number of Substrings With Only 1s
         public int numSub(String s){
             int r = 0;
