@@ -144,6 +144,19 @@ public class p28{
         }
     }
 
+    static class s2870{//Minimum Number of Operations to Make Array Empty
+        public int minOperations(int[] a) {
+            int f[] = new int[1_000_001], r = 0;
+            Arrays.stream(a).forEach(n -> f[n]++);
+            for (int n : f) {
+                if (n == 1)
+                    return -1;
+                r += (n + 2) / 3;
+            }
+            return r;
+        }
+    }
+
     static class s2873{//Maximum Value of an Ordered Triplet I
         public long maximumTripletValue(int[] a) {
             long r = 0, maxAb = 0, maxA = 0;
