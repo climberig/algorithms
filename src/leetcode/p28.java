@@ -168,4 +168,21 @@ public class p28{
             return r;
         }
     }
+
+    static class s2899{//Last Visited Integers
+        public List<Integer> lastVisitedIntegers(List<String> words) {
+            List<Integer> list = new ArrayList<>(), r = new ArrayList<>();
+            int i = 0;
+            for (String word : words)
+                if (word.equals("prev")) {
+                    int j = list.size() - i - 1;
+                    r.add(j < 0 ? -1 : list.get(j));
+                    i++;
+                } else {
+                    list.add(Integer.parseInt(word));
+                    i = 0;
+                }
+            return r;
+        }
+    }
 }
