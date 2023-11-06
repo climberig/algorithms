@@ -1,4 +1,5 @@
 package leetcode;
+import java.util.Arrays;
 public class p29{
     static class s2908{//Minimum Sum of Mountain Triplets I
         public int minimumSum(int[] a) {
@@ -37,6 +38,15 @@ public class p29{
                 if (dp[i] >= k)
                     r += 1 << i;
             return r;
+        }
+    }
+
+    static class s2923{//Find Champion I
+        public int findChampion(int[][] g) {
+            for (int i = 0; i < g.length; i++)
+                if (Arrays.stream(g[i]).sum() == g.length - 1)
+                    return i;
+            return -1;
         }
     }
 }
