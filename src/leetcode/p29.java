@@ -24,4 +24,19 @@ public class p29{
             return r;
         }
     }
+
+    static class s2917{//Find the K-or of an Array
+        public int findKOr(int[] a, int k) {
+            int[] dp = new int[31];
+            for (int n : a)
+                for (int i = 0; n > 0; n >>= 1, i++)
+                    if ((n & 1) == 1)
+                        dp[i]++;
+            int r = 0;
+            for (int i = 0; i < 31; i++)
+                if (dp[i] >= k)
+                    r += 1 << i;
+            return r;
+        }
+    }
 }
