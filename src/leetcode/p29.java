@@ -50,6 +50,19 @@ public class p29{
         }
     }
 
+    static class s2928{//Distribute Candies Among Children I
+        public int distributeCandies(int n, int limit) {return dist(3, n, limit);}
+
+        int dist(int kids, int n, int limit) {
+            if (kids == 0)
+                return n == 0 ? 1 : 0;
+            int r = 0;
+            for (int i = 0; i <= Math.min(limit, n); i++)
+                r += dist(kids - 1, n - i, limit);
+            return r;
+        }
+    }
+
     static class s2937{//Make Three Strings Equal
         public int findMinimumOperations(String s1, String s2, String s3) {
             int i = 0, len = Math.min(s1.length(), Math.min(s2.length(), s3.length()));
