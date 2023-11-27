@@ -70,4 +70,20 @@ public class p29{
             return i == 0 ? -1 : s1.length() - i + s2.length() - i + s3.length() - i;
         }
     }
+
+    static class s2946{//Matrix Similarity After Cyclic Shifts
+        public boolean areSimilar(int[][] m, int k) {
+            int len = m[0].length;
+            k = k % len;
+            for (int i = 0; i < m.length; i += 2)
+                for (int j = 0; j < len; j++)
+                    if (m[i][j] != m[i][(j + len - k) % len])
+                        return false;
+            for (int i = 0; i < m.length; i += 2)
+                for (int j = 0; j < len; j++)
+                    if (m[i][j] != m[i][(j + k) % len])
+                        return false;
+            return true;
+        }
+    }
 }
