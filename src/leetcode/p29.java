@@ -86,4 +86,19 @@ public class p29{
             return true;
         }
     }
+
+    static class s2947{//Count Beautiful Substrings I
+        public int beautifulSubstrings(String s, int k) {
+            int r = 0;
+            for (int i = 0; i < s.length(); i++)
+                for (int j = i, v = 0, c = 0; j < s.length(); j++) {
+                    if ("aeiou".indexOf(s.charAt(j)) >= 0)
+                        v++;
+                    else c++;
+                    if (c == v && (c * v) % k == 0)
+                        r++;
+                }
+            return r;
+        }
+    }
 }
