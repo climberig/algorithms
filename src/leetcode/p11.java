@@ -231,6 +231,26 @@ public class p11{
         }
     }
 
+    static class s1160{//Find Words That Can Be Formed by Characters
+        public int countCharacters(String[] words, String chars) {
+            int f[] = f(chars);
+            return Arrays.stream(words).filter(w -> canForm(f(w), f)).mapToInt(String::length).sum();
+        }
+
+        boolean canForm(int[] a, int[] b) {
+            for (int i = 0; i < 26; i++)
+                if (a[i] > b[i])
+                    return false;
+            return true;
+        }
+
+        int[] f(String s) {
+            int[] r = new int[26];
+            s.chars().forEach(c -> r[c - 'a']++);
+            return r;
+        }
+    }
+
     static class s1165{//Single-Row Keyboard
         public int calculateTime(String keyboard, String word){
             int layout[] = new int[26], r = 0;
