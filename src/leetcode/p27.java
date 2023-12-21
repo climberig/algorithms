@@ -72,6 +72,16 @@ public class p27{
         }
     }
 
+    static class s2784{//Check if Array is Good
+        public boolean isGood(int[] a) {
+            Arrays.sort(a);
+            for (int i = 0; i < a.length - 1; i++)
+                if (a[i] != i + 1)
+                    return false;
+            return a[a.length - 1] == a.length - 1;
+        }
+    }
+
     static class s2788{//Split Strings by Separator
         public List<String> splitWordsBySeparator(List<String> words, char separator) {
             List<String> r = new ArrayList<>();
