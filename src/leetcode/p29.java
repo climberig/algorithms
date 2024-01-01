@@ -101,4 +101,24 @@ public class p29{
             return r;
         }
     }
+
+    static class s2970{//Count the Number of Incremovable Subarrays I
+        public int incremovableSubarrayCount(int[] a) {
+            int r = 0;
+            for (int i = 0; i < a.length; i++)
+                for (int j = i; j < a.length; j++)
+                    if (incremovable(a, i, j))
+                        r++;
+            return r;
+        }
+        boolean incremovable(int[] a, int start, int end) {
+            for (int i = 1; i < start; i++)
+                if (a[i - 1] >= a[i])
+                    return false;
+            for (int i = end + 2; i < a.length; i++)
+                if (a[i - 1] >= a[i])
+                    return false;
+            return start <= 0 || end + 1 >= a.length || a[start - 1] < a[end + 1];
+        }
+    }
 }
