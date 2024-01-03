@@ -102,6 +102,15 @@ public class p29{
         }
     }
 
+    static class s2960{//Count Tested Devices After Test Operations
+        public int countTestedDevices(int[] p) {
+            int r = 0;
+            for (int d : p)
+                r += d > r ? 1 : 0;
+            return r;
+        }
+    }
+
     static class s2970{//Count the Number of Incremovable Subarrays I
         public int incremovableSubarrayCount(int[] a) {
             int r = 0;
