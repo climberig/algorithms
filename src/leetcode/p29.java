@@ -1,5 +1,7 @@
 package leetcode;
 import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 public class p29{
     static class s2908{//Minimum Sum of Mountain Triplets I
         public int minimumSum(int[] a) {
@@ -128,6 +130,19 @@ public class p29{
                 if (a[i - 1] >= a[i])
                     return false;
             return start <= 0 || end + 1 >= a.length || a[start - 1] < a[end + 1];
+        }
+    }
+
+    static class s2996{//Smallest Missing Integer Greater Than Sequential Prefix Sum
+        public int missingInteger(int[] a) {
+            int preSum = a[0];
+            Set<Integer> s = Arrays.stream(a).boxed().collect(Collectors.toSet());
+            for (int i = 1; i < a.length && a[i] == a[i - 1] + 1; i++)
+                preSum += a[i];
+            int r = preSum;
+            while (s.contains(r))
+                r++;
+            return r;
         }
     }
 }
