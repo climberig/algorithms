@@ -1,4 +1,5 @@
 package leetcode;
+import java.util.PriorityQueue;
 public class p30{
     static class s3001{//Minimum Moves to Capture The Queen
         public int minMovesToCaptureTheQueen(int rookX, int rookY, int bishopX, int bishopY, int queenX, int queenY) {
@@ -42,6 +43,15 @@ public class p30{
                     r = maxFreq;
                 }
             return r;
+        }
+    }
+
+    static class s3010{//Divide an Array Into Subarrays With Minimum Cost I
+        public int minimumCost(int[] a) {
+            PriorityQueue<Integer> pq = new PriorityQueue<>();
+            for (int i = 1; i < a.length; i++)
+                pq.offer(a[i]);
+            return a[0] + pq.poll() + pq.poll();
         }
     }
 }
