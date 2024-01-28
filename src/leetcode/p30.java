@@ -54,4 +54,14 @@ public class p30{
             return a[0] + pq.poll() + pq.poll();
         }
     }
+
+    static class s3019{//Number of Changing Keys
+        public int countKeyChanges(String s) {
+            int r = 0;
+            for (int i = 1; i < s.length(); i++)
+                if (Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(i - 1)))
+                    r++;
+            return r;
+        }
+    }
 }
