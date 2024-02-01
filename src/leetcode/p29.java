@@ -113,6 +113,19 @@ public class p29{
         }
     }
 
+    static class s2966{//Divide Array Into Arrays With Max Difference
+        public int[][] divideArray(int[] a, int k) {
+            Arrays.sort(a);
+            int[][] r = new int[a.length / 3][3];
+            for (int i = 2; i < a.length; i += 3) {
+                if (a[i] - a[i - 2] > k)
+                    return new int[0][];
+                r[i / 3] = new int[]{a[i - 2], a[i - 1], a[i]};
+            }
+            return r;
+        }
+    }
+
     static class s2970{//Count the Number of Incremovable Subarrays I
         public int incremovableSubarrayCount(int[] a) {
             int r = 0;
