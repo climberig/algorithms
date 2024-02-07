@@ -1,4 +1,5 @@
 package leetcode;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 public class p30{
     static class s3001{//Minimum Moves to Capture The Queen
@@ -52,6 +53,19 @@ public class p30{
             for (int i = 1; i < a.length; i++)
                 pq.offer(a[i]);
             return a[0] + pq.poll() + pq.poll();
+        }
+    }
+
+    static class s3011{//Find if Array Can Be Sorted
+        public boolean canSortArray(int[] a) {
+            for (int i = 0, j; i < a.length; i = j) {
+                for (j = i; j < a.length && Integer.bitCount(a[i]) == Integer.bitCount(a[j]); j++) ;
+                Arrays.sort(a, i, j);
+            }
+            for (int i = 1; i < a.length; i++)
+                if (a[i - 1] > a[i])
+                    return false;
+            return true;
         }
     }
 
