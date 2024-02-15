@@ -146,6 +146,19 @@ public class p29{
         }
     }
 
+    static class s2971{//Find Polygon With the Largest Perimeter
+        public long largestPerimeter(int[] a) {
+            Arrays.sort(a);
+            long r = -1, cs = 0;
+            for (int n : a) {
+                cs += n;
+                if (cs > n * 2L)
+                    r = cs;
+            }
+            return r;
+        }
+    }
+
     static class s2996{//Smallest Missing Integer Greater Than Sequential Prefix Sum
         public int missingInteger(int[] a) {
             int preSum = a[0];
