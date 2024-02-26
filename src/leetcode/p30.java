@@ -78,4 +78,14 @@ public class p30{
             return r;
         }
     }
+
+    static class s3046{//Split the Array
+        public boolean isPossibleToSplit(int[] a) {
+            int[] f = new int[101];
+            for (int n : a)
+                if (++f[n] == 3)
+                    return false;
+            return true;
+        }
+    }
 }
