@@ -88,4 +88,14 @@ public class p30{
             return true;
         }
     }
+
+    static class s3074{//Apple Redistribution into Boxes
+        public int minimumBoxes(int[] apples, int[] capacity) {
+            int sum = Arrays.stream(apples).sum(), r = 0;
+            Arrays.sort(capacity);
+            for (int i = capacity.length - 1; i >= 0 && sum > 0; i--, r++)
+                sum -= capacity[i];
+            return r;
+        }
+    }
 }
