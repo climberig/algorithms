@@ -98,4 +98,19 @@ public class p30{
             return r;
         }
     }
+
+    static class s3079{//Find the Sum of Encrypted Integers
+        public int sumOfEncryptedInt(int[] a) {
+            return Arrays.stream(a).map(this::encrypt).sum();
+        }
+
+        int encrypt(int n) {
+            int max = 0, r = 0;
+            for (int m = n; m > 0; m /= 10)
+                max = Math.max(max, m % 10);
+            for (; n > 0; n /= 10)
+                r = r * 10 + max;
+            return r;
+        }
+    }
 }
