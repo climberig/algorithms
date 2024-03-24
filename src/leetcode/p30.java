@@ -113,4 +113,27 @@ public class p30{
             return r;
         }
     }
+
+    static class s3083{//Existence of a Substring in a String and Its Reverse
+        public boolean isSubstringPresent(String s) {
+            for (char a = 'a'; a <= 'z'; a++)
+                for (char b = 'a'; b <= 'z'; b++)
+                    if (s.contains("" + a + b) && s.contains("" + b + a))
+                        return true;
+            return false;
+        }
+    }
+
+    static class s3090{//Maximum Length Substring With Two Occurrences
+        public int maximumLengthSubstring(String s) {
+            int f[] = new int[26], r = 0;
+            for (int i = 0, j = 0; j < s.length(); j++) {
+                f[s.charAt(j) - 'a']++;
+                while (f[s.charAt(j) - 'a'] == 3)
+                    f[s.charAt(i++) - 'a']--;
+                r = Math.max(r, j - i + 1);
+            }
+            return r;
+        }
+    }
 }
