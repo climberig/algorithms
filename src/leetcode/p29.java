@@ -1,5 +1,7 @@
 package leetcode;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 public class p29{
@@ -100,6 +102,20 @@ public class p29{
                     if (c == v && (c * v) % k == 0)
                         r++;
                 }
+            return r;
+        }
+    }
+
+    static class s2958{//Length of Longest Subarray With at Most K Frequency
+        public int maxSubarrayLength(int[] a, int k) {
+            Map<Integer, Integer> m = new HashMap<>();
+            int r = 0;
+            for (int i = 0, j = 0; j < a.length; j++) {
+                m.put(a[j], m.getOrDefault(a[j], 0) + 1);
+                while (m.get(a[j]) > k)
+                    m.put(a[i], m.get(a[i++]) - 1);
+                r = Math.max(r, j - i + 1);
+            }
             return r;
         }
     }
