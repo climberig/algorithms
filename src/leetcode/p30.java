@@ -136,4 +136,17 @@ public class p30{
             return r;
         }
     }
+
+    static class s3095{//Shortest Subarray With OR at Least K I
+        public int minimumSubarrayLength(int[] a, int k) {
+            int r = Integer.MAX_VALUE;
+            for (int i = 0; i < a.length; i++) {
+                int or = a[i], j = i + 1;
+                for (; or < k && j < a.length; or |= a[j++]) ;
+                if (or >= k)
+                    r = Math.min(r, j - i);
+            }
+            return r < Integer.MAX_VALUE ? r : -1;
+        }
+    }
 }
