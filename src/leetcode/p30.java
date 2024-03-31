@@ -149,4 +149,13 @@ public class p30{
             return r < Integer.MAX_VALUE ? r : -1;
         }
     }
+
+    static class s3099{//Harshad Number
+        public int sumOfTheDigitsOfHarshadNumber(int x) {
+            int sum = 0;
+            for (int n = x; n > 0; n /= 10)
+                sum += n % 10;
+            return x % sum == 0 ? sum : -1;
+        }
+    }
 }
