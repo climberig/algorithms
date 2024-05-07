@@ -29,6 +29,19 @@ public class p28{
         }
     }
 
+    static class s2816{//Double a Number Represented as a Linked List
+        public ListNode doubleIt(ListNode head) {
+            if (head.val > 4)
+                head = new ListNode(0, head);
+            for (ListNode node = head; node != null; node = node.next) {
+                node.val = (node.val * 2) % 10;
+                if (node.next != null && node.next.val > 4)
+                    node.val++;
+            }
+            return head;
+        }
+    }
+
     static class s2824{//Count Pairs Whose Sum is Less than Target
         public int countPairs(List<Integer> a, int target) {
             Collections.sort(a);
