@@ -1,5 +1,5 @@
 package leetcode;
 
-public class a {
+public class a{
 
 }
