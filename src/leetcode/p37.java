@@ -25,6 +25,20 @@ public class p37 {
         }
     }
 
+    static class s3769{//Sort Integers by Binary Reflection
+        public int[] sortByReflection(int[] a){
+            return Arrays.stream(a).boxed().sorted((n1, n2) -> {
+                int b1 = binReflection(n1), b2 = binReflection(n2);
+                return b1 != b2 ? b1 - b2 : n1 - n2;
+            }).mapToInt(n -> n).toArray();
+        }
+
+        int binReflection(int n){
+            String s = Integer.toBinaryString(n);
+            return Integer.parseInt(new StringBuilder(s).reverse().toString(), 2);
+        }
+    }
+
     static class s3754 {//Concatenate Non-Zero Digits and Multiply by Sum I
         public long sumAndMultiply(int n) {
             int x = 0, sum = 0;
