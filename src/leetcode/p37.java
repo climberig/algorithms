@@ -7,6 +7,20 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class p37 {
+    static class s3726{//Remove Zeros in Decimal Representation
+        public long removeZeros(long n){
+            long r = 0;
+            for(long m = 1; n > 0; n /= 10){
+                long d = n % 10;
+                if(d != 0){
+                    r = d * m + r;
+                    m *= 10;
+                }
+            }
+            return r;
+        }
+    }
+
     static class s3731{//Find Missing Elements
         public List<Integer> findMissingElements(int[] a){
             TreeSet<Integer> s = Arrays.stream(a).boxed().collect(Collectors.toCollection(TreeSet::new));
@@ -15,6 +29,19 @@ public class p37 {
                 if(!s.contains(i))
                     r.add(i);
             return r;
+        }
+    }
+
+    static class s3740{//Minimum Distance Between Three Equal Elements I
+        public int minimumDistance(int[] a){
+            int minDist = Integer.MAX_VALUE;
+            for(int i = 0, j, k; i < a.length; i++){
+                for(j = i + 1; j < a.length && a[i] != a[j]; j++) ;
+                for(k = j + 1; k < a.length && a[i] != a[k]; k++) ;
+                if(j < a.length && k < a.length)
+                    minDist = Math.min(minDist, j - i + k - i + k - j);
+            }
+            return minDist == Integer.MAX_VALUE ? -1 : minDist;
         }
     }
 
