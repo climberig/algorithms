@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class p37 {
     static class s3726{//Remove Zeros in Decimal Representation
@@ -49,6 +50,15 @@ public class p37 {
         public int maximizeExpressionOfThree(int[] a) {
             Arrays.sort(a);
             return a[a.length - 1] + a[a.length - 2] - a[0];
+        }
+    }
+
+    static class s3750{//Minimum Number of Flips to Reverse Binary String
+        public int minimumFlips(int n){
+            String s = Integer.toBinaryString(n);
+            return (int) IntStream.range(0, s.length())
+                    .filter(i -> s.charAt(i) != s.charAt(s.length() - i - 1))
+                    .count();
         }
     }
 
