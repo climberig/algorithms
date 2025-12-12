@@ -8,6 +8,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p37 {
+    static class s3712{//Sum of Elements With Frequency Divisible by K
+        public int sumDivisibleByK(int[] a, int k){
+            int f[] = new int[101], r = 0;
+            Arrays.stream(a).forEach(n -> f[n]++);
+            for(int i = 0; i < f.length; i++)
+                if(f[i] % k == 0)
+                    r += i * f[i];
+            return r;
+        }
+    }
+
     static class s3726{//Remove Zeros in Decimal Representation
         public long removeZeros(long n){
             long r = 0;
