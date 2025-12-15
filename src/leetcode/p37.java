@@ -87,6 +87,16 @@ public class p37 {
         }
     }
 
+    static class s3774{//Absolute Difference Between Maximum and Minimum K Elements
+        public int absDifference(int[] a, int k){
+            Arrays.sort(a);
+            int r = 0;
+            for(int i = 0; i < k; i++)
+                r += a[a.length - 1 - i] - a[i];
+            return r;
+        }
+    }
+
     static class s3754 {//Concatenate Non-Zero Digits and Multiply by Sum I
         public long sumAndMultiply(int n) {
             int x = 0, sum = 0;
