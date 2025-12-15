@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -54,6 +51,21 @@ public class p37 {
                     minDist = Math.min(minDist, j - i + k - i + k - j);
             }
             return minDist == Integer.MAX_VALUE ? -1 : minDist;
+        }
+    }
+
+    static class s3741{//Minimum Distance Between Three Equal Elements II
+        public int minimumDistance(int[] a){
+            int r = Integer.MAX_VALUE;
+            Map<Integer, List<Integer>> m = new HashMap<>();
+            for(int i = 0; i < a.length; i++){
+                m.putIfAbsent(a[i], new ArrayList<>());
+                m.get(a[i]).add(i);
+            }
+            for(List<Integer> list : m.values())
+                for(int i = 2; i < list.size(); i++)
+                    r = Math.min(r, 2 * (list.get(i) - list.get(i - 2)));
+            return r == Integer.MAX_VALUE ? -1 : r;
         }
     }
 
