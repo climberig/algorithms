@@ -41,6 +41,12 @@ public class p37 {
         }
     }
 
+    static class s3736{//Minimum Moves to Equal Array Elements III
+        public int minMoves(int[] a){
+            return Arrays.stream(a).max().getAsInt() * a.length - Arrays.stream(a).sum();
+        }
+    }
+
     static class s3740{//Minimum Distance Between Three Equal Elements I
         public int minimumDistance(int[] a){
             int minDist = Integer.MAX_VALUE;
