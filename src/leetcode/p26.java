@@ -327,6 +327,15 @@ public class p26{
         }
     }
 
+    static class s2682{//Find the Losers of the Circular Game
+        public int[] circularGameLosers(int n, int k){
+            boolean[] a = new boolean[n];
+            for(int i = 0, j = 0; !a[i]; i = (i + ++j * k) % n)
+                a[i] = true;
+            return IntStream.range(1, n + 1).filter(i -> !a[i - 1]).toArray();
+        }
+    }
+
     static class s2696{//Minimum String Length After Removing Substrings
         public int minLength(String s) {
             String r = s.replaceAll("AB", "").replaceAll("CD", "");
