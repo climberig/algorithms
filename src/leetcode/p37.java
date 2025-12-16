@@ -5,6 +5,20 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p37 {
+    static class s3707{//Equal Score Substrings
+        public boolean scoreBalance(String s){
+            int sum = 0;
+            for(int i = 0; i < s.length(); i++)
+                sum += s.charAt(i) - 'a' + 1;
+            for(int i = 0, left = 0; i < s.length(); i++){
+                left += s.charAt(i) - 'a' + 1;
+                if(left == sum - left)
+                    return true;
+            }
+            return false;
+        }
+    }
+
     static class s3712{//Sum of Elements With Frequency Divisible by K
         public int sumDivisibleByK(int[] a, int k){
             int f[] = new int[101], r = 0;
