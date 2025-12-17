@@ -28,6 +28,15 @@ public class p36{
         }
     }
 
+    static class s3683{//Earliest Time to Finish One Task
+        public int earliestTime(int[][] tasks){
+            int r = Integer.MAX_VALUE;
+            for(int[] t : tasks)
+                r = Math.min(r, t[0] + t[1]);
+            return r;
+        }
+    }
+
     static class s3697{//Compute Decimal Representation
         public int[] decimalRepresentation(int n){
             LinkedList<Integer> r = new LinkedList<>();
