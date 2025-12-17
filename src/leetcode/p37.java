@@ -129,6 +129,21 @@ public class p37 {
         }
     }
 
+    static class s3775{//Reverse Words With Same Vowel Count
+        public String reverseWords(String s){
+            Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u');
+            String[] words = s.split(" ");
+            for(int i = 1, count = countVowels(words[0], vowels); i < words.length; i++)
+                if(count == countVowels(words[i], vowels))
+                    words[i] = new StringBuilder(words[i]).reverse().toString();
+            return String.join(" ", words);
+        }
+
+        int countVowels(String w, Set<Character> vowels){
+            return Math.toIntExact(w.chars().filter(c -> vowels.contains((char) c)).count());
+        }
+    }
+
     static class s3754 {//Concatenate Non-Zero Digits and Multiply by Sum I
         public long sumAndMultiply(int n) {
             int x = 0, sum = 0;
