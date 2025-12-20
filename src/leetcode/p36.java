@@ -5,6 +5,17 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class p36{
+    static class s3668{//Restore Finishing Order
+        public int[] recoverOrder(int[] order, int[] friends){
+            int r[] = new int[friends.length], j = 0;
+            for(int person : order)
+                for(int friend : friends)
+                    if(person == friend)
+                        r[j++] = friend;
+            return r;
+        }
+    }
+
     static class s3674{//Minimum Operations to Equalize Array
         public int minOperations(int[] a){
             for(int i = 1; i < a.length; i++)
