@@ -1,10 +1,22 @@
 package leetcode;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 public class p36{
+    static class s3663{//Find The Least Frequent Digit
+        public int getLeastFrequentDigit(int n){
+            int[] f = new int[10];
+            for(; n > 0; n /= 10)
+                f[n % 10]++;
+            int minFreq = Arrays.stream(f).filter(d -> d > 0).min().getAsInt();
+            return IntStream.range(0, 10).filter(d -> f[d] == minFreq).findFirst().getAsInt();
+        }
+    }
+
     static class s3668{//Restore Finishing Order
         public int[] recoverOrder(int[] order, int[] friends){
             int r[] = new int[friends.length], j = 0;
