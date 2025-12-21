@@ -1,12 +1,29 @@
 package leetcode;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class p36{
+    static class s3606{//Coupon Code Validator
+        public List<String> validateCoupons(String[] code, String[] businessLine, boolean[] isActive){
+            Set<String> business = Set.of("electronics", "grocery", "pharmacy", "restaurant");
+            return IntStream.range(0, code.length)
+                    .filter(i -> isActive[i] && business.contains(businessLine[i]) && isValid(code[i])).boxed()
+                    .sorted(Comparator.comparing((Integer i) -> businessLine[i])
+                            .thenComparing(i -> code[i]))
+                    .map(i -> code[i])
+                    .collect(Collectors.toList());
+        }
+
+        boolean isValid(String s){
+            for(int i = 0; i < s.length(); i++)
+                if(!(Character.isLetterOrDigit(s.charAt(i)) || s.charAt(i) == '_'))
+                    return false;
+            return !s.isBlank();
+        }
+    }
+
     static class s3663{//Find The Least Frequent Digit
         public int getLeastFrequentDigit(int n){
             int[] f = new int[10];
