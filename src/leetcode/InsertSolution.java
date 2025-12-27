@@ -10,7 +10,7 @@ public class InsertSolution{
     static String SOLUTION_PREFIX = "    static class s";
     static Logger log = Logger.getLogger("InsertSolution");
 
-    public static void main(String[] args) throws IOException{
+    static void main() throws IOException{
         log.info("Reading a.java");
         List<String> insertLines = solutionFromA();
         int problemNo = problemNo(insertLines.get(0));
