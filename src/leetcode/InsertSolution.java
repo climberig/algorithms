@@ -63,7 +63,7 @@ public class InsertSolution{
         if(!s.startsWith(SOLUTION_PREFIX))
             return 0;
         int n = 0;
-        for(int i = SOLUTION_PREFIX.length(); s.charAt(i) != '{'; i++)
+        for(int i = SOLUTION_PREFIX.length(); Character.isDigit(s.charAt(i)); i++)
             n = 10 * n + s.charAt(i) - '0';
         return n;
     }

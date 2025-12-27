@@ -72,6 +72,18 @@ public class p27{
         }
     }
 
+    static class s2765 {//Longest Alternating Subarray
+
+        public int alternatingSubarray(int[] a) {
+            int r = -1, dp = -1;
+            for (int i = 1; i < a.length; i++, r = Math.max(r, dp))
+                if (dp > 0 && a[i] == a[i - 2])
+                    dp++;
+                else dp = a[i - 1] + 1 == a[i] ? 2 : -1;
+            return r;
+        }
+    }
+
     static class s2784{//Check if Array is Good
         public boolean isGood(int[] a) {
             Arrays.sort(a);
