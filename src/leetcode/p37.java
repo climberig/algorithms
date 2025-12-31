@@ -158,4 +158,14 @@ public class p37 {
             return 1L * x * sum;
         }
     }
+
+    static class s3783 {//Mirror Distance of an Integer
+
+        public int mirrorDistance(int n) {
+            int r = 0;
+            for (int m = n; m > 0; m /= 10)
+                r = 10 * r + m % 10;
+            return Math.abs(r - n);
+        }
+    }
 }
