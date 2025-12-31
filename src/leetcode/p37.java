@@ -168,4 +168,17 @@ public class p37 {
             return Math.abs(r - n);
         }
     }
+
+    static class s3788 {//Maximum Score of a Split
+
+        public long maximumScore(int[] a) {
+            long sum = Arrays.stream(a).asLongStream().sum(), r = Long.MIN_VALUE, min = Long.MAX_VALUE;
+            for (int i = a.length - 1; i > 0; i--) {
+                sum -= a[i];
+                min = Math.min(min, a[i]);
+                r = Math.max(r, sum - min);
+            }
+            return r;
+        }
+    }
 }
