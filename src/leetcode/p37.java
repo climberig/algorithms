@@ -181,4 +181,13 @@ public class p37 {
             return r;
         }
     }
+
+    static class s3798 {// Largest Even Number
+
+        public String largestEven(String s) {
+            int i = s.length() - 1;
+            for (; i >= 0 && s.charAt(i) == '1'; i--) ;
+            return s.substring(0, i + 1);
+        }
+    }
 }
