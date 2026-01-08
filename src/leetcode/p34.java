@@ -1,4 +1,7 @@
 package leetcode;
+
+import java.util.Arrays;
+
 public class p34{
     static class s3402{//Minimum Operations to Make Columns Strictly Increasing
         public int minimumOperations(int[][] g) {
@@ -20,6 +23,13 @@ public class p34{
             String pre = p.substring(0, k), post = p.substring(k + 1);
             int i = s.indexOf(pre), j = s.indexOf(post, i + pre.length());
             return i >= 0 && j >= 0;
+        }
+    }
+
+    static class s3432 {//Count Partitions with Even Sum Difference
+
+        public int countPartitions(int[] a) {
+            return Arrays.stream(a).sum() % 2 == 0 ? a.length - 1 : 0;
         }
     }
 }
