@@ -1,8 +1,8 @@
 package leetcode;
 import java.util.*;
 import java.util.stream.Collectors;
-public class p27{
-    static class s2707{//Extra Characters in a String
+public class p27 {
+    static class s2707 {//Extra Characters in a String
         public int minExtraChar(String s, String[] dictionary) {
             Set<String> words = Arrays.stream(dictionary).collect(Collectors.toSet());
             Map<String, Integer> dp = new HashMap<>();
@@ -26,11 +26,13 @@ public class p27{
         }
     }
 
-    static class s2716{//Minimize String Length
-        public int minimizedStringLength(String s) {return (int) s.chars().distinct().count();}
+    static class s2716 {//Minimize String Length
+        public int minimizedStringLength(String s) {
+            return (int) s.chars().distinct().count();
+        }
     }
 
-    static class s2717{//Semi-Ordered Permutation
+    static class s2717 {//Semi-Ordered Permutation
         public int semiOrderedPermutation(int[] a) {
             int onePosition = 0, nPosition = 0;
             for (int i = 0; i < a.length; i++)
@@ -42,7 +44,7 @@ public class p27{
         }
     }
 
-    static class s2733{//Neither Minimum nor Maximum
+    static class s2733 {//Neither Minimum nor Maximum
         public int findNonMinOrMax(int[] a) {
             if (a.length < 3)
                 return -1;
@@ -51,7 +53,7 @@ public class p27{
         }
     }
 
-    static class s2739{//Total Distance Traveled
+    static class s2739 {//Total Distance Traveled
         public int distanceTraveled(int mainTank, int additionalTank) {
             if (additionalTank == 0 || mainTank < 5)
                 return 10 * mainTank;
@@ -59,7 +61,7 @@ public class p27{
         }
     }
 
-    static class s2760{//Longest Even Odd Subarray With Threshold
+    static class s2760 {//Longest Even Odd Subarray With Threshold
         public int longestAlternatingSubarray(int[] a, int max) {
             int r = 0;
             for (int i = 0; i < a.length; i++)
@@ -73,7 +75,6 @@ public class p27{
     }
 
     static class s2765 {//Longest Alternating Subarray
-
         public int alternatingSubarray(int[] a) {
             int r = -1, dp = -1;
             for (int i = 1; i < a.length; i++, r = Math.max(r, dp))
@@ -84,7 +85,7 @@ public class p27{
         }
     }
 
-    static class s2784{//Check if Array is Good
+    static class s2784 {//Check if Array is Good
         public boolean isGood(int[] a) {
             Arrays.sort(a);
             for (int i = 0; i < a.length - 1; i++)
@@ -94,7 +95,7 @@ public class p27{
         }
     }
 
-    static class s2788{//Split Strings by Separator
+    static class s2788 {//Split Strings by Separator
         public List<String> splitWordsBySeparator(List<String> words, char separator) {
             List<String> r = new ArrayList<>();
             for (String w : words) {
