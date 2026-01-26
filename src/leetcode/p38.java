@@ -48,4 +48,12 @@ public class p38 {
             return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
         }
     }
+
+    static class s3818 {//Minimum Prefix Removal to Make Array Strictly Increasing
+        public int minimumPrefixLength(int[] a) {
+            int i = a.length - 2;
+            for (; i >= 0 && a[i] < a[i + 1]; i--) ;
+            return i + 1;
+        }
+    }
 }
